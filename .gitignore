@@ -1,0 +1,33 @@
+# Local environments and generated results
+.venv/
+.venv-figures311/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+runs/
+
+# Prepared test/figure files; compact inputs under data_sources are included.
+/data/baseline2d/validation/seed260745/full.parquet
+/data/derived/test_static77.parquet
+/data/evaluation/candidate_geometry_2d.parquet
+/data/evaluation/candidate_geometry_3d.parquet
+/data/evaluation/candidate_geometry_minip2d.parquet
+/data/features/validation/seed260745/paper92.parquet
+/data/features/validation/seed260745/static77.parquet
+/data/features/validation/seed260745/static_scored.parquet
+/data/inputs/test_candidates.parquet
+/data/labels/validation/seed260745/particles.parquet
+/data/minip2d/validation/seed260745/full.parquet
+/data/paper_figures/fig04/frame_metrics.parquet
+/data/paper_figures/fig05/velocity_tracks.parquet
+/data/paper_figures/fig07/low_confidence_detections.parquet
+/data/paper_figures/fig07/paired_tracks_20mm.parquet
+/data/paper_figures/reference/projected_xy_pr_curves.parquet
+/data/predictions/2d/validation/seed260745.parquet
+/data/predictions/3d/validation/seed260745.parquet
+/data/predictions/minip2d/validation/seed260745.parquet
+/data/tracking/validation/seed260745/smoothedtrajs.parquet

@@ -1,0 +1,30 @@
+{
+  "title": "Semi-automated detection of droplet collision-coalescence using digital in-line holography: code, models and numerical data",
+  "upload_type": "dataset",
+  "creators": [
+    {
+      "name": "Nakai, Dai"
+    }
+  ],
+  "description": "Numerical materials and trained collision models for Semi-automated detection of droplet collision-coalescence using digital in-line holography. Supports all three pretrained models on the complete independent test seed 260745, Tables 3–4, and Figures 4, 5, 7, 8 and 11–15. Includes 3D test trajectories, compact candidate and image measurements, numerical figure inputs and the 1,120-row top-80 experimental review cohort. Preparation calculates trajectory features and test particle states locally and verifies reference checksums. Five-seed training data, supplementary evaluations, full experimental sequence replay, raw images and upstream particle-measurement weights are outside this reduced distribution.",
+  "keywords": [
+    "digital in-line holography",
+    "droplet collision",
+    "droplet coalescence",
+    "three-dimensional particle tracking",
+    "minimum-intensity projection",
+    "collision detection",
+    "synthetic holograms",
+    "machine learning",
+    "cloud microphysics"
+  ],
+  "license": "cc-by-4.0",
+  "version": "1.0.0",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/dainakai/CollisionPaper",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

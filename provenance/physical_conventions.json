@@ -1,0 +1,41 @@
+{
+  "paper_commit": "eccf65a46a62b77d8efd297bffc42181d5f69751",
+  "synthetic_benchmark": {
+    "training_seeds": [
+      260740,
+      260741,
+      260742,
+      260743,
+      260744
+    ],
+    "test_seed": 260745,
+    "reconstruction_start_um": 64900,
+    "last_plane_um": 167200,
+    "slice_spacing_um": 100,
+    "slice_count": 1024,
+    "measurement_phase_iterations": 3,
+    "measurement_padding_px": 1536,
+    "collision_image_phase_iterations": 12,
+    "collision_image_padding_px": 2048,
+    "reference_measurement_backend": "TensorRT FP16",
+    "hologram_primary_camera_front_um": 74900,
+    "hologram_secondary_camera_front_um": 96350
+  },
+  "figure7_bcd": {
+    "input": "data/paper_figures/fig07/paired_tracks_20mm.parquet",
+    "reconstruction_start_um": 74900,
+    "phase_iterations": 3,
+    "padding_px": 1536,
+    "track_membership": "fixed"
+  },
+  "gravity_default": {
+    "convention": "saved-figure",
+    "frames_per_scene": 10904,
+    "fps": 4000,
+    "volume_cm3": 10.71644672,
+    "density_bootstrap_blocks": 11,
+    "density_bootstrap_resamples": 4000,
+    "density_bootstrap_seed": 260724,
+    "standard_deviation_formula": "sqrt(expected_count + density_bootstrap_sd**2)"
+  }
+}

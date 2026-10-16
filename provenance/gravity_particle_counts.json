@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "counts_sha256": "5b1869aa60e26b5981e3bd4afab154356530a4574a0a53353fc45e491fb05cf9",
+  "histogram_rule": "25 to 300 um in 5 um bins; final right edge included, as in original NumPy histogram",
+  "sources": [
+    {
+      "raw_scene_num": 12,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1084574782,
+      "source_sha256": "d57bba1ee29969843f14d7ba0b4bdada084e0f19fb4bc217f7a25e34c0861042",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1184308,
+      "last_13_frame_rows": 1592,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 13,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1534688469,
+      "source_sha256": "fc310282c77c88dda61a736e2b3d1d96686447b5bd6a05991f61b582d42ac65d",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1671141,
+      "last_13_frame_rows": 1996,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 15,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1188523775,
+      "source_sha256": "5e105b0c5c7fadd07addcf0a6dfa5cb0916246695de80e9720874e0d52615504",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1295544,
+      "last_13_frame_rows": 1475,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 17,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1244491917,
+      "source_sha256": "149e8809241695542cd3c320115ffdc35efe742f21639f4a9d946998b57485ba",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1355818,
+      "last_13_frame_rows": 1890,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 18,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1146355151,
+      "source_sha256": "adc640812585677a2e7ecc5a20f51ff0211a05a31c5e7262aa4c869bcc966369",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1249636,
+      "last_13_frame_rows": 1270,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 20,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 858177904,
+      "source_sha256": "a2f5a990bfcf67c336c9f54e7e60bf0267e33d7c862cc741757065759c583de4",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 936655,
+      "last_13_frame_rows": 1167,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 21,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1073917791,
+      "source_sha256": "81af5733a4206fed0f6627464c2b67a720f396d929a6f7a2707bf033eb5dd54a",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1170685,
+      "last_13_frame_rows": 1480,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 22,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1197869687,
+      "source_sha256": "49edf23cc982898cbf27237fe28cc908844dc3061440d5bb4a16cf094dccc88a",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1305642,
+      "last_13_frame_rows": 1475,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 24,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1036718009,
+      "source_sha256": "2ccd36454a4b2549d5e91d26c5a9ab2a7dbaf0676662a5d7e024a14bab315b83",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1130440,
+      "last_13_frame_rows": 1310,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 25,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1034879170,
+      "source_sha256": "cc1078e49beb1c2e1bffd1fe5373881109c11307ec4499755bc70eef4f75f4d4",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1128904,
+      "last_13_frame_rows": 1406,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 26,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1161469893,
+      "source_sha256": "b5649e7a2440a33951b0206ed481e503526645730c51f201dc42a377c01a2fd1",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1265544,
+      "last_13_frame_rows": 1595,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 28,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1178367217,
+      "source_sha256": "ad1ecd695d04b2abc15606e9d313a0856818621f947791ab5362d6015ee7640d",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1284336,
+      "last_13_frame_rows": 1639,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 29,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1375483211,
+      "source_sha256": "2f05fa38b1f7deff891b0e6bc1128f1fed35b4f0565048102aa5e5879c259418",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1499154,
+      "last_13_frame_rows": 2074,
+      "frame_min": 0,
+      "frame_max": 10916
+    },
+    {
+      "raw_scene_num": 30,
+      "source_name": "particles_3d.csv",
+      "source_bytes": 1204647434,
+      "source_sha256": "e7e3268978569f62e93ff462844bccb7dd464af52857a53a9c952e0ade462e19",
+      "diameter_column": "final_diameter_um",
+      "finite_positive_rows": 1312970,
+      "last_13_frame_rows": 1391,
+      "frame_min": 0,
+      "frame_max": 10916
+    }
+  ]
+}

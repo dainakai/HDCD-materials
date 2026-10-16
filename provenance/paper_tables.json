@@ -1,0 +1,31 @@
+{
+  "paper_commit": "eccf65a46a62b77d8efd297bffc42181d5f69751",
+  "sources": [
+    {
+      "file": "projected_xy_method_summary.csv",
+      "sha256": "c0ff0677d1a0688f0bf23ae26751679dd273c79a062398fc9ee63266ca9f66b6"
+    },
+    {
+      "file": "projected_xy_target_recall.csv",
+      "sha256": "2537fd394e0bb4078cbd7e5cbafa446b45e4014baf4b309d042890f5f8c745a4"
+    },
+    {
+      "file": "projected_xy_candidate_pipeline_by_seed.csv",
+      "sha256": "3f1c3d38e79432cbaa60186d8b3297a2bbdb77bdd82be1121b6898b0fef14cc6"
+    },
+    {
+      "file": "projected_xy_stage_ablation_summary.csv",
+      "sha256": "1cec22b0a7616c52b754b362ba6f4d09c7fbd66429d2b5896c24833f27e30b2e"
+    }
+  ],
+  "scope": "Terminal seed 260745; reference CSVs are assertions, not the source of recomputed results. Table 3 operating points use the saved target-recall table (first attainable threshold), and agree with all manuscript-rounded values.",
+  "original_reference_paper_commit": "b4f54fc9519c025bf2dbc4ae470806df4b776745",
+  "reference_main_tex_sha256": "d5ad07184a193fa7b3d3492c6048039df76c39988d5178a9afeb8811f03fb644",
+  "three_method_comparison": {
+    "release": "2026.10.08",
+    "paper_source_commit": "47fce929bdcb495cf74895a4953c1136ace5540b",
+    "source_table_sha256": "c941e36a21947c90c3512d41e66d2f661d5f93bbea3fe4315765614bad571001",
+    "distributed_reference_sha256": "d9ab9530e545faa20668e9a49e0709303c5deb8a9bb7a953fb518e6e32687698",
+    "difference": "method minus Ours, using displayed three-decimal values"
+  }
+}

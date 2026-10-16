@@ -1,0 +1,65 @@
+{
+  "date": "2026-09-29",
+  "paper_branch": "newmain",
+  "paper_commit": "1fef8c1ca4a76a278d9977c8e4a0617e2ebe2b12",
+  "selection": "review_stratum == top_score; ranks 1-80 in each of 14 scenes; original row and score values preserved",
+  "review_rows": 1120,
+  "binary_rows": 1081,
+  "counts": {
+    "collision": 185,
+    "non_collision": 896,
+    "ambiguous": 39
+  },
+  "excluded_former_stratified_audit": {
+    "rows": 840,
+    "collision": 0,
+    "non_collision": 836,
+    "ambiguous": 4
+  },
+  "confirmed_rows_and_physical_measurements_unchanged": true,
+  "single_experimental_scene": {
+    "scene_num": 12,
+    "rows": 80,
+    "collision": 13,
+    "non_collision": 63,
+    "ambiguous": 4
+  },
+  "figure13_valid_measurements": {
+    "diameter": {
+      "FP": 877,
+      "TP": 185
+    },
+    "velocity": {
+      "FP": 803,
+      "TP": 180
+    }
+  },
+  "previous_cohort": "The earlier 1,960-row export is preserved in owner records and original research; it is not part of the current paper cohort.",
+  "files": [
+    {
+      "path": "data/paper_figures/review/visual_review_labels.csv",
+      "previous_sha256": "303f91300c598dcde26e0f0a44ba0b8b71a49dac6bcd256d448debb922789e97",
+      "sha256": "10de34e54988cf4162df4cd82cf80a5189efbea33d0f0aaa9d529f4e192383ea"
+    },
+    {
+      "path": "data/experimental/260715/C000H001S0012/review_labels.csv",
+      "previous_sha256": "ad31bd96f9ac78eab4648654ec475d0635f7e18ded25a3c9df2b42c1dbaf5436",
+      "sha256": "6228ccf6c41ef7f0125c45007ee44a16cab5883fe1748d819142feb7ea0a834e"
+    },
+    {
+      "path": "data/paper_figures/fig13/window_measurements.parquet",
+      "previous_sha256": "df2e35db9d47bbb1d53ef0aeac91a111916aa797387729aaa62c12df91304c1c",
+      "sha256": "6b1408360106f5d78205fbbfce5556ca54b9e43a05e0813433d8e196d2e38cc1"
+    },
+    {
+      "path": "data/paper_figures/reference/physical_consistency_events.csv",
+      "previous_sha256": "e2b42767259788a56c2900c180e86ee06ca6b6543df4d1cbb7c9bbc2c42c50da",
+      "sha256": "ec73e11a305c5991d03322373f7be93baa0ea73b6251e303e26d5bd8f98ca3eb"
+    },
+    {
+      "path": "data/experimental/260715/C000H001S0012/review_labels.parquet",
+      "previous_sha256": "5465f5bbb9e9f72a635dbe901b38fbdef88d9e3a1c9b37a007f4ef49fe39bc86",
+      "sha256": "36eef958529b032fc2784dcd05a276658b3369620c2023780dee9ece7df082c1"
+    }
+  ]
+}

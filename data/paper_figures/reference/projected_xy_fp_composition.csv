@@ -1,0 +1,7 @@
+cohort,method,category,count
+terminal,ours,duplicate_or_competition,9
+terminal,ours,no_frame_xy_truth,58
+terminal,depth_free,duplicate_or_competition,18
+terminal,depth_free,no_frame_xy_truth,170
+terminal,minip_2d,duplicate_or_competition,31
+terminal,minip_2d,no_frame_xy_truth,337

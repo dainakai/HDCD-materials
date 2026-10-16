@@ -1,0 +1,105 @@
+{
+  "status": "PASS",
+  "date": "2026-09-29",
+  "paper_branch": "newmain",
+  "paper_commit": "1fef8c1ca4a76a278d9977c8e4a0617e2ebe2b12",
+  "package_version": "0.1.3+zenodo.20260929",
+  "scope": "Top-80 review dataset update, figure reproduction and explanation of existing physical conventions.",
+  "review_rows": 1120,
+  "binary_rows": 1081,
+  "counts": {
+    "collision": 185,
+    "non_collision": 896,
+    "ambiguous": 39
+  },
+  "single_scene": {
+    "scene_num": 12,
+    "rows": 80,
+    "collision": 13,
+    "non_collision": 63,
+    "ambiguous": 4
+  },
+  "confirmed_rows_and_measurements_unchanged": true,
+  "figure13_valid_measurements": {
+    "diameter": {
+      "FP": 877,
+      "TP": 185
+    },
+    "velocity": {
+      "FP": 803,
+      "TP": 180
+    }
+  },
+  "figures_verified": [
+    4,
+    5,
+    7,
+    8,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "pdf_assets_matching": 18,
+  "new_paper_pdf_assets": [
+    11,
+    13
+  ],
+  "unchanged_paper_pdf_assets": 16,
+  "top30_counts_and_coverage_unchanged": true,
+  "gravity_counts_uncertainty_and_rates_unchanged": true,
+  "visual_inspection": [
+    11,
+    13
+  ],
+  "software_tests_passed": 32,
+  "ruff": "PASS",
+  "git_diff_check": "PASS",
+  "english_only_documentation": true,
+  "documentation_links": {
+    "documents": 72,
+    "local_links": 247,
+    "status": "PASS"
+  },
+  "environment": {
+    "status": "PASS",
+    "profile": "core",
+    "python": "3.12.12",
+    "packages": {
+      "numpy": "2.4.6",
+      "pandas": "3.0.3",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.7.1",
+      "torch": "2.12.0",
+      "pillow": "12.2.0",
+      "pyarrow": "25.0.1",
+      "pyyaml": "6.0.3",
+      "huggingface-hub": "1.19.0",
+      "flask": "3.1.3",
+      "threadpoolctl": "3.6.0",
+      "zstandard": "0.25.0",
+      "skops": "0.14.0",
+      "safetensors": "0.8.0",
+      "matplotlib": "3.10.9",
+      "ra3d": "0.1.3+zenodo.20260929"
+    },
+    "cuda_available": false,
+    "errors": []
+  },
+  "code_sha256": {
+    "scripts/reproduce_figures.py": "fe59c9872dc24cb0957bd959bdd5622d4f71bc4871c858dc6e8043214b3fda75",
+    "scripts/figure_support/review_scores.py": "eb8a71c76982f4fa6550d60bbf2a27c22a84dd856cd936e0120af1acb746679e",
+    "scripts/figure_support/physical_plot.py": "3f83130f1a007605450d83af3ee34acd7594497de6c5fb129809182418ad08c7",
+    "tests/test_paper_figures.py": "f0ef02fd5dfa250fcfe8a413da1731924da0097bfebdac67b789c847011fb083"
+  },
+  "data_sources": "review_cohort.json",
+  "figures": "figure_verification.json",
+  "physical_evidence": "physical_conventions.json",
+  "not_repeated": [
+    "Collision model inference and full training",
+    "Hologram generation and particle remeasurement"
+  ],
+  "previous_full_reader_audit": "reader_audit.json",
+  "payload_check": "After manifest finalization, run scripts/verify_release.py --tables; this record precedes that check to avoid a circular hash."
+}

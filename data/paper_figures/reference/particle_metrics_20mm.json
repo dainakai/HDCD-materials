@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "seed": 260745,
+  "dataset": "seed260745",
+  "run": "paired raw/smoothed measurements for Figure 7(b-d)",
+  "detection": {
+    "truth_count": 1200000,
+    "prediction_count_conf_ge_0p001": 1473698,
+    "true_positive_count_conf_ge_0p001": 1173492,
+    "matching": "confidence-ranked greedy one-to-one matching within each frame",
+    "xy_gate_px": 8.0,
+    "minimum_saved_confidence": 0.001,
+    "average_precision": 0.9750451069527624,
+    "best_f1": 0.9617700683228719,
+    "best_f1_confidence": 0.2745516002178192,
+    "operating_point_0p10": {
+      "threshold": 0.1,
+      "precision": 0.9466400387829087,
+      "recall": 0.9665841666666667,
+      "f1": 0.956508150392408
+    },
+    "lowest_threshold_point_0p001": {
+      "threshold": 0.001,
+      "precision": 0.7962906918513833,
+      "recall": 0.97791,
+      "f1": 0.877804449118786
+    },
+    "model_weights": "vendor/holod3/models/production/detector.pt"
+  },
+  "trajectory_matching": {
+    "truth_points": 1200000,
+    "predicted_points": 1225299,
+    "matched_points": 1160051,
+    "unmatched_truth_points": 39949,
+    "unmatched_predicted_points": 65248,
+    "recall": 0.9667091666666666,
+    "precision": 0.9467493240425399,
+    "matching_coordinates": "unsmoothed trajectory3d XY only",
+    "matching_xy_gate_px": 8.0,
+    "measured_coordinates": "smoothedtrajs x, y, z, diameter_px",
+    "post_out_prob_filter": "none",
+    "matched_post_out_prob_gt_0p5_fraction": 0.12835383961567207
+  },
+  "xy_error_smoothed_um": {
+    "n": 1160051,
+    "mean": 7.084226399253497,
+    "median": 2.7670103192687847,
+    "p90": 17.32910062343659,
+    "p95": 26.102853101081237,
+    "p99": 60.2370031877208,
+    "max": 772.1977693332828
+  },
+  "z_error_smoothed_um": {
+    "n": 1160051,
+    "mean": 124.30395726856966,
+    "median": 76.23497236813819,
+    "std": 4635.02089780231,
+    "mae": 776.1626698142935,
+    "p50_abs": 78.71571479590784,
+    "p90_abs": 155.02382283862062,
+    "p95_abs": 1465.6603983522757,
+    "p99_abs": 21120.494815703372,
+    "min": -98778.1570825897,
+    "max": 98908.98314147067,
+    "within_0p5mm_fraction": 0.9360829825585254,
+    "within_1mm_fraction": 0.9449170769216181,
+    "within_5mm_fraction": 0.9675652191153665
+  },
+  "z_absolute_error_smoothed_um": {
+    "n": 1160051,
+    "mean": 776.1626698142935,
+    "median": 78.71571479590784,
+    "p90": 155.02382283862062,
+    "p95": 1465.6603983522757,
+    "p99": 21120.494815703372,
+    "max": 98908.98314147067
+  },
+  "diameter_relative_error": {
+    "n": 1160051,
+    "mean": 0.003228279042356801,
+    "median": 0.0012657430712649158,
+    "std": 0.10922163068809491,
+    "mae": 0.025513124793619182,
+    "p50_abs": 0.008016913469579967,
+    "p90_abs": 0.03840629230102058,
+    "p95_abs": 0.09580737035582354,
+    "p99_abs": 0.3197076346417711,
+    "min": -0.8848446559700134,
+    "max": 9.400890457516065,
+    "definition": "(predicted_diameter - true_diameter) / true_diameter",
+    "within_10pct_fraction": 0.9515978176821537,
+    "within_20pct_fraction": 0.9753614280751449
+  },
+  "sources": {
+    "truth": "data/labels/validation/seed260745/particles.parquet",
+    "low_confidence_detections": "data/paper_figures/fig07/low_confidence_detections.parquet",
+    "paired_raw_and_smoothed_tracks": "data/paper_figures/fig07/paired_tracks_20mm.parquet"
+  }
+}

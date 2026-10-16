@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "date": "2026-10-16",
+  "distribution_version": "1.0.0",
+  "scope": {
+    "test_seed": 260745,
+    "test_frames": 6000,
+    "true_collision_events": 2000,
+    "figures": [
+      4,
+      5,
+      7,
+      8,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "tables": [
+      3,
+      4
+    ]
+  },
+  "preparation": {
+    "files": 20,
+    "all_output_checksums_match": true,
+    "original_files_with_exact_sha256": 15,
+    "elapsed_seconds": 862.560407733079,
+    "versions": {
+      "numpy": "2.4.6",
+      "pandas": "3.0.3",
+      "scipy": "1.17.1",
+      "pyarrow": "25.0.1",
+      "zstandard": "0.25.0"
+    }
+  },
+  "trajectory_feature_calculation": {
+    "rows": 566261,
+    "features_checked": 77,
+    "unadjusted_max_absolute_difference": 4.656612873077393e-10,
+    "after_reference_serialization": "Exact original file SHA-256"
+  },
+  "feature_sample": {
+    "status": "PASS",
+    "rows": 500,
+    "feature_columns_checked": 77
+  },
+  "test_evaluation": {
+    "3d": {
+      "status": "PASS",
+      "event_AP": 0.9171254959438848,
+      "prediction_rows": 26604
+    },
+    "2d": {
+      "status": "PASS",
+      "event_AP": 0.9011106311866217,
+      "prediction_rows": 22976
+    },
+    "minip2d": {
+      "status": "PASS",
+      "event_AP": 0.858187450125321,
+      "prediction_rows": 24078
+    }
+  },
+  "tables": {
+    "status": "PASS",
+    "displayed_values_checked": 45
+  },
+  "figures": {
+    "status": "PASS",
+    "panels": 18,
+    "pixel_verification": true,
+    "dpi": 150,
+    "renderer": "Poppler 22.02.0"
+  },
+  "tests": {
+    "passed": 44
+  },
+  "not_included": [
+    "five training sequences",
+    "supplementary seed 260913",
+    "full experimental sequence replay",
+    "upstream measurement weights",
+    "hologram images"
+  ]
+}

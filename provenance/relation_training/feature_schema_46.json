@@ -1,0 +1,560 @@
+[
+  {
+    "column_1based": 1,
+    "name": "score",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 2,
+    "name": "score_percentile",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 3,
+    "name": "structural_score",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 4,
+    "name": "image_enriched",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 5,
+    "name": "time_offset_frame",
+    "unit_before_standardization": "frame",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 6,
+    "name": "vanished_max",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 7,
+    "name": "vanished_second",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 8,
+    "name": "vanished_top3_mean",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 9,
+    "name": "vanished_mean",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 10,
+    "name": "vanished_std",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 11,
+    "name": "vanished_log_count",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": "natural log(1+n)",
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 12,
+    "name": "vanished_rank",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 13,
+    "name": "vanished_below_max",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 14,
+    "name": "vanished_frame_span",
+    "unit_before_standardization": "frame",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 15,
+    "name": "survivor_max",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 16,
+    "name": "survivor_second",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 17,
+    "name": "survivor_top3_mean",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 18,
+    "name": "survivor_mean",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 19,
+    "name": "survivor_std",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 20,
+    "name": "survivor_log_count",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": "natural log(1+n)",
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 21,
+    "name": "survivor_rank",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 22,
+    "name": "survivor_below_max",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 23,
+    "name": "survivor_frame_span",
+    "unit_before_standardization": "frame",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 24,
+    "name": "pair_max",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 25,
+    "name": "pair_second",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 26,
+    "name": "pair_top3_mean",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 27,
+    "name": "pair_mean",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 28,
+    "name": "pair_std",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 29,
+    "name": "pair_log_count",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": "natural log(1+n)",
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 30,
+    "name": "pair_rank",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 31,
+    "name": "pair_below_max",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 32,
+    "name": "pair_frame_span",
+    "unit_before_standardization": "frame",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 33,
+    "name": "vanished_log_unique_survivors",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": "natural log(1+n)",
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 34,
+    "name": "survivor_log_unique_vanished",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": "natural log(1+n)",
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 35,
+    "name": "vanished_image_fraction",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 36,
+    "name": "survivor_image_fraction",
+    "unit_before_standardization": "dimensionless",
+    "scope": "full per-scene scoring union",
+    "count_transform": null,
+    "nonfinite_replacement": {
+      "NaN": 0,
+      "+Inf": 1000000.0,
+      "-Inf": -1000000.0
+    },
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 37,
+    "name": "frame_from_top",
+    "unit_before_standardization": "frame",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 38,
+    "name": "x_from_top",
+    "unit_before_standardization": "micrometre",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 39,
+    "name": "y_from_top",
+    "unit_before_standardization": "micrometre",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 40,
+    "name": "z_from_top",
+    "unit_before_standardization": "micrometre",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 41,
+    "name": "frame_from_mean",
+    "unit_before_standardization": "frame",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 42,
+    "name": "x_from_mean",
+    "unit_before_standardization": "micrometre",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 43,
+    "name": "y_from_mean",
+    "unit_before_standardization": "micrometre",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 44,
+    "name": "z_from_mean",
+    "unit_before_standardization": "micrometre",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 45,
+    "name": "same_survivor_as_top",
+    "unit_before_standardization": "dimensionless",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  },
+  {
+    "column_1based": 46,
+    "name": "survivor_set_fraction",
+    "unit_before_standardization": "dimensionless",
+    "scope": "selected top-20 per vanished trajectory",
+    "count_transform": null,
+    "nonfinite_replacement": null,
+    "standardization": "training valid-row column mean and population standard deviation"
+  }
+]

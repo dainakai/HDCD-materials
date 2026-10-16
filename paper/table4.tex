@@ -1,0 +1,45 @@
+\begin{table}[H]
+  \centering
+  \small
+  \caption{
+    Cumulative stage ablation on the synthetic test sequence containing 2,000 ground-truth events. Image features, relation-attention, and duplicate suppression are added successively to the trajectory-feature model. At each target recall, precision and false-positive counts are evaluated at the same highest score threshold attaining that recall, including tied scores jointly. AP denotes average precision, P precision, R recall, and FP the number of false positives. Arrows indicate the favorable direction.
+  }
+  \label{tab:projected_xy_stage_ablation}
+  \resizebox{\linewidth}{!}{%
+    \begin{tabular}{lrrrrr}
+      \toprule
+      Variant
+        & AP $\uparrow$
+        & $P$ at $R\geq0.8$ $\uparrow$
+        & FP at $R\geq0.8$ $\downarrow$
+        & $P$ at $R\geq0.9$ $\uparrow$
+        & FP at $R\geq0.9$ $\downarrow$ \\
+      \midrule
+      Trajectory features only
+        & 0.879
+        & 0.857
+        & 266
+        & 0.532
+        & 1,583 \\
+      + image features
+        & 0.888
+        & 0.881
+        & 216
+        & 0.603
+        & 1,186 \\
+      + relation-attention
+        & 0.896
+        & 0.917
+        & 144
+        & 0.668
+        & 896 \\
+      + duplicate suppression
+        & 0.917
+        & 0.960
+        & 67
+        & 0.766
+        & 550 \\
+      \bottomrule
+    \end{tabular}%
+  }
+\end{table}

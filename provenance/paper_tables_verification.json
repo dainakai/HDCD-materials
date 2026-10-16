@@ -1,0 +1,187 @@
+{
+  "status": "PASS",
+  "table3": {
+    "status": "PASS",
+    "rows": [
+      {
+        "method": "3d",
+        "event_ap": 0.9171254959438848,
+        "maximum_f1": 0.8779317697228146,
+        "maximum_recall": 0.969,
+        "prediction_rows": 26604,
+        "precision_at_recall_0p8": 0.9598080383923215,
+        "false_positives_at_recall_0p8": 67,
+        "threshold_at_recall_0p8": 0.9475594238110432,
+        "achieved_recall_0p8": 0.8,
+        "precision_at_recall_0p9": 0.7659574468085106,
+        "false_positives_at_recall_0p9": 550,
+        "threshold_at_recall_0p9": 0.9003125444501257,
+        "achieved_recall_0p9": 0.9,
+        "candidate_pool_rows": 566261,
+        "candidate_pool_recall": 0.9845
+      },
+      {
+        "method": "2d",
+        "event_ap": 0.9011106311866217,
+        "maximum_f1": 0.8458965783380499,
+        "maximum_recall": 0.9745,
+        "prediction_rows": 22976,
+        "precision_at_recall_0p8": 0.8948545861297539,
+        "false_positives_at_recall_0p8": 188,
+        "threshold_at_recall_0p8": 0.9307914050463048,
+        "achieved_recall_0p8": 0.8,
+        "precision_at_recall_0p9": 0.6373937677053825,
+        "false_positives_at_recall_0p9": 1024,
+        "threshold_at_recall_0p9": 0.853158496380113,
+        "achieved_recall_0p9": 0.9,
+        "candidate_pool_rows": 566261,
+        "candidate_pool_recall": 0.9895
+      },
+      {
+        "method": "minip2d",
+        "event_ap": 0.858187450125321,
+        "maximum_f1": 0.8110882956878851,
+        "maximum_recall": 0.965,
+        "prediction_rows": 24078,
+        "precision_at_recall_0p8": 0.8130081300813008,
+        "false_positives_at_recall_0p8": 368,
+        "threshold_at_recall_0p8": 0.9147487978776322,
+        "achieved_recall_0p8": 0.8,
+        "precision_at_recall_0p9": 0.42382858488344716,
+        "false_positives_at_recall_0p9": 2447,
+        "threshold_at_recall_0p9": 0.7458359145328758,
+        "achieved_recall_0p9": 0.9,
+        "candidate_pool_rows": 566261,
+        "candidate_pool_recall": 0.9905
+      }
+    ],
+    "source": "frozen final predictions and uncorrected candidate pools",
+    "paper_layout": {
+      "paper_rounded_cells_match": true,
+      "numeric_cells": 25,
+      "latex": "table3.tex",
+      "rounding": "three decimal places, half up",
+      "parenthetical_differences": "method minus Ours, using displayed values"
+    }
+  },
+  "table4": {
+    "status": "PASS",
+    "rows": [
+      {
+        "method": "trajectory",
+        "event_ap": 0.8791007596306825,
+        "maximum_f1": 0.8286085825747724,
+        "maximum_recall": 0.969,
+        "prediction_rows": 47057,
+        "precision_at_recall_0p8": 0.857449088960343,
+        "false_positives_at_recall_0p8": 266,
+        "threshold_at_recall_0p8": 0.9312245801103957,
+        "achieved_recall_0p8": 0.8,
+        "precision_at_recall_0p9": 0.5320721253325451,
+        "false_positives_at_recall_0p9": 1583,
+        "threshold_at_recall_0p9": 0.7257478486851822,
+        "achieved_recall_0p9": 0.9
+      },
+      {
+        "method": "image",
+        "event_ap": 0.8884842700607077,
+        "maximum_f1": 0.8396349413298566,
+        "maximum_recall": 0.9705,
+        "prediction_rows": 42982,
+        "precision_at_recall_0p8": 0.8810572687224669,
+        "false_positives_at_recall_0p8": 216,
+        "threshold_at_recall_0p8": 0.9196650863495378,
+        "achieved_recall_0p8": 0.8,
+        "precision_at_recall_0p9": 0.6028131279303416,
+        "false_positives_at_recall_0p9": 1186,
+        "threshold_at_recall_0p9": 0.6566422403569353,
+        "achieved_recall_0p9": 0.9
+      },
+      {
+        "method": "relation",
+        "event_ap": 0.8964615369150479,
+        "maximum_f1": 0.8569923623913616,
+        "maximum_recall": 0.9695,
+        "prediction_rows": 42982,
+        "precision_at_recall_0p8": 0.9174311926605505,
+        "false_positives_at_recall_0p8": 144,
+        "threshold_at_recall_0p8": 0.9480361213733502,
+        "achieved_recall_0p8": 0.8,
+        "precision_at_recall_0p9": 0.6676557863501483,
+        "false_positives_at_recall_0p9": 896,
+        "threshold_at_recall_0p9": 0.9074553192143716,
+        "achieved_recall_0p9": 0.9
+      },
+      {
+        "method": "suppression",
+        "event_ap": 0.9171254959438848,
+        "maximum_f1": 0.8779317697228146,
+        "maximum_recall": 0.969,
+        "prediction_rows": 26604,
+        "precision_at_recall_0p8": 0.9598080383923215,
+        "false_positives_at_recall_0p8": 67,
+        "threshold_at_recall_0p8": 0.9475594238110432,
+        "achieved_recall_0p8": 0.8,
+        "precision_at_recall_0p9": 0.7659574468085106,
+        "false_positives_at_recall_0p9": 550,
+        "threshold_at_recall_0p9": 0.9003125444501257,
+        "achieved_recall_0p9": 0.9
+      }
+    ],
+    "selection": {
+      "trajectory": {
+        "seed": 260745,
+        "input_candidates": 566261,
+        "temporal_pair_modes": 72993,
+        "post_vanished_cap": 47057,
+        "post_coordinate_suppression": 47057,
+        "pair_mode_gap_frames": 10,
+        "maximum_modes_per_vanished_track": 5
+      },
+      "image": {
+        "seed": 260745,
+        "input_candidates": 260123,
+        "temporal_pair_modes": 53057,
+        "post_vanished_cap": 42982,
+        "post_coordinate_suppression": 42982,
+        "pair_mode_gap_frames": 10,
+        "maximum_modes_per_vanished_track": 5
+      },
+      "relation": {
+        "seed": 260745,
+        "input_candidates": 260123,
+        "temporal_pair_modes": 53057,
+        "post_vanished_cap": 42982,
+        "post_coordinate_suppression": 42982,
+        "pair_mode_gap_frames": 10,
+        "maximum_modes_per_vanished_track": 5
+      },
+      "suppression": {
+        "seed": 260745,
+        "input_candidates": 260123,
+        "temporal_pair_modes": 53057,
+        "post_vanished_cap": 42982,
+        "post_coordinate_suppression": 26604,
+        "pair_mode_gap_frames": 10,
+        "maximum_modes_per_vanished_track": 5
+      }
+    },
+    "relation": {
+      "total_groups": 12008,
+      "positive_groups": 4129,
+      "positive_groups_with_topk_positive": 4092,
+      "positive_topk_coverage": 0.9910389924921288,
+      "output_sets": 12008,
+      "selected_rows": 209322,
+      "mean_absolute_probability_change": 0.012874325461257344
+    },
+    "paper_layout": {
+      "paper_rounded_cells_match": true,
+      "numeric_cells": 20,
+      "latex": "table4.tex",
+      "rounding": "three decimal places, half up",
+      "difference_column": null
+    },
+    "source": "published trajectory scores, freshly inferred image/relation scores and residual corrections"
+  }
+}

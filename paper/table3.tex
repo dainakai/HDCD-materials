@@ -1,0 +1,16 @@
+\begin{table}[tbp]
+  \centering
+  \caption{Event-level performance of the proposed method, the depth-free variant using MinIP image features, and MinIP-based 2D on the synthetic test sequence. Events are matched one-to-one within the common spatiotemporal gate defined by in-plane distance and time difference in Sec.~\ref{sec:synthetic_hologram_generation}. Average precision summarizes the precision-recall curve, and the maximum F1 score is obtained by varying the score threshold. Precision is additionally reported at target recalls of 0.8 and 0.9. Candidate-pool recall is evaluated for the generated candidate pool $\mathcal{H}$, before candidate-wise scoring and duplicate suppression. Values in parentheses denote the difference from Ours (method minus Ours).}
+  \label{tab:projected_xy_metric_summary}
+  \begin{tabular}{lrrr}
+    \hhline{====}
+    Metric & Ours & \shortstack{Depth-free\\variant} & \shortstack{MinIP-based\\2D} \\
+    \hline
+    Average Precision & 0.917 & 0.901 ($-0.016$) & 0.858 ($-0.059$) \\
+    Maximum $F_1$ & 0.878 & 0.846 ($-0.032$) & 0.811 ($-0.067$) \\
+    Precision at recall $=0.8$ & 0.960 & 0.895 ($-0.065$) & 0.813 ($-0.147$) \\
+    Precision at recall $=0.9$ & 0.766 & 0.637 ($-0.129$) & 0.424 ($-0.342$) \\
+    Candidate-pool recall & 0.985 & 0.990 ($+0.005$) & 0.991 ($+0.006$) \\
+    \hhline{====}
+  \end{tabular}
+\end{table}

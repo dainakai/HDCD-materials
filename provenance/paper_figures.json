@@ -1,0 +1,529 @@
+{
+  "paper_commit": "eccf65a46a62b77d8efd297bffc42181d5f69751",
+  "panels": [
+    {
+      "figure": 4,
+      "paper_path": "figures/methods/particle_size_distribution_mean_ci_260715.pdf",
+      "reference_sha256": "247b0dac91f942177da84c01056110ba3332a6a24c1d720b80874a54f941ca16",
+      "bytes": 16160,
+      "page_points": [
+        453.6,
+        334.8
+      ],
+      "render": {
+        "width": 946,
+        "height": 698,
+        "rgb_sha256": "2dd86bc86dfa4b279948ef4a461e26d17c35e3c3886ded8d48512fc682a9bed6"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": null,
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 4,
+      "paper_path": "figures/methods/particle_count_lwc_scene_summary.pdf",
+      "reference_sha256": "04c12a908966e966289e87c311ee53aef46d6aa4a1e748004ded8bb5a042ca17",
+      "bytes": 18598,
+      "page_points": [
+        877.137375,
+        549.83975
+      ],
+      "render": {
+        "width": 1828,
+        "height": 1146,
+        "rgb_sha256": "1b8633c78ed6f40e196ebabd60b76ad0a7627661dfad56bd96961ce7f7eb26f1"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": "2.1.5",
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 5,
+      "paper_path": "figures/methods/velocity_distributions_260715.pdf",
+      "reference_sha256": "e3903917fdcec401757484ce4a5bde4a4aa7fec1a8497505e8b86a07d790043e",
+      "bytes": 297231,
+      "page_points": [
+        888.590875,
+        375.958475
+      ],
+      "render": {
+        "width": 1852,
+        "height": 784,
+        "rgb_sha256": "f654435ecea98168b33881fc76731cb6e8e9905269179f0b3eaf343ee0805f1c"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": null,
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 7,
+      "paper_path": "figures/methods/01_particle_detection_pr_curve_seed260745.pdf",
+      "reference_sha256": "5ecef0d758289d9551880e58f7c114ca1b4b113e856794cc900179f344bafb10",
+      "bytes": 12404,
+      "page_points": [
+        550.1659375,
+        389.631125
+      ],
+      "render": {
+        "width": 1147,
+        "height": 812,
+        "rgb_sha256": "3d18b383f01fb40a7824300e42c5324e7d055a689d477809cdf5924d90f353ff"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": "1.07.4",
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 7,
+      "paper_path": "figures/methods/02_xy_center_error_smoothed_hist_seed260745.pdf",
+      "reference_sha256": "c4fa4d7c53938e6190311473dac30c3e884d1b43e0368da0fe7dccf7c145d025",
+      "bytes": 24525,
+      "page_points": [
+        539.705,
+        394.412375
+      ],
+      "render": {
+        "width": 1125,
+        "height": 822,
+        "rgb_sha256": "9590c831490cf4ff2300c00e40a86d41176f250c9bcfeb3bfe9666436d43e063"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": "1.07.4",
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 7,
+      "paper_path": "figures/methods/03_axial_error_smoothed_hist_seed260745.pdf",
+      "reference_sha256": "686e0c856bd234b7e513befc8ab51f0dbed3489f19e5442c00f3a416382c3f6f",
+      "bytes": 21938,
+      "page_points": [
+        535.533125,
+        385.412375
+      ],
+      "render": {
+        "width": 1116,
+        "height": 803,
+        "rgb_sha256": "5f4c26221fa7d41f5e0a70debadf53cfd76c961862b8eb0d3bbb57d2285bdb3e"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": "1.07.4",
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 7,
+      "paper_path": "figures/methods/04_diameter_relative_error_hist_seed260745.pdf",
+      "reference_sha256": "622fedd62446bd2c128bf22a91b39dbb5a5659c7edb8f2fa93d9a95ee2ad42c0",
+      "bytes": 22363,
+      "page_points": [
+        539.705,
+        385.412375
+      ],
+      "render": {
+        "width": 1125,
+        "height": 803,
+        "rgb_sha256": "64903660e38599722a555000d0d9fbdc4b0fe0591ce2e9378f0c1e6f5880c082"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": "1.07.4",
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 7,
+      "paper_path": "figures/methods/paper_number_density_distribution_25_300um_seed260745.pdf",
+      "reference_sha256": "2dc2e42912665ceeace7d2bffee2dee12342f4274bd88ba1e8e9521da56d2e97",
+      "bytes": 17765,
+      "page_points": [
+        546.53875,
+        394.1451484375
+      ],
+      "render": {
+        "width": 1139,
+        "height": 822,
+        "rgb_sha256": "a6c92e47c5255edae2997c4a23ad45c2d74746333e487d159a88c5fbd6472e01"
+      },
+      "matplotlib_version": "3.11.1",
+      "liberation_font_version": "2.1.5",
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 7,
+      "paper_path": "figures/methods/paper_trajectory_length_counts_25_300um_seed260745.pdf",
+      "reference_sha256": "9967f5f10fed1d0f0c176e36f8945441a0270431ffeacff930842a9bc03f4758",
+      "bytes": 30843,
+      "page_points": [
+        541.22,
+        396.2247382812
+      ],
+      "render": {
+        "width": 1128,
+        "height": 826,
+        "rgb_sha256": "6300a14caac848536804d091b72599d2192486229d1b1a52236e1080fc8c4519"
+      },
+      "matplotlib_version": "3.11.1",
+      "liberation_font_version": "2.1.5",
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 8,
+      "paper_path": "figures/synthresult/01_validation_precision_recall.pdf",
+      "reference_sha256": "a1355bfb20d6c3b5216193813c5b46c0a4c00735c6f26b4952014fb253604b79",
+      "bytes": 30500,
+      "page_points": [
+        468.0,
+        345.6
+      ],
+      "render": {
+        "width": 976,
+        "height": 721,
+        "rgb_sha256": "8e9abb456982bd884e5ae03af2d74ea1a4cd463dd864bd7ad22e1d4e50de378e"
+      },
+      "matplotlib_version": "3.11.1",
+      "liberation_font_version": null,
+      "reference_kind": "three_method_comparison"
+    },
+    {
+      "figure": 8,
+      "paper_path": "figures/synthresult/02_validation_topn_precision_recall.pdf",
+      "reference_sha256": "c9ae5011d4aba7d8b1f77acab9ba62b7572143c16bee1283bb48a8e1f67f831e",
+      "bytes": 36415,
+      "page_points": [
+        468.0,
+        345.6
+      ],
+      "render": {
+        "width": 976,
+        "height": 721,
+        "rgb_sha256": "8838f9e2908278e2188a8145ad6255dcd609daafff1f9b4659c8929567004279"
+      },
+      "matplotlib_version": "3.11.1",
+      "liberation_font_version": null,
+      "reference_kind": "three_method_comparison"
+    },
+    {
+      "figure": 8,
+      "paper_path": "figures/synthresult/03_validation_false_positive_burden.pdf",
+      "reference_sha256": "49afedf021be58262577638186c1f4ee78f0c3d29df967755eaad7ecd201e901",
+      "bytes": 13638,
+      "page_points": [
+        468.0,
+        345.6
+      ],
+      "render": {
+        "width": 976,
+        "height": 721,
+        "rgb_sha256": "941a249c0c8bc1db9e040410268182af52717bd32b02ebcc3c35885476736c5b"
+      },
+      "matplotlib_version": "3.11.1",
+      "liberation_font_version": null,
+      "reference_kind": "three_method_comparison"
+    },
+    {
+      "figure": 8,
+      "paper_path": "figures/synthresult/04_validation_false_positive_composition.pdf",
+      "reference_sha256": "559dce897a73b3f4a0988a5a14220bdb21a9538915cff52134ca1d9162279e10",
+      "bytes": 12424,
+      "page_points": [
+        468.0,
+        345.6
+      ],
+      "render": {
+        "width": 976,
+        "height": 721,
+        "rgb_sha256": "84677b453ef913c330eba7793f049e5a9bf321e6d3f8f89fe91db7fee7a59dd7"
+      },
+      "matplotlib_version": "3.11.1",
+      "liberation_font_version": null,
+      "reference_kind": "three_method_comparison"
+    },
+    {
+      "figure": 11,
+      "paper_path": "figures/expresult/review_tp_fp_score_distributions_260715.pdf",
+      "reference_sha256": "86d9e1f6403cb27ee522eafe4cff2fb70fc6f6fb61dc38d697a1d081b04fd5c8",
+      "bytes": 15638,
+      "page_points": [
+        475.2,
+        331.2
+      ],
+      "render": {
+        "width": 990,
+        "height": 690,
+        "rgb_sha256": "cf92278271f6a7ba72c8b96ced4f6e33551c311ec8ec78c72b943db7598397f3"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": null,
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 12,
+      "paper_path": "figures/expresult/review_budget_operating_points_260715.pdf",
+      "reference_sha256": "a1d474535f2eb76626817df7f3c4e554e898809ab57f8be8fc486359be72d022",
+      "bytes": 17507,
+      "page_points": [
+        662.4,
+        388.8
+      ],
+      "render": {
+        "width": 1380,
+        "height": 811,
+        "rgb_sha256": "b305ba5af40414d669ccdb9de378daed26765c2f9992e8cb750f90ad9b764397"
+      },
+      "matplotlib_version": "3.11.1",
+      "liberation_font_version": null,
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 13,
+      "paper_path": "figures/expresult/physical_consistency_combined_260715.pdf",
+      "reference_sha256": "412af5d6e7a57f5584c972b2632748150ba9e3a531cf781a3e8e45e8477c588d",
+      "bytes": 66899,
+      "page_points": [
+        748.8,
+        385.2
+      ],
+      "render": {
+        "width": 1560,
+        "height": 803,
+        "rgb_sha256": "73f30c5fee7464fcf9528458268096747c472274a39ffcc32848eda6c24e18c1"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": null,
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 14,
+      "paper_path": "figures/expresult/scene_collision_counts_observed_vs_hall_260715.pdf",
+      "reference_sha256": "7186d038bd91b4aac58cf08c956cc07e7bee5e61c72e3ff7d1482757b3b029ac",
+      "bytes": 17757,
+      "page_points": [
+        656.4853750052,
+        397.268
+      ],
+      "render": {
+        "width": 1368,
+        "height": 828,
+        "rgb_sha256": "9194edad346bb86e1a3c5ebfe11ba59ecdbd3d7050f1b06f43abe30ad8438875"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": null,
+      "reference_kind": "paper_commit"
+    },
+    {
+      "figure": 15,
+      "paper_path": "figures/expresult/collision_count_map_observed_vs_hall_260715.pdf",
+      "reference_sha256": "ba3635a97e78e2cfd74956979fcedf8580804e252e2af0761d67d50caa29a09f",
+      "bytes": 27237,
+      "page_points": [
+        763.2,
+        370.8
+      ],
+      "render": {
+        "width": 1591,
+        "height": 773,
+        "rgb_sha256": "9f772b67bcc8c37eb5294f048651a1c72d9a28f22ac752bd89240f4278f7f646"
+      },
+      "matplotlib_version": "3.10.9",
+      "liberation_font_version": null,
+      "reference_kind": "paper_commit"
+    }
+  ],
+  "paper_repository": "https://github.com/dainakai/CollisionPaper",
+  "render_dpi": 150,
+  "renderer": "pdftoppm version 22.02.0",
+  "code_sources": [
+    {
+      "source_name": "analyze_particle_size_distribution.py",
+      "source_sha256": "d7501f4838b23e76c12a78348abff5ccf3c5cedb52896fa1371e364333721caa",
+      "symbols": [
+        "configure_plotting",
+        "set_diameter_ticks",
+        "style_axis"
+      ]
+    },
+    {
+      "source_name": "plot_particle_size_distribution_mean_ci.py",
+      "source_sha256": "862a3cab32d9f7a1c12bcd86bb0ade300c250fa7e1e0cb4ec41d7a154cfa77b1",
+      "symbols": [
+        "load_scene_curves",
+        "bootstrap_mean_interval",
+        "plot_distribution"
+      ]
+    },
+    {
+      "source_name": "build_particle_count_lwc_figure.py",
+      "source_sha256": "691a0086d27739286a5997bcf74b5324e52c280e909d80db18efa7bf45ff4899",
+      "symbols": [
+        "style_publication",
+        "scene_summary",
+        "draw_mean_sd",
+        "render_scene_summary",
+        "save_figure_set"
+      ]
+    },
+    {
+      "source_name": "plot_holographic_velocity_260715.py",
+      "source_sha256": "ead01055ab9083b5d7d851c94265f24929d99ee0d815fec0f26688ff7716ade8",
+      "symbols": [
+        "plot_velocity"
+      ]
+    },
+    {
+      "source_name": "beard1976.py",
+      "source_sha256": "7b73f2dfc1b5029c589d752a2f4cca3fd8b1857179728512001c638385940f55",
+      "symbols": [
+        "terminal_velocity_um_s",
+        "terminal_velocity_beard_1976_um_s"
+      ]
+    },
+    {
+      "source_name": "build_validation_seed260745_figures.py",
+      "source_sha256": "b51b45ee79c241c515df3c58ae22cd1d8f05a8e3c30d913010009ccf6294a5b2",
+      "symbols": [
+        "load_truth",
+        "greedy_detection_flags",
+        "precision_recall",
+        "match_tracks"
+      ]
+    },
+    {
+      "source_name": "build_scientific_individual_pdfs.py",
+      "source_sha256": "ff136691391a9dca3f031853b73f012b9d08ea127d92d06eb6852d87ab14aa06",
+      "symbols": [
+        "configure_plotting",
+        "style_box",
+        "paper_figure",
+        "save_pdf",
+        "finite",
+        "plot_pr",
+        "plot_positive_histogram",
+        "plot_diameter_histogram"
+      ]
+    },
+    {
+      "source_name": "plot_number_density_paper.py",
+      "source_sha256": "84dc7b6d94259ca5273aedf03def82ba0e5cf05b2f65c78d4501d318d7c80249",
+      "symbols": [
+        "configure_style",
+        "main"
+      ]
+    },
+    {
+      "source_name": "plot_trajectory_length_paper.py",
+      "source_sha256": "bac43c5d51caba7e405f3a29fef010b578eeb6685dd7e9eb1f7fa6fcd30784fa",
+      "symbols": [
+        "cumulative_count_curve",
+        "configure_style",
+        "main"
+      ]
+    },
+    {
+      "source_name": "generate_validation_figures.py",
+      "source_sha256": "bb7f0d7e3dbd952f961d0eaf38d41fa2bc9263296574786eb7ff2a5f1899cb9a",
+      "symbols": [
+        "configure_matplotlib",
+        "new_figure",
+        "polish",
+        "plot_precision_recall",
+        "plot_fp_burden",
+        "plot_fp_composition",
+        "plot_topn"
+      ]
+    },
+    {
+      "source_name": "analyze_review_score_distributions.py",
+      "source_sha256": "fbe961406cc069becd1e14f162af503b946e5742b7ba48b4eed44c38441e1f8f",
+      "symbols": [
+        "configure_plotting",
+        "class_data",
+        "count_histogram",
+        "style_axis",
+        "main"
+      ]
+    },
+    {
+      "source_name": "plot_review_topn_yield.py",
+      "source_sha256": "40a10ac9c6fad11dacd395439e20629b1433d635b3370f5fb0665b6d972566fc",
+      "symbols": [
+        "validate_top_score_cohort",
+        "aggregate_by_rank"
+      ]
+    },
+    {
+      "source_name": "plot_review_budget_decision.py",
+      "source_sha256": "e4662f878afa9f72844a23d347e9b4e3f8887a9b133261bc6bd4a6dc01ff607d",
+      "symbols": [
+        "configure_plotting",
+        "validate_curve",
+        "validate_labels",
+        "build_operating_table",
+        "style_axis",
+        "plot_figure"
+      ]
+    },
+    {
+      "source_name": "analyze_physical_consistency.py",
+      "source_sha256": "ce4c1ef8782c3c48424e01fa2d2a69eae6c3c7fcfa539990b3a8f5b3d846acc2",
+      "symbols": [
+        "configure_plotting",
+        "equal_limits",
+        "scatter_panel",
+        "combined_scatter_figure"
+      ]
+    },
+    {
+      "source_name": "analyze_hall_collision_comparison.py",
+      "source_sha256": "72b0010cadcad144e24eb364a6aa9371ca001cde0315232ba2d91d9958f2443a",
+      "symbols": [
+        "configure_plotting",
+        "HallCorrectedLaminarKernel",
+        "pair_prediction",
+        "observed_collision_counts",
+        "predictive_standard_deviation",
+        "pair_labels",
+        "setup_pair_axis",
+        "annotation_color",
+        "save_pair_map",
+        "add_count_axis",
+        "plot_count_columns",
+        "style_count_axis",
+        "save_scene_comparison"
+      ]
+    },
+    {
+      "source_name": "plot_top80_experimental_reviews.py",
+      "source_sha256": "db4c9b0c50a32afc1c888fb418d460964f1e340b5625ed027ba9028c7c74242b",
+      "symbols": [
+        "configure_plotting",
+        "plot_scores",
+        "plot_physical"
+      ],
+      "scope": "Author's local script for updated Figures 11 and 13; adapted to bundled tables, then checked against committed newmain PDFs."
+    }
+  ],
+  "numerical_environment": "requirements-figures-reference.txt",
+  "additional_plot_environment": "requirements-figures311-reference.txt",
+  "font_selection": "scripts/figure_support/fonts.py",
+  "figure7_reconstruction_note": "Panels b-d use the bundled figure-specific paired measurements (front 74900 um; fixed track membership). Panels e-f use the bundled collision-benchmark distribution and length summaries (front 64900 um).",
+  "original_plot_commit": "c3afaffc0a27f40474eff5418d5510079e6e07be",
+  "manuscript_sha256": "d5ad07184a193fa7b3d3492c6048039df76c39988d5178a9afeb8811f03fb644",
+  "audit_date": "2026-10-04",
+  "paper_branch": "main",
+  "review_cohort": "Top 80 per scene: 1,120 reviews; 185 collision, 896 non-collision, 39 ambiguous",
+  "default_gravity_convention": "saved-figure",
+  "gravity_reference_scope": "Default calculation reproduces the pinned paper PDFs and their numerical tables.",
+  "three_method_comparison": {
+    "version": "2026.10.08",
+    "figure": 8,
+    "methods": [
+      "Ours",
+      "Depth-free variant",
+      "MinIP-based 2D"
+    ],
+    "source_sha256": {
+      "03_validation_false_positive_burden.pdf": "49afedf021be58262577638186c1f4ee78f0c3d29df967755eaad7ecd201e901",
+      "01_validation_precision_recall.pdf": "a1355bfb20d6c3b5216193813c5b46c0a4c00735c6f26b4952014fb253604b79",
+      "02_validation_topn_precision_recall.pdf": "c9ae5011d4aba7d8b1f77acab9ba62b7572143c16bee1283bb48a8e1f67f831e",
+      "fig08.pdf": "f363e1b695f152baa3a79f8f2031a44c6e75f82003aa5ef84c06c9f3af1b9bad",
+      "04_validation_false_positive_composition.pdf": "559dce897a73b3f4a0988a5a14220bdb21a9538915cff52134ca1d9162279e10"
+    }
+  }
+}

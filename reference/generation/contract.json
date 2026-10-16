@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "name": "paper-six-scenes-6000f-halfmix25-v1",
+  "seeds": [
+    260740,
+    260741,
+    260742,
+    260743,
+    260744,
+    260745
+  ],
+  "reference_environment": {
+    "python_major_minor": "3.12",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3"
+  },
+  "random_generator": "PCG64",
+  "seed_offsets": {
+    "main": 0,
+    "velocity_distribution_sampling": 113,
+    "diameter_distribution_sampling": 197
+  },
+  "label_arguments": [
+    "--theme",
+    "collision_benchmark_260715_halfmix25_v1",
+    "--frames",
+    "6000",
+    "--target-particles",
+    "200",
+    "--target-planned-collisions",
+    "2000",
+    "--half-mixture-25um",
+    "--half-mixture-coverage-collisions",
+    "1000",
+    "--half-mixture-candidates-per-pair",
+    "6000",
+    "--half-mixture-parent-lead-frames",
+    "1500",
+    "--min-diameter-um",
+    "25",
+    "--max-diameter-um",
+    "300",
+    "--diameter-density-csv",
+    "{root}/src/ra3d/config/simulation/diameter_distribution_260715.csv",
+    "--velocity-quantiles-csv",
+    "{root}/src/ra3d/config/simulation/velocity_quantiles_260715.csv",
+    "--y-velocity-offset-m-s",
+    "-0.26",
+    "--disable-natural-collisions",
+    "--small-particle-y-jitter",
+    "--refresh-source"
+  ],
+  "source_sha256": {
+    "reference/generation/generate_collision_benchmark.py": "9bea91038c92afdebee66878c1b65de374855b79b761ecb66f216ab26978ef7f",
+    "reference/generation/generate_clean.py": "30da4ce17759ccb21fe2ac78469a98758429383e9377c6b9f7d587ac1978a810",
+    "reference/generation/half_mixture.py": "ddafe3f0c26adc69d6ba1aecd5c84a46b32956721d0e64841d39238bb635f6fc",
+    "reference/generation/render_holograms.jl": "d12c4be9e0b4ebf6867059e785f2b1dd46771720dd3114c54011dd1d201cd4aa",
+    "reference/generation/Project.toml": "d866f9576be59b17ad45100e3b58d86d939615a0e40d7ef1f5d81dea198eff03",
+    "reference/generation/Manifest.toml": "a5e74d3fcb39e4dc47b18d0f8f8d306e17ccc9238a92ea58c660cd43003bddf6",
+    "src/ra3d/config/simulation/diameter_distribution_260715.csv": "7b6286da85ca8c5b4783e30908440f34fe92725637186cd04b36f8918e4f2beb",
+    "src/ra3d/config/simulation/velocity_quantiles_260715.csv": "1be7499fdc685d1a40b57301f2f23869ca2d77d35520fd6d9865a27cf33ade16"
+  },
+  "rendering": "No stochastic optical noise; image values depend on the particle table and the pinned deterministic optical calculation. Cross-GPU/FFT/encoder byte equality must be checked."
+}
