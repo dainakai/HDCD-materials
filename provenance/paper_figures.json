@@ -326,7 +326,6 @@
       "reference_kind": "paper_commit"
     }
   ],
-  "paper_repository": "https://github.com/dainakai/CollisionPaper",
   "render_dpi": 150,
   "renderer": "pdftoppm version 22.02.0",
   "code_sources": [

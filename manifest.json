@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "release": "1.0.0",
+  "release": "1.0.1",
   "layout": "test-and-figures",
   "preparation": "python scripts/prepare_data.py --profile all",
   "source_numerical_release": "2026.10.08",
@@ -13,13 +13,13 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 1471,
-      "sha256": "5a6dd01e78025723124b5f18c95b481ceedaddf19de852e9b644a9b6266f4376"
+      "bytes": 1858,
+      "sha256": "587fd7b2b7241e2234b1f7c89a90454364963fb0f7cc9536e379713fd069584e"
     },
     {
       "path": "CITATION.cff",
-      "bytes": 936,
-      "sha256": "fbefe463580a09b37cbfb8e8a9b417497973225bc43937682798f02a3329e903"
+      "bytes": 946,
+      "sha256": "b232f0a4abc9b21e9f16ba905e592989bddd8d0c70e2cb5ebdb072bdb434cfe4"
     },
     {
       "path": "DATASET_INDEX.csv",
@@ -38,8 +38,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6856,
-      "sha256": "f7a79c748b482d416f3ed31918dfa70256a758d6a3b06dd4d2fa846482188f2d"
+      "bytes": 6969,
+      "sha256": "78a18709ca8ad786ba00fee56fc04457055c26910f112c1e805272cec955f59c"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -3023,8 +3023,8 @@
     },
     {
       "path": "paper/preview.tex",
-      "bytes": 1581,
-      "sha256": "910a388459012ca994d840bbd5041f6f8b46d2b53310562fffa494d17f642c26"
+      "bytes": 1543,
+      "sha256": "853e35382b463e60fbca4ea1c43ed053eafee43780077b97e3a554f002b97ef9"
     },
     {
       "path": "paper/table3.tex",
@@ -3053,8 +3053,8 @@
     },
     {
       "path": "provenance/paper_figures.json",
-      "bytes": 17455,
-      "sha256": "32036a466bb564674126cde9ce9a79fd59d8c972216bd8d6d4795d25ad635e92"
+      "bytes": 17387,
+      "sha256": "2d31bd333d099ee49bbd54cb79b7c56a5e1a35fe9022fae8b7c72cf08d1c74ea"
     },
     {
       "path": "provenance/paper_tables.json",
@@ -3103,8 +3103,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 1854,
-      "sha256": "938aff019520493edee1745588981f17925f98d8438e21ceceb92de93361db89"
+      "bytes": 1820,
+      "sha256": "4bd325ac83b04a39855de0fa86b92500eda3f64db1ebc171c30fc10b9a146b13"
     },
     {
       "path": "reference/ParticleHolography/LICENSE",
@@ -3418,8 +3418,8 @@
     },
     {
       "path": "reference/figure_layouts.tex",
-      "bytes": 11064,
-      "sha256": "40338b8b9fd3a902ec11f32eea658946e0fe132b21337d8cac9391fbfc4eb9c9"
+      "bytes": 11026,
+      "sha256": "9991546fca707ad603a50fb51008820a62fa9c278aa2e8c8792f0e958e50471a"
     },
     {
       "path": "reference/generation/Manifest.toml",
@@ -3679,7 +3679,7 @@
     {
       "path": "src/ra3d/__init__.py",
       "bytes": 104,
-      "sha256": "5f43d3a9548f93a51a3a86eec3ff7972f778894213a17d8728e7747f1dad0f01"
+      "sha256": "3ece41fb013e7a2846433e6aa49c0558057a5b03e173f0345ab39551c7ce16de"
     },
     {
       "path": "src/ra3d/__main__.py",

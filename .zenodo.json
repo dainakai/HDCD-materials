@@ -1,12 +1,14 @@
 {
-  "title": "Semi-automated detection of droplet collision-coalescence using digital in-line holography: code, models and numerical data",
+  "title": "HDCD-materials: Holographic droplet collision detection",
   "upload_type": "dataset",
   "creators": [
     {
-      "name": "Nakai, Dai"
+      "name": "Nakai, Dai",
+      "affiliation": "Kyoto Institute of Technology",
+      "orcid": "0000-0002-6819-2825"
     }
   ],
-  "description": "Numerical materials and trained collision models for Semi-automated detection of droplet collision-coalescence using digital in-line holography. Supports all three pretrained models on the complete independent test seed 260745, Tables 3–4, and Figures 4, 5, 7, 8 and 11–15. Includes 3D test trajectories, compact candidate and image measurements, numerical figure inputs and the 1,120-row top-80 experimental review cohort. Preparation calculates trajectory features and test particle states locally and verifies reference checksums. Five-seed training data, supplementary evaluations, full experimental sequence replay, raw images and upstream particle-measurement weights are outside this reduced distribution.",
+  "description": "HDCD stands for Holographic droplet collision detection. These evaluation data, trained models and code accompany Semi-automated detection of droplet collision-coalescence using digital in-line holography. Supports all three pretrained models on the complete independent test seed 260745, Tables 3–4, and Figures 4, 5, 7, 8 and 11–15. Includes 3D test trajectories, compact candidate and image measurements, numerical figure inputs and the 1,120-row top-80 experimental review cohort. Preparation calculates trajectory features and test particle states locally and verifies reference checksums. Five-seed training data, supplementary evaluations, full experimental sequence replay, raw images and upstream particle-measurement weights are outside this distribution. Numerical research data use CC BY 4.0; software and included collision-model weights use MIT. See the README for installation and commands.",
   "keywords": [
     "digital in-line holography",
     "droplet collision",
@@ -19,11 +21,16 @@
     "cloud microphysics"
   ],
   "license": "cc-by-4.0",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "related_identifiers": [
     {
-      "identifier": "https://github.com/dainakai/CollisionPaper",
-      "relation": "isSupplementTo",
+      "identifier": "https://github.com/dainakai/HDCD-materials/tree/v1.0.1",
+      "relation": "isIdenticalTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/dainakai/HDCD-materials/blob/v1.0.1/README.md",
+      "relation": "isDocumentedBy",
       "scheme": "url"
     }
   ]

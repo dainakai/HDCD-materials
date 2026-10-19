@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ra3d"
-version = "1.0.0"
+version = "1.0.1"
 description = "Reproducible relation-attention detection and review of 3D particle collisions"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -31,10 +31,10 @@ collision-physics = "ra3d.physics:main"
 ra3d = "ra3d.cli:main"
 
 [project.urls]
-Repository = "https://github.com/dainakai/collision-paper-materials"
-Documentation = "https://github.com/dainakai/collision-paper-materials#readme"
-Issues = "https://github.com/dainakai/collision-paper-materials/issues"
-Paper = "https://github.com/dainakai/CollisionPaper"
+Repository = "https://github.com/dainakai/HDCD-materials"
+Documentation = "https://github.com/dainakai/HDCD-materials#readme"
+Issues = "https://github.com/dainakai/HDCD-materials/issues"
+Archive = "https://doi.org/10.5281/zenodo.23409588"
 
 [tool.setuptools.packages.find]
 where = ["src"]

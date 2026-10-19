@@ -1,12 +1,14 @@
 cff-version: 1.2.0
 message: "Please cite the associated paper and the version of this dataset used in your analysis."
 type: dataset
-title: "Semi-automated detection of droplet collision-coalescence using digital in-line holography: code, models and numerical data"
+title: "HDCD-materials: Holographic droplet collision detection"
 authors:
   - family-names: Nakai
     given-names: Dai
-version: "1.0.0"
-date-released: "2026-10-16"
-repository-code: "https://github.com/dainakai/collision-paper-materials"
-url: "https://github.com/dainakai/collision-paper-materials/releases/tag/v1.0.0"
+    affiliation: "Kyoto Institute of Technology"
+    orcid: "https://orcid.org/0000-0002-6819-2825"
+version: "1.0.1"
+date-released: "2026-10-19"
+repository-code: "https://github.com/dainakai/HDCD-materials"
+url: "https://github.com/dainakai/HDCD-materials/releases/tag/v1.0.1"
 abstract: "Complete held-out test evaluation for three pretrained collision-detection methods, Tables 3–4, nine numerical figures and 1,120 top-80 experimental review labels. Includes 3D test trajectories and code that calculates trajectory features and regenerates test particle states. Training sequences, supplementary evaluations, full experimental replay data and images are outside this reduced distribution."

@@ -1,6 +1,6 @@
-# Holographic droplet collision detection — evaluation data, models and code
+# HDCD-materials
 
-Materials accompanying “Semi-automated detection of droplet collision-coalescence using digital in-line holography” by Dai Nakai.
+HDCD stands for Holographic droplet collision detection. This repository provides evaluation data, trained models and code accompanying “Semi-automated detection of droplet collision-coalescence using digital in-line holography” by Dai Nakai.
 
 Evaluate the three pretrained collision models on the complete held-out test sequence, reproduce Tables 3–4 and Figures 4, 5, 7, 8 and 11–15, and examine the experimental review labels. These workflows use numerical data and run on a CPU. Hologram images are not required.
 
@@ -19,11 +19,11 @@ The [use-case guide](docs/use-cases.md) describes the input boundary of each wor
 
 ## Quick start
 
-Download and extract the [v1.0.0 ZIP](https://github.com/dainakai/collision-paper-materials/archive/refs/tags/v1.0.0.zip), or clone the release:
+Download and extract the [v1.0.1 ZIP](https://github.com/dainakai/HDCD-materials/archive/refs/tags/v1.0.1.zip), or clone the release:
 
 ```bash
-git clone --branch v1.0.0 --depth 1 https://github.com/dainakai/collision-paper-materials.git
-cd collision-paper-materials
+git clone --branch v1.0.1 --depth 1 https://github.com/dainakai/HDCD-materials.git
+cd HDCD-materials
 ```
 
 Use Linux and Python 3.12. Run all commands from this directory. Installation needs the package registry; numerical inputs and collision weights are included. [Environment setup](docs/environment.md).
@@ -87,4 +87,4 @@ A ready-to-view [figure and table preview](paper/preview.pdf) is included. [Figu
 
 ## Citation and licenses
 
-Please cite the associated paper and the dataset version used. [CITATION.cff](CITATION.cff) contains the citation metadata. Numerical research data use [CC BY 4.0](LICENSE-DATA.md); software and included collision-model weights use MIT, with third-party components retaining their own licenses. [Third-party notices](THIRD_PARTY_NOTICES.md).
+Please cite the associated paper and the dataset version used. [CITATION.cff](CITATION.cff) contains the citation metadata; the [Zenodo archive](https://doi.org/10.5281/zenodo.23409588) provides a DOI for each release. Numerical research data use [CC BY 4.0](LICENSE-DATA.md); software and included collision-model weights use MIT, with third-party components retaining their own licenses. [Third-party notices](THIRD_PARTY_NOTICES.md).
