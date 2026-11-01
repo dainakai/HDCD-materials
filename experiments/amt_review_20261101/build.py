@@ -52,12 +52,12 @@ def style_body(body):
 def page(body, title, subtitle, current, *, full=False):
     body, headings = style_body(body)
     links = ''.join(f'<a href="#{key}">{label}</a>' for key, label in headings)
-    cover = '' if full else '''<div class="verdict"><span class="pill">今回の判定</span><h2>条件差の検証は完了。<br>最終版の図表は再生成が必要。</h2><p>実験レビューを始める前に、数値検証からモデルまでを固定するための報告です。</p><div class="facts"><div><strong>7<span>条件</span></strong><small>固定入力の比較が完了</small></div><div><strong>6<span>系列</span></strong><small>新しい正解データを生成済み</small></div><div><strong>0<span> / 36,000対</span></strong><small>新ホログラムの描画状況</small></div></div></div>'''
+    cover = '' if full else '''<div class="verdict"><span class="pill">今回の判定</span><h2>新条件の全量評価を実行中。<br>生成から3手法の再学習へ。</h2><p>実験レビューを始める前に、数値検証からモデルまでを固定するための報告です。</p><div class="facts"><div><strong>7<span>条件</span></strong><small>固定入力の比較が完了</small></div><div><strong>6<span>系列</span></strong><small>新しい正解データを生成済み</small></div><div><strong><b id="full-render-count">処理中</b><span> / 36,000対</span></strong><small>新ホログラムの検証済み数</small></div></div></div>'''
     return f'''<!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="robots" content="noindex,nofollow"><title>{esc(title)} | HDCD研究報告</title><link rel="stylesheet" href="assets/report.css"><script src="assets/report.js" defer></script></head>
 <body><a class="skip" href="#content">本文へ移動</a><header class="top"><a class="brand" href="index.html">HDCD <span>RESEARCH NOTE</span></a><div class="top-links"><a href="index.html" {'aria-current="page"' if not full else ''}>今回の確認</a><a href="preflight.html" {'aria-current="page"' if full else ''}>詳細報告</a><button type="button" id="print-report">印刷 / PDF</button></div></header>
 <div class="shell"><aside><div class="toc-label">この報告書の内容</div><nav aria-label="目次">{links}</nav><div class="aside-note">数値検証を先に確定<br>その後に実験レビューへ</div></aside>
-<main id="content"><div class="title-block"><div class="eyebrow">MATERIALS REVISION · 2026.11.01</div><h1>{esc(title)}</h1><p class="subtitle">{esc(subtitle)}</p><div class="provenance">科学計算の版 <code>c7110c8</code> · 今回は保存状況と原稿を再点検</div></div>{cover}
+<main id="content"><div class="title-block"><div class="eyebrow">MATERIALS REVISION · 2026.11.01</div><h1>{esc(title)}</h1><p class="subtitle">{esc(subtitle)}</p><div class="provenance">固定入力対照 <code>c7110c8</code> · 新版の全量計算は進行状況欄で更新</div></div>{cover}
 <details class="mobile-toc"><summary>目次を開く</summary><nav aria-label="モバイル目次">{links}</nav></details>
 <article>{body}</article><footer>確認日時：{esc(current)}<br>Quick Tunnelは実行中のみ利用できます。再作成するとURLが変わります。<a href="#content">先頭へ戻る ↑</a></footer></main></div></body></html>'''
 

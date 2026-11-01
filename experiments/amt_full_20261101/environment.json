@@ -1,0 +1,22 @@
+{
+  "python": "3.12.12",
+  "gpu_python": "/media/dai-server/M2Disk2TB/repos/260712/.venv/bin/python",
+  "cpu_torch": "2.12.0+cpu",
+  "gpu_device_requested": 0,
+  "packages": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.7.1",
+    "torch": "2.12.0",
+    "skops": "0.14.0",
+    "scipy": "1.17.1",
+    "pyarrow": "25.0.1",
+    "Pillow": "12.2.0",
+    "ultralytics": "8.4.61",
+    "safetensors": "0.8.0",
+    "threadpoolctl": "3.6.0",
+    "matplotlib": "3.10.9",
+    "PyYAML": "6.0.3",
+    "torch-tensorrt": "2.12.1"
+  }
+}
