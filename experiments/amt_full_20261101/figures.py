@@ -61,6 +61,7 @@ def main():
     for method,dim in zip(METHODS,['3d','2d','minip2d']):
         cases={'Published':published[dim]['metrics'],
             '74.9 mm only':json.loads((AUDIT/f'results/range_only/{method}/metrics.json').read_text()),
+            'Oct 29 combined changes':json.loads((AUDIT/f'aligned/results/{method}/metrics.json').read_text()),
             'Revised 102.3 mm / phase 3':metrics[method]}
         for case,m in cases.items():
             row={'method':method,'case':case,'ap':m['event_ap'],'max_recall':m['maximum_recall'],'max_f1':m['maximum_f1']}
@@ -70,18 +71,19 @@ def main():
                 row[f'precision_{target}']=None if point is None else point['precision']
             comparison.append(row)
     compare=pd.DataFrame(comparison);write_table(compare,ROOT/'results/scenario-comparison.csv')
-    fig,axes=plt.subplots(1,3,figsize=(15,4.9))
-    cases=['Published','74.9 mm only','Revised 102.3 mm / phase 3'];colors=['#B2BBC4','#69AFBF','#284E70']
-    x=np.arange(3);width=.25
+    fig,axes=plt.subplots(1,3,figsize=(16,5.3))
+    cases=['Published','74.9 mm only','Oct 29 combined changes','Revised 102.3 mm / phase 3'];colors=['#B2BBC4','#69AFBF','#C6996C','#284E70']
+    x=np.arange(3);width=.20
     for ax,column,title in zip(axes,['ap','fp_0.8','fp_0.9'],['(a) Event AP','(b) False positives at recall 0.8','(c) False positives at recall 0.9']):
         for i,(case,color) in enumerate(zip(cases,colors)):
             vals=compare.loc[compare['case'].eq(case)].set_index('method').loc[METHODS,column].to_numpy()
-            bars=ax.bar(x+(i-1)*width,vals,width,color=color,label=case)
+            bars=ax.bar(x+(i-1.5)*width,vals,width,color=color,label=case)
             ax.bar_label(bars,fmt='%.3f' if column=='ap' else '%.0f',padding=4,fontsize=8.5)
         ax.set_xticks(x,[NAMES[m].replace('-based ','\n') for m in METHODS]);ax.set_title(title);ax.margins(y=.18)
         if column=='ap':ax.set_ylim(0,1.08);ax.legend(fontsize=8,loc='lower left')
     fig.suptitle('Synthetic benchmark: revised generation and common manuscript conditions',fontsize=15)
-    fig.text(.5,.015,'Five training scenes; held-out seed 260745; 2,000 truth events. Time/XY maximum one-to-one matching.',ha='center',fontsize=10)
+    fig.text(.5,.015,'All scenarios: test seed 260745, 2,000 truth events, common time/XY matching.\n'
+             'Combined-condition comparisons do not isolate one factor; revised generation changes the truth events.',ha='center',fontsize=9)
     fig.tight_layout(rect=(0,.05,1,.94));fig.savefig(OUT/'comparison.png',dpi=170);fig.savefig(OUT/'comparison.pdf');plt.close(fig)
     # Candidate labels are recomputed after each stage's new selection.
     labelrows=[]
@@ -93,7 +95,7 @@ def main():
     frame=pd.DataFrame(labelrows)
     write_table(frame,ROOT/'results/training-labels.csv')
     write_json({'status':'PASS','methods':METHODS,'figure08_assembly':'Current submission prepare_figures.py',
-                'figure08_axis_adjustment':'FP axis lower limit 0.8 instead of 1.6 to show the measured one-FP point at recall 0.5.',
+                'figure08_axis_adjustment':json.loads((panels/'axis-audit.json').read_text()),
                 'protocol_sha256':sha256(ROOT/'config/protocol.json'),
                 'figure_hashes':{p.name:sha256(p) for p in OUT.glob('*.pdf')}},ROOT/'results/figures.json')
 

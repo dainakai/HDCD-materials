@@ -35,7 +35,7 @@
     {
       "topic": "Table4段階比較",
       "current": "Cumulative stage ablation",
-      "proposed": "Comparison of scoring stages under common temporal-mode aggregation, a per-trajectory mode cap, rank adjustment, and localization correction. Coordinate suppression is added only in the last row. A separate control removes all duplicate-suppression operations.",
+      "proposed": "Comparison of scoring stages under common temporal-mode aggregation, a per-trajectory mode cap, rank adjustment, and localization correction. Coordinate suppression is added only in the last row. A separate control removes all duplicate-suppression operations. The trajectory-only row uses the static shortlist and has no image features for localization; later rows use the scoring union and their available image features. Thus the comparison includes candidate-selection and feature-availability changes.",
       "reason": "現コードの表の行は共通後処理を持つ。段階ごとの改善という記述は実測のclaim-checksで確認する。"
     },
     {

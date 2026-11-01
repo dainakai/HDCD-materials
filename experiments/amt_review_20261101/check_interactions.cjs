@@ -14,9 +14,9 @@ class Element {
 const nodes=Object.fromEntries(['print-report','comparison-output','full-progress','full-render-count'].map(k=>[k,new Element('div')]));
 const buttons=['phase','rule','rank','z'].map(k=>{const e=new Element('button');e.dataset.comparison=k;return e;});
 const mobile=new Element('a');mobile.parent={open:true};
-let prints=0;const intervals=[];
+let prints=0,progressOverride=null;const intervals=[];
 const context={document:{querySelector:q=>nodes[q.slice(1)]||null,querySelectorAll:q=>q==='[data-comparison]'?buttons:q==='.mobile-toc a'?[mobile]:[],createElement:t=>new Element(t)},
-  fetch:async name=>({ok:true,json:async()=>JSON.parse(fs.readFileSync(path.join(root,'public',name),'utf8'))}),
+  fetch:async name=>({ok:true,json:async()=>name==='evidence/full-progress.json'&&progressOverride?progressOverride:JSON.parse(fs.readFileSync(path.join(root,'public',name),'utf8'))}),
   window:{print:()=>prints++},setInterval:fn=>intervals.push(fn),console,Date,Number,Set,Error};
 const code=fs.readFileSync(path.join(__dirname,'report.js'),'utf8');
 (async()=>{
@@ -27,7 +27,13 @@ const code=fs.readFileSync(path.join(__dirname,'report.js'),'utf8');
  if(nodes['full-render-count'].textContent!==Number(progress.paired_holograms_verified).toLocaleString('ja-JP'))throw Error('progress counter');
  if(!nodes['full-progress'].textContent.includes('260745')||!nodes['full-progress'].textContent.includes('Depth-free'))throw Error('missing progress rows');
  if(intervals.length!==1)throw Error('missing refresh interval');await intervals[0]();
+ progressOverride=JSON.parse(JSON.stringify(progress));
+ progressOverride.stage_comparison=[{stage:'trajectory',event_ap:.7,false_positives_at_recall_0p8:null,false_positives_at_recall_0p9:null},{stage:'suppression',event_ap:.9,false_positives_at_recall_0p8:20,false_positives_at_recall_0p9:200}];
+ progressOverride.completion={finalized:true,claim_checks:{ours_exceeds_both_event_ap:true,stagewise_nondecreasing_event_ap:false}};
+ await intervals[0]();
+ for(const phrase of ['新条件の段階比較','維持できる','そのまま記載できない','判定できない','図表と数値だけの差し替えでは完成しません'])if(!nodes['full-progress'].textContent.includes(phrase))throw Error('missing completion disclosure: '+phrase);
  const result={status:'PASS',comparison_buttons:4,print_handler:true,mobile_toc_closes:true,live_progress_sequences:6,auto_refresh_handler:true,
+  finalized_claim_display:true,stage_comparison_display:true,
   scope:'DOM-stub JavaScript execution; not a browser rendering or mobile screenshot check.',script_sha256:crypto.createHash('sha256').update(code).digest('hex')};
  fs.writeFileSync(path.join(root,'interaction-verification.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
 })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -37,7 +37,21 @@ def update():
         summary=load_if(ROOT/f'results/{method}/summary.json')
         verified=load_if(ROOT/f'results/{method}/verification.json')
         methods.append({'method':method,'evaluated':bool(summary and verified and verified['status']=='PASS'),
-                        'metrics':summary if verified and summary else None})
+                        'metrics':summary if verified and summary else None,
+                        'rank_sensitivity':load_if(ROOT/f'results/{method}/rank_sensitivity.json')})
+    final=load_if(ROOT/'finalized.json')
+    finish_job=load_if(ROOT/'finalization-job.json')
+    checks=load_if(ROOT/'manuscript/claim-checks.json')
+    table4=ROOT/'results/table4/table4.csv'
+    completion={'finalized':bool(final and final['status']=='PASS'),
+                'finalization_failed':bool(finish_job and finish_job['status']=='FAILED'),
+                'manuscript_numeric_only_ready':False,
+                'experimental_model_frozen':bool(final and final['experimental_model_frozen']),
+                'experimental_reprocessing_complete':False,
+                'claim_checks':checks['claims'] if checks else None,
+                'remaining_text_changes':['順位罰則を固定する時点','ID対応とZゲート、neutral候補、重み',
+                    'APの定義','段階比較に共通する後処理','テスト系列を感度分析に用いた履歴'],
+                'prior_experimental_figures_pending':['Fig.3','Fig.4','Fig.5']}
     figures=[];public_files={}
     for name,label in [('figure07','Fig.7：同じテスト系列の粒子計測'),('figure08','Fig.8：3手法の衝突検出性能'),
                        ('figure09','Fig.9：新しい候補の画像特徴'),('comparison','旧版との性能比較')]:
@@ -53,7 +67,10 @@ def update():
           'paired_holograms_saved':sum(r['paired_holograms_saved'] for r in rows),
           'minip_verified':sum(r['minip_verified'] for r in rows),
           'measurement_frames':sum(r['measurement_frames'] for r in rows),
-          'methods':methods,'figures':figures,'protocol':{'generation_depth_mm':102.3,'front_mm':74.9,
+          'methods':methods,'figures':figures,'completion':completion,
+          'stage_comparison':read_table(table4).to_dict('records') if table4.exists() else [],
+          'version':load_if(ROOT/'config/run-version.json'),
+          'protocol':{'generation_depth_mm':102.3,'front_mm':74.9,
           'last_plane_mm':177.2,'phase_iterations':3,'minip_planes':513,'minip_padding':1536,'image_padding':2048},
           'interpretation':'検証済みの新生成データだけを集計。最終APは各手法の再学習と共通マッチング検証が完了してから表示。'}
     target=PUBLIC/'evidence/full-progress.json';write_json(note,target)

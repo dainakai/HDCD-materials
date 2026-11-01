@@ -74,6 +74,8 @@ def stages(bundle,truth):
     write_table(pd.DataFrame(rows),out/'table4.csv')
     write_json({'common_operations':['temporal modes','maximum 5 modes per terminating track',
         'pre-suppression lineage rank penalty','final 92-feature localization regressors'],
+        'localization_feature_availability':'The same trained regressors receive the features available at each stage. Image features are missing in the trajectory-only row. This is not an isolated intervention on classifier scores alone.',
+        'candidate_sets':'The trajectory row uses the static shortlist; later rows use the scoring union. The selection effect is included in this stage comparison.',
         'last_row_addition':'coordinate NMS','interpretation':'Historical Table 4 scoring-stage comparison with common downstream processing explicitly stated.',
         'selection':audits},out/'protocol.json')
     # Actual removal of duplicate suppression: all U candidates, no modes,

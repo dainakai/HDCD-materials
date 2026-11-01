@@ -54,6 +54,7 @@ if (progressBox) {
       const current=el('p',`${status} · 更新 ${new Date(data.updated_at).toLocaleString('ja-JP')}`);current.className='progress-status';
       const totals=el('p',`ホログラム保存 ${number(data.paired_holograms_saved)}対 ／ 検証済み ${number(data.paired_holograms_verified)}対、MinIP ${number(data.minip_verified)}枚、計測完了 ${number(data.measurement_frames)}フレーム。`);
       progressBox.replaceChildren(current,totals);
+      if(data.version)progressBox.append(el('small',`${data.version.branch} · ${data.version.commit.slice(0,12)}`));
       const tableWrap=el('div');tableWrap.className='table-wrap';tableWrap.tabIndex=0;
       const table=el('table'),head=el('thead'),header=el('tr'),body=el('tbody');
       ['系列','用途','ホログラム検証済み','MinIP','計測完了','3D / 2D追跡'].forEach(t=>{const th=el('th',t);th.scope='col';header.append(th);});head.append(header);
@@ -65,6 +66,26 @@ if (progressBox) {
         if(m.evaluated){card.append(el('p',`AP ${Number(m.metrics.event_ap).toFixed(6)}`));card.append(el('small',`FP80 ${m.metrics.false_positives_at_recall_0p8 ?? '未到達'} / FP90 ${m.metrics.false_positives_at_recall_0p9 ?? '未到達'}`));}
         else card.append(el('p','再学習・評価の完了待ち'));
         results.append(card);});progressBox.append(results);
+      if(data.stage_comparison?.length){
+        progressBox.append(el('h3','新条件の段階比較'));
+        const stageNames={trajectory:'軌跡の特徴',image:'画像特徴を追加',relation:'関係attentionを追加',suppression:'座標の重複抑制を追加'};
+        const wrap=el('div');wrap.className='table-wrap';wrap.tabIndex=0;
+        const t=el('table'),h=el('thead'),r=el('tr'),b=el('tbody');
+        ['段階','AP','FP80','FP90'].forEach(v=>{const th=el('th',v);th.scope='col';r.append(th);});h.append(r);
+        data.stage_comparison.forEach(s=>{const line=el('tr');[stageNames[s.stage]||s.stage,Number(s.event_ap).toFixed(6),s.false_positives_at_recall_0p8??'未到達',s.false_positives_at_recall_0p9??'未到達'].forEach(v=>line.append(el('td',v)));b.append(line);});
+        t.append(h,b);wrap.append(t);progressBox.append(wrap,el('small','各段階には時間モード選択・最大5候補・抑制前の順位罰則・同じ学習済み位置補正器を適用。軌跡行の位置補正には画像特徴を渡さず、後続行では候補集合も絞られるため、分類スコアだけを変えた比較ではありません。最終行で座標抑制を追加します。'));
+      }
+      if(data.completion){
+        if(data.completion.finalization_failed)progressBox.append(el('p','数値計算後の成果物整理でエラーが発生しました。結果の固定は未完了です。'));
+        if(data.completion.finalized){
+          progressBox.append(el('h3','数値検証の完了確認'));
+          progressBox.append(el('p','3手法の入力・モデル・評価の照合と図表の整理が完了し、実験レビュー用のモデルを固定しました。'));
+          const claims=data.completion.claim_checks||{};
+          const titles={ours_exceeds_both_event_ap:'OursのAPが両比較法を上回る',ours_exceeds_both_maximum_f1:'Oursの最大F1が両比較法を上回る',stagewise_nondecreasing_event_ap:'段階追加でAPが単調に向上する',stagewise_nonincreasing_false_positives_at_recall_0p8:'段階追加でFP80が単調に減る',stagewise_nonincreasing_false_positives_at_recall_0p9:'段階追加でFP90が単調に減る'};
+          const list=el('ul');Object.entries(titles).forEach(([key,title])=>list.append(el('li',`${title}：${claims[key]===true?'維持できる':claims[key]===false?'そのまま記載できない':'判定できない'}`)));progressBox.append(list);
+          progressBox.append(el('p','図表と数値だけの差し替えでは完成しません。順位・教師対応・AP・段階比較・テスト利用履歴の本文修正と、実験由来のFig.3–5の更新が残ります。実験の再処理と新しい目視レビューは未実施です。'));
+        }
+      }
       if(data.failed_jobs.length)progressBox.append(el('p',`エラーを記録した処理：${data.failed_jobs.join('、')}`));
       const allowed=new Set(['assets/full-figure07.png','assets/full-figure08.png','assets/full-figure09.png','assets/full-comparison.png']);
       for(const item of data.figures){if(!allowed.has(item.path))continue;const fig=el('figure'),link=el('a'),img=el('img');link.href=item.path;link.target='_blank';link.rel='noopener';img.src=item.path;img.alt=item.label;img.loading='lazy';link.append(img);fig.append(link,el('figcaption',item.label+'（新条件の計算結果）'));progressBox.append(fig);}
