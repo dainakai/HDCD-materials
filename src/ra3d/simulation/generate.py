@@ -2894,6 +2894,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--theme", default=THEME)
     parser.add_argument("--frames", type=int, default=DEFAULT_FRAMES)
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
+    parser.add_argument("--volume-depth-um", type=float, default=None,
+                        help="Explicit physical depth; the revised 1024-plane profile uses 102300 um.")
     parser.add_argument(
         "--target-particles",
         type=int,
@@ -3057,6 +3059,7 @@ def main() -> None:
         target_particles=args.target_particles,
         min_diameter_um=DIAMETER_MIN_UM,
         max_diameter_um=DIAMETER_MAX_UM,
+        volume_depth_um=args.volume_depth_um,
     )
     generate_dataset(
         project_root,

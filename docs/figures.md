@@ -38,7 +38,7 @@ Both required Liberation font revisions are bundled and selected explicitly, ind
 ## 2. Generate all nine figures
 
 ```bash
-python scripts/reproduce_figures.py --output runs/paper-figures --verify-rendered
+python scripts/reproduce_figures.py --output runs/paper-figures --gravity-convention saved-figure --verify-rendered
 ```
 
 All input tables, models and reference values stay unchanged.
@@ -47,13 +47,13 @@ It runs on CPU and needs no images or network access after environment setup.
 Figure 7 evaluates all 6,000 frames, including 1,473,698 low-confidence particle detections and 1,225,299 track points; allow several minutes and several GB of free memory.
 Other figures use smaller tables.
 
-The default `saved-figure` convention reproduces Figures 14–15 using the paper plots' exposure and uncertainty settings. The expected result is `PASS`, with all 18 panel page sizes and rendered-pixel hashes matching. [Calculation settings](physical-conventions.md) define the rates, resampling seed and optional alternatives.
+The explicit `saved-figure` convention reproduces the historical Figures 14–15 using their saved exposure and uncertainty settings. The expected result is `PASS`, with all 18 panel page sizes and rendered-pixel hashes matching. On the revision branch, omitting the option selects `manuscript`: all 10,917 frames, nominal volume and Poisson-only SD. Those revised figures intentionally differ from the historical references. [Calculation settings](physical-conventions.md) define both conventions.
 
 If the environments or Poppler executable are elsewhere:
 
 ```bash
 python scripts/reproduce_figures.py --output runs/paper-figures-custom \
-  --plot-python /path/to/figures311/bin/python --pdftoppm /usr/bin/pdftoppm
+  --plot-python /path/to/figures311/bin/python --pdftoppm /usr/bin/pdftoppm --gravity-convention saved-figure
 ```
 
 Generate only selected figures with:
@@ -99,7 +99,7 @@ The 14-scene experimental inputs are numerical summaries and measured windows. C
 | 11 | `review/visual_review_labels.csv` | Single histogram over score 0.98–1.00 from `collision_score`; 185 collisions and 896 non-collisions, excluding 39 ambiguous cases |
 | 12 | Same review CSV | Ranked top-score cohort: 80 candidates × 14 scenes; at top 30 per scene, 177/185 = 95.7% confirmed-event coverage and 177/420 = 42.1% precision |
 | 13 | Review CSV and `fig13/window_measurements.parquet` | Recompute volume-conservation diameter and momentum-conservation vertical velocity from measured pre-event values; 185 confirmed and 877 rejected diameter cases; 180 confirmed and 803 rejected valid velocity cases |
-| 14 | Review CSV, `gravity/fine_density_by_scene_5um.csv`, `time_block_density_by_scene_5um.csv`, bundled physical tables | 185 confirmed events versus 210.1 ± 14.6 predicted events across 14 scenes; density resampling and counting SD with the plotted exposure |
+| 14 | Review CSV, `gravity/fine_density_by_scene_5um.csv`, `time_block_density_by_scene_5um.csv`, `recorded_particle_counts_by_scene_5um.csv`, bundled physical tables | 185 confirmed events; `manuscript` gives 210.119 ± 14.495 predicted events; explicit `saved-figure` gives 210.057 ± 14.628 |
 | 15 | Same as Figure 14 | Observed and predicted counts in hard 25 µm diameter bins; 66 unordered bin pairs; the same total counts as Figure 14 |
 
 Figure 8(c) uses absolute false-positive counts.
@@ -109,11 +109,13 @@ For review denominators, training association and event-policy definitions, read
 
 Figure 7(b–d) uses `paired_tracks_20mm.parquet`, with 74,900 µm front reconstruction distance, 3 phase iterations, 1,536-pixel padding and fixed linked-track membership. These paired raw/smoothed measurements are included specifically for the error panels. Figure 7(e,f) uses the supplied benchmark's saved density and trajectory summaries. [Processing conditions](benchmark-reconstruction.md) identify the input for each figure and the collision benchmark.
 
+Those are the historical reproduction inputs. The [revision preflight](revision-preflight-20261030.md#fig7とテスト系列の対応) verifies their test-sequence identity and provides a revised Figure 7 calculated from the exact tracking geometry used by the 74.9 mm collision experiment.
+
 ### Gravitational prediction and randomness
 
-Figures 14–15 use a 5 µm density/kernel grid and a 25 µm display grid. The default calculation uses 10,904 frames per scene, 4,000 Hz, and 10.71644672 cm³ per frame. Its density uncertainty uses 11 temporal blocks, 4,000 resamples, and seed 260724. Count SD is `sqrt(expected count + density bootstrap variance)`.
+Figures 14–15 use a 5 µm density/kernel grid and a 25 µm display grid. The revised default, `manuscript`, uses all 10,917 frames, 4,000 Hz and nominal 10.72693248 cm³ volume, with count SD `sqrt(expected count)`.
 
-The optional `poisson-only` mode keeps this density/exposure and uses `sqrt(expected count)`. The optional `manuscript` mode uses all 10,917 frames and the nominal volume, with Poisson-only SD. Both change Figures 14–15; use the default for exact reproduction. [Detailed settings](physical-conventions.md).
+Explicit `saved-figure` reproduces the historical plots: 10,904 frames, 10.71644672 cm³ volume, 11 temporal density blocks, 4,000 resamples and seed 260724, with SD `sqrt(expected count + density bootstrap variance)`. The optional `poisson-only` mode retains that historical density/exposure and removes the bootstrap variance. [Detailed settings](physical-conventions.md).
 
 The kernel is evaluated at fine-bin centers before aggregation, including half-weight for unordered pairs within the same coarse bin. Every mode retains the hard 25 µm diameter bins.
 

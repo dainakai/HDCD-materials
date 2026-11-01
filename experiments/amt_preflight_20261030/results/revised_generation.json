@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "seed": 260745,
+  "frames": 6000,
+  "particles_per_frame": 200,
+  "events": 2000,
+  "in_volume_particle_points": 1200000,
+  "all_particle_points": 2090434,
+  "outside_nominal_xy_points": 890434,
+  "all_z_min_um": 2.738051,
+  "all_z_max_um": 102295.500481,
+  "event_z_min_um": 398.5104595050925,
+  "event_z_max_um": 102099.99618723178,
+  "all_particle_centers_and_events_within_revised_grid": true,
+  "events_with_changed_time_or_position": 2000,
+  "holograms_rendered": false,
+  "processing_completed": "numerical truth only",
+  "source_csv_sha256": "0a058257df0bde0aeb68124027efa0211ab6ebec2145f6c09ebaabcc29c1e42b",
+  "events_csv_sha256": "44feccac7ca3c451c5bf5870c5ec32d38fea2dde56050298765fe7dfd0730164"
+}

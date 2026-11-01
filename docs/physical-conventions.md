@@ -2,9 +2,9 @@
 
 [Repository home](../README.md) · [Figure reproduction](figures.md) · [Physical diagnostics](physics.md)
 
-The default figure command uses the `saved-figure` calculation below to reproduce Figures 14–15. Counts, observation volume-time and uncertainty must use the same convention when comparing rates.
+The revision branch defaults to `manuscript`: all 10,917 recorded frames, nominal volume, and Poisson-only SD. Use `--gravity-convention saved-figure` to reproduce the historical Figures 14–15. Both calculations retain the same 185 reviewed events; they do not represent experimental validation of a newly trained collision model. Counts, observation volume-time and uncertainty use the same convention when comparing rates.
 
-## 1. Paper-figure calculation
+## 1. Historical paper-figure calculation (`saved-figure`)
 
 | Setting | Value |
 | --- | --- |
@@ -33,27 +33,27 @@ The pooled expected count is 210.057, density-resampling SD 1.978, and total SD 
 
 ```bash
 python scripts/reproduce_figures.py --figures 14 15 \
-  --output runs/paper-counts --verify-rendered
+  --output runs/paper-counts --gravity-convention saved-figure --verify-rendered
 ```
 
 Read `figure14/scene_counts.csv` and `figure15/diameter_pair_counts.csv` for full-precision results. `paper_reference_comparison.json` compares counts, rates, exposure and uncertainty with the independently saved reference tables.
 
-## 2. Optional alternative calculations
+## 2. Revised default and comparison calculations
 
 | Option | Density and exposure | Count SD |
 | --- | --- | --- |
-| `saved-figure` (default) | Settings above | `sqrt(lambda + sd_density**2)` |
-| `poisson-only` | Same density and exposure as the default | `sqrt(lambda)` |
-| `manuscript` | All 10,917 frames and nominal 10.24 × 10.24 × 102.3 mm³ volume | `sqrt(lambda)` |
+| `saved-figure` | Historical settings above | `sqrt(lambda + sd_density**2)` |
+| `poisson-only` | Same density and exposure as `saved-figure` | `sqrt(lambda)` |
+| `manuscript` (default) | All 10,917 frames and nominal 10.24 × 10.24 × 102.3 mm³ volume | `sqrt(lambda)` |
 
 The `manuscript` option uses the counting convention described in the text. It gives expected count 210.119, SD 14.495, and observed rate 4.5136 × 10⁵ m⁻³ s⁻¹. The full-recording density counts are bundled in `gravity/recorded_particle_counts_by_scene_5um.csv`.
 
 ```bash
 python scripts/reproduce_figures.py --figures 14 15 \
-  --gravity-convention manuscript --output runs/alternative-counts
+  --gravity-convention manuscript --output runs/manuscript-counts
 ```
 
-These alternative calculations produce different plots from the paper figures and report `COMPUTED_WITH_PAPER_DIFFERENCES`. Use the default for exact paper-figure reproduction. The alternative outputs do not change the reference files.
+The revised `manuscript` calculation produces different plots from the historical paper figures and reports `COMPUTED_WITH_PAPER_DIFFERENCES`. Use explicit `saved-figure` for exact historical reproduction. Reference files retain their original provenance.
 
 ## 3. Rebuild full-recording density inputs
 

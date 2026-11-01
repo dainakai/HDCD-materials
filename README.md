@@ -1,5 +1,8 @@
 # HDCD-materials
 
+This branch contains the [AMT revision preflight and controlled experiments](docs/revision-preflight-20261030.md). Bundled v1.0.1 inputs and weights remain historical records. The proposed 102.3 mm, 74.9 mm-front, three-iteration dataset is not yet a regenerated release.
+The distribution manifest still identifies v1.0.1; use the experiment verification recorded in the report for this preflight branch. The quick-start clone below targets the historical v1.0.1 release.
+
 HDCD stands for Holographic droplet collision detection. This repository provides evaluation data, trained models and code accompanying “Semi-automated detection of droplet collision-coalescence using digital in-line holography” by Dai Nakai.
 
 Evaluate the three pretrained collision models on the complete held-out test sequence, reproduce Tables 3–4 and Figures 4, 5, 7, 8 and 11–15, and examine the experimental review labels. These workflows use numerical data and run on a CPU. Hologram images are not required.
@@ -68,7 +71,7 @@ This recalculates Tables 3–4 and writes CSVs, LaTeX tables and a verification 
 Install the [figure environments](docs/figures.md#1-set-up-the-two-plotting-environments), then run:
 
 ```bash
-python scripts/reproduce_figures.py --output runs/paper-figures --verify-rendered
+python scripts/reproduce_figures.py --output runs/paper-figures --gravity-convention saved-figure --verify-rendered
 ```
 
 The command produces nine figures with 18 PDF panels, numerical outputs, English captions and the paper's layout. Exact pixel checks use the specified plotting environments and Poppler 22.02.0. With another Poppler version, omit `--verify-rendered` to retain numerical checks and report rendering differences.

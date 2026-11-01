@@ -1,0 +1,522 @@
+[
+  {
+    "stage": "stage1",
+    "seed": 260740,
+    "candidate_rows": 402264,
+    "spatial_positive_rows": 46091,
+    "spatial_negative_rows": 356173,
+    "exact_covered_events": 1927,
+    "attributed_events": 1927,
+    "identity_consistent_events": 1097,
+    "identity_fallback_events": 830,
+    "identity_training_positive_rows": 23194,
+    "neutral_spatial_rows": 22897,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 356173,
+      "identity_unknown": 33393,
+      "identity_inconsistent": 10742,
+      "identity_consistent": 1956
+    }
+  },
+  {
+    "stage": "static",
+    "seed": 260740,
+    "candidate_rows": 540812,
+    "spatial_positive_rows": 64558,
+    "spatial_negative_rows": 476254,
+    "exact_covered_events": 1942,
+    "attributed_events": 1942,
+    "identity_consistent_events": 1102,
+    "identity_fallback_events": 840,
+    "identity_training_positive_rows": 31909,
+    "neutral_spatial_rows": 32649,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 476254,
+      "identity_unknown": 45785,
+      "identity_inconsistent": 16803,
+      "identity_consistent": 1970
+    }
+  },
+  {
+    "stage": "full",
+    "seed": 260740,
+    "candidate_rows": 251443,
+    "spatial_positive_rows": 47126,
+    "spatial_negative_rows": 204317,
+    "exact_covered_events": 1938,
+    "attributed_events": 1938,
+    "identity_consistent_events": 1100,
+    "identity_fallback_events": 838,
+    "identity_training_positive_rows": 22943,
+    "neutral_spatial_rows": 24183,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 204317,
+      "identity_unknown": 31843,
+      "identity_inconsistent": 13316,
+      "identity_consistent": 1967
+    }
+  },
+  {
+    "stage": "stage1",
+    "seed": 260741,
+    "candidate_rows": 403480,
+    "spatial_positive_rows": 45384,
+    "spatial_negative_rows": 358096,
+    "exact_covered_events": 1946,
+    "attributed_events": 1946,
+    "identity_consistent_events": 1098,
+    "identity_fallback_events": 848,
+    "identity_training_positive_rows": 22682,
+    "neutral_spatial_rows": 22702,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 358096,
+      "identity_unknown": 32610,
+      "identity_inconsistent": 10810,
+      "identity_consistent": 1964
+    }
+  },
+  {
+    "stage": "static",
+    "seed": 260741,
+    "candidate_rows": 542678,
+    "spatial_positive_rows": 63192,
+    "spatial_negative_rows": 479486,
+    "exact_covered_events": 1957,
+    "attributed_events": 1957,
+    "identity_consistent_events": 1102,
+    "identity_fallback_events": 855,
+    "identity_training_positive_rows": 31505,
+    "neutral_spatial_rows": 31687,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 479486,
+      "identity_unknown": 44363,
+      "identity_inconsistent": 16858,
+      "identity_consistent": 1971
+    }
+  },
+  {
+    "stage": "full",
+    "seed": 260741,
+    "candidate_rows": 251254,
+    "spatial_positive_rows": 47106,
+    "spatial_negative_rows": 204148,
+    "exact_covered_events": 1950,
+    "attributed_events": 1950,
+    "identity_consistent_events": 1102,
+    "identity_fallback_events": 848,
+    "identity_training_positive_rows": 23333,
+    "neutral_spatial_rows": 23773,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 204148,
+      "identity_unknown": 31776,
+      "identity_inconsistent": 13359,
+      "identity_consistent": 1971
+    }
+  },
+  {
+    "stage": "stage1",
+    "seed": 260742,
+    "candidate_rows": 386770,
+    "spatial_positive_rows": 48199,
+    "spatial_negative_rows": 338571,
+    "exact_covered_events": 1925,
+    "attributed_events": 1925,
+    "identity_consistent_events": 1085,
+    "identity_fallback_events": 840,
+    "identity_training_positive_rows": 24416,
+    "neutral_spatial_rows": 23783,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 338571,
+      "identity_unknown": 35210,
+      "identity_inconsistent": 11043,
+      "identity_consistent": 1946
+    }
+  },
+  {
+    "stage": "static",
+    "seed": 260742,
+    "candidate_rows": 525235,
+    "spatial_positive_rows": 68304,
+    "spatial_negative_rows": 456931,
+    "exact_covered_events": 1943,
+    "attributed_events": 1943,
+    "identity_consistent_events": 1089,
+    "identity_fallback_events": 854,
+    "identity_training_positive_rows": 34402,
+    "neutral_spatial_rows": 33902,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 456931,
+      "identity_unknown": 48738,
+      "identity_inconsistent": 17613,
+      "identity_consistent": 1953
+    }
+  },
+  {
+    "stage": "full",
+    "seed": 260742,
+    "candidate_rows": 245974,
+    "spatial_positive_rows": 48975,
+    "spatial_negative_rows": 196999,
+    "exact_covered_events": 1939,
+    "attributed_events": 1939,
+    "identity_consistent_events": 1087,
+    "identity_fallback_events": 852,
+    "identity_training_positive_rows": 24552,
+    "neutral_spatial_rows": 24423,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 196999,
+      "identity_unknown": 33380,
+      "identity_inconsistent": 13645,
+      "identity_consistent": 1950
+    }
+  },
+  {
+    "stage": "stage1",
+    "seed": 260743,
+    "candidate_rows": 398760,
+    "spatial_positive_rows": 45700,
+    "spatial_negative_rows": 353060,
+    "exact_covered_events": 1926,
+    "attributed_events": 1926,
+    "identity_consistent_events": 1105,
+    "identity_fallback_events": 821,
+    "identity_training_positive_rows": 22495,
+    "neutral_spatial_rows": 23205,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 353060,
+      "identity_unknown": 33267,
+      "identity_inconsistent": 10475,
+      "identity_consistent": 1958
+    }
+  },
+  {
+    "stage": "static",
+    "seed": 260743,
+    "candidate_rows": 540499,
+    "spatial_positive_rows": 64072,
+    "spatial_negative_rows": 476427,
+    "exact_covered_events": 1939,
+    "attributed_events": 1939,
+    "identity_consistent_events": 1112,
+    "identity_fallback_events": 827,
+    "identity_training_positive_rows": 31012,
+    "neutral_spatial_rows": 33060,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 476427,
+      "identity_unknown": 45580,
+      "identity_inconsistent": 16521,
+      "identity_consistent": 1971
+    }
+  },
+  {
+    "stage": "full",
+    "seed": 260743,
+    "candidate_rows": 252019,
+    "spatial_positive_rows": 47741,
+    "spatial_negative_rows": 204278,
+    "exact_covered_events": 1934,
+    "attributed_events": 1934,
+    "identity_consistent_events": 1111,
+    "identity_fallback_events": 823,
+    "identity_training_positive_rows": 23218,
+    "neutral_spatial_rows": 24523,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 204278,
+      "identity_unknown": 32249,
+      "identity_inconsistent": 13522,
+      "identity_consistent": 1970
+    }
+  },
+  {
+    "stage": "stage1",
+    "seed": 260744,
+    "candidate_rows": 391978,
+    "spatial_positive_rows": 46408,
+    "spatial_negative_rows": 345570,
+    "exact_covered_events": 1922,
+    "attributed_events": 1919,
+    "identity_consistent_events": 1097,
+    "identity_fallback_events": 822,
+    "identity_training_positive_rows": 23036,
+    "neutral_spatial_rows": 23372,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 345570,
+      "identity_unknown": 33533,
+      "identity_inconsistent": 10902,
+      "identity_consistent": 1973
+    }
+  },
+  {
+    "stage": "static",
+    "seed": 260744,
+    "candidate_rows": 530433,
+    "spatial_positive_rows": 64795,
+    "spatial_negative_rows": 465638,
+    "exact_covered_events": 1937,
+    "attributed_events": 1936,
+    "identity_consistent_events": 1106,
+    "identity_fallback_events": 830,
+    "identity_training_positive_rows": 31941,
+    "neutral_spatial_rows": 32854,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 465638,
+      "identity_unknown": 45911,
+      "identity_inconsistent": 16894,
+      "identity_consistent": 1990
+    }
+  },
+  {
+    "stage": "full",
+    "seed": 260744,
+    "candidate_rows": 250120,
+    "spatial_positive_rows": 47805,
+    "spatial_negative_rows": 202315,
+    "exact_covered_events": 1933,
+    "attributed_events": 1932,
+    "identity_consistent_events": 1106,
+    "identity_fallback_events": 826,
+    "identity_training_positive_rows": 22892,
+    "neutral_spatial_rows": 24913,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 202315,
+      "identity_unknown": 32258,
+      "identity_inconsistent": 13559,
+      "identity_consistent": 1988
+    }
+  },
+  {
+    "stage": "relation_top20",
+    "seed": 260740,
+    "candidate_rows": 202150,
+    "spatial_positive_rows": 35455,
+    "spatial_negative_rows": 166695,
+    "exact_covered_events": 1932,
+    "attributed_events": 1932,
+    "identity_consistent_events": 1100,
+    "identity_fallback_events": 832,
+    "identity_training_positive_rows": 17274,
+    "neutral_spatial_rows": 18181,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 166695,
+      "identity_unknown": 24653,
+      "identity_inconsistent": 8835,
+      "identity_consistent": 1967
+    }
+  },
+  {
+    "stage": "relation_top20",
+    "seed": 260741,
+    "candidate_rows": 204177,
+    "spatial_positive_rows": 36247,
+    "spatial_negative_rows": 167930,
+    "exact_covered_events": 1944,
+    "attributed_events": 1943,
+    "identity_consistent_events": 1102,
+    "identity_fallback_events": 841,
+    "identity_training_positive_rows": 17871,
+    "neutral_spatial_rows": 18376,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 167930,
+      "identity_unknown": 25057,
+      "identity_inconsistent": 9220,
+      "identity_consistent": 1970
+    }
+  },
+  {
+    "stage": "relation_top20",
+    "seed": 260742,
+    "candidate_rows": 199057,
+    "spatial_positive_rows": 37100,
+    "spatial_negative_rows": 161957,
+    "exact_covered_events": 1932,
+    "attributed_events": 1932,
+    "identity_consistent_events": 1087,
+    "identity_fallback_events": 845,
+    "identity_training_positive_rows": 18675,
+    "neutral_spatial_rows": 18425,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 161957,
+      "identity_unknown": 26036,
+      "identity_inconsistent": 9115,
+      "identity_consistent": 1949
+    }
+  },
+  {
+    "stage": "relation_top20",
+    "seed": 260743,
+    "candidate_rows": 202340,
+    "spatial_positive_rows": 36270,
+    "spatial_negative_rows": 166070,
+    "exact_covered_events": 1925,
+    "attributed_events": 1925,
+    "identity_consistent_events": 1111,
+    "identity_fallback_events": 814,
+    "identity_training_positive_rows": 17700,
+    "neutral_spatial_rows": 18570,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 166070,
+      "identity_unknown": 25224,
+      "identity_inconsistent": 9077,
+      "identity_consistent": 1969
+    }
+  },
+  {
+    "stage": "relation_top20",
+    "seed": 260744,
+    "candidate_rows": 201857,
+    "spatial_positive_rows": 36031,
+    "spatial_negative_rows": 165826,
+    "exact_covered_events": 1926,
+    "attributed_events": 1923,
+    "identity_consistent_events": 1104,
+    "identity_fallback_events": 819,
+    "identity_training_positive_rows": 17416,
+    "neutral_spatial_rows": 18615,
+    "identity_window": "strict t-1 parents and t+1 daughter; no imputation",
+    "gate": {
+      "frames": 5,
+      "xy_um": 350,
+      "z_um": 30000.0,
+      "candidate_z_origin_correction_um": -100
+    },
+    "identity_state_rows": {
+      "negative": 165826,
+      "identity_unknown": 25067,
+      "identity_inconsistent": 8978,
+      "identity_consistent": 1986
+    }
+  }
+]

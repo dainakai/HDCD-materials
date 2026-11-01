@@ -26,6 +26,13 @@ class SynthParams:
     calibration_bundle: str = "C000H001S0010"
     c002_front_distance_um: float = 74900.0
     c001_front_distance_um: float = 96350.0
+    volume_depth_um: float | None = None
+
+    def __post_init__(self):
+        if self.volume_depth_um is not None and (
+            not math.isfinite(self.volume_depth_um) or self.volume_depth_um <= 0
+        ):
+            raise ValueError("volume_depth_um must be finite and positive")
 
     @property
     def width_um(self) -> float:
@@ -37,7 +44,7 @@ class SynthParams:
 
     @property
     def depth_um(self) -> float:
-        return self.slices * self.dz_um
+        return self.slices * self.dz_um if self.volume_depth_um is None else self.volume_depth_um
 
     @property
     def volume_cm3(self) -> float:

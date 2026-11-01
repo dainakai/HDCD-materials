@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "arm": "legacy_phase3_z15",
+  "seconds": 2369.3881502570002,
+  "train_seeds": [
+    260740,
+    260741,
+    260742,
+    260743,
+    260744
+  ],
+  "test_seed": 260745,
+  "test_used_in_fitting": false,
+  "fixed_upstream_tables": true,
+  "full_pipeline_regenerated": false,
+  "phase_iterations": 3,
+  "training_z_gate_um": 15000.0,
+  "label_rule": "legacy"
+}

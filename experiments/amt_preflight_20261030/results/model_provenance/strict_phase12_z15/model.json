@@ -1,0 +1,533 @@
+{
+  "schema_version": 1,
+  "sklearn_version": "1.7.1",
+  "recipe": {
+    "method": "ra3d",
+    "set_top_k": 20,
+    "hidden_size": 48,
+    "attention_heads": 4,
+    "epochs": 12,
+    "batch_size": 192,
+    "inference_batch_size": 512,
+    "learning_rate": 0.0008,
+    "weight_decay": 0.0001,
+    "random_seed": 270901,
+    "device": "cpu",
+    "cpu_threads": 4,
+    "relation_logit_weight": 0.15,
+    "source_policy": {
+      "score_column": "relation_attention_percentile",
+      "pair_mode_gap_frames": 10,
+      "maximum_modes_per_vanished_track": 5,
+      "coordinate_suppression": true,
+      "coordinate_frame_tolerance": 2,
+      "coordinate_xy_tolerance_um": 250.0,
+      "coordinate_z_tolerance_um": 7500.0,
+      "lineage_log_odds_penalty": 1.0
+    },
+    "residual_model": {
+      "max_iter": 150,
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 30,
+      "l2_regularization": 0.1
+    },
+    "outside_fraction": 0.4,
+    "image_fraction": 0.25,
+    "structural_max_vanished_rank": 20
+  },
+  "features": [
+    "time_offset_frame",
+    "xy_dist_um",
+    "z_dist_um",
+    "closest_distance_um",
+    "effective_distance_um",
+    "radius_sum_um",
+    "distance_margin_um",
+    "effective_margin_um",
+    "vanished_diameter_um",
+    "survivor_diameter_um",
+    "closing_speed_um_frame",
+    "post_survival_frames",
+    "pre_overlap_frames",
+    "boundary_exit_score",
+    "survivor_change_score",
+    "survivor_delta_diameter_px",
+    "survivor_delta_speed_px_frame",
+    "vertical_y_gap_um",
+    "vertical_closing_um_frame",
+    "vertical_time_to_catch_frame",
+    "vertical_penalty",
+    "xy_gate_ratio_400",
+    "z_gate_ratio_6000",
+    "xy_z_gate_value_400_6000",
+    "pre_diameter_vanished_um",
+    "pre_diameter_survivor_um",
+    "pre_diameter_large_um",
+    "pre_diameter_small_um",
+    "post_diameter_um",
+    "pre_diameter_vanished_n",
+    "pre_diameter_survivor_n",
+    "post_diameter_n",
+    "post_over_large",
+    "post_over_expected",
+    "post_minus_large",
+    "post_minus_expected",
+    "volume_resid_frac",
+    "signed_volume_resid_frac",
+    "small_large_ratio",
+    "expected_growth_um",
+    "growth_fraction_of_expected",
+    "pre_n_min",
+    "pre_kin_both_count",
+    "pre_kin_span_frames",
+    "pre_eff_first_um",
+    "pre_eff_last_um",
+    "pre_eff_min_um",
+    "pre_eff_max_um",
+    "pre_eff_last_minus_first_um",
+    "pre_eff_slope_um_frame",
+    "pre_eff_tail_slope_um_frame",
+    "pre_eff_increase_fraction",
+    "pre_eff_tail_increase_fraction",
+    "pre_eff_event_minus_last_um",
+    "pre_eff_event_minus_min_um",
+    "pre_xy_first_um",
+    "pre_xy_last_um",
+    "pre_xy_min_um",
+    "pre_xy_max_um",
+    "pre_xy_last_minus_first_um",
+    "pre_xy_slope_um_frame",
+    "pre_xy_tail_slope_um_frame",
+    "pre_xy_increase_fraction",
+    "pre_xy_tail_increase_fraction",
+    "pre_xy_event_minus_last_um",
+    "pre_xy_event_minus_min_um",
+    "pre_z_first_um",
+    "pre_z_last_um",
+    "pre_z_last_minus_first_um",
+    "pre_z_slope_um_frame",
+    "pre_closing_eff_last_um_frame",
+    "pre_closing_xy_last_um_frame",
+    "pre_closing_eff_median_um_frame",
+    "pre_closing_xy_median_um_frame",
+    "rendered_pre_frames",
+    "skipped_pre_frames",
+    "pre_same_interp_count",
+    "pre_same_interp_fraction",
+    "pre_same_observed_count",
+    "pre_alternating_same_count",
+    "same_component_area_median_px",
+    "same_component_score",
+    "fragment_pre_full_v1",
+    "fragment_pre8_v1",
+    "fragment_pre7_v1",
+    "same_ge7",
+    "same_ge8",
+    "same_ge9",
+    "diameter_under_0p725",
+    "diameter_under_0p90",
+    "same7_and_diameter_under_0p90",
+    "moving_apart_xy_rule"
+  ],
+  "stage1_features": [
+    "time_offset_frame",
+    "xy_dist_um",
+    "z_dist_um",
+    "closest_distance_um",
+    "effective_distance_um",
+    "radius_sum_um",
+    "distance_margin_um",
+    "effective_margin_um",
+    "vanished_diameter_um",
+    "survivor_diameter_um",
+    "closing_speed_um_frame",
+    "post_survival_frames",
+    "pre_overlap_frames",
+    "boundary_exit_score",
+    "survivor_change_score",
+    "survivor_delta_diameter_px",
+    "survivor_delta_speed_px_frame",
+    "vertical_y_gap_um",
+    "vertical_closing_um_frame",
+    "vertical_time_to_catch_frame",
+    "vertical_penalty",
+    "xy_gate_ratio_400",
+    "z_gate_ratio_6000",
+    "xy_z_gate_value_400_6000"
+  ],
+  "static_features": [
+    "time_offset_frame",
+    "xy_dist_um",
+    "z_dist_um",
+    "closest_distance_um",
+    "effective_distance_um",
+    "radius_sum_um",
+    "distance_margin_um",
+    "effective_margin_um",
+    "vanished_diameter_um",
+    "survivor_diameter_um",
+    "closing_speed_um_frame",
+    "post_survival_frames",
+    "pre_overlap_frames",
+    "boundary_exit_score",
+    "survivor_change_score",
+    "survivor_delta_diameter_px",
+    "survivor_delta_speed_px_frame",
+    "vertical_y_gap_um",
+    "vertical_closing_um_frame",
+    "vertical_time_to_catch_frame",
+    "vertical_penalty",
+    "xy_gate_ratio_400",
+    "z_gate_ratio_6000",
+    "xy_z_gate_value_400_6000",
+    "pre_diameter_vanished_um",
+    "pre_diameter_survivor_um",
+    "pre_diameter_large_um",
+    "pre_diameter_small_um",
+    "post_diameter_um",
+    "pre_diameter_vanished_n",
+    "pre_diameter_survivor_n",
+    "post_diameter_n",
+    "post_over_large",
+    "post_over_expected",
+    "post_minus_large",
+    "post_minus_expected",
+    "volume_resid_frac",
+    "signed_volume_resid_frac",
+    "small_large_ratio",
+    "expected_growth_um",
+    "growth_fraction_of_expected",
+    "pre_n_min",
+    "pre_kin_both_count",
+    "pre_kin_span_frames",
+    "pre_eff_first_um",
+    "pre_eff_last_um",
+    "pre_eff_min_um",
+    "pre_eff_max_um",
+    "pre_eff_last_minus_first_um",
+    "pre_eff_slope_um_frame",
+    "pre_eff_tail_slope_um_frame",
+    "pre_eff_increase_fraction",
+    "pre_eff_tail_increase_fraction",
+    "pre_eff_event_minus_last_um",
+    "pre_eff_event_minus_min_um",
+    "pre_xy_first_um",
+    "pre_xy_last_um",
+    "pre_xy_min_um",
+    "pre_xy_max_um",
+    "pre_xy_last_minus_first_um",
+    "pre_xy_slope_um_frame",
+    "pre_xy_tail_slope_um_frame",
+    "pre_xy_increase_fraction",
+    "pre_xy_tail_increase_fraction",
+    "pre_xy_event_minus_last_um",
+    "pre_xy_event_minus_min_um",
+    "pre_z_first_um",
+    "pre_z_last_um",
+    "pre_z_last_minus_first_um",
+    "pre_z_slope_um_frame",
+    "pre_closing_eff_last_um_frame",
+    "pre_closing_xy_last_um_frame",
+    "pre_closing_eff_median_um_frame",
+    "pre_closing_xy_median_um_frame",
+    "diameter_under_0p725",
+    "diameter_under_0p90",
+    "moving_apart_xy_rule"
+  ],
+  "files": {
+    "trees.skops": "2cc2d6e5ec949217564bb5d3421ca4844c11766f2e9e579cadb3968d422c6263",
+    "relation.safetensors": "ce8ebe6dec067a7ff6e6fc45b0dea448ceba280d94d3ce4e673c0435846b9fea",
+    "normalization.npz": "70b2b1c3648dd656003cd2961c67bb165df32656624a21d3d8a8286a195a85e7"
+  },
+  "provenance": {
+    "training_scenes": [
+      260740,
+      260741,
+      260742,
+      260743,
+      260744
+    ],
+    "candidate_tables_fixed": true,
+    "source_manifest": {
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260740/stage1_training.parquet": "105abbc6721ef9003a00256417a3de3d717af384387448e00d1b97e015993481",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260740/static77.parquet": "a1dffaad4b6a563a9a4453b619327a740dd9cb5259ecf7eeea7df6168af33610",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260740/paper92.parquet": "8ead5cd788fccfd17b320eb7a124bdff98e8701aa551896efef9ff8e5821678e",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260741/stage1_training.parquet": "78b0e673b99b032fa491a567d5d01d901d2f5984915eb1b2c1b44ff73d8d2987",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260741/static77.parquet": "e00ba1c587c5271f9e9bd0bc031acf886bda8be74233979e032a9c7502f05400",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260741/paper92.parquet": "38d0dec034d28e297cb312365dd538614c11e2eb67adcd932ea9b3274a0186df",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260742/stage1_training.parquet": "aef125164c12ab4f359f18991dc9c7c7b6018587d1b06998f8897e577ce112dd",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260742/static77.parquet": "6e7f9810c0f468d99f731194c3eebc49d9d3db5758be2d636a65725de9f439ab",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260742/paper92.parquet": "18e8e3bb7fec40fc3fbedab164175e6e395f5aac57724afbed4d860de9000c1a",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260743/stage1_training.parquet": "f8e50f3acaeccafd72e42eee66ce5501b5d73e9d648253a4d8fc0acafbd60b21",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260743/static77.parquet": "70552219c63f10258011a3a88b251dfa517025398e6626019bbb2df79b1dcacc",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260743/paper92.parquet": "41b168f4cb9778f7c66d11d172f017cd30d5bb243bcfd0bdc64d73fda4eaef98",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260744/stage1_training.parquet": "7bc73123c95bbeb30a22f6c6439bd1f174f2f87977844a44788475586d1de2ad",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260744/static77.parquet": "9443c11316c936815cff297a8badeda858897d678ddbf6f9e6df145357c580af",
+      "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/features/train/seed260744/paper92.parquet": "82cd6df38b4e7afa7f1e3fc89da5447a0d7da16ff7a2a9c4db6eeffcac92f02e",
+      "protocol": "cc1bdfb05263a2ccf4d6ec3ef2ac129c96069b6b61311a349b0a0f22fb857094",
+      "engine_strict_labels": "9205dd826e12d19955cf8cbcc89eca8e31df9ec3d9737cf3d31c0ec55008d989",
+      "train_script": "964ca6aed9c5fbfa57f9dd4fe620044ab75a971791e730f1c8e8691b9d7ee49a"
+    },
+    "base_score_reuse": false,
+    "stages": {
+      "stage1": {
+        "rows": 1873313,
+        "positive_rows": 104583,
+        "features": 24,
+        "random_state": 269723,
+        "iterations": 350,
+        "seconds": 18.655147369005135
+      },
+      "static": {
+        "rows": 2525665,
+        "positive_rows": 143082,
+        "features": 77,
+        "random_state": 269723,
+        "iterations": 350,
+        "seconds": 81.28342652099673
+      },
+      "outer_260740": {
+        "training_scenes": [
+          260741,
+          260742,
+          260743,
+          260744
+        ],
+        "fits": [
+          {
+            "rows": 905716,
+            "positive_rows": 85843,
+            "features": 92,
+            "random_state": 269723,
+            "iterations": 350,
+            "seconds": 31.806102235990693
+          },
+          {
+            "rows": 905716,
+            "positive_rows": 85843,
+            "features": 92,
+            "random_state": 269724,
+            "iterations": 350,
+            "seconds": 34.16320243100927
+          },
+          {
+            "rows": 905716,
+            "positive_rows": 85843,
+            "features": 92,
+            "random_state": 269725,
+            "iterations": 350,
+            "seconds": 32.49521755799651
+          }
+        ]
+      },
+      "outer_260741": {
+        "training_scenes": [
+          260740,
+          260742,
+          260743,
+          260744
+        ],
+        "fits": [
+          {
+            "rows": 905342,
+            "positive_rows": 85498,
+            "features": 92,
+            "random_state": 269723,
+            "iterations": 350,
+            "seconds": 43.562841981998645
+          },
+          {
+            "rows": 905342,
+            "positive_rows": 85498,
+            "features": 92,
+            "random_state": 269724,
+            "iterations": 350,
+            "seconds": 40.816082804012694
+          },
+          {
+            "rows": 905342,
+            "positive_rows": 85498,
+            "features": 92,
+            "random_state": 269725,
+            "iterations": 350,
+            "seconds": 40.34539164300077
+          }
+        ]
+      },
+      "outer_260742": {
+        "training_scenes": [
+          260740,
+          260741,
+          260743,
+          260744
+        ],
+        "fits": [
+          {
+            "rows": 911288,
+            "positive_rows": 84282,
+            "features": 92,
+            "random_state": 269723,
+            "iterations": 350,
+            "seconds": 31.88829847400484
+          },
+          {
+            "rows": 911288,
+            "positive_rows": 84282,
+            "features": 92,
+            "random_state": 269724,
+            "iterations": 350,
+            "seconds": 41.473507878996315
+          },
+          {
+            "rows": 911288,
+            "positive_rows": 84282,
+            "features": 92,
+            "random_state": 269725,
+            "iterations": 350,
+            "seconds": 35.03488638000272
+          }
+        ]
+      },
+      "outer_260743": {
+        "training_scenes": [
+          260740,
+          260741,
+          260742,
+          260744
+        ],
+        "fits": [
+          {
+            "rows": 905176,
+            "positive_rows": 85538,
+            "features": 92,
+            "random_state": 269723,
+            "iterations": 350,
+            "seconds": 33.40111771300144
+          },
+          {
+            "rows": 905176,
+            "positive_rows": 85538,
+            "features": 92,
+            "random_state": 269724,
+            "iterations": 350,
+            "seconds": 36.172304624007666
+          },
+          {
+            "rows": 905176,
+            "positive_rows": 85538,
+            "features": 92,
+            "random_state": 269725,
+            "iterations": 350,
+            "seconds": 30.626359435991617
+          }
+        ]
+      },
+      "outer_260744": {
+        "training_scenes": [
+          260740,
+          260741,
+          260742,
+          260743
+        ],
+        "fits": [
+          {
+            "rows": 907618,
+            "positive_rows": 85699,
+            "features": 92,
+            "random_state": 269723,
+            "iterations": 350,
+            "seconds": 39.299740857997676
+          },
+          {
+            "rows": 907618,
+            "positive_rows": 85699,
+            "features": 92,
+            "random_state": 269724,
+            "iterations": 350,
+            "seconds": 40.88010947800649
+          },
+          {
+            "rows": 907618,
+            "positive_rows": 85699,
+            "features": 92,
+            "random_state": 269725,
+            "iterations": 350,
+            "seconds": 36.53963579000265
+          }
+        ]
+      },
+      "relation": {
+        "total_groups": 57855,
+        "positive_groups": 15518,
+        "positive_groups_with_topk_positive": 15382,
+        "positive_topk_coverage": 0.9912359840185591,
+        "output_sets": 57855,
+        "weight_audits": [
+          {
+            "context": 0,
+            "positive": 15924,
+            "negative": 168684,
+            "neutral": 17542
+          },
+          {
+            "context": 1,
+            "positive": 16428,
+            "negative": 170116,
+            "neutral": 17633
+          },
+          {
+            "context": 2,
+            "positive": 17170,
+            "negative": 164128,
+            "neutral": 17759
+          },
+          {
+            "context": 3,
+            "positive": 16230,
+            "negative": 168239,
+            "neutral": 17871
+          },
+          {
+            "context": 4,
+            "positive": 16240,
+            "negative": 167649,
+            "neutral": 17968
+          }
+        ],
+        "device": "cuda:0",
+        "epochs": 12,
+        "initial_epoch_loss": 0.2560329442533961,
+        "final_epoch_loss": 0.19880077982007047,
+        "elapsed_seconds": 31.28138198099623,
+        "peak_gpu_memory_gb": 0.03720521926879883
+      },
+      "full": [
+        {
+          "rows": 1133785,
+          "positive_rows": 106715,
+          "features": 92,
+          "random_state": 269723,
+          "iterations": 350,
+          "seconds": 42.74044797899842
+        },
+        {
+          "rows": 1133785,
+          "positive_rows": 106715,
+          "features": 92,
+          "random_state": 269724,
+          "iterations": 350,
+          "seconds": 34.00844543801213
+        },
+        {
+          "rows": 1133785,
+          "positive_rows": 106715,
+          "features": 92,
+          "random_state": 269725,
+          "iterations": 350,
+          "seconds": 37.15134395498899
+        }
+      ]
+    }
+  }
+}

@@ -245,7 +245,7 @@ def fig13(output):
             "rejected_velocity": int(velocity.classification_role.eq("FP").sum()), "conservation_predictions_match": True}
 
 
-def gravity_analysis(convention="saved-figure"):
+def gravity_analysis(convention="manuscript"):
     """Compute either manuscript counts or the explicitly requested saved figures.
 
     poisson-only isolates the uncertainty change while keeping saved exposure.
@@ -359,8 +359,8 @@ def main():
     parser.add_argument("--output", type=Path, default=ROOT / "runs/paper-figures")
     parser.add_argument("--verify-rendered", action="store_true", help="Require exact panel-pixel agreement with the paper figures using Poppler")
     parser.add_argument("--pdftoppm", default="pdftoppm")
-    parser.add_argument("--gravity-convention", choices=["saved-figure", "manuscript", "poisson-only"], default="saved-figure",
-                        help="Figures 14–15: saved-figure reproduces the paper plots (default); manuscript and poisson-only are alternative calculations")
+    parser.add_argument("--gravity-convention", choices=["saved-figure", "manuscript", "poisson-only"], default="manuscript",
+                        help="Figures 14–15: manuscript uses full exposure and Poisson SD (default); saved-figure explicitly reproduces the historical plots")
     parser.add_argument("--plot-python", type=Path, default=PLOT_PYTHON,
                         help="Python in the separate Matplotlib 3.11.1 plot environment")
     args = parser.parse_args()

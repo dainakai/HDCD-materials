@@ -2,6 +2,8 @@
 
 [Repository home](../README.md) · [Data dictionary](data.md)
 
+This page describes the historical bundled inputs. The [2026-10-30 revision preflight](revision-preflight-20261030.md) distinguishes those records from the proposed 102.3 mm generation span, 74.9 mm reconstruction front, and three-iteration processing profile. Historical numerical tables and model weights have not been relabeled as a regenerated release.
+
 The following settings identify the supplied synthetic benchmark and the separate numerical inputs used for Figure 7. Use the acquisition configuration for the processing stage being run.
 
 ## Synthetic data and collision benchmark

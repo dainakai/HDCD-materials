@@ -1,0 +1,92 @@
+{
+  "status": "PASS",
+  "sources": [
+    {
+      "seed": 260740,
+      "role": "particles",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260740/particles.parquet",
+      "sha256": "34d9f4e6589cb8bbd8fcc5223f8f469e3eb9cf2d4f1cf01f7aa8cc3a3076c78a"
+    },
+    {
+      "seed": 260740,
+      "role": "events",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260740/collision_events.parquet",
+      "sha256": "3f2e8ea4c34c267e738d0d7381e119d8c443534caf88b51b4a9d05befbe4517a"
+    },
+    {
+      "seed": 260741,
+      "role": "particles",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260741/particles.parquet",
+      "sha256": "c6733a2f384f64cab18e5047c0e3f362633476ca8168f4bb691bfa43bd6658b9"
+    },
+    {
+      "seed": 260741,
+      "role": "events",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260741/collision_events.parquet",
+      "sha256": "19805bad3d85589208ec8705a43ea2f7d8b43b763de593c041ad3466d08781b5"
+    },
+    {
+      "seed": 260742,
+      "role": "particles",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260742/particles.parquet",
+      "sha256": "3325566ec2f12aeb7cdbc7c0a3d3ea8100d6965ad2e0e40f595b7c369910d65e"
+    },
+    {
+      "seed": 260742,
+      "role": "events",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260742/collision_events.parquet",
+      "sha256": "a2d53e5e1e9a1c8c249268919fb714974651c763536d075679347e5aee91744d"
+    },
+    {
+      "seed": 260743,
+      "role": "particles",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260743/particles.parquet",
+      "sha256": "2ea504f9b4b55c118e5efdc0261881e5c121e6282ea6337e7a3bdc16c448131c"
+    },
+    {
+      "seed": 260743,
+      "role": "events",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260743/collision_events.parquet",
+      "sha256": "87bf15637be89eb385badaf463f5694bf22a940337bf844956c0054cd4298d6e"
+    },
+    {
+      "seed": 260744,
+      "role": "particles",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260744/particles.parquet",
+      "sha256": "494416036450306dfe1cd623d7e75e75db9c33a9e8edb96d435cc68f78db42e7"
+    },
+    {
+      "seed": 260744,
+      "role": "events",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/train/seed260744/collision_events.parquet",
+      "sha256": "fd4ad8cef5153c7ba0c17f6a011599cf4ed03753de37c1318907e29c17ed0848"
+    },
+    {
+      "seed": 260745,
+      "role": "particles",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/validation/seed260745/particles.parquet",
+      "sha256": "f7f71261b1f0679d728b153feee5abcec1ac26a006aa2a0d69f50d4d6788d40a"
+    },
+    {
+      "seed": 260745,
+      "role": "events",
+      "path": "/media/dai-server/DATAM2/siderepos/260804/zenodo-collision-reproducibility/data/labels/validation/seed260745/collision_events.parquet",
+      "sha256": "8fff163b50e9d446d723713047f073745f90ad290a13ebbee7716aa33ab0bd6a"
+    }
+  ],
+  "coordinate_rule": "camera_distance_um=74900+truth_z_um",
+  "new_grid_camera_planes_um": [
+    74900,
+    177200
+  ],
+  "planes": 1024,
+  "step_um": 100,
+  "old_grid_camera_planes_um": [
+    64900,
+    167200
+  ],
+  "old_grid_in_truth_coordinates_um": [
+    -10000,
+    92300
+  ]
+}

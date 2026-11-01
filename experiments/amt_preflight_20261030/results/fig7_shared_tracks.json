@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "seed": 260745,
+  "frames": 6000,
+  "truth_particle_points": 1200000,
+  "same_operational_detection_rows": 1225299,
+  "raw_detection_keys_exactly_equal": true,
+  "differences_from_old_paired_file": {
+    "smooth_x": 201698,
+    "smooth_y": 183374,
+    "smooth_z": 1225299,
+    "diameter_px": 618294,
+    "post_out_prob": 1151268
+  },
+  "matched_track_points": 1160051,
+  "xy_p50_p90_p95_um": [
+    2.7668016824277797,
+    17.323752977934028,
+    26.09605103494566
+  ],
+  "absolute_z_p50_p90_p95_um": [
+    28.563557661078676,
+    113.54602224720907,
+    1006.5388375300302
+  ],
+  "diameter_p2p5_p5_p50_p95_p97p5_percent": [
+    -8.62504363138649,
+    -3.808371178722207,
+    0.1265811400783753,
+    3.8980430525004253,
+    10.44175651787673
+  ],
+  "z_convention": "(one-based reconstructed slice - 1)*100 um; truth already has zero origin",
+  "raw_tracks": {
+    "path": "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/tracking/validation/seed260745/raw.parquet",
+    "sha256": "ecbc8fca7e66687523fb34830f01360842a5dc47e614e410aa1fd1d345be574f"
+  },
+  "smooth_tracks": {
+    "path": "/media/dai-server/DATAM2/siderepos/260804/paper-range-only-20260930/data/tracking/validation/seed260745/geometry_smoothed.parquet",
+    "sha256": "2a2daf4e367ec121caac1ea8a31f423c1518d645ff39ec49acb03bbe96608d20"
+  },
+  "boundary_probability_tracks_sha256": "40470c0bd7e4799d247582ac09130899a7b4cb2b3d92d3f7c5929c4ee9bd1a0d",
+  "number_density_volume_cm3": 10.73741824,
+  "old_paired_sha256": "e9d57504d2a74b195c0c48d97b0afc4600d150c5a8d4c0746c269aabe9f8ea09",
+  "truth_sha256": "f7f71261b1f0679d728b153feee5abcec1ac26a006aa2a0d69f50d4d6788d40a",
+  "scope": "Same held-out scene and same corrected measurement tracks as the controlled collision experiments; existing 102.4 mm truth.",
+  "particle_pr_source": {
+    "path": "/media/dai-server/N1SATA2TB/repos/261029/audit/results/published-figures/figure07/particle_pr_curve.parquet",
+    "sha256": "4441d9d414e8f6e4367d3b56bc0fae3a8c071169955478e627b68e40cb1c1ce0",
+    "role": "Previously verified low-confidence detection curve on the same test seed; reused unchanged."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "rows": 1225299,
+  "same_rows": true,
+  "columns": {
+    "frame": {
+      "equal": true,
+      "max_abs_diff": 0.0
+    },
+    "raw_x": {
+      "equal": true,
+      "max_abs_diff": 0.0
+    },
+    "raw_y": {
+      "equal": true,
+      "max_abs_diff": 0.0
+    },
+    "smooth_x": {
+      "equal": false,
+      "max_abs_diff": 11.512687057141989
+    },
+    "smooth_y": {
+      "equal": false,
+      "max_abs_diff": 61.41274571428539
+    },
+    "smooth_z": {
+      "equal": false,
+      "max_abs_diff": 988.515792715206
+    },
+    "diameter_px": {
+      "equal": false,
+      "max_abs_diff": 17.527437973022455
+    },
+    "post_out_prob": {
+      "equal": false,
+      "max_abs_diff": 0.999385804575877
+    }
+  }
+}
