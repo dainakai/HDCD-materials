@@ -30,8 +30,7 @@ Outputs are written under `../audit/revision-review-20261101/`:
 The preparation records the requested experimental front as 74.9 mm and preserves the historical calibrated front separately.
 Scenes 17/18 previously used 74.7 mm, and 20/21/22 used 74.8 mm.
 All historical experimental MinIP summaries use 12 phase iterations; the target is 3.
-The source raw-image disk is currently absent from the recorded location, and the retained 100 images per camera do not provide a complete 10,917-frame sequence.
-These records are input contracts, **not executable final acquisition configurations**: complete image manifests and validated calibration coefficients are still needed. Final model fingerprints have been registered separately with the completed numerical campaign.
+The source 16 TB disk was connected on November 2 and mounted read-only. All 28 camera directories have contiguous indices 1–10,917, and the six calibration bundles are present. The original preparation records remain historical; new executable acquisition contracts, file manifests, smoke checks, and processing state are in `../audit/revision-experimental-20261102/`. See [experimental processing](../amt_experimental_20261102/README.md). Final model fingerprints remain those of the completed numerical campaign.
 
 Repeated preparation refreshes the inventories but refuses to overwrite changed annotation or correspondence CSVs. Record actual new reviews in a separate, version-bound run directory rather than editing these templates.
 Historical labels must not be copied to new ranks.
@@ -40,7 +39,7 @@ Keep the historical empirical distribution used to generate synthetic data fixed
 ## Preview
 
 `serve.py` binds only to `127.0.0.1:8769` and serves files explicitly listed in `public-manifest.json`.
-It does not list directories or expose raw images, weights, review records, or other repository files.
+It also forwards only `/experimental-review/` to the dedicated loopback review service on port 8770. That service requires its private entry key/session and binds annotations to frozen cohorts. Only the selected reconstructed crops and local trajectory snippets are shown. Directory listings, full raw images, weights, database files, historical labels, and other repository files are not served.
 The server and Cloudflare Quick Tunnel are running for this review; their current URL, PIDs and logs are in the audit directory's `preview-processes.json` and `PREVIEW.md`.
 Reuse that tunnel while it is running.
 

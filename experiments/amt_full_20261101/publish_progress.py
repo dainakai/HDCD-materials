@@ -61,13 +61,28 @@ def update():
             if not target.exists() or sha256(source)!=sha256(target):
                 temporary=target.with_suffix('.partial');shutil.copyfile(source,temporary);temporary.replace(target)
             figures.append({'label':label,'path':relative});public_files[relative]=sha256(target)
+    experimental_root=ROOT.parent/'revision-experimental-20261102'
+    experimental_state=load_if(experimental_root/'campaign-state.json') or {'status':'not_started'}
+    experimental_inventory=load_if(experimental_root/'input-inventory.json')
+    experimental_rows=[]
+    for n in [12,13,15,17,18,20,21,22,24,25,26,28,29,30]:
+        folder=experimental_root/f'scenes/scene{n:04d}'
+        stages=[s for s in ['background','minip','measurement','tracking','inference','assets'] if (folder/f'stages/{s}.json').exists()]
+        experimental_rows.append({'scene':n,'completed_stages':stages,'review_ready':(folder/'review/manifest.json').exists()})
+    experimental={'inputs_validated':bool(experimental_inventory and experimental_inventory['status']=='PASS'),
+                  'raw_images':experimental_inventory['raw_images'] if experimental_inventory else 0,
+                  'paired_frames':experimental_inventory['paired_frames'] if experimental_inventory else 0,
+                  'status':experimental_state['status'],'scene':experimental_state.get('scene'),
+                  'stage':experimental_state.get('stage'),'scenes':experimental_rows,
+                  'budget_per_scene':80,'total_review_budget':1120}
+    completion['experimental_reprocessing_complete']=experimental['status']=='PASS'
     note={'status':state['status'],'updated_at':dt.datetime.now().astimezone().isoformat(),
           'current_jobs':active,'failed_jobs':failed,'sequences':rows,'total_frames':36000,
           'paired_holograms_verified':sum(r['paired_holograms_verified'] for r in rows),
           'paired_holograms_saved':sum(r['paired_holograms_saved'] for r in rows),
           'minip_verified':sum(r['minip_verified'] for r in rows),
           'measurement_frames':sum(r['measurement_frames'] for r in rows),
-          'methods':methods,'figures':figures,'completion':completion,
+          'methods':methods,'figures':figures,'completion':completion,'experimental':experimental,
           'stage_comparison':read_table(table4).to_dict('records') if table4.exists() else [],
           'version':load_if(ROOT/'config/run-version.json'),
           'protocol':{'generation_depth_mm':102.3,'front_mm':74.9,

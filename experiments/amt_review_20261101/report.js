@@ -83,8 +83,15 @@ if (progressBox) {
           const claims=data.completion.claim_checks||{};
           const titles={ours_exceeds_both_event_ap:'OursのAPが両比較法を上回る',ours_exceeds_both_maximum_f1:'Oursの最大F1が両比較法を上回る',stagewise_nondecreasing_event_ap:'段階追加でAPが単調に向上する',stagewise_nonincreasing_false_positives_at_recall_0p8:'段階追加でFP80が単調に減る',stagewise_nonincreasing_false_positives_at_recall_0p9:'段階追加でFP90が単調に減る'};
           const list=el('ul');Object.entries(titles).forEach(([key,title])=>list.append(el('li',`${title}：${claims[key]===true?'維持できる':claims[key]===false?'そのまま記載できない':'判定できない'}`)));progressBox.append(list);
-          progressBox.append(el('p','図表と数値だけの差し替えでは完成しません。順位・教師対応・AP・段階比較・テスト利用履歴の本文修正と、実験由来のFig.3–5の更新が残ります。実験の再処理と新しい目視レビューは未実施です。'));
+          progressBox.append(el('p','図表と数値だけの差し替えでは完成しません。順位・教師対応・AP・段階比較・テスト利用履歴の本文修正と、実験由来のFig.3–5の更新が残ります。実験データの進捗は次の欄で確認できます。'));
         }
+      }
+      if(data.experimental){
+        const e=data.experimental,labels={background:'背景除去',minip:'MinIP再構成',measurement:'粒子計測',tracking:'追跡',inference:'衝突推論',assets:'レビュー画像作成'};
+        progressBox.append(el('h3','実験データの再処理と上位80件の準備'));
+        progressBox.append(el('p',e.inputs_validated?`14系列・${number(e.raw_images)}枚の原画像と校正を確認済み。各系列の上位80件、計1,120件をレビューします。`:'原画像と校正を確認しています。'));
+        progressBox.append(el('p',e.status==='PASS'?'全14系列の処理とレビュー画像作成が完了しました。目視判定は別途保存します。':e.status==='FAILED'?'実験処理でエラーが発生し、確認が必要です。':e.scene?`現在：系列${e.scene}の${labels[e.stage]||e.stage}`:'全量処理の接続確認中です。'));
+        progressBox.append(el('p',`レビュー画像完成：${e.scenes.filter(s=>s.review_ready).length} / 14系列。小規模な接続確認の候補は、この件数や本レビューへ含めません。`));
       }
       if(data.failed_jobs.length)progressBox.append(el('p',`エラーを記録した処理：${data.failed_jobs.join('、')}`));
       const allowed=new Set(['assets/full-figure07.png','assets/full-figure08.png','assets/full-figure09.png','assets/full-comparison.png']);

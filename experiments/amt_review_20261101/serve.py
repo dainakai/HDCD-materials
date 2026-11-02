@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+from http.client import HTTPConnection
 
 ROOT = Path(__file__).resolve().parents[3] / 'audit/revision-review-20261101'
 PUBLIC = ROOT / 'public'
@@ -12,6 +13,45 @@ PUBLIC = ROOT / 'public'
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(PUBLIC), **kwargs)
+
+    def proxy_review(self):
+        if not urlsplit(self.path).path.startswith('/experimental-review/'):
+            return False
+        try:
+            size = int(self.headers.get('Content-Length', '0'))
+        except ValueError:
+            self.send_error(400)
+            return True
+        if not 0 <= size <= 16384:
+            self.send_error(413)
+            return True
+        body = self.rfile.read(size) if size else None
+        headers = {k: self.headers[k] for k in ['Content-Type', 'Cookie', 'X-CSRF-Token'] if self.headers.get(k)}
+        connection = HTTPConnection('127.0.0.1', 8770, timeout=30)
+        try:
+            connection.request(self.command, self.path, body=body, headers=headers)
+            response = connection.getresponse()
+            payload = response.read()
+            self.send_response(response.status)
+            for key, value in response.getheaders():
+                if key.lower() not in {'connection', 'transfer-encoding', 'server', 'date', 'content-length'}:
+                    self.send_header(key, value)
+            self.send_header('Content-Length', str(len(payload)))
+            self.end_headers()
+            self.wfile.write(payload)
+        except (OSError, TimeoutError):
+            self.send_error(503, 'Experimental review service is unavailable')
+        finally:
+            connection.close()
+        return True
+
+    def do_GET(self):
+        if not self.proxy_review():
+            super().do_GET()
+
+    def do_POST(self):
+        if not self.proxy_review():
+            self.send_error(404)
 
     def send_head(self):
         path = unquote(urlsplit(self.path).path).lstrip('/') or 'index.html'

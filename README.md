@@ -1,7 +1,7 @@
 # HDCD-materials
 
 This branch contains the completed [full 102.3 mm, 74.9 mm-front, three-iteration evaluation](experiments/amt_full_20261101/README.md), following the [AMT preflight and controlled experiments](docs/revision-preflight-20261030.md). All six numerical sequences were rebuilt from regenerated holograms, through measurement and training of all three methods. Verified event AP is 0.922169 for Ours, 0.913348 for Depth-free, and 0.877041 for MinIP-based 2D. [New numerical results and figure replacements](experiments/amt_full_20261101/results/manifest.json).
-Bundled v1.0.1 inputs and weights remain historical records, and the distribution manifest still identifies v1.0.1. New outputs have separate provenance and result directories; the quick-start instructions below reproduce the historical release. Experimental-image reprocessing is still pending.
+Bundled v1.0.1 inputs and weights remain historical records, and the distribution manifest still identifies v1.0.1. New outputs have separate provenance and result directories; the quick-start instructions below reproduce the historical release. [Experimental reprocessing and top-80 review](experiments/amt_experimental_20261102/README.md) started on November 2 after all 305,676 raw images and the six calibration bundles became available. New manual judgments are not yet complete.
 
 HDCD stands for Holographic droplet collision detection. This repository provides evaluation data, trained models and code accompanying “Semi-automated detection of droplet collision-coalescence using digital in-line holography” by Dai Nakai.
 
