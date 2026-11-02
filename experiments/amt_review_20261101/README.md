@@ -1,8 +1,10 @@
 # AMT revision report and experimental-review preparation
 
 This follow-up converts the preflight report into a responsive HTML document and checks whether the manuscript can be completed by replacing figures and values.
-The answer is **not yet**: the seven controlled models are complete, while the new 102.3 mm paired holograms and final three-method pipeline are not.
+The answer remains **not by replacing figures and numbers alone**: the seven controlled comparisons and the regenerated 102.3 mm, six-sequence, three-method pipeline are complete. The final numerical results, fixed models, and Figure 7–9 exports were verified on November 2. Manuscript wording, experimental reprocessing/review, and the release's default data/model switch remain pending.
 It does not run or relabel a new experimental evaluation.
+
+The main report includes an explicit comparison against tag `v1.0.1` (`0b0419fa844419bff1b4b6a93c0505b4c31a775a`). In particular, the published Depth-free MinIP already began at 74.9 mm, measurement and MinIP already used three phase iterations, and rank-before-suppression and the AP algorithm are retained. The R5 description distinguishes existing classifier identity selection from the changed identity observations and attention supervision.
 
 ## Build and inspect
 
@@ -29,7 +31,7 @@ The preparation records the requested experimental front as 74.9 mm and preserve
 Scenes 17/18 previously used 74.7 mm, and 20/21/22 used 74.8 mm.
 All historical experimental MinIP summaries use 12 phase iterations; the target is 3.
 The source raw-image disk is currently absent from the recorded location, and the retained 100 images per camera do not provide a complete 10,917-frame sequence.
-These records are input contracts, **not executable final acquisition configurations**: complete image manifests, validated calibration coefficients, and final model fingerprints are still needed.
+These records are input contracts, **not executable final acquisition configurations**: complete image manifests and validated calibration coefficients are still needed. Final model fingerprints have been registered separately with the completed numerical campaign.
 
 Repeated preparation refreshes the inventories but refuses to overwrite changed annotation or correspondence CSVs. Record actual new reviews in a separate, version-bound run directory rather than editing these templates.
 Historical labels must not be copied to new ranks.
@@ -54,8 +56,8 @@ Quick Tunnel URLs expire when the process stops and change on recreation.
 
 ## Verification and limits
 
-- All 29 published files were fetched from the HTTPS URL and matched local bytes.
-- All 88 HTML links, anchors and resources resolved.
+- The November 2 completed-result report contains 43 public files; static files were fetched from the HTTPS URL and matched local bytes, while the live progress JSON was checked separately.
+- Local HTML links, anchors and resources are rechecked after each report update; the latest count is in `html-verification.json`.
 - Four comparison selectors produced the expected saved AP values; mobile-menu closing and print handlers were exercised with a minimal DOM substitute.
 - Unlisted files and traversal paths were rejected with HTTP 404/400.
 - Actual browser visual QA was unavailable because local browser use is disabled in the app settings. It is not represented as a completed screenshot or smartphone test.

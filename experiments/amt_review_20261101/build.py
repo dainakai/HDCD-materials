@@ -84,7 +84,7 @@ def main():
     historical = csv_rows(WORKSPACE / 'audit/aligned/results/scenario-comparison.csv')
     versions = []
     for case, name, conditions in [
-        ('Published', '公開版 v1.0.1', '奥行102.4 mm、前端64.9 mm。計測3回／画像特徴12回。'),
+        ('Published', '公開版 v1.0.1', '生成奥行102.4 mm。主計測・焦点画像・MinIP 2Dは前端64.9 mm、Depth-free用MinIPは74.9 mm。計測・MinIPは3回、焦点画像特徴は12回。'),
         ('74.9 mm only', '前端のみ修正版', '同じ生成真値、前端74.9 mm。保存済み3手法を再推論。'),
         ('Aligned + adjacent IDs', '10月29日の本文整合実験', '全12回、padding 2048、Zゲートなし、抑制後順位。上流から再学習。'),
     ]:
