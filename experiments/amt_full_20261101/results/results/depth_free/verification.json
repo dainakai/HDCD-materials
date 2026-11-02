@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "fresh_inference": true,
+  "held_out_seed": 260745,
+  "test_truth_used_for_model_fit": false,
+  "test_settings_history": "Previously inspected in sensitivity analysis; disclose this history. No additional test-selected parameter optimization.",
+  "rank_before_suppression_verified": true,
+  "input_sha256": "6575685a38769afea72ed381f8b0e1715eb6d037b2a5aa698b0b20b4ad442faf",
+  "model_sha256": "6609fcbf8995feec64d722024a0972b852ac186f9507e89afd3aefc262539a8c",
+  "policy": {}
+}

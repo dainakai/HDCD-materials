@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "test_seed": 260745,
+  "frames": 6000,
+  "truth_points": 1200000,
+  "source_is_collision_test_tracks": true,
+  "particle_ap": 0.9752611871208939,
+  "tracking_input_operating_point": {
+    "confidence": 0.1,
+    "predictions": 1223546,
+    "true_positives": 1159515,
+    "precision": 0.9476676806593295,
+    "recall": 0.9662625
+  },
+  "measured_points": 1223546,
+  "matched_points": 1159665,
+  "xy_p50_p90_p95_um": [
+    2.7833181672249236,
+    17.461320109951373,
+    26.21558240676126
+  ],
+  "absolute_z_p50_p90_p95_um": [
+    28.47954212654713,
+    116.3878085012311,
+    948.5886946185846
+  ],
+  "diameter_p2p5_p5_p50_p95_p97p5_percent": [
+    -8.651956155284502,
+    -3.828079179633232,
+    0.12258098369815668,
+    3.804123312304079,
+    10.335524438020233
+  ],
+  "number_density_volume_cm3": 10.72693248,
+  "physical_z": "(one-based slice - 1)*100 um",
+  "particle_pr_rule": "Confidence-ranked nearest-unmatched truth in an 8 px radial gate; same historical rule.",
+  "position_error_rule": "Raw XY squared-distance Hungarian association in an 8 px gate; errors from the exact collision-feature smoothed tracks.",
+  "inputs": {
+    "data/labels/validation/seed260745/particles.parquet": "5e8abda87ec5a1721f699c606c05f2e2e9834fa99efe231932ecc7d5036478b3",
+    "results/figure07/low_confidence_detections.parquet": "a7a10c3662ec2d1bb70d542beced612937e9e2d6c56132f47403820c133d3d49",
+    "runs/measurement/seed260745/raw_detections.csv": "f95e6d148d177456b665d26688cfa1f52b4f6c947b684e3661b64333ac0177e4",
+    "runs/tracking/seed260745/raw.parquet": "399bb3d4f1418121ba5c89262a7493d291c8d4321288ec58abf6c5e681ebef86",
+    "runs/tracking/seed260745/smoothed.parquet": "d10c2cbadde528354f1e688a38881de3083a29c447aaec543bb56c3e6fbf7c75",
+    "runs/minip/seed260745/identity.json": "286f4645c45b90724aa9e7881b0984f2cfd1a5e07d833706a637b479bbdd44cf"
+  }
+}

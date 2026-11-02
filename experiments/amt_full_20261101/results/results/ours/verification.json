@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "fresh_inference": true,
+  "held_out_seed": 260745,
+  "test_truth_used_for_model_fit": false,
+  "test_settings_history": "Previously inspected in sensitivity analysis; disclose this history. No additional test-selected parameter optimization.",
+  "rank_before_suppression_verified": true,
+  "input_sha256": "f3153e709892973b1d1e10f4288da3d00b7ff442ce4e7cffa6a25b0a5f11c588",
+  "model_sha256": "d648ebf407d18ff66b54670711dbebfe8997b1fa6a502a982b39803a19fda114",
+  "policy": {
+    "relation": {
+      "total_groups": 11976,
+      "positive_groups": 0,
+      "positive_groups_with_topk_positive": 0,
+      "positive_topk_coverage": 0.0,
+      "output_sets": 11976,
+      "selected_rows": 209497,
+      "mean_absolute_probability_change": 0.013722729642059658
+    },
+    "policy": {
+      "seed": 260745,
+      "input_candidates": 263185,
+      "temporal_pair_modes": 52132,
+      "post_vanished_cap": 42517,
+      "post_coordinate_suppression": 26924,
+      "pair_mode_gap_frames": 10,
+      "maximum_modes_per_vanished_track": 5
+    }
+  }
+}

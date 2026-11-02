@@ -1,0 +1,20 @@
+{
+  "removed": [
+    "temporal mode representatives",
+    "maximum 5 modes",
+    "coordinate NMS",
+    "lineage rank penalty"
+  ],
+  "kept": [
+    "relation scores",
+    "final localization regression"
+  ],
+  "event_ap": 0.48862330056163833,
+  "maximum_f1": 0.49065543564095815,
+  "maximum_recall": 0.9795,
+  "prediction_rows": 263185,
+  "precision_at_recall_0p8": 0.17811421574084382,
+  "false_positives_at_recall_0p8": 7383,
+  "precision_at_recall_0p9": 0.10561520859003697,
+  "false_positives_at_recall_0p9": 15243
+}

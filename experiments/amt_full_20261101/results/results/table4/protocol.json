@@ -1,0 +1,50 @@
+{
+  "common_operations": [
+    "temporal modes",
+    "maximum 5 modes per terminating track",
+    "pre-suppression lineage rank penalty",
+    "final 92-feature localization regressors"
+  ],
+  "localization_feature_availability": "The same trained regressors receive the features available at each stage. Image features are missing in the trajectory-only row. This is not an isolated intervention on classifier scores alone.",
+  "candidate_sets": "The trajectory row uses the static shortlist; later rows use the scoring union. The selection effect is included in this stage comparison.",
+  "last_row_addition": "coordinate NMS",
+  "interpretation": "Historical Table 4 scoring-stage comparison with common downstream processing explicitly stated.",
+  "selection": {
+    "trajectory": {
+      "seed": 260745,
+      "input_candidates": 554389,
+      "temporal_pair_modes": 70474,
+      "post_vanished_cap": 46200,
+      "post_coordinate_suppression": 46200,
+      "pair_mode_gap_frames": 10,
+      "maximum_modes_per_vanished_track": 5
+    },
+    "image": {
+      "seed": 260745,
+      "input_candidates": 263185,
+      "temporal_pair_modes": 52132,
+      "post_vanished_cap": 42517,
+      "post_coordinate_suppression": 42517,
+      "pair_mode_gap_frames": 10,
+      "maximum_modes_per_vanished_track": 5
+    },
+    "relation": {
+      "seed": 260745,
+      "input_candidates": 263185,
+      "temporal_pair_modes": 52132,
+      "post_vanished_cap": 42517,
+      "post_coordinate_suppression": 42517,
+      "pair_mode_gap_frames": 10,
+      "maximum_modes_per_vanished_track": 5
+    },
+    "suppression": {
+      "seed": 260745,
+      "input_candidates": 263185,
+      "temporal_pair_modes": 52132,
+      "post_vanished_cap": 42517,
+      "post_coordinate_suppression": 26924,
+      "pair_mode_gap_frames": 10,
+      "maximum_modes_per_vanished_track": 5
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "method": "minip2d",
+  "event_ap": 0.8770406816345007,
+  "maximum_f1": 0.8308339910549855,
+  "maximum_recall": 0.9715,
+  "prediction_rows": 23327,
+  "precision_at_recall_0p8": 0.8470089994706194,
+  "false_positives_at_recall_0p8": 289,
+  "precision_at_recall_0p9": 0.4955947136563877,
+  "false_positives_at_recall_0p9": 1832,
+  "candidate_pool_rows": 554389,
+  "candidate_pool_recall": 0.99
+}

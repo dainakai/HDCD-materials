@@ -57,7 +57,10 @@ def main():
         for a,b in [('minip2d','depth_free'),('minip2d','ours'),('depth_free','ours')]:
             old,new=summaries[a][key],summaries[b][key]
             reductions[f'{a}_to_{b}_{key}_percent']=None if old in [None,0] or new is None else 100*(old-new)/old
-    write_json({'methods':summaries,'table4':stages.to_dict('records'),'false_positive_reductions':reductions},manuscript/'numeric-replacements.json')
+    write_json({'methods':summaries,'table4':stages.to_dict('records'),'false_positive_reductions':reductions,
+                'figure7':json.loads((ROOT/'results/figure07/summary.json').read_text()),
+                'figure9_cases':json.loads((ROOT/'results/figure9.json').read_text())['cases'],
+                'rank_sensitivity':{m:json.loads((ROOT/f'results/{m}/rank_sensitivity.json').read_text()) for m in summaries}},manuscript/'numeric-replacements.json')
     write_json({'claims':claims,'interpretation':'False claims require rewriting the narrative; do not preserve the old conclusions automatically.'},manuscript/'claim-checks.json')
     export=ROOT/'artifacts';export.mkdir(exist_ok=True)
     archive=export/'hdcd-amt-102p3mm-phase3-models.tar.gz'

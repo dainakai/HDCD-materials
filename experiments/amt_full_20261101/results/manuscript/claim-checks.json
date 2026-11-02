@@ -1,0 +1,14 @@
+{
+  "claims": {
+    "ours_exceeds_both_event_ap": true,
+    "ours_exceeds_both_maximum_f1": true,
+    "ours_exceeds_both_precision_at_recall_0p8": true,
+    "ours_exceeds_both_precision_at_recall_0p9": true,
+    "stagewise_nondecreasing_event_ap": true,
+    "stagewise_nondecreasing_precision_at_recall_0p8": false,
+    "stagewise_nondecreasing_precision_at_recall_0p9": true,
+    "stagewise_nonincreasing_false_positives_at_recall_0p8": false,
+    "stagewise_nonincreasing_false_positives_at_recall_0p9": true
+  },
+  "interpretation": "False claims require rewriting the narrative; do not preserve the old conclusions automatically."
+}

@@ -49,6 +49,18 @@
       "current": "terminal velocity minus the mean upward air velocity",
       "proposed": "Retain the current size-dependent vertical-velocity perturbation and document its exact parameters in the material generation specification.",
       "reason": "コードは変更しない。パディング詳細の本文追記は不要。"
+    },
+    {
+      "topic": "画像特徴の段階におけるFP80",
+      "current": "Adding image features reduced the number of false positives at a recall of 0.8 from 266 to 216.",
+      "proposed": "At the image-feature stage, AP increased from 0.893 to 0.898 and the false-positive count at recall 0.9 decreased from 1186 to 1004. However, the count at recall 0.8 increased from 177 to 183. Thus improvement was not monotonic across all operating points.",
+      "reason": "新しい全量評価では画像特徴段階のFP80が増加。旧本文863行付近の低下という主張をそのまま残せない。"
+    },
+    {
+      "topic": "Fig.9の新版事例スコア",
+      "current": "The true-event score changes from 0.977 to 0.964; the artifact score decreases from 0.890 to 0.336.",
+      "proposed": "In the new illustrative examples, the true-event score remains 0.999 when rounded to three decimal places, whereas the shared-particle artifact score decreases from 0.530 to 0.317. These selected examples illustrate candidate scoring and do not establish an average effect over the test set.",
+      "reason": "事例は新版の真値・画像・モデルから固定した可視性と順位規則で選び直した。旧事例のスコアは転用しない。"
     }
   ]
 }

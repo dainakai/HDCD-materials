@@ -3,10 +3,11 @@
 from pathlib import Path
 import sys
 import json
+# Resolve the pinned optional dependencies before pandas caches Arrow support.
+from common import ROOT,path,tracking,events
 import numpy as np
 import pandas as pd
 import torch
-from common import ROOT,path,tracking,events
 from ra3d.strict_labels import attach_identity_labels as label_candidates
 from ra3d.acquisition import Acquisition,Reconstructor
 from ra3d.io import write_json,write_table
