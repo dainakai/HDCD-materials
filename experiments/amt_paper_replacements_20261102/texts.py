@@ -31,7 +31,7 @@ def figure9_caption(n):
     return rf'''Illustrative examples of the effect of image features on candidate scores on the synthetic test sequence.
 Reconstructed images are shown at \(-1.25\), \(0\), and \(+1.00\,\unit{{ms}}\) relative to the candidate time for (a) a true collision--coalescence event and (b) a shared-particle artifact, in which two reconstructed track IDs represent the same physical particle.
 Red circles and blue squares mark actual observations of the terminating and continuing tracks, respectively; lines show their recent trajectories.
-Each \(128\times128\)-pixel crop (\(1.28\times1.28\,\unit{{mm}}\)) follows the continuing track and is reconstructed at its estimated depth.
+Each \(128\times128\)-pixel crop (\(1.28\times1.28\,\unit{{mm}}\)) lies wholly within the recorded image and is reconstructed at the continuing track's estimated depth.
 For display, each crop is linearly normalized between its first and 99th intensity percentiles; the scale bar is \ensuremath{{500\,\unit{{\mu m}}}}.
 The diameters below (a) are ground-truth parent and daughter diameters.
 (c) Candidate scores from the trajectory classifier and the image-feature ensemble, before relation-attention adjustment.
@@ -171,10 +171,12 @@ Improvements were therefore not uniform across operating points.
 Relation-attention subsequently reduced false positives to {c['false_positives_at_recall_0p8']} and {c['false_positives_at_recall_0p9']} at recalls 0.8 and 0.9; coordinate-based duplicate suppression reduced them further to {z['false_positives_at_recall_0p8']} and {z['false_positives_at_recall_0p9']}.
 The last-row comparison concerns coordinate-based suppression; temporal-mode aggregation, the mode cap, and rank adjustment are already present in every row.'''
     true, artifact = n['figure9_cases']
+    shared_frames = round(artifact['image_pre_same_fraction']*9)
+    shared_words = {8:'eight of the nine',9:'all nine'}.get(shared_frames, f'{shared_frames} of the nine')
     examples = rf'''Figure~\ref{{fig:image_feature_case_study}} illustrates two individual scoring outcomes.
 For the true collision--coalescence event, the trajectory and image-feature scores were {true['trajectory_score']:.6f} and {true['image_feature_score']:.6f}, respectively.
 For the shared-particle artifact, the score decreased from {artifact['trajectory_score']:.6f} to {artifact['image_feature_score']:.6f}.
-The two reconstructed trajectory IDs were supported by the same ground-truth particle at different preceding frames, and their image features indicated a shared connected component in all nine evaluated pre-event frames.
+The two reconstructed trajectory IDs were supported by the same ground-truth particle at different preceding frames, and their image features indicated a shared connected component in {shared_words} evaluated pre-event frames.
 The true event was retained and the artifact was excluded by the final candidate-selection policy.
 The examples were selected after examining the results for visible particle separation before a true event and overlapping track observations in a shared-particle artifact; they do not estimate an average image-feature effect.'''
     ending = r'''The comparisons support the benefits of depth-informed particle measurements and trajectories, and of depth use during collision detection, for precision on this synthetic sequence.

@@ -107,6 +107,7 @@ def render_fig9(n):
                     str(PAPER.parent/'figures/fig09.pdf'),str(OUT/'original-fig09')],check=True,
                    stdout=subprocess.DEVNULL)
     cp(OUT/'original-fig09.png', 'figures/fig09-original-reference.png')
+    cp(REFINED/'previous-smaller-cases/fig09.png','figures/fig09-previous-smaller.png')
     cp(REFINED/'selection.json', 'provenance/fig09-layout.json')
     cp(REFINED/'verification.json', 'provenance/fig09-verification.json')
     cp(REFINED/'search-protocol.json', 'provenance/fig09-search-protocol.json')
@@ -198,7 +199,7 @@ def readme(mapping, n):
               '- 画像特徴段階でAPは0.892678から0.897689に改善し、FP90は1,186から1,004に減りますが、FP80は177から183に増えます。「全段階で全指標が改善」は使えません。',
               '- Table 5は候補集合と位置補正に渡せる特徴も変わります。スコアだけの要因実験とは解釈しません。最終行で追加されるのは座標による重複抑制です。',
               '- Fig.9は著者の依頼により事例を選び直しました。128×128画素、各クロップの1–99パーセンタイルによる線形コントラスト調整、元の作図スクリプトと投稿用ラベル処理を使用しています。画像は固定済みの新系列から位相回復3回で再構成しました。学習・推論スコア・全量性能評価は変更していません。',
-              '- Fig.9の表示時刻は−1.25、0、＋1.00 msです。赤丸は終了軌跡、青四角は継続軌跡の実観測で、線は短い軌跡です。継続軌跡の推定Zで焦点を合わせ、真値による焦点調整はしていません。事例は結果を見た後の例示選択であり、平均効果の評価ではありません。',
+              '- Fig.9は194＋258→290 µmの真の衝突と、前コマの小さい方の計測径が約252 µmのアーティファクトへ更新しました。128画素の切り出し枠を撮影範囲内へ移動し、粒子全体を収めています。表示時刻は−1.25、0、＋1.00 msです。赤丸は終了軌跡、青四角は継続軌跡の実観測で、線は短い軌跡です。継続軌跡の推定Zで焦点を合わせ、真値による焦点調整はしていません。事例は結果を見た後の例示選択であり、平均効果の評価ではありません。',
               '- Fig.7(a)はconfidenceを動かしたPR曲線、(b–f)は衝突用の計測／追跡系統の集計です。低confidenceの追加検出まで同一ファイルとは説明しません。',
               '- 生成座標0–102.3 mmと、カメラからの距離74.9–177.2 mmを区別します。',
               '- APはprecision包絡線の積分です。scikit-learnの非補間APと同じ定義とは書きません。',
@@ -244,7 +245,10 @@ def html_page(n, mapping):
         snippet=(PACKAGE/f'latex/fig{num:02d}.tex').read_text()
         extra = ''
         if num == 9:
-            extra = '<p>元の論文と同じ<strong>128×128画素（1.28 mm四方）</strong>です。各画像の1–99パーセンタイルで線形に明暗を調整しています。赤丸・青四角と軌跡、右側の横棒、フォント、パネル配置は元の作図処理を使用しました。両軌跡の実観測がある時刻を使い、表示は<strong>−1.25、0、＋1.00 ms</strong>に統一しています。</p><p>前回の差し替え案の実クロップは144×144画素で、PDFに埋め込まれた画像が256×256画素でした。下の比較図は今回の同じ事例を256画素と128画素で切り出した比較です。</p><details><summary>クロップ・コントラストの比較を見る</summary><figure><a href="paper/figures/crop-contrast-comparison.png"><img src="paper/figures/crop-contrast-comparison.png" alt="同じ事例の256画素、128画素の調整前、128画素の調整後を比較" loading="lazy"></a><figcaption>左：256画素・1–99％。中央：128画素・固定0–1表示。右：採用した128画素・1–99％。表示処理は推論や特徴抽出へ戻していません。</figcaption></figure></details><details><summary>元の論文のFig.9と出典を見る</summary><figure><a href="paper/figures/fig09-original-reference.png"><img src="paper/figures/fig09-original-reference.png" alt="CollisionPaperの元のFig.9：様式の比較用" loading="lazy"></a><figcaption>元図は様式比較の参考です。今回の差し替えには上の新PDFを使用してください。</figcaption></figure><p>CollisionPaperの既存クローンをfetchし、mainと同じコミット2a5d3f4を確認。旧作業コピーから見つけた原作図スクリプトは保存済みスナップショットとも一致しました。</p><a href="paper/provenance/fig09-layout.json" download>事例・描画条件・出典の記録</a></details>'
+            true, artifact = n['figure9_cases']
+            event = true['truth_event']
+            large_note = f"<p><strong>大きな粒子の事例へ更新しました。</strong>真の衝突は {event['parent1_diameter_um']:.0f}＋{event['parent2_diameter_um']:.0f}→{event['child_diameter_um']:.0f} µm（前版は128＋127→161 µm）。アーティファクトは前コマの小さい方の計測径で約{artifact['measured_pre_diameter_min_um']:.0f} µmです。クロップ幅と倍率は維持し、元の粒子が大きい事例を選んでいます。</p>"
+            extra = large_note + '<p>元の論文と同じ<strong>128×128画素（1.28 mm四方）</strong>です。各画像の1–99パーセンタイルで線形に明暗を調整しています。赤丸・青四角と軌跡、右側の横棒、フォント、パネル配置は元の作図処理を使用しました。画像端近くの事例を含めるため、128画素の枠全体を撮影範囲内へ移動しています。粒子画像の拡大・合成は行っていません。両軌跡の実観測がある時刻を使い、表示は<strong>−1.25、0、＋1.00 ms</strong>に統一しています。</p><p>最初の差し替え案の実クロップは144×144画素で、PDFに埋め込まれた画像が256×256画素でした。下の比較図は今回の同じ事例を256画素と128画素で切り出した比較です。</p><details><summary>前の128画素版（小さい粒子）と比べる</summary><figure><a href="paper/figures/fig09-previous-smaller.png"><img src="paper/figures/fig09-previous-smaller.png" alt="前の128画素版。真の衝突は128＋127→161 µm" loading="lazy"></a><figcaption>前版。クロップ幅と描画倍率は今回と同じです。差し替えには現在の新PDFを使用してください。</figcaption></figure></details><details><summary>クロップ・コントラストの比較を見る</summary><figure><a href="paper/figures/crop-contrast-comparison.png"><img src="paper/figures/crop-contrast-comparison.png" alt="同じ事例の256画素、128画素の調整前、128画素の調整後を比較" loading="lazy"></a><figcaption>左：256画素・1–99％。中央：128画素・固定0–1表示。右：採用した128画素・1–99％。表示処理は推論や特徴抽出へ戻していません。</figcaption></figure></details><details><summary>元の論文のFig.9と出典を見る</summary><figure><a href="paper/figures/fig09-original-reference.png"><img src="paper/figures/fig09-original-reference.png" alt="CollisionPaperの元のFig.9：様式の比較用" loading="lazy"></a><figcaption>元図は様式比較の参考です。今回の差し替えには上の新PDFを使用してください。</figcaption></figure><p>CollisionPaperの既存クローンをfetchし、mainと同じコミット2a5d3f4を確認。旧作業コピーから見つけた原作図スクリプトは保存済みスナップショットとも一致しました。</p><a href="paper/provenance/fig09-layout.json" download>事例・描画条件・出典の記録</a></details>'
         cards.append(f'''<section id="fig{num}"><div class="section-heading"><span>FIGURE {num:02d}</span><h2>Fig.{num} · {['粒子計測と追跡','衝突検出性能と確認件数','画像特徴の事例'][num-7]}</h2></div>
 <p>{fig_notes[num]}</p>{extra}<figure><a href="paper/{path}.png" aria-label="Fig.{num}を拡大"><img src="paper/{path}.png" alt="Fig.{num}の差し替え図" loading="lazy"></a><figcaption>図をタップすると拡大できます。論文への挿入にはPDFを使用してください。</figcaption></figure>
 <div class="downloads"><a href="paper/{path}.pdf" download>PDFを保存</a><a href="paper/{path}.png" download>PNGを保存</a><a href="paper/latex/fig{num:02d}.tex" download>図環境・キャプション .tex</a></div>
@@ -306,7 +310,7 @@ def main():
     }
     for src,dst in copies.items(): cp(SOURCE/src,dst)
     write('data/numeric-results.json', n)
-    write('data/figure09-cases.json', {k:selection[k] for k in ['status','cases','selection','focus','crop_size_px','display_normalization']})
+    write('data/figure09-cases.json', {k:selection[k] for k in ['status','cases','selection','focus','crop_size_px','crop_position','display_normalization']})
     extra_sources={}
     for name in ['event_pr.csv','event_summary.csv','target_recall.csv','fp_composition.csv']:
         source = FULL/'results/figure08'/name
@@ -324,7 +328,7 @@ def main():
           'particle_reconstruction_planes':1024,'phase_retrieval_iterations':3,
           'prior_test_seed_use':'Implementation and sensitivity checks on earlier generated data; excluded from model fitting.'})
     files = {str(p.relative_to(PACKAGE)):sha(p) for p in sorted(PACKAGE.rglob('*')) if p.is_file() and p.name not in {'manifest.json','SHA256SUMS'}}
-    write('manifest.json', {'schema_version':1,'status':'PASS','edition':'2026-11-02 synthetic paper replacement package, original-style Fig.9 refinement',
+    write('manifest.json', {'schema_version':1,'status':'PASS','edition':'2026-11-02 synthetic paper replacement package, original-style larger-particle Fig.9 refinement',
           'source_branch':'revision/amt-102p3mm-phase3','source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
           'manuscript_sha256':original_paper,'files':files,'file_count_excluding_manifests':len(files),
           'manuscript_modified':False,'full_manuscript_compilation':'Not performed: manuscript replacement is reserved for the author.'})

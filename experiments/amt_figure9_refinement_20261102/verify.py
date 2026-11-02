@@ -73,7 +73,7 @@ def main():
         assert case['display_time_ms'] == [d/4 for d in DELTAS]
         v = tracks.loc[tracks.track_id.eq(case['vanished_track_id'])].sort_values('frame')
         s = tracks.loc[tracks.track_id.eq(case['survivor_track_id'])].sort_values('frame')
-        cache = np.load(OUT/f"cache/{case['review_id']}.npz")
+        cache = np.load(Path(selection.get('candidate_search_directory',OUT))/f"cache/{case['review_id']}.npz")
         panels = [p for p in selection['panels'] if p['frame'] in case['display_frames']]
         assert len(panels) == 3
         for panel in panels:
@@ -89,6 +89,16 @@ def main():
             assert sp is not None
             for axis in 'xyz':
                 assert np.isclose(float(s.loc[s.frame.eq(frame),axis].iloc[0]), panel['center_'+axis])
+            for axis in 'xy':
+                assert panel['crop_center_'+axis] == np.clip(panel['center_'+axis],64,960)
+                assert panel[axis+'0'] == round(panel['crop_center_'+axis])-64
+            assert 0 <= panel['x0'] <= 896 and 0 <= panel['y0'] <= 896
+            for track in [v,s]:
+                actual=track.loc[track.frame.eq(frame)]
+                if actual.empty:continue
+                p=actual.iloc[0]
+                clearance=min(p.x-panel['x0'],panel['x0']+127-p.x,p.y-panel['y0'],panel['y0']+127-p.y)-p.diameter_px/2
+                assert clearance>=1, (case['review_id'],frame,clearance)
             assert panel['actual_marker_observations'] == {'terminating':vp is not None,'continuing':True}
             if d < 0 or (case['true_event_id'] < 0 and d == 0): assert vp is not None
             if d > 0: assert vp is None
@@ -132,6 +142,7 @@ def main():
               'used_fonts_embedded_and_no_clipped_text':True,'used_fonts':sorted(used_fonts),
               'unused_default_helvetica_resource':True,'display_crops_checked':6,'crop_size_px':128,
               'original_percentile_normalization_exact':True,'actual_track_observations_checked':True,
+              'whole_crop_inside_recorded_frame':True,'measured_particle_disks_clear_crop_boundaries':True,
               'candidate_scores_and_final_policy_checked':True,'artifact_truth_support_frames':9,
               'artifact_has_no_truth_in_common_evaluation_gate':True,'manuscript_unchanged':True}
     (OUT/'verification.json').write_text(json.dumps(result,indent=2)+'\n')

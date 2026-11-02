@@ -97,7 +97,7 @@ def main():
     assert '\\citep{scikit-learn}' not in table4
     assert 'coordinate' in table5 and 'candidate selection' in table5
     results=(PACKAGE/'latex/results-synthetic.tex').read_text()
-    for old in ['0.917','0.901','0.858','266 to 216','0.890 to 0.336','0.999184','0.530122','0.316817','eight of the nine','successively improved performance across all']:
+    for old in ['0.917','0.901','0.858','266 to 216','0.890 to 0.336','0.999184','0.530122','0.316817','0.874401','0.480383','all nine evaluated','successively improved performance across all']:
         assert old not in results, old
     caption=(PACKAGE/'latex/fig09.tex').read_text()
     assert '128\\times128' in caption and 'Red circles and blue squares' in caption

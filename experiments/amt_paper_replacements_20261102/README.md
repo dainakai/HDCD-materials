@@ -28,7 +28,12 @@ and the recovered original plotting function and submission relabeling script.
 The layout, fonts, markers and horizontal score bars follow the manuscript.
 The crops were reconstructed only for display from the frozen new synthetic
 sequence; candidate scores, model fits and performance metrics are unchanged.
-The previous package is archived privately as `paper-replacements-before-fig09-refinement.zip`.
+The original package is archived privately as `paper-replacements-before-fig09-refinement.zip`.
+The previous 128-pixel smaller-particle package is preserved as
+`paper-replacements-before-larger-particles.zip`. The current cases are larger
+particles (194 + 258 → 290 µm true event, and a 252 µm measured artifact).
+Whole crop windows are moved within the recording boundaries without changing
+pixel scale; original particle images are not enlarged.
 
 `texts.py` holds proposed language. `build.py` checks the 34 finalized source
 hashes, generates the package, asserts that the manuscript is unchanged, and

@@ -1,17 +1,17 @@
 {
-  "true_candidates_eligible": 60,
+  "true_candidates_eligible": 9,
   "artifact_candidates_eligible": 1,
-  "display_candidates": 31,
+  "display_candidates": 10,
   "crop_size_px": 128,
-  "contrast": "Per-frame 1st/99th percentiles, exact original function.",
   "time_frames": [
     -5,
     0,
     4
   ],
-  "focus": "Continuing-track smoothed Z, no manual focus or truth-based refocusing.",
-  "selection": "Illustrative visual selection at author request after numerical evaluation; no fitting, threshold or performance metric changes.",
-  "truth_conditions": "Identity-consistent, exact event frame, final policy retained, both scores >=0.9, both pre-event observations and continuing observations at all display frames present, no terminating observation in the post-frame, both pre-event disks in crop with >=2 px edge separation.",
-  "artifact_conditions": "No ground truth in the common evaluation gate (time +/-5, XY 350 um, no Z condition); both track IDs supported by same truth particle over nine preframes; >=5 distinct support frames and >=2 per track; no conflicting IDs; absent from final policy.",
-  "style_source_sha256": "b4b1c09f1e34ea694ee599eebc984318b3581c4a0a51902cc500cca928640a4f"
+  "contrast": "Same original per-frame first/99th-percentile linear normalization.",
+  "crop_position": "Continuing-track center, clamped to [64,960] in each direction to retain a wholly recorded 128-pixel crop. Actual measured disks have >=1 pixel clearance from every crop boundary.",
+  "focus": "Continuing-track smoothed Z; no manual or truth-based refocusing.",
+  "selection": "Author requested larger particles. Post-hoc illustrative choice, sorted by true smaller-parent diameter / measured artifact diameter, followed by visual inspection. No change to models, inference or performance.",
+  "truth_conditions": "Both true parent diameters >=165um; exact truth-event frame; identity-consistent and final-policy retained; saved scores >=0.75; actual observations; measured pre-event edge gap >=1px.",
+  "artifact_conditions": "Measured smaller-track diameter >=170um; no truth within common +/-5frame/350umXY/noZ gate; no conflicting truth identity over nine preframes; >=5 distinct supported frames and >=2 per track; shared component >=7/9; saved score decrease >=0.1; final-policy absent."
 }
