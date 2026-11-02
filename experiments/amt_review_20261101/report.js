@@ -87,10 +87,25 @@ if (progressBox) {
         }
       }
       if(data.experimental){
-        const e=data.experimental,labels={background:'背景除去',minip:'MinIP再構成',measurement:'粒子計測',tracking:'追跡',inference:'衝突推論',assets:'レビュー画像作成'};
+        const e=data.experimental,labels={background:'背景除去',minip:'MinIP再構成',measurement:'粒子計測',tracking:'追跡',inference:'衝突推論',assets:'レビュー画像作成',stage_inputs:'入力設定の転送',transfer_raw:'原画像の転送',verify_remote_outputs:'出力の照合',transfer_results:'結果の回収',reconnecting:'通信の再接続'};
         progressBox.append(el('h3','実験データの再処理と上位80件の準備'));
         progressBox.append(el('p',e.inputs_validated?`14系列・${number(e.raw_images)}枚の原画像と校正を確認済み。各系列の上位80件、計1,120件をレビューします。`:'原画像と校正を確認しています。'));
-        progressBox.append(el('p',e.status==='PASS'?'全14系列の処理とレビュー画像作成が完了しました。目視判定は別途保存します。':e.status==='FAILED'?'実験処理でエラーが発生し、確認が必要です。':e.scene?`現在：系列${e.scene}の${labels[e.stage]||e.stage}`:'全量処理の接続確認中です。'));
+        if(e.workers?.length){
+          progressBox.append(el('p',e.status==='PASS'?'全14系列の処理とレビュー画像作成が完了しました。目視判定は別途保存します。':'空いたGPUへ系列を順次割り当てています。'));
+          const names={'local-gpu0':'ローカル RTX 4080 SUPER','local-gpu1':'ローカル RTX 4060 Ti','daiPCatKIT-gpu0':'daiPCatKIT RTX 5060 Ti'};
+          const list=el('ul');
+          for(const w of e.workers){
+            const status=w.status==='waiting_for_other_gpu_job'?'別ジョブが使用中。終了後に自動参加':w.status==='device_validation'?'同一入力による動作確認中':w.status==='FAILED'?'エラーを保存して停止':w.status==='PASS'?'担当系列の処理完了':w.scene?`系列${w.scene}・${labels[w.stage]||w.stage||'開始準備'}`:'次の割り当て待ち';
+            list.append(el('li',`${names[w.worker]||w.worker}：${status}`));
+          }
+          progressBox.append(list);
+          if(e.failed_workers?.length)progressBox.append(el('p','エラーが生じたGPUの出力は保護し、原因を確認するまで再実行しません。'));
+        }else progressBox.append(el('p',e.status==='PASS'?'全14系列の処理とレビュー画像作成が完了しました。目視判定は別途保存します。':e.status==='FAILED'?'実験処理でエラーが発生し、確認が必要です。':e.scene?`現在：系列${e.scene}の${labels[e.stage]||e.stage}`:'全量処理の接続確認中です。'));
+        if(e.code_equivalence?.status==='PASS'){
+          progressBox.append(el('p',`全GPUのコード照合：一致。処理コード・設定・重み${e.code_equivalence.production_files_verified}ファイル、実際に読み込むHolo-Linker、推論モデル、実行環境を確認済みです。各ジョブの開始前にも照合します。`));
+          progressBox.append(el('small',`Holo-Linker SHA-256：${e.code_equivalence.actual_holo_linker_sha256}。GPU機種とドライバーは実行条件として記録します。`));
+          progressBox.append(el('p','128フレームの比較ではGPUによって計測点が1点変わり、候補順位にも差が生じました。同じ計測・追跡結果を渡した対照実験では94候補・上位80件の順序・スコアが一致しました。承認済みの方針に従い、機種差を記録して全工程を分散します。'));
+        }
         progressBox.append(el('p',`レビュー画像完成：${e.scenes.filter(s=>s.review_ready).length} / 14系列。小規模な接続確認の候補は、この件数や本レビューへ含めません。`));
       }
       if(data.failed_jobs.length)progressBox.append(el('p',`エラーを記録した処理：${data.failed_jobs.join('、')}`));

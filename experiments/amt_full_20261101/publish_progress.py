@@ -75,6 +75,13 @@ def update():
                   'status':experimental_state['status'],'scene':experimental_state.get('scene'),
                   'stage':experimental_state.get('stage'),'scenes':experimental_rows,
                   'budget_per_scene':80,'total_review_budget':1120}
+    experimental['workers']=experimental_state.get('workers',[])
+    experimental['failed_workers']=experimental_state.get('failed_workers',[])
+    equivalence=load_if(experimental_root/'distributed/code-equivalence.json')
+    if equivalence:
+        experimental['code_equivalence']={key:equivalence[key] for key in
+            ['status','checked_at','workers','production_files_verified','actual_holo_linker_sha256']}
+        experimental['gpu_numerical_variance_recorded']=True
     completion['experimental_reprocessing_complete']=experimental['status']=='PASS'
     note={'status':state['status'],'updated_at':dt.datetime.now().astimezone().isoformat(),
           'current_jobs':active,'failed_jobs':failed,'sequences':rows,'total_frames':36000,
