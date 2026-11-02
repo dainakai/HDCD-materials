@@ -101,3 +101,24 @@ for provenance; they do not select the current examples. Only selected assets
 and audit records are copied to the author package. Full reconstruction caches,
 model weights and full research data remain private. Current final assets and
 provenance are versioned in `results/`.
+
+## Separate frame-selection gallery
+
+`frame_gallery.py` exports all six consecutive frames from −1.00 to +0.25 ms
+for the selected (a) and (b) cases, without any trajectory or score overlay.
+Labels A1–A6 and B1–B6 appear outside the image pixels. Native 128-pixel PNGs,
+two horizontal contact sheets, and a separate responsive `fig09-frames.html`
+page are written under `../audit/revision-figure9-frames-20261102/` and copied
+to the existing scoped report preview. Only six missing intermediate frames
+are reconstructed; the other six match the current Fig.9 display cache exactly.
+The current paper figure, selection and replacement ZIP are hash-checked to
+remain unchanged. Run with the same Python environment as above:
+
+```bash
+MPLCONFIGDIR=/tmp/amt-figure9-mpl "$PY" experiments/amt_figure9_refinement_20261102/frame_gallery.py
+```
+
+The gallery uses the existing Quick Tunnel and is for the author's subsequent
+frame choice. `publication.json` in its private output directory records the
+HTTPS byte checks, process receipt and stop command. Raw reconstruction caches
+remain outside the public directory.
