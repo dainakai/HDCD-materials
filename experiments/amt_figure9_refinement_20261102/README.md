@@ -4,6 +4,61 @@ This author-requested revision changes illustrative examples and display only.
 Model fits, saved candidate scores and 34 frozen numerical outputs remain
 unchanged. The manuscript is not edited.
 
+## Current status: the old (a) is rejected
+
+The author correctly identified poor particle localization in C04. It is no
+longer recommended as a clean tracking illustration. The current paper PDF
+still contains that example, pending the author's choice of a replacement.
+The earlier selection rationale below is preserved as history, not as approval
+of C04. The artifact H01 remains unchanged.
+
+All four red observations in frames 5519–5522 already have raw XY errors of
+12.27–12.67 pixels. Smoothing leaves errors of 12.47–14.10 pixels. The source
+measurement records have `contrast_area_f70_bg90_full_gate2px_bbox_fallback`
+and coordinates equal to their small detection-box centers near the particle
+edge. In the frozen production code, this method means the contrast-area
+centroid was more than 2 pixels from the box center, so the box center was
+returned. The crop and marker overlay accurately display those saved values;
+their display coordinates are not the cause. Requiring only inclusion within
+the truth particle's projected disk was an inadequate selection criterion.
+
+`clean_true.py` checks identity, visibility and all ten measured positions
+across the six displayed frames. `render_clean_true.py` reconstructs four
+alternatives with the same 128-pixel crop, measured focus, original contrast
+and red/blue overlay. `publish_clean_true.py` records the old failure and
+publishes `fig09-clean-a.html`, with a correction link from the old gallery.
+All 24 reconstructed panels were visually inspected.
+
+| Alternative | Event frame | True diameters (µm) | Mean / maximum XY error (px) |
+| --- | ---: | --- | --- |
+| C1, larger particles | 4335 | 232 + 269 → 317 | 2.42 / 4.43 |
+| C2 | 3593 | 186 + 221 → 259 | 1.41 / 4.22 |
+| C3, position priority | 5249 | 150 + 176 → 206 | 1.05 / 2.47 |
+| C4 | 4740 | 153 + 226 → 247 | 1.61 / 2.85 |
+
+These means and maxima cover ten actual markers per example, not the whole
+test series. One pixel is 10 µm. C1's red positions have errors of 1.82–2.70
+pixels; its maximum is the blue position at 0 ms. None of these examples is
+claimed to be error-free. Truth is used for selection and auditing only; no
+marker is moved and no image is refocused using truth. The search criteria
+and unsuccessful stricter thresholds are recorded in `search-protocol.json`.
+
+Use the Python environment below, in this order:
+
+```bash
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/clean_true.py
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/render_clean_true.py
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/publish_clean_true.py
+```
+
+Output and private diagnostics:
+`../audit/revision-figure9-clean-true-20261102/`. The candidate ZIP includes
+24 overlaid frames and four contact sheets. The paper PDF, selected-case
+record and author replacement ZIP are hash-checked to remain unchanged.
+Final paper assembly awaits the author's frame choice. The existing tunnel,
+port 8769, server PID 2058041 and tunnel PID 523581 are reused; its logs and
+stop command are recorded in the private `publication.json` receipt.
+
 ## Correction and selected cases
 
 The previous larger-particle version (`3cf2861`, L03/B01) incorrectly moved
