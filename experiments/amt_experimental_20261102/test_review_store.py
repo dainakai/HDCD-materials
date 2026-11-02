@@ -41,6 +41,17 @@ class ReviewStoreTest(unittest.TestCase):
             export=other.get(PREFIX+'/export.csv',base_url=base).data.decode('utf-8-sig')
             self.assertIn('fixed-model,fixed-predictions',export);self.assertIn('test evidence',export)
             self.assertEqual(other.get(PREFIX+'/assets/../../reviews.sqlite3',base_url=base).status_code,404)
+            token2=re.search(r'name="csrf-token" content="([^"]+)"',other.get(PREFIX+'/',base_url=base).data.decode()).group(1)
+            undo=PREFIX+'/api/scenes/12/events/12:1:2:0/undo'
+            self.assertEqual(other.post(undo,json={},base_url=base).status_code,403)
+            self.assertEqual(other.post(undo,json={},headers={'X-CSRF-Token':token2},base_url=base).status_code,200)
+            self.assertEqual(other.get(PREFIX+'/api/status',base_url=base).get_json()['scenes'][0]['reviewed'],0)
+            import sqlite3
+            with sqlite3.connect(root/'reviews.sqlite3') as db:
+                self.assertEqual(db.execute('SELECT label FROM history ORDER BY id').fetchall(),[('collision',),('unreviewed',)])
+            self.assertTrue(image.exists())
+            with other.get(PREFIX+'/api/scenes/12/events/12:1:2:0/movie',base_url=base) as response:
+                self.assertEqual(response.data,b'GIF89a')
             document['prediction_sha256']='different-predictions';save(path,document)
             with self.assertRaisesRegex(RuntimeError,'Frozen cohort changed'):
                 other.get(PREFIX+'/api/scenes/12',base_url=base)

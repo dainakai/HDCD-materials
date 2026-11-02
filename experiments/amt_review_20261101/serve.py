@@ -15,8 +15,13 @@ class Handler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(PUBLIC), **kwargs)
 
     def proxy_review(self):
-        if not urlsplit(self.path).path.startswith('/experimental-review/'):
+        path=urlsplit(self.path).path
+        port=8770 if path.startswith('/experimental-review/') else 8771 if path.startswith('/experimental-monitor/') else None
+        if port is None:
             return False
+        if port==8771 and self.command!='GET':
+            self.send_error(405)
+            return True
         try:
             size = int(self.headers.get('Content-Length', '0'))
         except ValueError:
@@ -27,7 +32,7 @@ class Handler(SimpleHTTPRequestHandler):
             return True
         body = self.rfile.read(size) if size else None
         headers = {k: self.headers[k] for k in ['Content-Type', 'Cookie', 'X-CSRF-Token'] if self.headers.get(k)}
-        connection = HTTPConnection('127.0.0.1', 8770, timeout=30)
+        connection = HTTPConnection('127.0.0.1', port, timeout=30)
         try:
             connection.request(self.command, self.path, body=body, headers=headers)
             response = connection.getresponse()

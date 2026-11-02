@@ -79,6 +79,11 @@ def create_app(root=ROOT, access=None):
         response.headers['X-Robots-Tag']='noindex, nofollow'
         response.headers['Content-Security-Policy']="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"
         return response
+    @app.errorhandler(403)
+    def forbidden(error):
+        if request.path==PREFIX+'/':
+            return '<!doctype html><html lang="ja"><meta name="viewport" content="width=device-width,initial-scale=1"><title>レビュー専用リンク</title><h1>レビュー専用リンクから開いてください</h1><p>この画面は専用リンクで保護されています。このスレッドでお渡ししたレビューURLから開くと、その後はこの端末で続けられます。</p><p><a href="/experimental-monitor/">処理状況を見る</a></p></html>',403
+        return error
     @app.get(PREFIX+'/')
     def index():return render_template('review.html',csrf=session['csrf'])
     @app.get(PREFIX+'/assets/<name>')
@@ -100,7 +105,7 @@ def create_app(root=ROOT, access=None):
                              'reviewed':sum(counts.values()),'completed_stages':completed})
         current=read(root/'campaign-state.json') if (root/'campaign-state.json').exists() else {'status':'not_started'}
         return jsonify({'scenes':rows,'budget_total':1120,'run_id':RUN_ID,
-                        'processing':{k:current[k] for k in ['status','scene','stage','started_at'] if k in current}})
+                        'processing':{k:current[k] for k in ['status','scene','stage','started_at','updated_at','completed_scenes'] if k in current}})
     @app.get(PREFIX+'/api/scenes/<int:n>')
     def events(n):
         data=cohort(n)
@@ -121,13 +126,26 @@ def create_app(root=ROOT, access=None):
     def review(n,key):
         item=candidate(n,key)
         if item is None:abort(404)
-        body=request.get_json();label=body.get('label');note=body.get('note','')
+        body=request.get_json()
+        if not isinstance(body,dict):abort(400)
+        label=body.get('label');note=body.get('note','')
         if label not in LABELS or not isinstance(note,str) or len(note)>4000:abort(400)
         values=(key,n,label,note,stamp(),item['asset_sha256'])
         with connect() as db:
             db.execute('INSERT INTO reviews VALUES(?,?,?,?,?,?) ON CONFLICT(candidate_id) DO UPDATE SET label=excluded.label,note=excluded.note,updated_at=excluded.updated_at,asset_sha256=excluded.asset_sha256',values)
             db.execute('INSERT INTO history(candidate_id,scene,label,note,updated_at,asset_sha256) VALUES(?,?,?,?,?,?)',values)
         return jsonify({'saved':True,'candidate_id':key,'label':label})
+    @app.post(PREFIX+'/api/scenes/<int:n>/events/<key>/undo')
+    def undo(n,key):
+        item=candidate(n,key)
+        if item is None:abort(404)
+        with connect() as db:
+            old=db.execute('SELECT * FROM reviews WHERE candidate_id=? AND scene=?',(key,n)).fetchone()
+            if old:
+                db.execute('INSERT INTO history(candidate_id,scene,label,note,updated_at,asset_sha256) VALUES(?,?,?,?,?,?)',
+                           (key,n,'unreviewed',old['note'],stamp(),item['asset_sha256']))
+                db.execute('DELETE FROM reviews WHERE candidate_id=? AND scene=?',(key,n))
+        return jsonify({'saved':True,'candidate_id':key,'label':None})
     @app.get(PREFIX+'/export.csv')
     def export():
         with connect() as db:
