@@ -7,7 +7,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from search import REPO, ROOT, OUT, HERE, original, DELTAS
+from search import REPO, ROOT, OUT, HERE, original
 import numpy as np
 import pandas as pd
 from ra3d.config import KEY_COLUMNS
@@ -54,6 +54,12 @@ def main():
     tracks = pd.read_parquet(ROOT/'runs/tracking/seed260745/smoothed.parquet')
     mapping = pd.read_parquet(ROOT/'runs/tracking/seed260745/mapping.parquet')
     truth = pd.read_parquet(ROOT/'data/labels/validation/seed260745/collision_events.parquet')
+    identity = load(OUT/'identity-audit.json')
+    comparison = load(OUT/'original-comparison.json')
+    assert identity['status'] == comparison['status'] == 'PASS'
+    assert sha(ROOT/'runs/tracking/seed260745/smoothed.parquet') == identity['track_sha256']
+    assert sha(ROOT/'runs/tracking/seed260745/mapping.parquet') == identity['mapping_sha256']
+    assert sha(ROOT/'data/labels/validation/seed260745/collision_events.parquet') == identity['truth_events_sha256']
 
     def candidate(df, case):
         selected = df
@@ -69,8 +75,8 @@ def main():
         assert float(row.pre_same_interp_fraction) == case['image_pre_same_fraction']
         key = (case['vanished_track_id'], case['survivor_track_id'], case['candidate_frame'])
         assert (key in final_keys) == case['final_candidate_retained']
-        assert case['display_frames'] == [case['candidate_frame']+d for d in DELTAS]
-        assert case['display_time_ms'] == [d/4 for d in DELTAS]
+        assert case['display_frames'] == [case['candidate_frame']+d for d in [-4,0,1]]
+        assert case['display_time_ms'] == [-1.,0.,.25]
         v = tracks.loc[tracks.track_id.eq(case['vanished_track_id'])].sort_values('frame')
         s = tracks.loc[tracks.track_id.eq(case['survivor_track_id'])].sort_values('frame')
         cache = np.load(Path(selection.get('candidate_search_directory',OUT))/f"cache/{case['review_id']}.npz")
@@ -78,21 +84,25 @@ def main():
         assert len(panels) == 3
         for panel in panels:
             d = panel['delta']; frame = panel['frame']
-            raw, display = cache[f'raw_{d}'], cache[f'display_{d}']
-            assert raw.shape == display.shape == (128,128)
-            assert panel['recorded_fraction'] == 1
+            raw, display, valid = cache[f'raw_{d}'], cache[f'display_{d}'], cache[f'valid_{d}']
+            assert raw.shape == display.shape == valid.shape == (128,128)
+            assert panel['recorded_fraction'] == valid.mean()
+            yy, xx = np.indices((128,128))
+            xx += int(panel['x0']); yy += int(panel['y0'])
+            assert np.array_equal(valid,(xx>=0)&(xx<1024)&(yy>=0)&(yy<1024))
+            assert not display[~valid].any()
             assert hashlib.sha256(raw.tobytes()).hexdigest() == panel['raw_array_sha256']
             assert hashlib.sha256(display.tobytes()).hexdigest() == panel['normalized_array_sha256']
-            assert np.array_equal(original.normalize_valid_crop(raw, np.ones_like(raw, dtype=bool)), display)
-            assert np.allclose(np.percentile(raw,[1,99]), panel['contrast_low_high'])
+            assert hashlib.sha256(valid.tobytes()).hexdigest() == panel['valid_mask_sha256']
+            assert np.array_equal(original.normalize_valid_crop(raw, valid), display)
+            assert np.allclose(np.percentile(raw[valid],[1,99]), panel['contrast_low_high'])
             sp = point_at(s,frame,nearest=False); vp = point_at(v,frame,nearest=False)
             assert sp is not None
             for axis in 'xyz':
                 assert np.isclose(float(s.loc[s.frame.eq(frame),axis].iloc[0]), panel['center_'+axis])
             for axis in 'xy':
-                assert panel['crop_center_'+axis] == np.clip(panel['center_'+axis],64,960)
-                assert panel[axis+'0'] == round(panel['crop_center_'+axis])-64
-            assert 0 <= panel['x0'] <= 896 and 0 <= panel['y0'] <= 896
+                assert panel[axis+'0'] == round(panel['center_'+axis])-64
+                assert abs(panel['center_'+axis]-panel[axis+'0']-64) <= .5
             for track in [v,s]:
                 actual=track.loc[track.frame.eq(frame)]
                 if actual.empty:continue
@@ -108,14 +118,21 @@ def main():
             for name in ['parent1_diameter_um','parent2_diameter_um','child_diameter_um']:
                 assert float(e.iloc[0][name]) == case['truth_event'][name]
         else:
+            assert case['trajectory_score'] >= .9
+            assert case['trajectory_score']-case['image_feature_score'] >= .3
+            assert not case['final_candidate_retained']
             t = case['candidate_frame']
             nearby = truth.loc[(truth.frame-t).abs().le(5)]
             assert not np.hypot(nearby.x_um-row.x_um, nearby.y_um-row.y_um).le(350).any()
-            support = mapping.loc[mapping.observed_track_id.isin(key[:2]) & mapping.frame.between(t-10,t-2)]
+            support = mapping.loc[mapping.observed_track_id.isin(key[:2]) & mapping.frame.between(t-10,t+1)]
             assert set(support.source_particle_id) == {case['shared_truth_particle_id']}
-            assert support.frame.nunique() == case['same_truth_particle_preframes'] == 9
-            assert sum(support.observed_track_id.eq(key[0])) == case['terminating_truth_support_preframes']
-            assert sum(support.observed_track_id.eq(key[1])) == case['continuing_truth_support_preframes']
+            assert set(support.observed_track_id) == {case['survivor_track_id']}
+        audit = next(c for c in identity['cases'] if c['review_id']==case['review_id'])
+        assert audit['strict_training_identity_state'] == case['strict_training_identity_state']
+        for observation in audit['observations']:
+            assert observation['projected_center_error_px'] <= observation['truth_radius_px']
+            assert abs(observation['depth_error_um']) < 100
+            assert observation['nearest_truth_center_is_expected']
 
     geometry = []
     used_fonts = set()
@@ -142,8 +159,13 @@ def main():
               'used_fonts_embedded_and_no_clipped_text':True,'used_fonts':sorted(used_fonts),
               'unused_default_helvetica_resource':True,'display_crops_checked':6,'crop_size_px':128,
               'original_percentile_normalization_exact':True,'actual_track_observations_checked':True,
-              'whole_crop_inside_recorded_frame':True,'measured_particle_disks_clear_crop_boundaries':True,
-              'candidate_scores_and_final_policy_checked':True,'artifact_truth_support_frames':9,
+              'target_centered_original_crop_policy':True,'black_padding_excluded_from_percentiles':True,
+              'fully_recorded_panels':sum(p['recorded_fraction']==1 for p in selection['panels']),
+              'measured_particle_disks_clear_crop_boundaries':True,
+              'candidate_scores_and_final_policy_checked':True,'artifact_trajectory_score_above_0p9':True,
+              'truth_geometry_observations_checked':sum(len(c['observations']) for c in identity['cases']),
+              'identity_audit_sha256':sha(OUT/'identity-audit.json'),
+              'original_comparison_sha256':sha(OUT/'original-comparison.json'),
               'artifact_has_no_truth_in_common_evaluation_gate':True,'manuscript_unchanged':True}
     (OUT/'verification.json').write_text(json.dumps(result,indent=2)+'\n')
     (HERE/'results').mkdir(exist_ok=True)

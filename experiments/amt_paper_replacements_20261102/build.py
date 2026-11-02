@@ -111,6 +111,9 @@ def render_fig9(n):
     cp(REFINED/'selection.json', 'provenance/fig09-layout.json')
     cp(REFINED/'verification.json', 'provenance/fig09-verification.json')
     cp(REFINED/'search-protocol.json', 'provenance/fig09-search-protocol.json')
+    cp(REFINED/'identity-audit.json', 'provenance/fig09-identity-audit.json')
+    cp(REFINED/'original-comparison.json', 'provenance/fig09-original-comparison.json')
+    cp(Path(selection['candidate_search_directory'])/'C01.png', 'figures/fig09-original-slot-current.png')
 
 
 def source_span(source, start, end):
@@ -199,7 +202,9 @@ def readme(mapping, n):
               '- 画像特徴段階でAPは0.892678から0.897689に改善し、FP90は1,186から1,004に減りますが、FP80は177から183に増えます。「全段階で全指標が改善」は使えません。',
               '- Table 5は候補集合と位置補正に渡せる特徴も変わります。スコアだけの要因実験とは解釈しません。最終行で追加されるのは座標による重複抑制です。',
               '- Fig.9は著者の依頼により事例を選び直しました。128×128画素、各クロップの1–99パーセンタイルによる線形コントラスト調整、元の作図スクリプトと投稿用ラベル処理を使用しています。画像は固定済みの新系列から位相回復3回で再構成しました。学習・推論スコア・全量性能評価は変更していません。',
-              '- Fig.9は194＋258→290 µmの真の衝突と、前コマの小さい方の計測径が約252 µmのアーティファクトへ更新しました。128画素の切り出し枠を撮影範囲内へ移動し、粒子全体を収めています。表示時刻は−1.25、0、＋1.00 msです。赤丸は終了軌跡、青四角は継続軌跡の実観測で、線は短い軌跡です。継続軌跡の推定Zで焦点を合わせ、真値による焦点調整はしていません。事例は結果を見た後の例示選択であり、平均効果の評価ではありません。',
+              '- Fig.9は286＋285→360 µmの真の衝突と、真値径276 µmの共有粒子アーティファクトです。スコアはそれぞれ0.958486→0.957430と0.908647→0.491434です。前版のクロップ位置の誤りを修正し、対象中心の128画素を切り出し、撮影範囲外だけを元図と同じ黒表示にしました。表示時刻は−1.00、0、＋0.25 msです。赤丸・青四角は実観測に限り、焦点は継続軌跡の推定Zです。事例は結果を見た後の例示選択であり、平均効果の評価ではありません。',
+              '- 元図のイベント1165・frame 3859も追跡しました。同じseed構成ですが、生成奥行き変更に伴う再生成後は位置と粒子IDが異なります。元図と同じ画像に新スコアを付けた図ではありません。元の候補ID、同じ計画枠の新旧真値、表示事例の照合結果はprovenance/fig09-original-comparison.jsonとfig09-identity-audit.jsonにあります。',
+              '- アーティファクトは二つの軌跡IDが同一粒子を捉えた候補です。その粒子は2フレーム後に別の粒子と衝突しますが、候補位置から約481 µm離れており共通評価ゲート350 µmの外です。「周辺に物理的な衝突が一切ない例」とは説明しません。',
               '- Fig.7(a)はconfidenceを動かしたPR曲線、(b–f)は衝突用の計測／追跡系統の集計です。低confidenceの追加検出まで同一ファイルとは説明しません。',
               '- 生成座標0–102.3 mmと、カメラからの距離74.9–177.2 mmを区別します。',
               '- APはprecision包絡線の積分です。scikit-learnの非補間APと同じ定義とは書きません。',
@@ -216,6 +221,36 @@ def readme(mapping, n):
               'manifest.jsonは本セット各ファイルのSHA-256、SHA256SUMSはコマンド用の照合リストです。',
               '元の研究画像、モデル重み、実験レビュー回答、認証キーは含めていません。', '']
     write('README.md', '\n'.join(lines))
+
+
+def figure9_notes(n):
+    true, artifact = n['figure9_cases']
+    event = true['truth_event']
+    original = load(REFINED/'original-comparison.json')
+    slot = original['same_planned_slot_1165']
+    a, b = slot['original'], slot['current']
+    slot_table = table_html(['イベント1165 / frame 3859','元論文の系列','今回の再生成系列'], [
+        ['親ID → 娘ID',f"{int(a['parent1_id'])}, {int(a['parent2_id'])} → {int(a['child_id'])}",f"{int(b['parent1_id'])}, {int(b['parent2_id'])} → {int(b['child_id'])}"],
+        ['位置 x, y, z (mm)',', '.join(f"{a[k]/1000:.3f}" for k in ['x_um','y_um','z_um']),', '.join(f"{b[k]/1000:.3f}" for k in ['x_um','y_um','z_um'])],
+        ['真値径 (µm)',f"{a['parent1_diameter_um']:.0f} + {a['parent2_diameter_um']:.0f} → {a['child_diameter_um']:.0f}",f"{b['parent1_diameter_um']:.0f} + {b['parent2_diameter_um']:.0f} → {b['child_diameter_um']:.0f}"],
+    ])
+    return f'''<p><strong>対象中心のクロップへ修正しました。</strong>真の衝突は {event['parent1_diameter_um']:.0f}＋{event['parent2_diameter_um']:.0f}→{event['child_diameter_um']:.0f} µm。アーティファクトの真値径は {artifact['shared_truth_diameter_um']:.0f} µmで、trajectory scoreは{artifact['trajectory_score']:.6f}、画像特徴追加後は{artifact['image_feature_score']:.6f}です。0.9以上から{artifact['trajectory_score']-artifact['image_feature_score']:.3f}低下します。</p>
+<p>元図と同じ128×128画素（1.28 mm四方）、赤丸・青四角と短い軌跡、右側の横棒、フォント・パネル配置を使っています。前版で加えた「枠を撮影範囲内へずらす処理」が粒子を端へ寄せていたため、削除しました。元図と同じく対象中心で切り出し、撮影範囲外は黒表示にします。記録された画素だけで1–99パーセンタイルの線形コントラスト調整を行っています。</p>
+<p>6枚の画像と完成PDFを目視確認し、実観測9点を正解粒子と照合しました。時刻は<strong>−1.00、0、＋0.25 ms</strong>です。粒子が撮影範囲から出る前の実観測を使うため、元図の＋1.00 msから変更しました。粒子画像の倍率・画素・推論結果は変更していません。</p>
+<details><summary>元論文と異なるサンプルになった理由と、元の事例の追跡結果</summary>
+<p>粒径・速度分布の元CSVは新旧でバイト単位で同じで、学習・テストに使うseedの構成も維持しています。ただし、生成体積を0–102.3 mmへ変更し、学習5系列とテスト1系列の真値・ホログラムを再生成して、粒子計測と追跡も再実行しています。学習用の個々の画像まで同じではありません。HoloD3を共通にしても入力画像と軌跡IDは一致しません。元図の真イベントは候補12515_12410_3859（計画イベント1165）、アーティファクトは17742_17721_5331でした。元のアーティファクトは0.890→0.336で、今回指定のtrajectory score 0.9以上には達していません。</p>
+{slot_table}
+<p>同じ計画イベント1165の今回の実現（候補12486_12575_3859）も再構成して比較しました。粒子径は近いものの、位置と軌跡は異なり、合体後にも赤の観測が残ります。今回は二粒子から一粒子への変化が見やすく、さらに大きいイベント1815を採用しました。「同じseedの同じ計画枠」と「同じ画像・同じ粒子の実現」を区別しています。</p>
+<figure><img src="paper/figures/fig09-original-slot-current.png" alt="元図と同じ計画イベント1165を今回の再生成データで再構成した比較候補。採用図ではありません" loading="lazy"><figcaption>比較用：今回のイベント1165。差し替えには上の採用PDFを使ってください。</figcaption></figure>
+<figure><a href="paper/figures/fig09-original-reference.png"><img src="paper/figures/fig09-original-reference.png" alt="CollisionPaperにある元論文のFig.9" loading="lazy"></a><figcaption>元論文のFig.9。元作図スクリプトと投稿用ラベル処理を今回も使用しています。</figcaption></figure>
+<p>CollisionPaperのmainと一致するコミット2a5d3f4を確認。旧作業コピーから回収した作図スクリプトは保存済みスナップショットとバイト単位で一致しています。</p>
+<a href="paper/provenance/fig09-original-comparison.json" download>新旧事例の対応記録</a></details>
+<details><summary>アーティファクトの正解対応と、選択上の注意</summary>
+<p>終了軌跡8518と継続軌跡8507は、表示した−1.00 msと0 msの両方で、同じ真値粒子3605の投影円内にあります。Z誤差は最大約66 µmです。一対一の対応表は継続軌跡にしか真値を割り当てないため、両IDがその対応表で確認できたとは記述していません。画像特徴は衝突前9フレームすべてで共有成分を示します。</p>
+<p>この粒子は2フレーム後に別の粒子と衝突します。ただし、そのイベントは候補位置から約481 µm離れ、共通評価の350 µmゲート外です。ここで示すアーティファクトは「同一粒子に付いた二つのIDを組にした候補」であり、周囲に衝突が一切ないという意味ではありません。真イベント1815は最終候補に残り、アーティファクトは除外されています。表示スコアはrelation-attention前です。</p>
+<p>真イベント1815の厳密な学習ラベルはidentity_unknownです。終了軌跡に一対一対応がないためで、今回の図では表示点を独立に正解の親7607・7608、娘7683と照合しました。学習ラベルや評価規則は変更していません。選択は結果を見た後の例示であり、画像特徴の平均効果を示すものではありません。</p>
+<a href="paper/provenance/fig09-identity-audit.json" download>表示点と正解粒子の照合記録</a> · <a href="paper/provenance/fig09-layout.json" download>事例・描画条件・出典</a></details>
+<details><summary>128画素クロップとコントラスト調整の比較</summary><figure><a href="paper/figures/crop-contrast-comparison.png"><img src="paper/figures/crop-contrast-comparison.png" alt="同じ採用事例を256画素、128画素固定0–1、128画素1–99パーセンタイルで比較" loading="lazy"></a><figcaption>左：256画素・1–99％。中央：128画素・固定0–1。右：採用した128画素・1–99％。表示処理を特徴抽出や推論へ戻していません。</figcaption></figure></details>'''
 
 
 def html_page(n, mapping):
@@ -245,14 +280,11 @@ def html_page(n, mapping):
         snippet=(PACKAGE/f'latex/fig{num:02d}.tex').read_text()
         extra = ''
         if num == 9:
-            true, artifact = n['figure9_cases']
-            event = true['truth_event']
-            large_note = f"<p><strong>大きな粒子の事例へ更新しました。</strong>真の衝突は {event['parent1_diameter_um']:.0f}＋{event['parent2_diameter_um']:.0f}→{event['child_diameter_um']:.0f} µm（前版は128＋127→161 µm）。アーティファクトは前コマの小さい方の計測径で約{artifact['measured_pre_diameter_min_um']:.0f} µmです。クロップ幅と倍率は維持し、元の粒子が大きい事例を選んでいます。</p>"
-            extra = large_note + '<p>元の論文と同じ<strong>128×128画素（1.28 mm四方）</strong>です。各画像の1–99パーセンタイルで線形に明暗を調整しています。赤丸・青四角と軌跡、右側の横棒、フォント、パネル配置は元の作図処理を使用しました。画像端近くの事例を含めるため、128画素の枠全体を撮影範囲内へ移動しています。粒子画像の拡大・合成は行っていません。両軌跡の実観測がある時刻を使い、表示は<strong>−1.25、0、＋1.00 ms</strong>に統一しています。</p><p>最初の差し替え案の実クロップは144×144画素で、PDFに埋め込まれた画像が256×256画素でした。下の比較図は今回の同じ事例を256画素と128画素で切り出した比較です。</p><details><summary>前の128画素版（小さい粒子）と比べる</summary><figure><a href="paper/figures/fig09-previous-smaller.png"><img src="paper/figures/fig09-previous-smaller.png" alt="前の128画素版。真の衝突は128＋127→161 µm" loading="lazy"></a><figcaption>前版。クロップ幅と描画倍率は今回と同じです。差し替えには現在の新PDFを使用してください。</figcaption></figure></details><details><summary>クロップ・コントラストの比較を見る</summary><figure><a href="paper/figures/crop-contrast-comparison.png"><img src="paper/figures/crop-contrast-comparison.png" alt="同じ事例の256画素、128画素の調整前、128画素の調整後を比較" loading="lazy"></a><figcaption>左：256画素・1–99％。中央：128画素・固定0–1表示。右：採用した128画素・1–99％。表示処理は推論や特徴抽出へ戻していません。</figcaption></figure></details><details><summary>元の論文のFig.9と出典を見る</summary><figure><a href="paper/figures/fig09-original-reference.png"><img src="paper/figures/fig09-original-reference.png" alt="CollisionPaperの元のFig.9：様式の比較用" loading="lazy"></a><figcaption>元図は様式比較の参考です。今回の差し替えには上の新PDFを使用してください。</figcaption></figure><p>CollisionPaperの既存クローンをfetchし、mainと同じコミット2a5d3f4を確認。旧作業コピーから見つけた原作図スクリプトは保存済みスナップショットとも一致しました。</p><a href="paper/provenance/fig09-layout.json" download>事例・描画条件・出典の記録</a></details>'
+            extra = figure9_notes(n)
         cards.append(f'''<section id="fig{num}"><div class="section-heading"><span>FIGURE {num:02d}</span><h2>Fig.{num} · {['粒子計測と追跡','衝突検出性能と確認件数','画像特徴の事例'][num-7]}</h2></div>
-<p>{fig_notes[num]}</p>{extra}<figure><a href="paper/{path}.png" aria-label="Fig.{num}を拡大"><img src="paper/{path}.png" alt="Fig.{num}の差し替え図" loading="lazy"></a><figcaption>図をタップすると拡大できます。論文への挿入にはPDFを使用してください。</figcaption></figure>
+<p>{fig_notes[num]}</p><figure><a href="paper/{path}.png" aria-label="Fig.{num}を拡大"><img src="paper/{path}.png" alt="Fig.{num}の差し替え図" loading="lazy"></a><figcaption>図をタップすると拡大できます。論文への挿入にはPDFを使用してください。</figcaption></figure>
 <div class="downloads"><a href="paper/{path}.pdf" download>PDFを保存</a><a href="paper/{path}.png" download>PNGを保存</a><a href="paper/latex/fig{num:02d}.tex" download>図環境・キャプション .tex</a></div>
-<details><summary>英語キャプションとLaTeXを表示</summary><button class="copy" data-copy="tex-fig{num}" type="button">LaTeXをコピー</button><pre id="tex-fig{num}">{esc(snippet)}</pre></details></section>''')
+{extra}<details><summary>英語キャプションとLaTeXを表示</summary><button class="copy" data-copy="tex-fig{num}" type="button">LaTeXをコピー</button><pre id="tex-fig{num}">{esc(snippet)}</pre></details></section>''')
     maps=[]
     for item in mapping:
         location = item.get('label') or f"{item.get('start_line')}–{item.get('end_line')}行"
@@ -328,7 +360,7 @@ def main():
           'particle_reconstruction_planes':1024,'phase_retrieval_iterations':3,
           'prior_test_seed_use':'Implementation and sensitivity checks on earlier generated data; excluded from model fitting.'})
     files = {str(p.relative_to(PACKAGE)):sha(p) for p in sorted(PACKAGE.rglob('*')) if p.is_file() and p.name not in {'manifest.json','SHA256SUMS'}}
-    write('manifest.json', {'schema_version':1,'status':'PASS','edition':'2026-11-02 synthetic paper replacement package, original-style larger-particle Fig.9 refinement',
+    write('manifest.json', {'schema_version':1,'status':'PASS','edition':'2026-11-02 synthetic paper replacement package, centered large particles and high-score artifact',
           'source_branch':'revision/amt-102p3mm-phase3','source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
           'manuscript_sha256':original_paper,'files':files,'file_count_excluding_manifests':len(files),
           'manuscript_modified':False,'full_manuscript_compilation':'Not performed: manuscript replacement is reserved for the author.'})

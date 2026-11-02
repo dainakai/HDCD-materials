@@ -1,17 +1,30 @@
 {
-  "true_candidates_eligible": 9,
-  "artifact_candidates_eligible": 1,
-  "display_candidates": 10,
-  "crop_size_px": 128,
-  "time_frames": [
-    -5,
-    0,
-    4
+  "status": "PASS",
+  "selected": [
+    "C04",
+    "H01"
   ],
-  "contrast": "Same original per-frame first/99th-percentile linear normalization.",
-  "crop_position": "Continuing-track center, clamped to [64,960] in each direction to retain a wholly recorded 128-pixel crop. Actual measured disks have >=1 pixel clearance from every crop boundary.",
-  "focus": "Continuing-track smoothed Z; no manual or truth-based refocusing.",
-  "selection": "Author requested larger particles. Post-hoc illustrative choice, sorted by true smaller-parent diameter / measured artifact diameter, followed by visual inspection. No change to models, inference or performance.",
-  "truth_conditions": "Both true parent diameters >=165um; exact truth-event frame; identity-consistent and final-policy retained; saved scores >=0.75; actual observations; measured pre-event edge gap >=1px.",
-  "artifact_conditions": "Measured smaller-track diameter >=170um; no truth within common +/-5frame/350umXY/noZ gate; no conflicting truth identity over nine preframes; >=5 distinct supported frames and >=2 per track; shared component >=7/9; saved score decrease >=0.1; final-policy absent."
+  "selection": "Post-hoc illustrative choice at the author request, not an estimate of an average image-feature effect.",
+  "inspected_centered_candidates": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "H01",
+    "H02"
+  ],
+  "artifact_rule": "Trajectory score >=0.9, saved image-ensemble score decreases by >=0.3, outside the common truth gate, absent from final policy; shared-particle interpretation audited from actual observations and independent truth geometry.",
+  "true_rule": "Final-policy retained, both scores >=0.9, exact event time, two actual pre-event track observations on the two truth parents, and actual daughter observations at/after the event.",
+  "crop": "128 pixels centered on continuing-track observations; original black padding and recorded-pixel 1st–99th percentile normalization.",
+  "time_frames": [
+    -4,
+    0,
+    1
+  ],
+  "focus": "Actual continuing-track smoothed depth; no truth-based refocusing.",
+  "historical_searches": [
+    "search.py: smaller centered examples",
+    "larger.py: superseded off-center examples"
+  ],
+  "strict_training_label_note": "C04 has identity_unknown in the strict training-label audit because the terminating ID lacks a one-to-one truth match. Its displayed observations are checked independently against the correct parents and daughter. Do not claim strict identity_consistent."
 }

@@ -97,11 +97,15 @@ def main():
     assert '\\citep{scikit-learn}' not in table4
     assert 'coordinate' in table5 and 'candidate selection' in table5
     results=(PACKAGE/'latex/results-synthetic.tex').read_text()
-    for old in ['0.917','0.901','0.858','266 to 216','0.890 to 0.336','0.999184','0.530122','0.316817','0.874401','0.480383','all nine evaluated','successively improved performance across all']:
+    for old in ['0.917','0.901','0.858','266 to 216','0.890 to 0.336','0.999184','0.530122','0.316817','0.874401','0.480383','0.579299','0.315224','successively improved performance across all']:
         assert old not in results, old
     caption=(PACKAGE/'latex/fig09.tex').read_text()
     assert '128\\times128' in caption and 'Red circles and blue squares' in caption
-    assert '-1.25' in caption and 'width=1.0\\linewidth' in caption
+    assert '-1.00' in caption and '+0.25' in caption and 'width=1.0\\linewidth' in caption
+    assert 'unrecorded regions are black' in caption and 'recorded pixels' in caption
+    assert selection['cases'][1]['trajectory_score'] >= .9
+    assert sha(PACKAGE/'provenance/fig09-identity-audit.json') == figure9_check['identity_audit_sha256']
+    assert sha(PACKAGE/'provenance/fig09-original-comparison.json') == figure9_check['original_comparison_sha256']
     for case in selection['cases']:
         for key in ['trajectory_score','image_feature_score']:
             assert f'{case[key]:.3f}' in caption

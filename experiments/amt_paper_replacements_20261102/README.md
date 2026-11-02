@@ -30,10 +30,17 @@ The crops were reconstructed only for display from the frozen new synthetic
 sequence; candidate scores, model fits and performance metrics are unchanged.
 The original package is archived privately as `paper-replacements-before-fig09-refinement.zip`.
 The previous 128-pixel smaller-particle package is preserved as
-`paper-replacements-before-larger-particles.zip`. The current cases are larger
-particles (194 + 258 → 290 µm true event, and a 252 µm measured artifact).
-Whole crop windows are moved within the recording boundaries without changing
-pixel scale; original particle images are not enlarged.
+`paper-replacements-before-larger-particles.zip`. The superseded off-center
+version is archived as `paper-replacements-before-centered-high-score.zip`.
+The current cases use 286 + 285 → 360 µm true particles and a 276 µm shared
+particle with trajectory score 0.908647 → image score 0.491434. Crops are
+centered on actual continuing-track observations, with black unrecorded regions
+and normalization over recorded pixels, restoring the original crop policy.
+The display times are −1.00, 0, +0.25 ms, before the targets leave the view.
+`fig09-original-comparison.json` traces the original cases and demonstrates why
+regeneration changed samples despite the same seed allocation.
+`fig09-identity-audit.json` independently checks nine actual observations against
+truth geometry. This display audit does not change strict training labels.
 
 `texts.py` holds proposed language. `build.py` checks the 34 finalized source
 hashes, generates the package, asserts that the manuscript is unchanged, and

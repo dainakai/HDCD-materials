@@ -1,94 +1,103 @@
-# Fig.9 refinement, 2026-11-02
+# Fig.9 correction, 2026-11-02
 
-This is an author-requested revision of illustrative cases and presentation.
-It does not change training, candidate scores, thresholds or performance results.
-The fixed test sequence is seed 260745 from the 102.3 mm, phase-retrieval-3 campaign.
-The original manuscript is not edited.
+This author-requested revision changes illustrative examples and display only.
+Model fits, saved candidate scores and 34 frozen numerical outputs remain
+unchanged. The manuscript is not edited.
 
-## Original figure provenance
+## Correction and selected cases
 
-The existing `../CollisionPaper` clone was fetched and checked at
-`2a5d3f4e4b4723aab782c2f42b473d5b5e3bbd92`, matching `origin/main`.
-Its original Fig.9 is `本番フォーマット/figures/fig09.pdf`.
-The plot script was recovered from
-`/media/dai-server/DATAM2/siderepos/260804/CollisionPaper/scripts/plot_image_feature_case_study.py`.
-It is byte-identical to the archived
-`paper-range-only-20260930/sources/paper_style/image_feature_case_study.py`.
-The unmodified source is frozen at `source/original_plot.py` (SHA-256
-`b4b1c09f1e34ea694ee599eebc984318b3581c4a0a51902cc500cca928640a4f`).
-`source/prepare_figures.py` is the current manuscript's submission relabeler.
+The previous larger-particle version (`3cf2861`, L03/B01) incorrectly moved
+128-pixel crop windows inside the recorded image to avoid black margins. That
+made targets appear near the crop edge. Its artifact trajectory score was also
+only 0.579. This version supersedes it: crops are centered on actual continuing
+track observations, and out-of-frame regions stay black as in the original.
 
-The original design uses 128×128 crops, red circles and blue squares with short
-track tails, two rows of three images, and horizontal score bars at right.
-The same Matplotlib 3.10.9 and Liberation Sans plot font are used here. The
-submission relabeler's documented Arial-compatible Liberation Sans fallback is
-used for panel captions (the original submission PDF embeds ArialMT there).
-All visible text fonts are embedded; the relabeler's default Helvetica resource
-is unused. Original image
-panel positions are identical within 0.01 pt. The tight PDF bounding box grows
-about 3.10 pt at right because the new larger score label extends farther right.
-Image panels, axes and label centres are not repositioned to accommodate this.
-
-## Selection and display
-
-The first refinement used `search.py` with fully centered 128-pixel crops and
-selected T22/A01. At the author's request for larger particles, `larger.py`
-expanded the display selection to allow moving the whole crop inside the image
-at its edges. The recorded image itself is not altered or rescaled. The earlier
-centered-crop condition excluded the large particles near the image boundary.
-Nine larger true-event candidates and one larger artifact passed the new checks;
-all ten were visually inspected. L03 was chosen for separated large parent
-silhouettes and a clear daughter, and B01 for two actual track observations on
-one large particle. This is post-hoc illustrative selection, not an estimate of
-average effectiveness.
-
-| Case | Frame / tracks | Trajectory → image score | Size / truth |
+| Case | Frame / tracks | Trajectory → image score | Ground truth |
 | --- | --- | --- | --- |
-| L03 | 1767 / 4342, 4349 | 0.9978357501 → 0.9967471864 | Event 348; true parents 194.379 + 257.688 µm, daughter 290.263 µm |
-| B01 | 1787 / 4486, 4436 | 0.5792988148 → 0.3152239211 | Smaller pre-frame measured diameter 251.726 µm; truth particle 2054 |
+| C04 | 5523 / 18638, 18667 | 0.9584858402 → 0.9574296554 | Event 1815; 285.733 + 285.336 → 359.751 µm |
+| H01 | 2813 / 8518, 8507 | 0.9086474013 → 0.4914342017 | Both IDs on particle 3605, diameter 276.472 µm |
 
-The exact true diameters are recorded in `results/selection.json` (the rounded
-values printed in the figure are 194 + 258 → 290 µm). The earlier true event was
-128 + 127 → 161 µm. The same 128-pixel field of view and plotting scale are used.
-The final candidate policy retains L03 and excludes B01. Scores in the figure
-precede relation-attention. The retained/rejected labels refer to final selection,
-not a 0.5 threshold applied to the displayed bars.
+Four true-event and two high-score artifact previews were visually inspected,
+including C01, the regenerated realization of original planned event 1165.
+C04 was chosen for its large, visible two-to-one transition. H01 satisfies the
+author's trajectory score >=0.9 requirement and drops by 0.417213 after image
+features. These are post-hoc illustrative choices, not an average-effect
+estimate. The final candidate policy retains C04 and excludes H01; displayed
+scores precede relation-attention and do not directly define that final policy.
 
-All displayed continuing-track positions and depths are actual smoothed observations.
-Both tracks have actual observations in the pre-frame and, for B01, at zero.
-Only the continuing track is observed in either post-frame. The common displayed
-offsets remain −5, 0 and +4 frames (−1.25, 0, +1.00 ms). No markers are interpolated,
-and focus is not selected manually or from truth. Crop centers are clamped to
-[64,960] in each coordinate so all pixels are recorded; the measured particle
-disks have at least one pixel clearance from every crop boundary. The display
-normalization remains the original per-crop 1st–99th percentile linear transform.
-It is not fed back into feature extraction or inference.
+The frames are −4, 0, +1 relative to candidate time (−1.00, 0, +0.25 ms).
+The post-frame precedes the targets leaving the recording area. All markers are
+actual observations; no missing positions are invented. All target disks lie
+inside the recorded image and crop. The two post-frame crops alone have small
+black bottom margins. Only recorded pixels determine the linear 1st–99th
+percentile display normalization. Focus is the continuing track's estimated
+depth, with no manual or truth-based adjustment.
 
-B01 has a single ground-truth particle supporting both IDs over nine distinct
-pre-frames (five and four observations), with no conflicting identity and no true
-event within the common evaluation gate. A shared connected component is indicated
-in eight of the nine image-feature pre-frames, not all nine.
+`audit_centered.py` independently checks nine displayed observations against
+truth: nearest projected center, center within the correct projected disk,
+and axial error below 100 µm. C04 has `identity_unknown` in the strict training
+labels because its terminating track has no one-to-one truth match. Do not
+call it strict `identity_consistent`: its displayed observations independently
+correspond to parents 7607/7608 and daughter 7683. H01's one-to-one mapping
+supports only continuing track 8507; it does not map both IDs to one particle.
+Independent geometry establishes that both displayed IDs lie on particle 3605.
+Its image features indicate a shared component in all nine pre-event frames.
+
+Particle 3605 is a parent of a real collision two frames later. That event is
+481 µm from this candidate, outside the common XY gate of 350 µm. The artifact
+is the duplicated track pair on one particle; it is not evidence that no
+physical collision occurs anywhere in the view. This detail is disclosed in
+the HTML and audit JSON. No labels, fitting or evaluation rules are changed.
+
+## Original figure and data provenance
+
+The `../CollisionPaper` clone was fetched and checked at
+`2a5d3f4e4b4723aab782c2f42b473d5b5e3bbd92`, matching `origin/main`.
+Original Fig.9: `本番フォーマット/figures/fig09.pdf`.
+Original plot recovered from
+`/media/dai-server/DATAM2/siderepos/260804/CollisionPaper/scripts/plot_image_feature_case_study.py`.
+Its byte-identical archived copy is
+`paper-range-only-20260930/sources/paper_style/image_feature_case_study.py`.
+The unmodified source is frozen at `source/original_plot.py`, SHA-256
+`b4b1c09f1e34ea694ee599eebc984318b3581c4a0a51902cc500cca928640a4f`.
+`source/prepare_figures.py` is the manuscript's submission relabeler.
+
+The original true candidate is 12515_12410_3859 (event 1165), score
+0.976999 → 0.964198; original artifact 17742_17721_5331, score
+0.889649 → 0.335793. Same training/test seeds and identical empirical input
+CSV distributions do not imply identical samples after regeneration at a
+102.3 mm generation depth. Original event 1165 has parents 5136/5137 and child
+5213 at (1.035, 9.091, 46.774) mm; the current realization has parents
+5167/5168 and child 5233 at (0.231, 7.536, 15.824) mm, at the same frame 3859.
+The current C01 preview was inspected but C04 gives a clearer and larger
+transition. `results/original-comparison.json` records hashes and exact values.
+
+Two rows of three 128-pixel images, red circles/blue squares and track tails,
+horizontal bars, Matplotlib 3.10.9 and Liberation Sans follow the original.
+The submission relabeler's Arial-compatible Liberation Sans fallback is used
+for captions; the original PDF embeds ArialMT there. Original image-panel
+positions match within 0.01 pt. Tight PDF width varies slightly with score
+labels, without changing panel coordinates. All rendered fonts are embedded.
+The final PDF was rendered and visually inspected after assembly.
 
 ## Reproduce and verify
 
-Use the environment with the original Matplotlib version; reconstruction is
-explicitly CPU-only with four Torch threads, preserving the ongoing GPU campaign.
+Use the original Matplotlib environment. Display reconstruction runs on CPU
+with four Torch threads, preserving the ongoing GPU campaign.
 
 ```bash
 PY=/media/dai-server/M2Disk2TB/repos/260712/.venv/bin/python
-MPLCONFIGDIR=/tmp/amt-figure9-mpl "$PY" experiments/amt_figure9_refinement_20261102/larger.py
-MPLCONFIGDIR=/tmp/amt-figure9-mpl "$PY" experiments/amt_figure9_refinement_20261102/larger.py render
+MPLCONFIGDIR=/tmp/amt-figure9-mpl "$PY" experiments/amt_figure9_refinement_20261102/centered.py
+MPLCONFIGDIR=/tmp/amt-figure9-mpl "$PY" experiments/amt_figure9_refinement_20261102/audit_centered.py
 MPLCONFIGDIR=/tmp/amt-figure9-mpl "$PY" experiments/amt_figure9_refinement_20261102/finish.py
 MPLCONFIGDIR=/tmp/amt-figure9-mpl "$PY" experiments/amt_figure9_refinement_20261102/verify.py
 ```
 
-Final outputs are under `../audit/revision-figure9-refinement-20261102/`.
-The larger-particle search, contact sheets and caches are under
-`../audit/revision-figure9-larger-20261102/`. The previous delivered smaller-particle
-figure is preserved in `previous-smaller-cases/` under the final-output directory. The final selection, panel intensity
-limits, frame IDs, source hashes and checks are in `selection.json` and
-`verification.json`. Earlier exploration is retained in `initial-preview/`.
-Only the final PDF, preview PNG, comparison PNG and provenance are copied into
-the author package by `amt_paper_replacements_20261102/build.py`.
-The same final assets and provenance are also versioned in `results/` here;
-contact sheets, full candidate tables and raw reconstruction caches stay private.
+Candidate previews/caches: `../audit/revision-figure9-centered-20261102/`.
+Final outputs: `../audit/revision-figure9-refinement-20261102/`.
+The latter preserves `previous-smaller-cases/` and
+`previous-offcenter-large-cases/`. Historical `search.py` and `larger.py` remain
+for provenance; they do not select the current examples. Only selected assets
+and audit records are copied to the author package. Full reconstruction caches,
+model weights and full research data remain private. Current final assets and
+provenance are versioned in `results/`.

@@ -1,7 +1,7 @@
 {
   "status": "PASS",
-  "final_pdf_sha256": "11e5b9307be523951dc3cdb98b9c7bc290b07aa2dd75162a2f2712332b111323",
-  "selection_sha256": "64c4a3ae236290337ca258cb1b0e9b8b1c4fc0551531d7b5078cc65db8bc1257",
+  "final_pdf_sha256": "bfaad5dad80c4477e302f9471ef2e7620f635dfa807f6a7c087c2392a624f3dd",
+  "selection_sha256": "d70d2378a53e5d933632cfeb0e464aae71b22b21bac7ec88549e885258f98766",
   "frozen_evaluation_files_unchanged": 34,
   "original_script_identical": true,
   "original_image_panel_geometry_identical": true,
@@ -15,10 +15,15 @@
   "crop_size_px": 128,
   "original_percentile_normalization_exact": true,
   "actual_track_observations_checked": true,
-  "whole_crop_inside_recorded_frame": true,
+  "target_centered_original_crop_policy": true,
+  "black_padding_excluded_from_percentiles": true,
+  "fully_recorded_panels": 4,
   "measured_particle_disks_clear_crop_boundaries": true,
   "candidate_scores_and_final_policy_checked": true,
-  "artifact_truth_support_frames": 9,
+  "artifact_trajectory_score_above_0p9": true,
+  "truth_geometry_observations_checked": 9,
+  "identity_audit_sha256": "7b894bfaa67b8a5b0050ec09e4e622d6ef9036d2b92b502c99e1e76da38348c8",
+  "original_comparison_sha256": "ba81e821ab9a2cc435a4a9925cd8cef41b27590d992d20084dd0ae6c3189b2a6",
   "artifact_has_no_truth_in_common_evaluation_gate": true,
   "manuscript_unchanged": true
 }

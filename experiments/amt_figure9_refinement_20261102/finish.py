@@ -2,7 +2,8 @@
 """Use the recovered original plot and submission relabeler on selected new cases."""
 import hashlib, importlib.util, json, shutil, subprocess, sys
 from pathlib import Path
-from search import HERE, REPO, ROOT, OUT, original, DELTAS, dump
+from search import HERE, REPO, ROOT, OUT, original, dump
+from audit_centered import CHOSEN
 import numpy as np
 import pandas as pd
 import matplotlib as mpl
@@ -11,8 +12,7 @@ from ra3d._core.track_images import point_at
 sys.path.append('/home/dai-server/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages')
 from pypdf import PdfReader
 
-CHOSEN=('L03','B01')
-CANDIDATES=REPO.parent/'audit/revision-figure9-larger-20261102'
+CANDIDATES=REPO.parent/'audit/revision-figure9-centered-20261102'
 
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -20,14 +20,17 @@ def main():
     assert mpl.__version__=='3.10.9',mpl.__version__
     shortlist=json.loads((CANDIDATES/'shortlist.json').read_text())
     rows=[next(r for r in shortlist if r['review_id']==key) for key in CHOSEN]
+    identity=json.loads((CANDIDATES/'identity-audit.json').read_text())
+    assert identity['status']=='PASS'
     tracks=pd.read_parquet(CANDIDATES/'shortlist-tracks.parquet')
     specs=[];rendered={};scores={};case_records=[];panels_audit=[]
     for row in rows:
         t=int(row['candidate_frame']);key=row['kind']
+        deltas=row['display_deltas']
         spec=original.CaseSpec(key=key,title=key,vanished_track_id=int(row['vanished_track_id']),
             survivor_track_id=int(row['survivor_track_id']),candidate_frame=t,
-            display_frames=tuple(t+d for d in DELTAS),time_reference_frame=t,
-            truth_event_id=int(row['matched_truth_event_id']) if key=='true_collision' else None,
+            display_frames=tuple(t+d for d in deltas),time_reference_frame=t,
+            truth_event_id=int(row['truth_event']['collision_event_id']) if key=='true_collision' else None,
             expected_shared_source_id=int(row['source_particle_id']) if key!='true_collision' else None)
         specs.append(spec)
         meta=json.loads((CANDIDATES/f"cache/{row['review_id']}.json").read_text())
@@ -37,30 +40,34 @@ def main():
         panels=[]
         for panel in meta['panels']:
             frame=panel['frame'];delta=panel['delta']
-            raw=images[f'raw_{delta}'];display=images[f'display_{delta}']
+            raw=images[f'raw_{delta}'];display=images[f'display_{delta}'];valid=images[f'valid_{delta}']
             assert raw.shape==display.shape==(128,128)
-            assert np.array_equal(original.normalize_valid_crop(raw,np.ones_like(raw,dtype=bool)),display)
+            assert np.array_equal(original.normalize_valid_crop(raw,valid),display)
             vpoint=point_at(v,frame,nearest=False);spoint=point_at(s,frame,nearest=False)
             assert spoint is not None
             if delta<0 or (key!='true_collision' and delta==0):assert vpoint is not None
-            if delta==4:assert vpoint is None
+            if delta>0:assert vpoint is None
             panels.append({**panel,'image':display,'elapsed_ms':delta/4,'vanished_point':vpoint,'survivor_point':spoint})
             panels_audit.append({'case':key,**panel,'crop_size_px':128,'raw_array_sha256':hashlib.sha256(raw.tobytes()).hexdigest(),
+                'valid_mask_sha256':hashlib.sha256(valid.tobytes()).hexdigest(),
                 'normalized_array_sha256':hashlib.sha256(display.tobytes()).hexdigest(),'actual_marker_observations':{'terminating':vpoint is not None,'continuing':spoint is not None}})
         rendered[key]=(panels,v,s)
         scores[key]=pd.Series({'static_score':row['static_score'],'full_score':row['base_score']})
         record={'case':'Ground-truth collision' if key=='true_collision' else 'Shared-particle artifact',
             'candidate_frame':t,'vanished_track_id':spec.vanished_track_id,'survivor_track_id':spec.survivor_track_id,
-            'true_event_id':int(row['matched_truth_event_id']),
+            'true_event_id':spec.truth_event_id if spec.truth_event_id is not None else -1,
             'trajectory_score':float(row['static_score']),'image_feature_score':float(row['base_score']),
             'image_pre_same_fraction':float(row['pre_same_interp_fraction']),
             'measured_pre_diameter_min_um':float(row['pre_diameter_min_um']),
             'final_candidate_retained':bool(row['final_candidate_retained']), 'review_id':row['review_id'],
-            'display_frames':list(spec.display_frames),'display_time_ms':[d/4 for d in DELTAS]}
+            'display_frames':list(spec.display_frames),'display_time_ms':[d/4 for d in deltas],
+            'strict_training_identity_state':row['identity_state']}
+        audit=next(c for c in identity['cases'] if c['review_id']==row['review_id'])
         if key=='true_collision':record['truth_event']=row['truth_event']
         else:record.update(shared_truth_particle_id=int(row['source_particle_id']),
-                same_truth_particle_preframes=row['identity_distinct_frames'],
-                terminating_truth_support_preframes=row['identity_support'][0],continuing_truth_support_preframes=row['identity_support'][1])
+                shared_truth_diameter_um=audit['truth_diameter_um'],
+                identity_evidence='Both actual track centers lie inside the projected disk of truth particle 3605 at the displayed pre-frame and candidate frame; depths differ from truth by less than 100 um. One-to-one mapping supports only the continuing ID.',
+                nearby_event=audit['nearest_event_in_time_gate'], nearby_event_note=audit['nearby_event_note'])
         case_records.append(record)
     original.TRUE_CASE,original.ARTIFACT_CASE=specs
     original.CASES=tuple(specs)
@@ -88,17 +95,15 @@ def main():
     new=PdfReader(OUT/'fig09.pdf').pages[0]
     sizes={'original_points':[float(old.mediabox.width),float(old.mediabox.height)],
            'revised_points':[float(new.mediabox.width),float(new.mediabox.height)]}
-    # Matplotlib tight bounding boxes include value labels: the new 0.998 label
-    # reaches about 3.10 pt farther right than the historical 0.977. The axes, image
-    # panels, legends and caption centres remain at the original coordinates.
+    # Tight bounds depend on score labels; image/panel coordinates stay fixed.
     assert abs(sizes['original_points'][1]-sizes['revised_points'][1])<.01,sizes
     assert abs(sizes['original_points'][0]-sizes['revised_points'][0])/sizes['original_points'][0]<.01,sizes
-    sizes['width_note']='Tight bounding box extends for the larger score label; all original plot/panel coordinates are unchanged.'
+    sizes['width_note']='Tight bounding-box width varies with score labels; all original plot/panel coordinates are unchanged.'
     subprocess.run(['/usr/bin/pdftoppm','-singlefile','-scale-to','2400','-png',str(OUT/'fig09.pdf'),str(OUT/'fig09')],check=True)
     fig,axs=plt.subplots(2,3,figsize=(11,7))
     for r,row in enumerate(rows):
         images=np.load(CANDIDATES/f"cache/{row['review_id']}.npz")
-        delta=DELTAS[0]
+        delta=row['display_deltas'][0]
         raw=images[f'raw_{delta}'];wide=images[f'wide_{delta}'];valid=images[f'wide_valid_{delta}']
         panels=[original.normalize_valid_crop(wide,valid),np.rint(raw*255).astype(np.uint8),images[f'display_{delta}']]
         for ax,image,title in zip(axs[r],panels,['256 px / 1–99%','128 px / fixed 0–1','128 px / 1–99%']):
@@ -106,7 +111,7 @@ def main():
         axs[r,0].set_ylabel('True collision' if r==0 else 'Shared-particle artifact')
     fig.tight_layout();fig.savefig(OUT/'crop-contrast-comparison.png',dpi=170);plt.close(fig)
     selection={
-        'status':'PASS','edition':'2026-11-02 author-requested larger-particle Fig.9 refinement',
+        'status':'PASS','edition':'2026-11-02 centered large particles and artifact trajectory score above 0.9',
         'candidate_search_directory':str(CANDIDATES),
         'cases':case_records,'panels':panels_audit,'layout':layout,'pdf_sizes':sizes,
         'original_paper_repository':'https://github.com/dainakai/CollisionPaper.git',
@@ -119,16 +124,17 @@ def main():
         'saved_scores_sha256':sha(ROOT/'results/ours/candidate_scores.parquet'),
         'saved_predictions_sha256':sha(ROOT/'results/ours/predictions.parquet'),
         'crop_size_px':128,'pixel_pitch_um':10,'physical_crop_width_mm':1.28,
-        'display_normalization':'Exact original plot function: linear 1st–99th percentile normalization separately for each full crop; no gamma, sharpening, denoising or local contrast.',
-        'selection':'At the author request for larger particles, inspected nine true-collision cases and one shared-particle artifact. Selected L03 (194+258→290 um true diameters) for separated large pre-event particles and a clear post-event daughter; selected B01 (252 um smaller measured track diameter in the pre-frame) for two actual track observations on one large particle and a saved score decrease. Previous T22/A01 version is archived. This is illustrative selection after seeing results, not a performance estimate.',
-        'crop_position':'The whole 128-pixel crop is translated into the recorded image where necessary by clamping its center to [64,960]. Pixels are not rescaled, reflected or moved within the crop. All six crops are fully recorded, and measured particle disks have at least one pixel clearance from the crop boundary.',
+        'display_normalization':'Exact original plot function: linear 1st–99th percentile normalization separately over recorded pixels in each crop; unrecorded padding stays black. No gamma, sharpening, denoising or local contrast.',
+        'selection':'Inspected four centered true-event candidates, including the regenerated realization of original planned event 1165, and two high-score artifacts. Selected C04 (286+285→360 um) for a large, visible two-to-one transition; selected H01 (truth diameter 276 um) for two track IDs on one particle and score 0.909→0.491. This is post-hoc illustrative selection, not a performance estimate.',
+        'crop_position':'Restore the original target-centered policy: center 128-pixel crops on actual continuing-track observations without clamping. Unrecorded image area is black. All target particle disks remain inside the recorded frame and crops. Four panels are fully recorded; only the two post-frames have black bottom margins.',
         'focus':'Continuing-track smoothed depth at each displayed frame, without manual or truth-based refocusing.',
         'all_model_fits_scores_and_performance_metrics_unchanged':True,
         'final_pdf_sha256':sha(OUT/'fig09.pdf'),'final_png_sha256':sha(OUT/'fig09.png')}
     dump('selection.json',selection)
-    shutil.copyfile(CANDIDATES/'search-protocol.json',OUT/'search-protocol.json')
+    for name in ['search-protocol.json','identity-audit.json','original-comparison.json']:
+        shutil.copyfile(CANDIDATES/name,OUT/name)
     (HERE/'results').mkdir(exist_ok=True)
-    for name in ['fig09.pdf','fig09.png','crop-contrast-comparison.png','selection.json','search-protocol.json']:
+    for name in ['fig09.pdf','fig09.png','crop-contrast-comparison.png','selection.json','search-protocol.json','identity-audit.json','original-comparison.json']:
         shutil.copyfile(OUT/name,HERE/'results'/name)
     print(json.dumps({'status':'PASS','chosen':CHOSEN,'scores':[[r['trajectory_score'],r['image_feature_score']] for r in case_records],
                       'pdf_sizes':sizes,'figure':str(OUT/'fig09.pdf')},indent=2))

@@ -1,0 +1,302 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "review_id": "C04",
+      "observations": [
+        {
+          "frame": 5519,
+          "track_id": 18638,
+          "truth_particle_id": 7607,
+          "track_xy_px": [
+            453.9613370476192,
+            889.4039190000003
+          ],
+          "truth_xy_px": [
+            444.846348,
+            878.644284
+          ],
+          "projected_center_error_px": 14.101516608913071,
+          "truth_radius_px": 14.2866555,
+          "depth_error_um": -49.360255971436345,
+          "truth_diameter_um": 285.73311,
+          "nearest_truth_center_is_expected": true,
+          "projected_center_inside_truth_disk": true
+        },
+        {
+          "frame": 5519,
+          "track_id": 18667,
+          "truth_particle_id": 7608,
+          "track_xy_px": [
+            420.10015900000025,
+            862.7383457619052
+          ],
+          "truth_xy_px": [
+            415.591927,
+            861.897583
+          ],
+          "projected_center_error_px": 4.585960944843793,
+          "truth_radius_px": 14.2668225,
+          "depth_error_um": -65.32953848865873,
+          "truth_diameter_um": 285.33645,
+          "nearest_truth_center_is_expected": true,
+          "projected_center_inside_truth_disk": true
+        },
+        {
+          "frame": 5523,
+          "track_id": 18667,
+          "truth_particle_id": 7683,
+          "track_xy_px": [
+            427.5655549523811,
+            951.6484561428576
+          ],
+          "truth_xy_px": [
+            432.366194,
+            952.026528
+          ],
+          "projected_center_error_px": 4.815503462223499,
+          "truth_radius_px": 17.98757265,
+          "depth_error_um": -36.01253944254677,
+          "truth_diameter_um": 359.751453,
+          "nearest_truth_center_is_expected": true,
+          "projected_center_inside_truth_disk": true
+        },
+        {
+          "frame": 5524,
+          "track_id": 18667,
+          "truth_particle_id": 7683,
+          "track_xy_px": [
+            432.478511809524,
+            972.3710420476197
+          ],
+          "truth_xy_px": [
+            432.895338,
+            972.461064
+          ],
+          "projected_center_error_px": 0.4264364254811015,
+          "truth_radius_px": 17.98757265,
+          "depth_error_um": -36.40579909369262,
+          "truth_diameter_um": 359.751453,
+          "nearest_truth_center_is_expected": true,
+          "projected_center_inside_truth_disk": true
+        }
+      ],
+      "strict_training_identity_state": "identity_unknown",
+      "one_to_one_mapping": [
+        {
+          "frame": 5514,
+          "observed_track_id": 18667,
+          "source_particle_id": 7608,
+          "match_cost": 0.5286058244696132
+        },
+        {
+          "frame": 5516,
+          "observed_track_id": 18667,
+          "source_particle_id": 7608,
+          "match_cost": 0.07192520403570746
+        },
+        {
+          "frame": 5517,
+          "observed_track_id": 18667,
+          "source_particle_id": 7608,
+          "match_cost": 0.79327969521823
+        },
+        {
+          "frame": 5518,
+          "observed_track_id": 18667,
+          "source_particle_id": 7608,
+          "match_cost": 0.9924431242291123
+        },
+        {
+          "frame": 5519,
+          "observed_track_id": 18667,
+          "source_particle_id": 7608,
+          "match_cost": 0.364517011647685
+        },
+        {
+          "frame": 5520,
+          "observed_track_id": 18667,
+          "source_particle_id": 7608,
+          "match_cost": 0.351482394323162
+        },
+        {
+          "frame": 5521,
+          "observed_track_id": 18667,
+          "source_particle_id": 7608,
+          "match_cost": 0.3355955227757854
+        },
+        {
+          "frame": 5522,
+          "observed_track_id": 18667,
+          "source_particle_id": 7608,
+          "match_cost": 0.5838862871455655
+        },
+        {
+          "frame": 5523,
+          "observed_track_id": 18667,
+          "source_particle_id": 7683,
+          "match_cost": 0.36922501915552125
+        },
+        {
+          "frame": 5524,
+          "observed_track_id": 18667,
+          "source_particle_id": 7683,
+          "match_cost": 0.004107836590366494
+        }
+      ],
+      "note": "Display-only geometric audit, not a change to training labels or event evaluation. One-to-one mapping cannot assign both duplicated IDs to the same truth particle in a frame."
+    },
+    {
+      "review_id": "H01",
+      "observations": [
+        {
+          "frame": 2809,
+          "track_id": 8507,
+          "truth_particle_id": 3605,
+          "track_xy_px": [
+            238.85795728571435,
+            879.6841344285717
+          ],
+          "truth_xy_px": [
+            244.598495,
+            874.604039
+          ],
+          "projected_center_error_px": 7.665581700858193,
+          "truth_radius_px": 13.82358505,
+          "depth_error_um": -11.4762775440322,
+          "truth_diameter_um": 276.471701,
+          "nearest_truth_center_is_expected": true,
+          "projected_center_inside_truth_disk": true
+        },
+        {
+          "frame": 2809,
+          "track_id": 8518,
+          "truth_particle_id": 3605,
+          "track_xy_px": [
+            252.64220461904773,
+            868.0380711904766
+          ],
+          "truth_xy_px": [
+            244.598495,
+            874.604039
+          ],
+          "projected_center_error_px": 10.383313426419242,
+          "truth_radius_px": 13.82358505,
+          "depth_error_um": -63.73917659356084,
+          "truth_diameter_um": 276.471701,
+          "nearest_truth_center_is_expected": true,
+          "projected_center_inside_truth_disk": true
+        },
+        {
+          "frame": 2813,
+          "track_id": 8507,
+          "truth_particle_id": 3605,
+          "track_xy_px": [
+            243.8252802380954,
+            953.6805100952386
+          ],
+          "truth_xy_px": [
+            246.244346,
+            952.300023
+          ],
+          "projected_center_error_px": 2.785251116244161,
+          "truth_radius_px": 13.82358505,
+          "depth_error_um": -5.960117059526965,
+          "truth_diameter_um": 276.471701,
+          "nearest_truth_center_is_expected": true,
+          "projected_center_inside_truth_disk": true
+        },
+        {
+          "frame": 2813,
+          "track_id": 8518,
+          "truth_particle_id": 3605,
+          "track_xy_px": [
+            251.48573300000007,
+            944.8530270000005
+          ],
+          "truth_xy_px": [
+            246.244346,
+            952.300023
+          ],
+          "projected_center_error_px": 9.10658482131359,
+          "truth_radius_px": 13.82358505,
+          "depth_error_um": -66.13889035317698,
+          "truth_diameter_um": 276.471701,
+          "nearest_truth_center_is_expected": true,
+          "projected_center_inside_truth_disk": true
+        },
+        {
+          "frame": 2814,
+          "track_id": 8507,
+          "truth_particle_id": 3605,
+          "track_xy_px": [
+            241.27418885714297,
+            974.1116479523814
+          ],
+          "truth_xy_px": [
+            246.655809,
+            971.724019
+          ],
+          "projected_center_error_px": 5.8874958493619785,
+          "truth_radius_px": 13.82358505,
+          "depth_error_um": -4.572530180274043,
+          "truth_diameter_um": 276.471701,
+          "nearest_truth_center_is_expected": true,
+          "projected_center_inside_truth_disk": true
+        }
+      ],
+      "strict_training_identity_state": "negative",
+      "one_to_one_mapping": [
+        {
+          "frame": 2807,
+          "observed_track_id": 8507,
+          "source_particle_id": 3605,
+          "match_cost": 0.8024767220730781
+        },
+        {
+          "frame": 2808,
+          "observed_track_id": 8507,
+          "source_particle_id": 3605,
+          "match_cost": 0.2954948375305461
+        },
+        {
+          "frame": 2811,
+          "observed_track_id": 8507,
+          "source_particle_id": 3605,
+          "match_cost": 0.9399371545620212
+        },
+        {
+          "frame": 2812,
+          "observed_track_id": 8507,
+          "source_particle_id": 3605,
+          "match_cost": 0.5417454834185996
+        },
+        {
+          "frame": 2813,
+          "observed_track_id": 8507,
+          "source_particle_id": 3605,
+          "match_cost": 0.5727092024334456
+        },
+        {
+          "frame": 2814,
+          "observed_track_id": 8507,
+          "source_particle_id": 3605,
+          "match_cost": 0.2540722340155294
+        }
+      ],
+      "note": "Display-only geometric audit, not a change to training labels or event evaluation. One-to-one mapping cannot assign both duplicated IDs to the same truth particle in a frame.",
+      "shared_truth_particle_id": 3605,
+      "truth_diameter_um": 276.471701,
+      "no_truth_in_common_evaluation_gate": true,
+      "nearest_event_in_time_gate": {
+        "planned_event_id": 757,
+        "frame": 2815,
+        "distance_xy_um": 481.34550473666366
+      },
+      "nearby_event_note": "The displayed particle is a parent of event 757 two frames later; the candidate lies 481 um from that event, outside the common 350 um gate. The artifact is the duplicate pair of track IDs on particle 3605, not a claim that no collision occurs elsewhere in the view."
+    }
+  ],
+  "track_sha256": "d10c2cbadde528354f1e688a38881de3083a29c447aaec543bb56c3e6fbf7c75",
+  "mapping_sha256": "8414ad3da81c3642d5fc82fcc1b38c358da174f3d1cf655589203b31bf892b08",
+  "truth_events_sha256": "60354b5d39d3678ff88313f0e748cdcffc70fa710da630e8f119f165024e3ebe"
+}
