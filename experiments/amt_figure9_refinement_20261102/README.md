@@ -116,7 +116,19 @@ remain unchanged. Run with the same Python environment as above:
 
 ```bash
 MPLCONFIGDIR=/tmp/amt-figure9-mpl "$PY" experiments/amt_figure9_refinement_20261102/frame_gallery.py
+MPLCONFIGDIR=/tmp/amt-figure9-mpl "$PY" experiments/amt_figure9_refinement_20261102/frame_gallery_tracks.py
 ```
+
+The second command adds the author's requested red-circle/blue-square markers
+and recent track lines, and makes that version the gallery's primary view.
+It reuses the original plot's overlay functions and the saved 12 image crops;
+no reconstruction is repeated. Lines cover the preceding 1.00 ms through the
+displayed frame. Only actual observations are marked: A5/A6/B6 have no red
+observation. The overlay is rendered separately at the original panel's
+physical scale and composited over exact 2x nearest-neighbor images; pixels
+outside the overlay are verified unchanged. A1–A6 and B1–B6 retain their
+times and crop positions. `tracks-manifest.json` records the 21 actual markers
+and tail coordinates. The original plain images remain available per panel.
 
 The gallery uses the existing Quick Tunnel and is for the author's subsequent
 frame choice. `publication.json` in its private output directory records the

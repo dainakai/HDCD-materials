@@ -30,7 +30,7 @@ def time_label(delta):
     return f'{delta/4:+.2f} ms' if delta else '0.00 ms'
 
 
-def contact_sheet(label, panels, target):
+def contact_sheet(label, panels, target, *, with_tracks=False):
     # Exact 2x nearest-neighbor display; labels are outside image pixels.
     size, gap, margin, top = 256, 16, 16, 92
     sheet = Image.new('RGB', (2*margin+6*size+5*gap, top+size+38), 'white')
@@ -40,36 +40,51 @@ def contact_sheet(label, panels, target):
     label_font = ImageFont.truetype(font, 23)
     small_font = ImageFont.truetype(font, 18)
     draw.text((margin,12),label,fill='#17242d',font=title_font)
+    if with_tracks:
+        draw.ellipse((775,19,791,35),fill=original.TERMINATING_COLOR)
+        draw.text((803,13),'terminating track',fill=original.TERMINATING_COLOR,font=label_font)
+        draw.rectangle((1110,19,1126,35),fill=original.CONTINUING_COLOR)
+        draw.text((1138,13),'continuing track',fill=original.CONTINUING_COLOR,font=label_font)
     for i,p in enumerate(panels):
         x = margin+i*(size+gap)
         draw.text((x,57),f"{p['label']}   {time_label(p['delta'])}",fill='#17242d',font=label_font)
-        with Image.open(OUT/'images'/p['filename']) as im:
+        with Image.open(OUT/('tracks' if with_tracks else 'images')/p['filename']) as im:
             enlarged = im.resize((size,size),Image.Resampling.NEAREST).convert('RGB')
             sheet.paste(enlarged,(x,top))
-            assert np.array_equal(np.asarray(sheet)[top:top+size,x:x+size][::2,::2,0],np.asarray(im))
+            step=1 if with_tracks else 2
+            assert np.array_equal(np.asarray(sheet)[top:top+size,x:x+size][::step,::step],np.asarray(im.convert('RGB')))
         draw.text((x,top+size+9),f"frame {p['frame']}",fill='#53616b',font=small_font)
     sheet.save(target)
 
 
-def page(cases):
+def page(cases, *, with_tracks=False):
     sections=[]
     for c in cases:
         cards=[]
         for p in c['panels']:
-            src='fig09-frames/images/'+p['filename']
+            src='fig09-frames/'+('tracks/' if with_tracks else 'images/')+p['filename']
+            plain='fig09-frames/images/'+p['filename']
+            description='赤丸・青四角と軌跡線付き' if with_tracks else '軌跡の重ね描きなし'
+            plain_link=f'<a href="{plain}">画像のみ</a>' if with_tracks else ''
             cards.append(f'''<figure><figcaption><strong>{p['label']}</strong><span>{time_label(p['delta'])}</span></figcaption>
-<a href="{src}" aria-label="{p['label']} の画像を開く"><img src="{src}" width="128" height="128" alt="{p['label']}、{time_label(p['delta'])} の再構成画像。軌跡の重ね描きなし"></a>
-<p>frame {p['frame']} <a href="{src}" download>PNG</a></p></figure>''')
+<a href="{src}" aria-label="{p['label']} の画像を開く"><img src="{src}" width="256" height="256" alt="{p['label']}、{time_label(p['delta'])} の再構成画像。{description}"></a>
+<p>frame {p['frame']} <a href="{src}" download>PNG</a> {plain_link}</p></figure>''')
+        sheet_name=f"{c['letter']}-{'tracks-' if with_tracks else ''}all-frames.png"
         sections.append(f'''<section id="{c['letter']}"><h2>({c['letter']}) {html.escape(c['title'])}</h2>
-<div class="frames">{''.join(cards)}</div><p><a href="fig09-frames/{c['letter']}-all-frames.png">6枚を横一列にした画像を開く</a></p></section>''')
+<div class="frames">{''.join(cards)}</div><p><a href="fig09-frames/{sheet_name}">6枚を横一列にした画像を開く</a></p></section>''')
+    overlay_note=('赤丸は終了軌跡、青四角は継続軌跡です。線は直前1.00 msからその時刻までの軌跡を示します。その時刻に実観測がない軌跡の点・線は描いていません。'
+                  if with_tracks else '画像内に軌跡・マーカー・スコアは重ねていません。')
+    zip_name='images-with-tracks.zip' if with_tracks else 'images.zip'
+    png_note=('軌跡付きPNGは128画素の画像を2倍の最近傍表示にして重ね描きしています。「画像のみ」から元の128画素PNGも開けます。'
+              if with_tracks else 'PNGは128画素の元サイズ、横並び画像は整数倍の最近傍表示です。')
     return '''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Fig.9 · 表示フレームの選択</title>
 <style>body{margin:0;background:#f6f7f8;color:#17242d;font:16px/1.6 system-ui,sans-serif}main{max-width:1680px;margin:auto;padding:24px}h1{font-size:clamp(24px,4vw,36px);margin:12px 0}h2{font-size:23px;margin:0 0 16px}a{color:#155d8a;text-underline-offset:3px}section{background:#fff;border:1px solid #dce2e6;border-radius:12px;padding:20px;margin:28px 0}.frames{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}figure{margin:0;min-width:0}figcaption{display:flex;justify-content:space-between;gap:4px;padding:0 0 8px;font-variant-numeric:tabular-nums}figure img{width:100%;height:auto;display:block;image-rendering:pixelated;background:#000}figure p{font-size:13px;margin:6px 0;color:#53616b;display:flex;justify-content:space-between}.note{color:#52616b;max-width:80ch}.downloads{display:flex;flex-wrap:wrap;gap:20px}footer{font-size:13px;color:#53616b;margin:32px 0}@media(max-width:1000px){.frames{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}}@media(max-width:560px){main{padding:14px}section{padding:12px}.frames{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}figcaption{font-size:15px}}</style></head><body><main>
 <a href="synthetic.html#fig9">← Fig.9と結果のページ</a><h1>Fig.9の表示フレームを選ぶ</h1>
 <p>−1.00、−0.75、−0.50、−0.25、0.00、＋0.25 msの全6枚です。<strong>A1〜A6、B1〜B6</strong>の番号で指定できます。</p>
-<p class="note">画像内に軌跡・マーカー・スコアは重ねていません。現在のFig.9と同じ128×128画素、対象中心のクロップ、継続軌跡の推定深さ、記録画素の1–99パーセンタイルのコントラスト調整です。撮影範囲外は黒表示です。左から時刻順に並び、スマホでは折り返して表示します。</p>
-<div class="downloads"><a href="fig09-frames/images.zip" download>12枚のPNGと横並び画像を保存</a><a href="#a">(a) 真の衝突</a><a href="#b">(b) 共有粒子アーティファクト</a></div>
+<p class="note">'''+overlay_note+''' 現在のFig.9と同じ128×128画素、対象中心のクロップ、継続軌跡の推定深さ、記録画素の1–99パーセンタイルのコントラスト調整です。撮影範囲外は黒表示です。左から時刻順に並び、スマホでは折り返して表示します。</p>
+<div class="downloads"><a href="fig09-frames/'''+zip_name+'''" download>12枚のPNGと横並び画像を保存</a><a href="#a">(a) 真の衝突</a><a href="#b">(b) 共有粒子アーティファクト</a></div>
 '''+''.join(sections)+'''
-<p class="note">このページは表示画像を選ぶための比較用です。論文用Fig.9の採用フレームは、このページの作成では変更していません。PNGは128画素の元サイズ、横並び画像は整数倍の最近傍表示です。</p>
+<p class="note">このページは表示画像を選ぶための比較用です。論文用Fig.9の採用フレームは、このページの作成では変更していません。'''+png_note+'''</p>
 <footer>既存のQuick Tunnelを使用しています。停止すると閲覧できなくなり、再作成するとURLが変わります。</footer></main></body></html>'''
 
 
