@@ -5,11 +5,9 @@ Run with the repository .venv; bundled pdfplumber/reportlab are read-only additi
 """
 from __future__ import annotations
 
-import copy
 import csv
 import hashlib
 import html
-import io
 import json
 import os
 from pathlib import Path
@@ -27,11 +25,12 @@ OUT = WORK / 'audit/revision-paper-replacements-20261102'
 PACKAGE = OUT / 'package'
 PUBLIC = WORK / 'audit/revision-review-20261101/public'
 PAPER = WORK / 'CollisionPaper/本番フォーマット/template.tex'
+REFINED = WORK / 'audit/revision-figure9-refinement-20261102'
 BUNDLE = Path('/home/dai-server/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages')
 sys.path.append(str(BUNDLE))
 os.environ.setdefault('MPLCONFIGDIR', str(OUT / 'cache/matplotlib'))
 
-from texts import CAPTIONS, FIGURE_LABELS, TABLE4_CAPTION, TABLE5_CAPTION, method_edits, result_paragraphs
+from texts import CAPTIONS, FIGURE_LABELS, TABLE4_CAPTION, TABLE5_CAPTION, figure9_caption, method_edits, result_paragraphs
 
 
 def sha(path):
@@ -59,8 +58,9 @@ def cp(source, relative):
 
 
 def figure_tex(number):
+    width = '1.0' if number == 9 else '0.98'
     return (r'\begin{figure}[tbp]' + '\n  \\centering\n'
-            + rf'  \includegraphics[width=0.98\linewidth,height=0.78\textheight,keepaspectratio]{{figures/fig{number:02d}.pdf}}' + '\n'
+            + rf'  \includegraphics[width={width}\linewidth,height=0.78\textheight,keepaspectratio]{{figures/fig{number:02d}.pdf}}' + '\n'
             + '  \\caption{' + CAPTIONS[number] + '}\n'
             + '  \\label{' + FIGURE_LABELS[number] + '}\n\\end{figure}\n')
 
@@ -94,83 +94,22 @@ def table_tex(n):
 
 
 def render_fig9(n):
-    """Recompose the exact six image panels, retaining their PDF pixel/vector data.
-
-    Only presentation changes: remove the audit title; combine the two score axes.
-    No resampling of source image data, refocusing, inference, or case reselection.
-    """
-    import pdfplumber
-    from pypdf import PdfReader, PdfWriter, Transformation
-    from pypdf.generic import RectangleObject
-    from reportlab.pdfgen import canvas
-    from reportlab.pdfbase import pdfmetrics
-    from reportlab.pdfbase.ttfonts import TTFont
-    import matplotlib
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
-
-    original = SOURCE / 'figures/figure09.pdf'
-    with pdfplumber.open(original) as doc:
-        width, height = doc.pages[0].width, doc.pages[0].height
-        images = sorted(doc.pages[0].images, key=lambda x: (round(x['top']), x['x0']))
-    assert len(images) == 6 and all(x['srcsize'] == (256, 256) for x in images)
-    reader = PdfReader(original)
-    page_width, page_height = 936, 500
-    overlay = io.BytesIO()
-    pdfmetrics.registerFont(TTFont('HDCD-DejaVuSans', str(Path(matplotlib.get_data_path())/'fonts/ttf/DejaVuSans.ttf')))
-    canvas_ = canvas.Canvas(overlay, pagesize=(page_width, page_height), initialFontName='HDCD-DejaVuSans')
-    lefts = [18, 220, 422]
-    tops = [48, 298]
-    for r, title in enumerate(['(a) True collision-coalescence event', '(b) Shared-particle artifact']):
-        canvas_.setFont('HDCD-DejaVuSans', 13)
-        canvas_.drawString(18, page_height - (18 + 250*r), title)
-        canvas_.setFont('HDCD-DejaVuSans', 11)
-        for x, label in zip(lefts, ['-1.0 ms', '0.0 ms', '+1.0 ms']):
-            canvas_.drawCentredString(x + 92.16, page_height - (39 + 250*r), label)
-    canvas_.setFont('HDCD-DejaVuSans', 13)
-    canvas_.drawString(645, page_height - 71, '(c) Candidate scores')
-    canvas_.save()
-    overlay.seek(0)
-    writer = PdfWriter()
-    page = writer.add_page(PdfReader(overlay).pages[0])
-    panel_records = []
-    for i, box in enumerate(images):
-        x0, x1 = box['x0'], box['x1']
-        y0, y1 = height - box['bottom'], height - box['top']
-        source_page = copy.deepcopy(reader.pages[0])
-        source_page.cropbox = RectangleObject((x0, y0, x1, y1))
-        destination_x = lefts[i % 3]
-        destination_y = page_height - tops[i // 3] - (y1-y0)
-        page.merge_transformed_page(source_page, Transformation().translate(destination_x-x0, destination_y-y0))
-        panel_records.append({'source_pdf_rectangle_points': [x0, y0, x1, y1],
-                              'source_image_pixels': list(box['srcsize']), 'scale': 1.0})
-    plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 11, 'pdf.fonttype': 42,
-                         'axes.spines.top': False, 'axes.spines.right': False})
-    fig, ax = plt.subplots(figsize=(4.0, 4.4))
-    values = [[r['trajectory_score'] for r in n['figure9_cases']], [r['image_feature_score'] for r in n['figure9_cases']]]
-    for offset, color, label, vals in [(-.18, '#79838A', 'Trajectory classifier', values[0]),
-                                       (.18, '#009E73', 'Image-feature ensemble', values[1])]:
-        x = [offset, 1+offset]
-        ax.bar(x, vals, width=.33, color=color, label=label)
-        for pos, value in zip(x, vals):
-            ax.text(pos, value+.018, f'{value:.3f}', ha='center', va='bottom', fontsize=10)
-    ax.set_ylim(0, 1.13)
-    ax.set_yticks([0,.2,.4,.6,.8,1])
-    ax.set_xticks([0, 1], ['True event', 'Shared-particle\nartifact'])
-    ax.set_ylabel('Candidate score')
-    ax.legend(loc='lower left', bbox_to_anchor=(-.04, 1.03), frameon=False, fontsize=10)
-    fig.subplots_adjust(left=.20, right=.99, bottom=.16, top=.84)
-    score_buffer = io.BytesIO()
-    fig.savefig(score_buffer, format='pdf'); plt.close(fig); score_buffer.seek(0)
-    page.merge_transformed_page(PdfReader(score_buffer).pages[0], Transformation().translate(630, 77))
-    output = PACKAGE / 'figures/fig09.pdf'
-    with output.open('wb') as f:
-        writer.write(f)
-    poppler = '/usr/bin/pdftoppm' if Path('/usr/bin/pdftoppm').exists() else 'pdftoppm'
-    subprocess.run([poppler, '-singlefile', '-scale-to', '2400', '-png', str(output), str(output.with_suffix(''))], check=True, stdout=subprocess.DEVNULL)
-    write('provenance/fig09-layout.json', {'source_sha256': sha(original), 'output_sha256': sha(output),
-          'operation': 'Lossless PDF panel clipping/translation, no reconstruction or case selection; score bars redrawn from saved values.',
-          'panels': panel_records, 'scores': n['figure9_cases']})
+    """Package new illustrative cases drawn with the recovered original script."""
+    selection = load(REFINED/'selection.json')
+    verification = load(REFINED/'verification.json')
+    assert selection['status'] == verification['status'] == 'PASS'
+    assert sha(REFINED/'fig09.pdf') == selection['final_pdf_sha256'] == verification['final_pdf_sha256']
+    assert sha(REFINED/'selection.json') == verification['selection_sha256']
+    assert n['figure9_cases'] == selection['cases']
+    for name in ['fig09.pdf', 'fig09.png', 'crop-contrast-comparison.png']:
+        cp(REFINED/name, 'figures/'+name)
+    subprocess.run(['/usr/bin/pdftoppm','-singlefile','-scale-to','2400','-png',
+                    str(PAPER.parent/'figures/fig09.pdf'),str(OUT/'original-fig09')],check=True,
+                   stdout=subprocess.DEVNULL)
+    cp(OUT/'original-fig09.png', 'figures/fig09-original-reference.png')
+    cp(REFINED/'selection.json', 'provenance/fig09-layout.json')
+    cp(REFINED/'verification.json', 'provenance/fig09-verification.json')
+    cp(REFINED/'search-protocol.json', 'provenance/fig09-search-protocol.json')
 
 
 def source_span(source, start, end):
@@ -258,7 +197,8 @@ def readme(mapping, n):
               '- OursはAP・最大F1・80%/90%再現率での適合率が両比較法を上回ります。候補集合recallと最大最終recallは比較法の方が高い値です。',
               '- 画像特徴段階でAPは0.892678から0.897689に改善し、FP90は1,186から1,004に減りますが、FP80は177から183に増えます。「全段階で全指標が改善」は使えません。',
               '- Table 5は候補集合と位置補正に渡せる特徴も変わります。スコアだけの要因実験とは解釈しません。最終行で追加されるのは座標による重複抑制です。',
-              '- Fig.9の事例は保存済みの同じ2候補です。画像6枚のPDF描画を等倍で配置し直し、スコア表示を1パネルにまとめました。画像・位置・スケールバー・スコア・選択基準は変更していません。',
+              '- Fig.9は著者の依頼により事例を選び直しました。128×128画素、各クロップの1–99パーセンタイルによる線形コントラスト調整、元の作図スクリプトと投稿用ラベル処理を使用しています。画像は固定済みの新系列から位相回復3回で再構成しました。学習・推論スコア・全量性能評価は変更していません。',
+              '- Fig.9の表示時刻は−1.25、0、＋1.00 msです。赤丸は終了軌跡、青四角は継続軌跡の実観測で、線は短い軌跡です。継続軌跡の推定Zで焦点を合わせ、真値による焦点調整はしていません。事例は結果を見た後の例示選択であり、平均効果の評価ではありません。',
               '- Fig.7(a)はconfidenceを動かしたPR曲線、(b–f)は衝突用の計測／追跡系統の集計です。低confidenceの追加検出まで同一ファイルとは説明しません。',
               '- 生成座標0–102.3 mmと、カメラからの距離74.9–177.2 mmを区別します。',
               '- APはprecision包絡線の積分です。scikit-learnの非補間APと同じ定義とは書きません。',
@@ -298,12 +238,15 @@ def html_page(n, mapping):
     cards=[]
     fig_notes = {7:'衝突評価と同じテスト系列の粒子計測・追跡。XY誤差の中央値2.783 µm、Z誤差の中央値28.480 µm。Z誤差の95パーセンタイルは948.589 µmです。',
                  8:'同じ2,000真値イベントに対する3手法の比較。再現率80%では、提案法は1,651候補を調べて1,600イベントに対応し、誤検出51件です。',
-                 9:'保存済みの同じ2事例を論文向けに配置。真イベントは0.999184→0.999126、共有粒子アーティファクトは0.530122→0.316817。事例選択による例示です。'}
+                 9:f"元の作図スクリプトで新しい2事例を描画。真イベントは{n['figure9_cases'][0]['trajectory_score']:.6f}→{n['figure9_cases'][0]['image_feature_score']:.6f}、共有粒子アーティファクトは{n['figure9_cases'][1]['trajectory_score']:.6f}→{n['figure9_cases'][1]['image_feature_score']:.6f}。結果を見た後に選んだ例示です。"}
     for num in [7,8,9]:
         path=f'figures/fig{num:02d}'
         snippet=(PACKAGE/f'latex/fig{num:02d}.tex').read_text()
+        extra = ''
+        if num == 9:
+            extra = '<p>元の論文と同じ<strong>128×128画素（1.28 mm四方）</strong>です。各画像の1–99パーセンタイルで線形に明暗を調整しています。赤丸・青四角と軌跡、右側の横棒、フォント、パネル配置は元の作図処理を使用しました。両軌跡の実観測がある時刻を使い、表示は<strong>−1.25、0、＋1.00 ms</strong>に統一しています。</p><p>前回の差し替え案の実クロップは144×144画素で、PDFに埋め込まれた画像が256×256画素でした。下の比較図は今回の同じ事例を256画素と128画素で切り出した比較です。</p><details><summary>クロップ・コントラストの比較を見る</summary><figure><a href="paper/figures/crop-contrast-comparison.png"><img src="paper/figures/crop-contrast-comparison.png" alt="同じ事例の256画素、128画素の調整前、128画素の調整後を比較" loading="lazy"></a><figcaption>左：256画素・1–99％。中央：128画素・固定0–1表示。右：採用した128画素・1–99％。表示処理は推論や特徴抽出へ戻していません。</figcaption></figure></details><details><summary>元の論文のFig.9と出典を見る</summary><figure><a href="paper/figures/fig09-original-reference.png"><img src="paper/figures/fig09-original-reference.png" alt="CollisionPaperの元のFig.9：様式の比較用" loading="lazy"></a><figcaption>元図は様式比較の参考です。今回の差し替えには上の新PDFを使用してください。</figcaption></figure><p>CollisionPaperの既存クローンをfetchし、mainと同じコミット2a5d3f4を確認。旧作業コピーから見つけた原作図スクリプトは保存済みスナップショットとも一致しました。</p><a href="paper/provenance/fig09-layout.json" download>事例・描画条件・出典の記録</a></details>'
         cards.append(f'''<section id="fig{num}"><div class="section-heading"><span>FIGURE {num:02d}</span><h2>Fig.{num} · {['粒子計測と追跡','衝突検出性能と確認件数','画像特徴の事例'][num-7]}</h2></div>
-<p>{fig_notes[num]}</p><figure><a href="paper/{path}.png" aria-label="Fig.{num}を拡大"><img src="paper/{path}.png" alt="Fig.{num}の差し替え図" loading="lazy"></a><figcaption>図をタップすると拡大できます。論文への挿入にはPDFを使用してください。</figcaption></figure>
+<p>{fig_notes[num]}</p>{extra}<figure><a href="paper/{path}.png" aria-label="Fig.{num}を拡大"><img src="paper/{path}.png" alt="Fig.{num}の差し替え図" loading="lazy"></a><figcaption>図をタップすると拡大できます。論文への挿入にはPDFを使用してください。</figcaption></figure>
 <div class="downloads"><a href="paper/{path}.pdf" download>PDFを保存</a><a href="paper/{path}.png" download>PNGを保存</a><a href="paper/latex/fig{num:02d}.tex" download>図環境・キャプション .tex</a></div>
 <details><summary>英語キャプションとLaTeXを表示</summary><button class="copy" data-copy="tex-fig{num}" type="button">LaTeXをコピー</button><pre id="tex-fig{num}">{esc(snippet)}</pre></details></section>''')
     maps=[]
@@ -332,7 +275,7 @@ def html_page(n, mapping):
 <div class="table-scroll" tabindex="0" role="region" aria-label="本文変更箇所"><table><thead><tr><th>差し替え対象</th><th>原稿のラベル／行</th><th>ファイル</th></tr></thead><tbody>{''.join(maps)}</tbody></table></div>{''.join(snippets)}
 <p class="note">数値検証の節以前にある実験由来のFig.3–5と、その後の実験結果は再処理・レビュー後の更新対象です。今回のセットで論文全体が完成したという意味ではありません。合成評価の結果と図表は確定しています。</p></section>
 <section id="versions"><h2>公開版からの結果の変化</h2>{comparison_table}<p>公開版はv1.0.1。生成深さ102.4→102.3 mm、主計測の前端64.9→74.9 mm、焦点画像特徴の位相回復12→3回、物理Z原点と教師規則をそろえ、画像から再生成・再学習しています。Depth-free用MinIPの前端は公開版から74.9 mmでした。</p><p>真値とモデルも変わるため、上表は変更一式の比較です。位相回復3回だけの効果ではありません。前端だけを修正した中間版との比較では、OursのFP90は430→486件と増えています。</p><div class="downloads"><a href="paper/tables/version-comparison.csv" download>中間版も含む比較 .csv</a><a href="index.html">R4・R5・位相回復の対照実験を見る</a></div></section>
-<section id="provenance"><h2>保存物と確認範囲</h2><p>Fig.7・8は確定済みのPDFと同一です。Fig.9は保存済みの6画像パネルを等倍で配置し直し、同じ2候補のスコアを1つのパネルにまとめました。再構成、再推論、事例の選び直しは行っていません。</p><p>保存済みの全34出力ハッシュ、各数値と図の元データ、原稿の参照ラベルを照合しました。元の原稿は変更していません。原稿に統合しての全文コンパイルは著者による差し替え後の確認事項です。</p><div class="downloads"><a href="paper/manifest.json" download>出典・ハッシュ</a><a href="paper/SHA256SUMS" download>SHA256SUMS</a><a href="paper/replacement-map.json" download>差し替え対応 .json</a></div><p class="micro">元研究画像・モデル重み・実験レビュー回答はこのセットに含めていません。展開後の容量：約{bytes_/1e6:.1f} MB。</p></section>
+<section id="provenance"><h2>保存物と確認範囲</h2><p>Fig.7・8は確定済みのPDFと同一です。Fig.9は見やすさを確認して事例を選び直し、固定済み新系列の画像を表示用に再構成しました。元の論文の作図関数・投稿用ラベル処理で仕上げています。フォントは原作図と同じLiberation Sansで、パネル説明には投稿用スクリプトが指定するArial互換フォントを使っています。モデル、候補スコア、性能評価値は変更していません。</p><p>保存済みの全34出力ハッシュ、各数値と図の元データ、原稿の参照ラベルを照合しました。元の原稿は変更していません。原稿に統合しての全文コンパイルは著者による差し替え後の確認事項です。</p><div class="downloads"><a href="paper/manifest.json" download>出典・ハッシュ</a><a href="paper/SHA256SUMS" download>SHA256SUMS</a><a href="paper/replacement-map.json" download>差し替え対応 .json</a></div><p class="micro">元研究画像・モデル重み・実験レビュー回答はこのセットに含めていません。展開後の容量：約{bytes_/1e6:.1f} MB。</p></section>
 <footer>Quick Tunnelはサーバーとトンネルの稼働中に利用できます。再作成するとURLが変わります。<a href="#main">先頭へ ↑</a></footer></main><div id="copy-status" role="status" aria-live="polite"></div></body></html>'''
 
 
@@ -346,6 +289,9 @@ def main():
     for path, digest in checks.items():
         assert sha(SOURCE/path)==digest, path
     n = load(SOURCE/'manuscript/numeric-replacements.json')
+    selection = load(REFINED/'selection.json')
+    n['figure9_cases'] = selection['cases']
+    CAPTIONS[9] = figure9_caption(n)
     for number in [7,8]:
         for suffix in ['pdf','png']:
             cp(SOURCE/f'figures/figure{number:02d}.{suffix}', f'figures/fig{number:02d}.{suffix}')
@@ -354,14 +300,13 @@ def main():
         'results/table3.csv':'tables/table04-metrics.csv',
         'results/table4/table4.csv':'tables/table05-stages.csv',
         'results/scenario-comparison.csv':'tables/version-comparison.csv',
-        'manuscript/numeric-replacements.json':'data/numeric-results.json',
         'manuscript/claim-checks.json':'provenance/claim-checks.json',
         'results/figure07/summary.json':'data/figure07-summary.json',
         'results/table4/protocol.json':'provenance/table05-protocol.json',
     }
     for src,dst in copies.items(): cp(SOURCE/src,dst)
-    fig9=load(SOURCE/'results/figure9.json')
-    write('data/figure09-cases.json', {k:fig9[k] for k in ['status','cases','selection','focus']})
+    write('data/numeric-results.json', n)
+    write('data/figure09-cases.json', {k:selection[k] for k in ['status','cases','selection','focus','crop_size_px','display_normalization']})
     extra_sources={}
     for name in ['event_pr.csv','event_summary.csv','target_recall.csv','fp_composition.csv']:
         source = FULL/'results/figure08'/name
@@ -379,7 +324,7 @@ def main():
           'particle_reconstruction_planes':1024,'phase_retrieval_iterations':3,
           'prior_test_seed_use':'Implementation and sensitivity checks on earlier generated data; excluded from model fitting.'})
     files = {str(p.relative_to(PACKAGE)):sha(p) for p in sorted(PACKAGE.rglob('*')) if p.is_file() and p.name not in {'manifest.json','SHA256SUMS'}}
-    write('manifest.json', {'schema_version':1,'status':'PASS','edition':'2026-11-02 synthetic paper replacement package',
+    write('manifest.json', {'schema_version':1,'status':'PASS','edition':'2026-11-02 synthetic paper replacement package, original-style Fig.9 refinement',
           'source_branch':'revision/amt-102p3mm-phase3','source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
           'manuscript_sha256':original_paper,'files':files,'file_count_excluding_manifests':len(files),
           'manuscript_modified':False,'full_manuscript_compilation':'Not performed: manuscript replacement is reserved for the author.'})

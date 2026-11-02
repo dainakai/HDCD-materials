@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "final_pdf_sha256": "a602efafb60163067fbcf5f2a94c6bb4886b08937bda7b39b77d524696899971",
+  "selection_sha256": "cf06ba496fd00067da28df4d7f69570070c1398d5abc5ed6c87bd8b6675a8439",
+  "frozen_evaluation_files_unchanged": 34,
+  "original_script_identical": true,
+  "original_image_panel_geometry_identical": true,
+  "used_fonts_embedded_and_no_clipped_text": true,
+  "used_fonts": [
+    "AAAAAA+LiberationSans",
+    "FRZNSF+LiberationSans"
+  ],
+  "unused_default_helvetica_resource": true,
+  "display_crops_checked": 6,
+  "crop_size_px": 128,
+  "original_percentile_normalization_exact": true,
+  "actual_track_observations_checked": true,
+  "candidate_scores_and_final_policy_checked": true,
+  "artifact_truth_support_frames": 9,
+  "artifact_has_no_truth_in_common_evaluation_gate": true,
+  "manuscript_unchanged": true
+}

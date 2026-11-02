@@ -8,7 +8,7 @@ import re
 import subprocess
 import zipfile
 
-from build import OUT, PACKAGE, PAPER, REPO, SOURCE, load, sha
+from build import OUT, PACKAGE, PAPER, REPO, SOURCE, REFINED, load, sha
 from pypdf import PdfReader
 
 
@@ -47,11 +47,18 @@ def main():
             assert archive.read('synthetic-paper-replacements/'+name)==(PACKAGE/name).read_bytes(),name
     for number in [7,8]:
         assert sha(PACKAGE/f'figures/fig{number:02d}.pdf')==sha(SOURCE/f'figures/figure{number:02d}.pdf')
-    original_images=image_hashes(SOURCE/'figures/figure09.pdf')
-    new_images=image_hashes(PACKAGE/'figures/fig09.pdf')
-    assert len(original_images)==6 and new_images==original_images
+    selection=load(REFINED/'selection.json')
+    figure9_check=load(REFINED/'verification.json')
+    assert figure9_check['status']=='PASS'
+    assert sha(REFINED/'selection.json')==figure9_check['selection_sha256']
+    assert sha(PACKAGE/'figures/fig09.pdf')==selection['final_pdf_sha256']==figure9_check['final_pdf_sha256']
+    assert sha(PACKAGE/'figures/fig09.png')==selection['final_png_sha256']
+    assert len(image_hashes(PACKAGE/'figures/fig09.pdf'))==6
+    assert load(PACKAGE/'data/figure09-cases.json')['cases']==selection['cases']
     fonts=subprocess.check_output(['/usr/bin/pdffonts',str(PACKAGE/'figures/fig09.pdf')],text=True)
-    assert all(' yes ' in row for row in fonts.splitlines()[2:]),fonts
+    for name in figure9_check['used_fonts']:
+        rows=[row for row in fonts.splitlines()[2:] if row.split()[0]==name]
+        assert len(rows)==1 and ' yes ' in rows[0],(name,rows)
     source_text=PAPER.read_text()
     mapping=load(PACKAGE/'replacement-map.json')['items']
     for item in mapping:
@@ -68,6 +75,9 @@ def main():
         for target in re.findall(r'\\input\{([^}]+)\}',name.read_text()):
             assert (PACKAGE/target).is_file(),target
     data=load(PACKAGE/'data/numeric-results.json')
+    source_data=load(SOURCE/'manuscript/numeric-replacements.json')
+    assert data['figure9_cases']==selection['cases']
+    assert {k:v for k,v in data.items() if k!='figure9_cases'}=={k:v for k,v in source_data.items() if k!='figure9_cases'}
     table_rows=list(csv.DictReader((PACKAGE/'tables/table04-metrics.csv').open()))
     for row in table_rows:
         saved=data['methods'][row['method']]
@@ -87,10 +97,18 @@ def main():
     assert '\\citep{scikit-learn}' not in table4
     assert 'coordinate' in table5 and 'candidate selection' in table5
     results=(PACKAGE/'latex/results-synthetic.tex').read_text()
-    for old in ['0.917','0.901','0.858','266 to 216','0.890 to 0.336','successively improved performance across all']:
+    for old in ['0.917','0.901','0.858','266 to 216','0.890 to 0.336','0.999184','0.530122','0.316817','eight of the nine','successively improved performance across all']:
         assert old not in results, old
+    caption=(PACKAGE/'latex/fig09.tex').read_text()
+    assert '128\\times128' in caption and 'Red circles and blue squares' in caption
+    assert '-1.25' in caption and 'width=1.0\\linewidth' in caption
+    for case in selection['cases']:
+        for key in ['trajectory_score','image_feature_score']:
+            assert f'{case[key]:.3f}' in caption
+            assert f'{case[key]:.6f}' in results
     result={'status':'PASS','package_files':len(expected_names),'archive_entries_verified':len(expected_names),
-            'source_figures_7_8_bit_identical':True,'figure9_original_image_payloads_preserved':len(original_images),
+            'source_figures_7_8_bit_identical':True,'figure9_original_style_and_refined_cases_verified':True,
+            'all_performance_values_unchanged':True,
             'figure9_fonts_embedded':True,'replacement_locations_verified':len(mapping),
             'metrics_and_fp_composition_consistent':True,'tex_braces_environments_inputs_checked':True,
             'full_manuscript_compilation':False,'manuscript_unchanged':True,
