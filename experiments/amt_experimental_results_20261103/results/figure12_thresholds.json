@@ -1,0 +1,27 @@
+{
+  "precision_target": 0.5,
+  "coverage_target": 0.95,
+  "exact_precision_50_exists": false,
+  "last_precision_at_least_50": {
+    "per_sequence": 24,
+    "total_reviews": 336,
+    "confirmed": 173,
+    "precision": 0.5148809523809523,
+    "coverage": 0.9301075268817204
+  },
+  "next_below_50": {
+    "per_sequence": 25,
+    "total_reviews": 350,
+    "confirmed": 173,
+    "precision": 0.4942857142857143,
+    "coverage": 0.9301075268817204
+  },
+  "first_coverage_at_least_95": {
+    "per_sequence": 34,
+    "total_reviews": 476,
+    "confirmed": 177,
+    "precision": 0.3718487394957983,
+    "coverage": 0.9516129032258064
+  },
+  "policy": "Equal integer top-N reviews within each of 14 sequences; all labels in precision denominator; coverage denominator 186 confirmed in top80."
+}

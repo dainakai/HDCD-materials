@@ -128,13 +128,8 @@ def main():
     plt.rcdefaults();review_scores.plot(labels,panels)
     for suffix in ['pdf','png']:
         shutil.copy2(panels/f'review_tp_fp_score_distributions_260715.{suffix}',FIGURES/f'fig11.{suffix}')
-    curve=review_budget.validate_curve(pd.read_csv(DATA/'review_budget.csv'))
-    top=review_budget.validate_labels(labels,186)
-    review_budget.OPERATING_POINTS=(20,30,34,40,60,80)
-    operating,minimum,suggested=review_budget.build_operating_table(curve,top)
-    operating.to_csv(DATA/'review_operating_points.csv',index=False)
-    assert minimum==34 and suggested==40
-    review_budget.plot_figure(curve,operating,suggested,FIGURES/'fig12')
+    from figure12_thresholds import main as figure12
+    figure12()
     events=pd.read_parquet(PRIVATE/'physical_events_all.parquet')
     binary=events.loc[events.status.ne('ambiguous')]
     physical_plot.FIGURE_ROOT=panels

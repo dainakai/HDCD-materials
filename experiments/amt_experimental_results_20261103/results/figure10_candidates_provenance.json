@@ -1,0 +1,830 @@
+{
+  "created_at": "2026-11-03T17:39:35.455239+09:00",
+  "model_sha256": "d648ebf407d18ff66b54670711dbebfe8997b1fa6a502a982b39803a19fda114",
+  "cases": [
+    {
+      "case": "01",
+      "candidate_id": "12:5450:4750:6588",
+      "scene_num": 12,
+      "review_rank": 2,
+      "candidate_frame_raw": 6588,
+      "display_t0_frame": 6588,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        110.2065544128418,
+        113.24472045898438
+      ],
+      "post_diameter_um": 135.08453369140625,
+      "frames": [
+        {
+          "frame": 6580,
+          "offset_ms": -2.0,
+          "x0": 651.0,
+          "y0": 417.0,
+          "z_slice": 139.69677834943477,
+          "cache": "01_6580.npz",
+          "sha256": "fa89b3e38e15c17149da9dff8be0d02ce8c79bb5cfe23ddb595d54b6d662dd67",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6584,
+          "offset_ms": -1.0,
+          "x0": 651.0,
+          "y0": 418.0,
+          "z_slice": 139.75037178628517,
+          "cache": "01_6584.npz",
+          "sha256": "8fc8b413d2e6b731547a6fd14f2496ef71599d2444b64f1cbe52996a964aeade",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6588,
+          "offset_ms": 0.0,
+          "x0": 649.0,
+          "y0": 418.0,
+          "z_slice": 139.80407994772472,
+          "cache": "01_6588.npz",
+          "sha256": "763f75da73b237f16e26b9f744a22b53361d757aebda21b6cf96d46f4a45266f",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6592,
+          "offset_ms": 1.0,
+          "x0": 651.0,
+          "y0": 420.0,
+          "z_slice": 139.85790283375346,
+          "cache": "01_6592.npz",
+          "sha256": "a9639646a15025eadcc31268032e4e9b740f2110c240eab1ea294760691b7506",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6596,
+          "offset_ms": 2.0,
+          "x0": 651.0,
+          "y0": 422.0,
+          "z_slice": 139.91184044437142,
+          "cache": "01_6596.npz",
+          "sha256": "d922f44c58cfe59429660d2f75b894be121af3bb485a7fd42bee3a108fb84afe",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "a1c15d7af97a159cf43c1afa98dc3b4f3dba663140ce180298ec1cb1584e0726",
+      "review_asset_sha256": "4b2293e9a5361ed94cbdfac226b2d75d928df48e2d27ff96ecf5c09ab65dc974",
+      "crop_center_policy": "observed_parent_bounds"
+    },
+    {
+      "case": "02",
+      "candidate_id": "13:10153:10312:5913",
+      "scene_num": 13,
+      "review_rank": 1,
+      "candidate_frame_raw": 5913,
+      "display_t0_frame": 5913,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        124.13467407226562,
+        134.10528564453125
+      ],
+      "post_diameter_um": 161.4305877685547,
+      "frames": [
+        {
+          "frame": 5905,
+          "offset_ms": -2.0,
+          "x0": 720.0,
+          "y0": 361.0,
+          "z_slice": 123.67916545372576,
+          "cache": "02_5905.npz",
+          "sha256": "d23cb025777be8b7376eaf5d06231028d79b7643db6d97a48126b08202f17fec",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 5909,
+          "offset_ms": -1.0,
+          "x0": 720.0,
+          "y0": 375.0,
+          "z_slice": 123.50616256511744,
+          "cache": "02_5909.npz",
+          "sha256": "48741874d11e45e9ac626c30e088ffa415bc7011f367b981b0848bf51eed6a02",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 5913,
+          "offset_ms": 0.0,
+          "x0": 722.0,
+          "y0": 387.0,
+          "z_slice": 123.33299984242709,
+          "cache": "02_5913.npz",
+          "sha256": "31a12ab121368418ef52864d0059102c164d266efe895ec43170421c05ecb5c9",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 5917,
+          "offset_ms": 1.0,
+          "x0": 719.0,
+          "y0": 402.0,
+          "z_slice": 123.15967728565474,
+          "cache": "02_5917.npz",
+          "sha256": "d1081651fc7d41e566a01da49a1021dc065b7321e7de232047497a654bd5cbff",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 5921,
+          "offset_ms": 2.0,
+          "x0": 719.0,
+          "y0": 417.0,
+          "z_slice": 122.98619489480032,
+          "cache": "02_5921.npz",
+          "sha256": "4171f81fd0750f1ea10ec8e0692eb84a0beaf2b8b44a4ec53f83f64fed931fc2",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "3c780205257722c9923c19b7ba3fcd30eeffd786f71515f1bc8cf4dcfce912a3",
+      "review_asset_sha256": "1f668c1c8e3b59e337baf358844524872767e290087f4bb491bf774cb553d7f5",
+      "crop_center_policy": "observed_parent_bounds"
+    },
+    {
+      "case": "03",
+      "candidate_id": "15:6509:6639:6750",
+      "scene_num": 15,
+      "review_rank": 1,
+      "candidate_frame_raw": 6750,
+      "display_t0_frame": 6750,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        127.91107940673828,
+        182.38520050048834
+      ],
+      "post_diameter_um": 201.1528549194336,
+      "frames": [
+        {
+          "frame": 6742,
+          "offset_ms": -2.0,
+          "x0": 495.0,
+          "y0": 659.0,
+          "z_slice": 424.7100712223547,
+          "cache": "03_6742.npz",
+          "sha256": "6c3a333cc376d05ab4b88d0b7ee1d1f2609805d13df8e52aad9dc54c622b2bbe",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6746,
+          "offset_ms": -1.0,
+          "x0": 496.0,
+          "y0": 686.0,
+          "z_slice": 424.64135154750267,
+          "cache": "03_6746.npz",
+          "sha256": "cafd08ce0c1d3397de4ea10e7a8ca695cdd554983821161dcee4651a4845f7cf",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6750,
+          "offset_ms": 0.0,
+          "x0": 495.0,
+          "y0": 712.0,
+          "z_slice": 424.57421442732885,
+          "cache": "03_6750.npz",
+          "sha256": "b218ee015568b76828d1598ebca956466742715962d0bed1b350c283a222f791",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6754,
+          "offset_ms": 1.0,
+          "x0": 497.0,
+          "y0": 747.0,
+          "z_slice": 424.5086598618334,
+          "cache": "03_6754.npz",
+          "sha256": "736515dd23fcd40f24b3e86a134aff86743ffde3ae85607838a58edd89deb2ca",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6758,
+          "offset_ms": 2.0,
+          "x0": 498.0,
+          "y0": 781.0,
+          "z_slice": 424.4446878510162,
+          "cache": "03_6758.npz",
+          "sha256": "d1a79a6be51f802824d9bf7889dad263dafd22e928897ad8b993c5efd7436323",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "256b28234b4ac1fd882c40b3975f3da46721319bb4e633007abe9049f30725e2",
+      "review_asset_sha256": "eb6b794833d6b7151bdfa08e0530b8178c3824f49f0f88b4fcfd30bb75f304f0",
+      "crop_center_policy": "observed_parent_bounds"
+    },
+    {
+      "case": "04",
+      "candidate_id": "17:10138:9881:8565",
+      "scene_num": 17,
+      "review_rank": 18,
+      "candidate_frame_raw": 8565,
+      "display_t0_frame": 8565,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        189.17699432373047,
+        119.90766906738283
+      ],
+      "post_diameter_um": 197.3730697631836,
+      "frames": [
+        {
+          "frame": 8557,
+          "offset_ms": -2.0,
+          "x0": 385.0,
+          "y0": 317.0,
+          "z_slice": 299.7085175047704,
+          "cache": "04_8557.npz",
+          "sha256": "3a50d4ad17d9cd195f3e5ccfa5a366d14674cb96bf70f45147aed48432dd3e3e",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 8561,
+          "offset_ms": -1.0,
+          "x0": 381.0,
+          "y0": 341.0,
+          "z_slice": 299.73201694202623,
+          "cache": "04_8561.npz",
+          "sha256": "19ede98b57e15581e3196ad1a16d564026a8f7fbefbef49b87299f36b6e56322",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 8565,
+          "offset_ms": 0.0,
+          "x0": 384.0,
+          "y0": 371.0,
+          "z_slice": 299.75661582999504,
+          "cache": "04_8565.npz",
+          "sha256": "0827c4364e50a2bb1c9c06842651bf9bb356a71dca539085988bb364567d476b",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 8569,
+          "offset_ms": 1.0,
+          "x0": 379.0,
+          "y0": 404.0,
+          "z_slice": 299.78242411374805,
+          "cache": "04_8569.npz",
+          "sha256": "876dbee168c49188ec6705d479dc97eef38fe94ad5afeec7dd3a42c4b4c41329",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 8573,
+          "offset_ms": 2.0,
+          "x0": 378.0,
+          "y0": 435.0,
+          "z_slice": 299.8094051449282,
+          "cache": "04_8573.npz",
+          "sha256": "cd585be02694d1c7f3a90a3909fec54f51d4edd9efa2610f510e1a48043cf817",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "2d264e63dbc6595ecfd21e75b6b85f656a1ac166bd6ab736931cd3826fecf465",
+      "review_asset_sha256": "f78137390ff4ec05ad70c4be3a4da37527acfc878f3238b9e0b73dc7084e4b79",
+      "crop_center_policy": "observed_parent_bounds"
+    },
+    {
+      "case": "05",
+      "candidate_id": "18:5198:4981:4474",
+      "scene_num": 18,
+      "review_rank": 2,
+      "candidate_frame_raw": 4474,
+      "display_t0_frame": 4474,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        127.98643112182617,
+        122.32221603393555
+      ],
+      "post_diameter_um": 151.69671630859375,
+      "frames": [
+        {
+          "frame": 4466,
+          "offset_ms": -2.0,
+          "x0": 461.0,
+          "y0": 730.0,
+          "z_slice": 597.2283400891704,
+          "cache": "05_4466.npz",
+          "sha256": "2a294129b85c3da2276926ca709aa4e008a0617b068d34ec1795b62a089748b3",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 4470,
+          "offset_ms": -1.0,
+          "x0": 461.0,
+          "y0": 740.0,
+          "z_slice": 597.2544501711507,
+          "cache": "05_4470.npz",
+          "sha256": "ebe50af1c1bdde42a792bb2a41bd79f24f5a6ba5795d38c5af910344f1573c19",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 4474,
+          "offset_ms": 0.0,
+          "x0": 462.0,
+          "y0": 751.0,
+          "z_slice": 597.2800323212347,
+          "cache": "05_4474.npz",
+          "sha256": "8fb743bfe161b8b200d1ff8fc8a014aaf561a9470cdb74d6f0b009a644d9183b",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 4478,
+          "offset_ms": 1.0,
+          "x0": 461.0,
+          "y0": 761.0,
+          "z_slice": 597.3050865394224,
+          "cache": "05_4478.npz",
+          "sha256": "f3c89fad8521125f8bb2d01bd57821066edd1cca93db5ee292db989fbe46eb19",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 4482,
+          "offset_ms": 2.0,
+          "x0": 462.0,
+          "y0": 772.0,
+          "z_slice": 597.329612825714,
+          "cache": "05_4482.npz",
+          "sha256": "24c279d6f601e9c6ef7d2700842dae4dfddb7449fe7fc25cb84420261ee43440",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "a9c2cab81bfbd023832cedbe3950954304a46a6511b399560b6dc700f3f38030",
+      "review_asset_sha256": "99b9a15a5113f908be6eaea02ddbcea5cd6efb7091312287af9973e73f0d2e46",
+      "crop_center_policy": "observed_parent_bounds"
+    },
+    {
+      "case": "06",
+      "candidate_id": "20:3702:4099:5429",
+      "scene_num": 20,
+      "review_rank": 1,
+      "candidate_frame_raw": 5429,
+      "display_t0_frame": 5429,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        130.82418823242188,
+        166.3853530883789
+      ],
+      "post_diameter_um": 185.05884552001953,
+      "frames": [
+        {
+          "frame": 5421,
+          "offset_ms": -2.0,
+          "x0": 28.0,
+          "y0": 800.0,
+          "z_slice": 655.5194727521457,
+          "cache": "06_5421.npz",
+          "sha256": "a45b21c9e937df38bd33bff63db99292cbfb01fd224f01d0d093aaf4bbb3c88d",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 5425,
+          "offset_ms": -1.0,
+          "x0": 29.0,
+          "y0": 816.0,
+          "z_slice": 655.586813049967,
+          "cache": "06_5425.npz",
+          "sha256": "80304f757c066cae1758ddf58a4c7032e7dd7bf73f6a322eebad7d6b999ca09a",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 5429,
+          "offset_ms": 0.0,
+          "x0": 27.0,
+          "y0": 833.0,
+          "z_slice": 655.6559247739614,
+          "cache": "06_5429.npz",
+          "sha256": "9bf93b589528ef766e0fc50ffcd68849d903e0d7becef289072863bb49db2bfe",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 5433,
+          "offset_ms": 1.0,
+          "x0": 28.0,
+          "y0": 855.0,
+          "z_slice": 655.7268079241287,
+          "cache": "06_5433.npz",
+          "sha256": "b9ed8aac009ffaa480fbefa8e2c4242a119669b344dd87a866418fb5ced75510",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 5437,
+          "offset_ms": 2.0,
+          "x0": 28.0,
+          "y0": 875.0,
+          "z_slice": 655.7994625004693,
+          "cache": "06_5437.npz",
+          "sha256": "62e2432efe53cdee0893bc12744db51b83faf449a4d62ddfce5d31014f95d73f",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "d9766c07ca6d13ad97eb9e0d2c94c14cf7cc981ca2c92a5f9747b6e884409a3c",
+      "review_asset_sha256": "805171b01efe9578c893e0dbae4f9408c0964e22cc879ac4ad000f0ae0a771a0",
+      "crop_center_policy": "observed_parent_bounds"
+    },
+    {
+      "case": "07",
+      "candidate_id": "21:2906:3007:3612",
+      "scene_num": 21,
+      "review_rank": 5,
+      "candidate_frame_raw": 3612,
+      "display_t0_frame": 3612,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        126.85271072387695,
+        166.53813934326172
+      ],
+      "post_diameter_um": 181.6917572021484,
+      "frames": [
+        {
+          "frame": 3604,
+          "offset_ms": -2.0,
+          "x0": 204.0,
+          "y0": 374.0,
+          "z_slice": 497.6152377710191,
+          "cache": "07_3604.npz",
+          "sha256": "6c4e6ae0497432f915875c9f350799dbcf5ab9787bd37687dd86290b98c7e02f",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 3608,
+          "offset_ms": -1.0,
+          "x0": 205.0,
+          "y0": 393.0,
+          "z_slice": 497.7353005212217,
+          "cache": "07_3608.npz",
+          "sha256": "c006041e28253de4ba2c6531b414ceb1124137ce2d0cc90710a5ac56cb043529",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 3612,
+          "offset_ms": 0.0,
+          "x0": 205.0,
+          "y0": 419.0,
+          "z_slice": 497.8544617471704,
+          "cache": "07_3612.npz",
+          "sha256": "3b8ec51e99862947ca6d979c11e7d4d3e6eaf1614bf8c66b0d3d82305b427e3a",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 3616,
+          "offset_ms": 1.0,
+          "x0": 205.0,
+          "y0": 440.0,
+          "z_slice": 497.972721448865,
+          "cache": "07_3616.npz",
+          "sha256": "369d0384f230261d4011131a38204903265e9785022ed67a605c1ff867008914",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 3620,
+          "offset_ms": 2.0,
+          "x0": 205.0,
+          "y0": 464.0,
+          "z_slice": 498.0900796263057,
+          "cache": "07_3620.npz",
+          "sha256": "39b54805c6be4a1aa7959a401cceca516942c1a5f8099279fdd80dd7777e3b38",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "45197eb816be5775ea31b1a646b5a550bcc419ea5e4874346df485113e3d1fc2",
+      "review_asset_sha256": "b13018b388edc2bf1964c5e750bea5dbbce3db1fcbc50277e70edda911cc1db3",
+      "crop_center_policy": "observed_parent_bounds"
+    },
+    {
+      "case": "08",
+      "candidate_id": "22:3758:4041:4087",
+      "scene_num": 22,
+      "review_rank": 2,
+      "candidate_frame_raw": 4087,
+      "display_t0_frame": 4087,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        99.54967498779297,
+        211.32900238037112
+      ],
+      "post_diameter_um": 217.54637908935547,
+      "frames": [
+        {
+          "frame": 4079,
+          "offset_ms": -2.0,
+          "x0": 351.0,
+          "y0": 362.0,
+          "z_slice": 838.1686830444551,
+          "cache": "08_4079.npz",
+          "sha256": "458cf3c8d4b7a7cdf21f2f41120ca3d06935d99d1cb23145497e06eb3cb2362b",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 4083,
+          "offset_ms": -1.0,
+          "x0": 353.0,
+          "y0": 379.0,
+          "z_slice": 838.2486903368862,
+          "cache": "08_4083.npz",
+          "sha256": "28c3f5a77b2f67208f3f69b2a527f1a24667d4e16a569c005ddde84990f61a3f",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 4087,
+          "offset_ms": 0.0,
+          "x0": 353.0,
+          "y0": 398.0,
+          "z_slice": 838.3301532248792,
+          "cache": "08_4087.npz",
+          "sha256": "8e50eeb073dba25aa7a6c72edfb6f01652b704e7821f3aab334e1cd26fe9d651",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 4091,
+          "offset_ms": 1.0,
+          "x0": 356.0,
+          "y0": 436.0,
+          "z_slice": 838.4130717084341,
+          "cache": "08_4091.npz",
+          "sha256": "c6805dd497ffa723402cf35eba6e60e242355c8267dcd2dd058bf60c81358c55",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 4095,
+          "offset_ms": 2.0,
+          "x0": 356.0,
+          "y0": 475.0,
+          "z_slice": 838.497445787551,
+          "cache": "08_4095.npz",
+          "sha256": "6d88461548f15293154d17a90bd8ecfe05e4eaa12996876f68ace72e2caba0fb",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "75a60eb9d1d520235e1d008f456f27f61ce7983cc209b3d320b66a8f8aaba07a",
+      "review_asset_sha256": "9b20585ce5ca4dc47cfe0c1b4f2ca0dd56c7b4d8f957a6221078e4ba7d1e3d07",
+      "crop_center_policy": "observed_parent_bounds"
+    },
+    {
+      "case": "09",
+      "candidate_id": "25:6128:6159:6903",
+      "scene_num": 25,
+      "review_rank": 6,
+      "candidate_frame_raw": 6903,
+      "display_t0_frame": 6903,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        169.20470428466797,
+        230.49015808105463
+      ],
+      "post_diameter_um": 259.5871276855469,
+      "frames": [
+        {
+          "frame": 6895,
+          "offset_ms": -2.0,
+          "x0": 399.0,
+          "y0": 457.0,
+          "z_slice": 481.91325000159225,
+          "cache": "09_6895.npz",
+          "sha256": "71fe9c6d1fc87e719c7150309354fa81142f736a276a515661706cebcf1b8b09",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6899,
+          "offset_ms": -1.0,
+          "x0": 399.0,
+          "y0": 501.0,
+          "z_slice": 481.9118860018498,
+          "cache": "09_6899.npz",
+          "sha256": "b41bd62d28651f75bdf4a34139df898e68dd2604c1111665281efaedaaaf3970",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6903,
+          "offset_ms": 0.0,
+          "x0": 399.0,
+          "y0": 548.0,
+          "z_slice": 481.911485710188,
+          "cache": "09_6903.npz",
+          "sha256": "78ce1095792ba5139ca5b9b6127d26e198b0bbb3683e04b8b92a0b2250ea9b62",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6907,
+          "offset_ms": 1.0,
+          "x0": 396.0,
+          "y0": 592.0,
+          "z_slice": 481.9120491266068,
+          "cache": "09_6907.npz",
+          "sha256": "3ef24116f4f52595639833ad601f55f1b31b886f7622e0c521f7367088d5d9c7",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6911,
+          "offset_ms": 2.0,
+          "x0": 399.0,
+          "y0": 644.0,
+          "z_slice": 481.9135762511063,
+          "cache": "09_6911.npz",
+          "sha256": "d8859373e1b0a982907a827d5a0f02eda8ae51042f6e3d7616ee8f99da2cf92e",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "4d282d37d30281d4a30c3c006770e969c57ce9466f1fe0b8e3dec8d7a085aee7",
+      "review_asset_sha256": "368b917d20e9451ffbe4bd3998c6ada96f537f1604be6b3964aede2057ea6104",
+      "crop_center_policy": "observed_parent_bounds"
+    },
+    {
+      "case": "10",
+      "candidate_id": "28:6577:6818:6810",
+      "scene_num": 28,
+      "review_rank": 3,
+      "candidate_frame_raw": 6810,
+      "display_t0_frame": 6810,
+      "display_t0_policy": "Raw candidate frame. Fixed display offsets -8,-4,0,+4,+8 frames; no redefinition of the analysis time.",
+      "parent_diameters_um": [
+        118.8313217163086,
+        207.45905303955078
+      ],
+      "post_diameter_um": 219.91690826416016,
+      "frames": [
+        {
+          "frame": 6802,
+          "offset_ms": -2.0,
+          "x0": 435.0,
+          "y0": 536.0,
+          "z_slice": 240.10146126003045,
+          "cache": "10_6802.npz",
+          "sha256": "88e9b27276f6831064559224be9836fd59b74f656ff0e3181c8985da2088fe4b",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6806,
+          "offset_ms": -1.0,
+          "x0": 434.0,
+          "y0": 567.0,
+          "z_slice": 240.056098212332,
+          "cache": "10_6806.npz",
+          "sha256": "bcce7f74150f7ae503421d9a4e552413d981e9b9cabf0476521a2b3e289d9057",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6810,
+          "offset_ms": 0.0,
+          "x0": 433.0,
+          "y0": 596.0,
+          "z_slice": 240.0107351646336,
+          "cache": "10_6810.npz",
+          "sha256": "0c730aa12b1a982fa2f70f3963d7f174b7910667f3510b9d6e83a5635c2100a4",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6814,
+          "offset_ms": 1.0,
+          "x0": 429.0,
+          "y0": 633.0,
+          "z_slice": 239.96537211693516,
+          "cache": "10_6814.npz",
+          "sha256": "309b98821c027972c6f5985a608ef597822def5cb8ec0b3734b7b001673539b0",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        },
+        {
+          "frame": 6818,
+          "offset_ms": 2.0,
+          "x0": 427.0,
+          "y0": 675.0,
+          "z_slice": 239.9200090692367,
+          "cache": "10_6818.npz",
+          "sha256": "40d856422b30199659125b52af9572c288096c009a276601c033d146a49e6f8c",
+          "pixel_pitch_um": 10,
+          "scale_bar_um": 500,
+          "scale_bar_px": 50
+        }
+      ],
+      "device": "NVIDIA GeForce RTX 4060 Ti",
+      "phase_iterations": 3,
+      "padding_px": 2048,
+      "acquisition_sha256": "b362ac8df1ed8ba943581eb6ede7d8bb9f10c74b36fdfa89130dc48c99f8ef45",
+      "review_asset_sha256": "59cf46ee82ee5853639514c6fbd90a9eb65410648a5e43104c229ca532f8c854",
+      "crop_center_policy": "observed_parent_bounds"
+    }
+  ],
+  "engine_manifest_sha256": "1778c88d23e58b72d83579edeedacdc7323f38f8847a8e83c7c70e62cdcb8045",
+  "selection": "Illustrative purposive selection from human-confirmed cases, checked as image sequences; includes the two existing Figure 10 examples. Not a statistical or residual-based sample.",
+  "gif_color_convention": "A terminating: gold; B continuing: cyan",
+  "figure_color_convention": "A terminating: red; B continuing: blue"
+}

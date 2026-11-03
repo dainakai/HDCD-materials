@@ -14,8 +14,11 @@ are outside the published package. Model SHA-256 is
 - 1,120 reviews: 186 collision, 922 noncollision, 12 ambiguous; last judgment
   saved at 2026-11-03 16:35:16 JST. Freeze completed at 16:45:07 JST.
 - Top 30 per sequence: 175/186 conditional coverage (94.086%), 175/420
-  precision (41.667%). The minimum budget reaching 95% is 34 per sequence;
-  top 40 gives 179/186 (96.237%) and 179/560 (31.964%).
+  precision (41.667%). The minimum budget reaching 95% is 34 per sequence
+  (476 reviews, 177/186 = 95.161%, precision 37.185%). The precision-50%
+  boundary is between N=24 (336 reviews, 51.488%) and N=25 (350, 49.429%);
+  both recover 173/186 = 93.011%. There is no exact integer-budget 50% point.
+  The earlier rounded-N=40 line is removed from Fig.12.
 - Diameter diagnostics: 184 confirmed / 908 rejected. Velocity diagnostics:
   179 confirmed / 822 rejected. No residual-based exclusions.
 - Confirmed diameter RMSE: 19.8994 µm; velocity RMSE: 0.0793867 m/s. The
@@ -114,3 +117,37 @@ Stop the shared preview only when all pages may stop, using the existing
 `audit/revision-review-20261101/stop_preview.py`. Stopping or recreating the Quick
 Tunnel invalidates or changes its public URL. HTTPS resource hashes and private
 route rejections are recorded in `https-verification.json` alongside the package.
+
+## Follow-up: Figures 10, 12 and 13
+
+- `gallery_images.py` reuses the manifest-verified frozen engine to reconstruct
+  five crops for each of ten human-confirmed examples. The raw candidate frame
+  is the display origin; offsets are −8, −4, 0, +4, +8 at 4000 fps. Crops are
+  centered on the bounding extents of the currently observed parent particles
+  to avoid clipping them. Focus depth follows the existing review convention.
+  This is a display operation and changes no tracks, labels or analysis values.
+- `gallery.py` produces `fig10-candidates.html`, ten single-case PDFs/PNGs/GIFs,
+  fifty clean image crops, captions and `fig10-candidates.pdf` (ten pages).
+  Existing Fig.10 remains available; its two examples are options 04 and 07.
+- `figure12_thresholds.py` produces the requested precision/coverage boundaries
+  using equal integer budgets per sequence, without interpolation.
+- `figure13_exclusions.py` audits all 1120 candidates and all 3360 windows
+  against hashed source tracks, including raw/smoothed observation support.
+  Exclusions: diameter 2 confirmed + 14 noncollision + 12 ambiguous; velocity
+  7 + 100 + 12. All 119 unique excluded candidates have individual reasons and
+  observed frame ranges in `fig13-exclusions.html` and CSVs. There are no invalid
+  selected diameters/y-values; insufficient observed track support explains the
+  technical exclusions. One-point windows are distinguished from API count zero.
+
+Additional reproduction (does not require rerunning the scientific campaign):
+
+```bash
+OPENBLAS_NUM_THREADS=4 .venv/bin/python experiments/amt_experimental_results_20261103/figure13_exclusions.py
+OPENBLAS_NUM_THREADS=4 MPLCONFIGDIR=/tmp/amt-experimental-mpl .venv/bin/python experiments/amt_experimental_results_20261103/figure12_thresholds.py
+CUDA_VISIBLE_DEVICES=1 OPENBLAS_NUM_THREADS=4 PYTHONDONTWRITEBYTECODE=1 /media/dai-server/M2Disk2TB/repos/260712/.venv/bin/python experiments/amt_experimental_results_20261103/gallery_images.py
+OPENBLAS_NUM_THREADS=4 MPLCONFIGDIR=/tmp/amt-experimental-mpl .venv/bin/python experiments/amt_experimental_results_20261103/gallery.py
+```
+
+Rebuild the eight-figure combined PDF and render final new PDFs with system
+`pdftoppm`. Then rebuild the report, verify, and publish as above. The initial
+package was preserved at `versions/initial-e744ca9` before this follow-up.
