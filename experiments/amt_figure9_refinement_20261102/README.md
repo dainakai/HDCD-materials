@@ -4,7 +4,69 @@ This author-requested revision changes illustrative examples and display only.
 Model fits, saved candidate scores and 34 frozen numerical outputs remain
 unchanged. The manuscript is not edited.
 
-## Latest candidates: complete crops inside the hologram, 2026-11-03
+## Current author decision: (a) confirmed, (b) alternatives, 2026-11-03
+
+The author confirmed N1 with −0.25, 0 and +0.25 ms: frames 3957, 3958 and
+3959, tracks 12754/12764, true event 1204. `confirm_true.py` exports these
+three cached images through the original plotting functions as a standalone
+Fig.9(a) PDF/PNG. Original image-panel dimensions, fonts, markers, tails and
+scale bar are preserved. All four displayed positions have one-to-one truth
+matches and all crops are fully recorded. Scores remain 0.9989552783 →
+0.9979272758. `results/confirmed-a/selection.json` is the current author
+decision; the older case-selection commands below are historical.
+
+Full Fig.9 and the existing author replacement ZIP remain historical versions
+until (b) is selected. Public pages explicitly flag that status and link to
+the confirmed (a) component. Do not treat the old hard-coded C04/H01 choice
+in `finish.py` as the current author decision.
+
+`interior_artifact.py` screens frozen test candidates for trajectory score
+>=0.9, score decrease >=0.2, absence from final predictions, no truth in the
+common evaluation gate, six actual continuing-track observations, full
+128-pixel interior crops, and independently verified particle identities.
+It excludes 18 examples that were an early/late candidate for a real collision
+between the same two parents. Two distinct alternatives remain:
+
+| Candidate | Frame / tracks | Trajectory → image score | True identity and depth separation | Minimum crop-to-hologram margin |
+| --- | --- | --- | --- | ---: |
+| B01 | 4761 / 15431, 15514 | 0.9173284486 → 0.4892281373 | Different particles 6319/6377; projected images overlap; 4.677–4.680 mm axial separation | 171 px |
+| B02 | 2806 / 7274, 8437 | 0.9188136418 → 0.6569510227 | Different particles 3422/3593; projected images remain separated; 7.836–7.867 mm axial separation | 163 px |
+
+Neither is a same-true-particle duplicate like the previous H01. B01's image
+component feature is shared in 9/9 preframes, but that does not imply the two
+track IDs represent the same physical particle. B02 has 0/9 shared components.
+Do not label either new case "Shared-particle artifact". The proposed caption
+and panel title explain a spurious pair of distinct particles. No scheduled
+collision between either pair exists anywhere in the test series.
+
+B01 is the preferred option for its larger score decrease (0.428100); B02
+is a comparison with a smaller decrease (0.261863). B01 has no continuing-track
+observation at −1.00 ms, so its six preview frames cover −0.75 through +0.50 ms.
+The common −0.25/0/+0.25 ms trio is B01-3/4/5. B02 covers −1.00 through
++0.25 ms; the matching trio is B02-4/5/6. Every marked position is actual;
+missing measurements are not interpolated for display. All 12 panels were
+visually inspected with both tracks and original contrast.
+
+Private outputs: `../audit/revision-figure9-confirmed-a-20261103/` and
+`../audit/revision-figure9-interior-artifact-20261103/`.
+Public page: `fig09-artifact-options.html`. The review ZIP includes the
+confirmed (a) PDF/PNG and native/overlaid selected images, both (b) galleries,
+identity/score evidence and caption proposals. The original paper is unedited.
+
+```bash
+PY=/media/dai-server/M2Disk2TB/repos/260712/.venv/bin/python
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/confirm_true.py
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/interior_artifact.py select
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/interior_artifact.py render
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/publish_artifact_options.py
+```
+
+The (a) PDF was rendered and inspected. Numerical scores are checked against
+the frozen Parquets, image-panel dimensions against the manuscript PDF, and
+all 34 frozen evaluation outputs remain unchanged. Publication verification
+and current process/log/stop details are in the private `publication.json`.
+
+## Earlier candidates: complete crops inside the hologram, 2026-11-03
 
 The author requested (a) candidates without clipping near the hologram boundary.
 `interior_true.py` now requires all six complete 128×128 crops to remain inside
