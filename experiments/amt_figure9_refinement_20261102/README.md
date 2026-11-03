@@ -20,51 +20,72 @@ until (b) is selected. Public pages explicitly flag that status and link to
 the confirmed (a) component. Do not treat the old hard-coded C04/H01 choice
 in `finish.py` as the current author decision.
 
-`interior_artifact.py` screens frozen test candidates for trajectory score
->=0.9, score decrease >=0.2, absence from final predictions, no truth in the
-common evaluation gate, six actual continuing-track observations, full
-128-pixel interior crops, and independently verified particle identities.
-It excludes 18 examples that were an early/late candidate for a real collision
-between the same two parents. Two distinct alternatives remain:
+## Corrected (b) review: same physical particle, 2026-11-03
 
-| Candidate | Frame / tracks | Trajectory → image score | True identity and depth separation | Minimum crop-to-hologram margin |
-| --- | --- | --- | --- | ---: |
-| B01 | 4761 / 15431, 15514 | 0.9173284486 → 0.4892281373 | Different particles 6319/6377; projected images overlap; 4.677–4.680 mm axial separation | 171 px |
-| B02 | 2806 / 7274, 8437 | 0.9188136418 → 0.6569510227 | Different particles 3422/3593; projected images remain separated; 7.836–7.867 mm axial separation | 163 px |
+The author rejected B01/B02 because both follow **distinct** true particles.
+Their recommendations and proposed changes to the scientific phenomenon/caption
+are withdrawn. `publish_artifact_options.py` is disabled to prevent republishing
+them. A shared reconstructed component alone does not establish common physical
+identity. The manuscript definition is explicit at `template.tex` lines 164–169
+and 914–925: two observed IDs intermittently track one true particle.
 
-Neither is a same-true-particle duplicate like the previous H01. B01's image
-component feature is shared in 9/9 preframes, but that does not imply the two
-track IDs represent the same physical particle. B02 has 0/9 shared components.
-Do not label either new case "Shared-particle artifact". The proposed caption
-and panel title explain a spurious pair of distinct particles. No scheduled
-collision between either pair exists anywhere in the test series.
+`shared_particle.py select` searches the entire frozen scoring union (263,185
+rows), including all 13,031 candidates with trajectory score >=0.9 and a score
+decrease. It independently associates actual XY/Z observations with physical
+truth. `intermittent` additionally checks the 412 candidates with a decrease
+>0.2 using a broader support fraction, because a particle can be created inside
+the history window and detections can alternate between IDs. These screens are
+explicitly not a proof that every possible duplicate-tracking pattern is found.
+Final displayed observations are individually audited and visually inspected.
 
-B01 is the preferred option for its larger score decrease (0.428100); B02
-is a comparison with a smaller decrease (0.261863). B01 has no continuing-track
-observation at −1.00 ms, so its six preview frames cover −0.75 through +0.50 ms.
-The common −0.25/0/+0.25 ms trio is B01-3/4/5. B02 covers −1.00 through
-+0.25 ms; the matching trio is B02-4/5/6. Every marked position is actual;
-missing measurements are not interpolated for display. All 12 panels were
-visually inspected with both tracks and original contrast.
+| Candidate | Frame / red, blue IDs | Same truth ID / diameter | Trajectory → image score | Display times | Final list |
+| --- | --- | --- | --- | --- | --- |
+| D4, preferred | 5337 / 17945, 18031 | 7364 / 321.39 µm | 0.9436670450 → 0.6247505742 | −0.50, 0, +0.50 ms | absent |
+| D2, qualified comparison | 5508 / 18567, 18658 | 7645 / 318.55 µm | 0.9372951809 → 0.4880977487 | −0.25, 0, +0.25 ms | retained |
 
-Private outputs: `../audit/revision-figure9-confirmed-a-20261103/` and
-`../audit/revision-figure9-interior-artifact-20261103/`.
-Public page: `fig09-artifact-options.html`. The review ZIP includes the
-confirmed (a) PDF/PNG and native/overlaid selected images, both (b) galleries,
-identity/score evidence and caption proposals. The original paper is unedited.
+D4's five actual positions in the proposed three panels all lie inside the
+same physical truth disk; axial errors are below 100 µm. Its full 128px crops
+have at least 35px to the hologram boundary. Its blue ID begins after the true
+particle's creation. The earlier real coalescence is 25 frames (6.25ms) before
+the candidate. Red positions at −0.75/−0.25ms are outside the target truth disk;
+blue is missing at +0.25ms. These are excluded from the proposed paper panels
+and explicitly shown as diagnostic frames. The +0.25ms diagnostic uses linearly
+interpolated image center/focus only; no blue marker or tail is invented.
+
+D2's proposed three crops have at least 204px to the recording boundary and
+both IDs follow one true particle before red terminates. The IDs originally
+followed distinct parents that merged eight frames (2ms) before this candidate;
+this history is disclosed. It remains in the final policy, so the original
+`(rejected)` score-panel annotation cannot be used with D2. Its −1.00ms blue
+point lies 1.38px outside the physical truth disk and is diagnostic only.
+
+Other examined cases remain private: D1's pair follows actual distinct parents
+before a coalescence six frames before its candidate; D3 is a smaller 147µm
+example with a lower decrease (0.920→0.651). H01 has a strong score decrease
+but the +0.25ms centered crop crosses the hologram boundary. None is silently
+substituted for the requested phenomenon or promoted as the chosen (b).
+
+`publish_shared_particle.py` verifies saved scores, final presence, independent
+truth geometry, all 34 frozen outputs, original manuscript and confirmed (a)
+checksums before publication. It produces separate paper-style track images
+and yellow truth-outline proof images, plus explicit diagnostics. All presented
+rasters were inspected. The public `fig09-artifact-options.html` URL is reused
+with a withdrawal notice and the corrected review; old B01/B02 direct downloads
+contain withdrawal notices. No final full Fig.9 or author replacement ZIP is
+changed before author selection.
+
+Private outputs: `../audit/revision-figure9-shared-particle-20261103/`.
+Versioned review record and three-panel previews: `results/shared-particle/`.
+The original (a) record stays in `results/confirmed-a/selection.json`.
 
 ```bash
 PY=/media/dai-server/M2Disk2TB/repos/260712/.venv/bin/python
-MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/confirm_true.py
-MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/interior_artifact.py select
-MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/interior_artifact.py render
-MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/publish_artifact_options.py
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/shared_particle.py select
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/shared_particle.py intermittent
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/shared_particle.py render
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/shared_particle.py diagnostics
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/publish_shared_particle.py
 ```
-
-The (a) PDF was rendered and inspected. Numerical scores are checked against
-the frozen Parquets, image-panel dimensions against the manuscript PDF, and
-all 34 frozen evaluation outputs remain unchanged. Publication verification
-and current process/log/stop details are in the private `publication.json`.
 
 ## Earlier candidates: complete crops inside the hologram, 2026-11-03
 

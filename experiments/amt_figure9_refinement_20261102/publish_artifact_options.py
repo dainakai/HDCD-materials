@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Publish confirmed (a), reviewed (b) alternatives, and their distinct meanings."""
+"""WITHDRAWN: distinct-particle examples do not illustrate Fig.9(b).
+
+Retained only as historical provenance. Use the shared-particle audit/publisher.
+"""
 import json
 import shutil
 import zipfile
@@ -15,6 +18,7 @@ DESCRIPTIONS={
 
 
 def main():
+    raise RuntimeError('Withdrawn B01/B02 workflow: Fig.9(b) requires two IDs on one true particle. Use shared_particle.py and publish_shared_particle.py.')
     a=json.loads((CONFIRMED/'selection.json').read_text())
     assert a['status']=='author_confirmed' and a['display_frames']==[3957,3958,3959]
     protected=a['old_complete_figure_and_zip_unchanged']

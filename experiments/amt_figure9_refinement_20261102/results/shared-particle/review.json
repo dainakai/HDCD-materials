@@ -1,0 +1,1309 @@
+{
+  "status": "PASS",
+  "author_selected_b": false,
+  "confirmed_a": "N1: -0.25/0/+0.25 ms",
+  "withdrawn_examples": [
+    "B01",
+    "B02"
+  ],
+  "paper_definition": "Two observed track IDs intermittently track the same physical particle; not two distinct true particles with overlapping projections.",
+  "cases": [
+    {
+      "case_id": "D4",
+      "status": "reviewed_candidate_not_author_selected",
+      "candidate_key": [
+        17945,
+        18031,
+        5337
+      ],
+      "source_particle_id": 7364,
+      "truth_diameter_um": 321.389563,
+      "trajectory_score": 0.9436670449838276,
+      "image_feature_score": 0.6247505741646191,
+      "score_decrease": 0.3189164708192085,
+      "shared_component_count": 8,
+      "rendered_pre_frames": 9,
+      "final_retained": false,
+      "no_truth_event_in_common_gate": true,
+      "selected_frames": [
+        5335,
+        5337,
+        5339
+      ],
+      "selected_times_ms": [
+        -0.5,
+        0.0,
+        0.5
+      ],
+      "minimum_selected_crop_hologram_margin_px": 35,
+      "maximum_displayed_z_error_um": 78.6055574890197,
+      "observations": [
+        {
+          "frame": 5331,
+          "track_id": 18031,
+          "x": 493.98803714285737,
+          "y": 786.7491629523813,
+          "z_plane": 783.1686583709195,
+          "diameter_px": 25.3960189819336,
+          "plausible_truth_ids": [
+            7364
+          ],
+          "nearest_xy_truth_id": 7364,
+          "one_to_one_source_id": null,
+          "truth_id": 7364,
+          "truth_x": 484.303063,
+          "truth_y": 792.663443,
+          "truth_z_um": 78285.519453,
+          "truth_diameter_um": 321.389563,
+          "xy_error_px": 11.348014479611685,
+          "z_error_um": -68.65361590805696,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5332,
+          "track_id": 18031,
+          "x": 493.8640165714288,
+          "y": 802.2117337619052,
+          "z_plane": 783.1550238693404,
+          "diameter_px": 20.38761138916016,
+          "plausible_truth_ids": [
+            7364
+          ],
+          "nearest_xy_truth_id": 7364,
+          "one_to_one_source_id": null,
+          "truth_id": 7364,
+          "truth_x": 484.31061,
+          "truth_y": 809.697478,
+          "truth_z_um": 78285.387656,
+          "truth_diameter_um": 321.389563,
+          "xy_error_px": 12.13688361636502,
+          "z_error_um": -69.88526906596962,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5333,
+          "track_id": 18031,
+          "x": 494.5232484285717,
+          "y": 820.2252630476193,
+          "z_plane": 783.1413541112194,
+          "diameter_px": 25.902557373046875,
+          "plausible_truth_ids": [
+            7364
+          ],
+          "nearest_xy_truth_id": 7364,
+          "one_to_one_source_id": null,
+          "truth_id": 7364,
+          "truth_x": 484.318157,
+          "truth_y": 826.731512,
+          "truth_z_um": 78285.255859,
+          "truth_diameter_um": 321.389563,
+          "xy_error_px": 12.102692530832272,
+          "z_error_um": -71.12044787805644,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5335,
+          "track_id": 18031,
+          "x": 494.40288700000025,
+          "y": 853.6977564761908,
+          "z_plane": 783.1139088253511,
+          "diameter_px": 29.4096923828125,
+          "plausible_truth_ids": [
+            7364
+          ],
+          "nearest_xy_truth_id": 7364,
+          "one_to_one_source_id": null,
+          "truth_id": 7364,
+          "truth_x": 484.333251,
+          "truth_y": 860.799582,
+          "truth_z_um": 78284.992264,
+          "truth_diameter_um": 321.389563,
+          "xy_error_px": 12.32207348392018,
+          "z_error_um": -73.60138146489044,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5335,
+          "track_id": 17945,
+          "x": 473.4911877142858,
+          "y": 865.6721800952383,
+          "z_plane": 783.9525169499657,
+          "diameter_px": 21.1070541381836,
+          "plausible_truth_ids": [
+            7364
+          ],
+          "nearest_xy_truth_id": 7364,
+          "one_to_one_source_id": null,
+          "truth_id": 7364,
+          "truth_x": 484.333251,
+          "truth_y": 860.799582,
+          "truth_z_um": 78284.992264,
+          "truth_diameter_um": 321.389563,
+          "xy_error_px": 11.886654217615352,
+          "z_error_um": 10.259430996564333,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5337,
+          "track_id": 18031,
+          "x": 493.1651811904764,
+          "y": 894.9798090476195,
+          "z_plane": 783.0863225133146,
+          "diameter_px": 20.787945556640626,
+          "plausible_truth_ids": [
+            7364
+          ],
+          "nearest_xy_truth_id": 7364,
+          "one_to_one_source_id": null,
+          "truth_id": 7364,
+          "truth_x": 484.348346,
+          "truth_y": 894.867652,
+          "truth_z_um": 78284.728669,
+          "truth_diameter_um": 321.389563,
+          "xy_error_px": 8.817548524354937,
+          "z_error_um": -76.09641766853747,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5337,
+          "track_id": 17945,
+          "x": 476.8414146666669,
+          "y": 903.7071881428576,
+          "z_plane": 784.0265109508235,
+          "diameter_px": 23.65887451171875,
+          "plausible_truth_ids": [
+            7364
+          ],
+          "nearest_xy_truth_id": 7364,
+          "one_to_one_source_id": null,
+          "truth_id": 7364,
+          "truth_x": 484.348346,
+          "truth_y": 894.867652,
+          "truth_z_um": 78284.728669,
+          "truth_diameter_um": 321.389563,
+          "xy_error_px": 11.597043470827554,
+          "z_error_um": 17.922426082353923,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5339,
+          "track_id": 18031,
+          "x": 494.61618000000016,
+          "y": 924.7404790000006,
+          "z_plane": 783.0585951751098,
+          "diameter_px": 29.54245910644532,
+          "plausible_truth_ids": [
+            7364
+          ],
+          "nearest_xy_truth_id": 7364,
+          "one_to_one_source_id": null,
+          "truth_id": 7364,
+          "truth_x": 484.36344,
+          "truth_y": 928.935722,
+          "truth_z_um": 78284.465075,
+          "truth_diameter_um": 321.389563,
+          "xy_error_px": 11.07784912953083,
+          "z_error_um": -78.6055574890197,
+          "mapping_agrees": true
+        }
+      ],
+      "selected_panels": [
+        {
+          "label": "D4-4",
+          "filename": "D4-4-frame-5335.png",
+          "frame": 5335,
+          "delta": -2,
+          "x0": 430.0,
+          "y0": 790.0,
+          "center_x": 494.40288700000025,
+          "center_y": 853.6977564761908,
+          "center_z": 783.1139088253511,
+          "recorded_fraction": 1.0,
+          "hologram_margin_px": 106,
+          "truth_audit": {
+            "frame": 5335,
+            "delta": -2,
+            "x0": 430,
+            "y0": 790,
+            "hologram_margin_px": 106,
+            "whole_crop": true,
+            "truth_disk_margin_px": 38.26377285000002,
+            "red_present": true,
+            "red_same": true,
+            "blue_observation": {
+              "frame": 5335,
+              "track_id": 18031,
+              "x": 494.40288700000025,
+              "y": 853.6977564761908,
+              "z_plane": 783.1139088253511,
+              "diameter_px": 29.4096923828125,
+              "plausible_truth_ids": [
+                7364
+              ],
+              "nearest_xy_truth_id": 7364,
+              "one_to_one_source_id": null,
+              "truth_id": 7364,
+              "truth_x": 484.333251,
+              "truth_y": 860.799582,
+              "truth_z_um": 78284.992264,
+              "truth_diameter_um": 321.389563,
+              "xy_error_px": 12.32207348392018,
+              "z_error_um": -73.60138146489044,
+              "mapping_agrees": true
+            },
+            "red_observation": {
+              "frame": 5335,
+              "track_id": 17945,
+              "x": 473.4911877142858,
+              "y": 865.6721800952383,
+              "z_plane": 783.9525169499657,
+              "diameter_px": 21.1070541381836,
+              "plausible_truth_ids": [
+                7364
+              ],
+              "nearest_xy_truth_id": 7364,
+              "one_to_one_source_id": null,
+              "truth_id": 7364,
+              "truth_x": 484.333251,
+              "truth_y": 860.799582,
+              "truth_z_um": 78284.992264,
+              "truth_diameter_um": 321.389563,
+              "xy_error_px": 11.886654217615352,
+              "z_error_um": 10.259430996564333,
+              "mapping_agrees": true
+            }
+          },
+          "png_sha256": "10264526d7d1c2011c97894a95ff14c5a5bcbf2a0730e133d3b4fcf18603c61c"
+        },
+        {
+          "label": "D4-5",
+          "filename": "D4-5-frame-5337.png",
+          "frame": 5337,
+          "delta": 0,
+          "x0": 429.0,
+          "y0": 831.0,
+          "center_x": 493.1651811904764,
+          "center_y": 894.9798090476195,
+          "center_z": 783.0863225133146,
+          "recorded_fraction": 1.0,
+          "hologram_margin_px": 65,
+          "truth_audit": {
+            "frame": 5337,
+            "delta": 0,
+            "x0": 429,
+            "y0": 831,
+            "hologram_margin_px": 65,
+            "whole_crop": true,
+            "truth_disk_margin_px": 39.27886784999999,
+            "red_present": true,
+            "red_same": true,
+            "blue_observation": {
+              "frame": 5337,
+              "track_id": 18031,
+              "x": 493.1651811904764,
+              "y": 894.9798090476195,
+              "z_plane": 783.0863225133146,
+              "diameter_px": 20.787945556640626,
+              "plausible_truth_ids": [
+                7364
+              ],
+              "nearest_xy_truth_id": 7364,
+              "one_to_one_source_id": null,
+              "truth_id": 7364,
+              "truth_x": 484.348346,
+              "truth_y": 894.867652,
+              "truth_z_um": 78284.728669,
+              "truth_diameter_um": 321.389563,
+              "xy_error_px": 8.817548524354937,
+              "z_error_um": -76.09641766853747,
+              "mapping_agrees": true
+            },
+            "red_observation": {
+              "frame": 5337,
+              "track_id": 17945,
+              "x": 476.8414146666669,
+              "y": 903.7071881428576,
+              "z_plane": 784.0265109508235,
+              "diameter_px": 23.65887451171875,
+              "plausible_truth_ids": [
+                7364
+              ],
+              "nearest_xy_truth_id": 7364,
+              "one_to_one_source_id": null,
+              "truth_id": 7364,
+              "truth_x": 484.348346,
+              "truth_y": 894.867652,
+              "truth_z_um": 78284.728669,
+              "truth_diameter_um": 321.389563,
+              "xy_error_px": 11.597043470827554,
+              "z_error_um": 17.922426082353923,
+              "mapping_agrees": true
+            }
+          },
+          "png_sha256": "a817968f4ab0345684adb3b1feda99f9b6a745a8c7ab4890c16efc356f697d5f"
+        },
+        {
+          "label": "D4-6",
+          "filename": "D4-6-frame-5339.png",
+          "frame": 5339,
+          "delta": 2,
+          "x0": 431.0,
+          "y0": 861.0,
+          "center_x": 494.61618000000016,
+          "center_y": 924.7404790000006,
+          "center_z": 783.0585951751098,
+          "recorded_fraction": 1.0,
+          "hologram_margin_px": 35,
+          "truth_audit": {
+            "frame": 5339,
+            "delta": 2,
+            "x0": 431,
+            "y0": 861,
+            "hologram_margin_px": 35,
+            "whole_crop": true,
+            "truth_disk_margin_px": 37.293961850000024,
+            "red_present": false,
+            "red_same": false,
+            "blue_observation": {
+              "frame": 5339,
+              "track_id": 18031,
+              "x": 494.61618000000016,
+              "y": 924.7404790000006,
+              "z_plane": 783.0585951751098,
+              "diameter_px": 29.54245910644532,
+              "plausible_truth_ids": [
+                7364
+              ],
+              "nearest_xy_truth_id": 7364,
+              "one_to_one_source_id": null,
+              "truth_id": 7364,
+              "truth_x": 484.36344,
+              "truth_y": 928.935722,
+              "truth_z_um": 78284.465075,
+              "truth_diameter_um": 321.389563,
+              "xy_error_px": 11.07784912953083,
+              "z_error_um": -78.6055574890197,
+              "mapping_agrees": true
+            },
+            "red_observation": null
+          },
+          "png_sha256": "bb5a61ae7b523efe663d7e728ba7ecc7420b0bf88c5b586e4c43b31c76e42428"
+        }
+      ],
+      "diagnostics": [
+        {
+          "case_id": "D4",
+          "label": "D4 diagnostic",
+          "filename": "D4-diagnostic-frame-5334.png",
+          "frame": 5334,
+          "delta": -3,
+          "x0": 430.0,
+          "y0": 774.0,
+          "center_x": 494.406621714286,
+          "center_y": 838.4078628571432,
+          "center_z": 783.1276490965563,
+          "recorded_fraction": 1.0,
+          "center_focus_interpolated": false,
+          "eligible_for_paper": false,
+          "png_sha256": "fef29a8f4efdf506d5b3a2de835e38bdbdc2c3fcce1c288c1ddd4fbde49ce23e",
+          "observations": [
+            {
+              "track_id": 17945,
+              "present": true,
+              "shared_truth_id": 7364,
+              "xy_error_to_shared_truth_px": 21.498121125352704,
+              "truth_radius_px": 16.069478150000002,
+              "z_error_to_shared_truth_um": 6.424873985451995,
+              "center_inside_truth_disk": false
+            },
+            {
+              "track_id": 18031,
+              "present": true,
+              "shared_truth_id": 7364,
+              "xy_error_to_shared_truth_px": 11.41620257952815,
+              "truth_radius_px": 16.069478150000002,
+              "z_error_to_shared_truth_um": -72.359151344368,
+              "center_inside_truth_disk": true
+            }
+          ],
+          "overlay_audit": {
+            "label": "D4 diagnostic",
+            "frame": 5334,
+            "source_png_sha256": "fef29a8f4efdf506d5b3a2de835e38bdbdc2c3fcce1c288c1ddd4fbde49ce23e",
+            "overlay_png_sha256": "2905fcf7ef1e44a45c232b8d7ed2baf750dae2b695894d24b11d7569f676418a",
+            "observations": [
+              {
+                "role": "terminating",
+                "present": true,
+                "track_id": 17945,
+                "marker": "o",
+                "color": "#D84A3A",
+                "crop_xy_px": [
+                  42.4367123809526,
+                  51.85406771428609
+                ],
+                "tail_frames": [
+                  5334
+                ],
+                "tail_crop_xy_px": [
+                  [
+                    42.4367123809526,
+                    51.85406771428609
+                  ]
+                ]
+              },
+              {
+                "role": "continuing",
+                "present": true,
+                "track_id": 18031,
+                "marker": "s",
+                "color": "#2C6FB7",
+                "crop_xy_px": [
+                  64.40662171428602,
+                  64.40786285714319
+                ],
+                "tail_frames": [
+                  5330,
+                  5331,
+                  5332,
+                  5333,
+                  5334
+                ],
+                "tail_crop_xy_px": [
+                  [
+                    64.78177904761935,
+                    -6.8482868571425115
+                  ],
+                  [
+                    63.988037142857365,
+                    12.749162952381312
+                  ],
+                  [
+                    63.864016571428806,
+                    28.21173376190518
+                  ],
+                  [
+                    64.52324842857172,
+                    46.22526304761925
+                  ],
+                  [
+                    64.40662171428602,
+                    64.40786285714319
+                  ]
+                ]
+              }
+            ],
+            "unmarked_pixels_unchanged": true,
+            "overlay_size_px": 256
+          }
+        },
+        {
+          "case_id": "D4",
+          "label": "D4 diagnostic",
+          "filename": "D4-diagnostic-frame-5336.png",
+          "frame": 5336,
+          "delta": -1,
+          "x0": 429.0,
+          "y0": 806.0,
+          "center_x": 493.19155300000017,
+          "center_y": 869.8737470476192,
+          "center_z": 783.1001332976039,
+          "recorded_fraction": 1.0,
+          "center_focus_interpolated": false,
+          "eligible_for_paper": false,
+          "png_sha256": "ab2cdec2878126747d8a4f57a4801e3ac0fccd0351e197faf406944bab940697",
+          "observations": [
+            {
+              "track_id": 17945,
+              "present": true,
+              "shared_truth_id": 7364,
+              "xy_error_to_shared_truth_px": 18.086324796770292,
+              "truth_radius_px": 16.069478150000002,
+              "z_error_to_shared_truth_um": 14.091948028872139,
+              "center_inside_truth_disk": false
+            },
+            {
+              "track_id": 18031,
+              "present": true,
+              "shared_truth_id": 7364,
+              "xy_error_to_shared_truth_px": 11.903586687521281,
+              "truth_radius_px": 16.069478150000002,
+              "z_error_to_shared_truth_um": -74.84713723961613,
+              "center_inside_truth_disk": true
+            }
+          ],
+          "overlay_audit": {
+            "label": "D4 diagnostic",
+            "frame": 5336,
+            "source_png_sha256": "ab2cdec2878126747d8a4f57a4801e3ac0fccd0351e197faf406944bab940697",
+            "overlay_png_sha256": "c622d7faf58393cfde9e3472cd3dabc1543be80eb3e8b28b7bad29d3643c0fa9",
+            "observations": [
+              {
+                "role": "terminating",
+                "present": true,
+                "track_id": 17945,
+                "marker": "o",
+                "color": "#D84A3A",
+                "crop_xy_px": [
+                  45.807841047619206,
+                  87.20364814285745
+                ],
+                "tail_frames": [
+                  5334,
+                  5335,
+                  5336
+                ],
+                "tail_crop_xy_px": [
+                  [
+                    43.4367123809526,
+                    19.85406771428609
+                  ],
+                  [
+                    44.491187714285786,
+                    59.67218009523833
+                  ],
+                  [
+                    45.807841047619206,
+                    87.20364814285745
+                  ]
+                ]
+              },
+              {
+                "role": "continuing",
+                "present": true,
+                "track_id": 18031,
+                "marker": "s",
+                "color": "#2C6FB7",
+                "crop_xy_px": [
+                  64.19155300000017,
+                  63.87374704761919
+                ],
+                "tail_frames": [
+                  5332,
+                  5333,
+                  5334,
+                  5335,
+                  5336
+                ],
+                "tail_crop_xy_px": [
+                  [
+                    64.8640165714288,
+                    -3.7882662380948204
+                  ],
+                  [
+                    65.52324842857172,
+                    14.22526304761925
+                  ],
+                  [
+                    65.40662171428602,
+                    32.407862857143186
+                  ],
+                  [
+                    65.40288700000025,
+                    47.69775647619076
+                  ],
+                  [
+                    64.19155300000017,
+                    63.87374704761919
+                  ]
+                ]
+              }
+            ],
+            "unmarked_pixels_unchanged": true,
+            "overlay_size_px": 256
+          }
+        },
+        {
+          "case_id": "D4",
+          "label": "D4 diagnostic",
+          "filename": "D4-diagnostic-frame-5338.png",
+          "frame": 5338,
+          "delta": 1,
+          "x0": 430.0,
+          "y0": 846.0,
+          "center_x": 493.8906805952383,
+          "center_y": 909.8601440238101,
+          "center_z": 783.0724588442122,
+          "recorded_fraction": 1.0,
+          "center_focus_interpolated": true,
+          "eligible_for_paper": false,
+          "png_sha256": "3e9d16a74e996cd03e0c8259c55824e50e2a386445c45485aed99c73be7db0c5",
+          "observations": [
+            {
+              "track_id": 17945,
+              "present": true,
+              "shared_truth_id": 7364,
+              "xy_error_to_shared_truth_px": 8.376367139794224,
+              "truth_radius_px": 16.069478150000002,
+              "z_error_to_shared_truth_um": 21.75086315702356,
+              "center_inside_truth_disk": true
+            },
+            {
+              "track_id": 18031,
+              "present": false
+            }
+          ],
+          "overlay_audit": {
+            "label": "D4 diagnostic",
+            "frame": 5338,
+            "source_png_sha256": "3e9d16a74e996cd03e0c8259c55824e50e2a386445c45485aed99c73be7db0c5",
+            "overlay_png_sha256": "0cc2f22f827b77d4a051d2a925337a86a13cb04e6601ba90673203ac296de5e1",
+            "observations": [
+              {
+                "role": "terminating",
+                "present": true,
+                "track_id": 17945,
+                "marker": "o",
+                "color": "#D84A3A",
+                "crop_xy_px": [
+                  48.76287800000023,
+                  72.13720700000022
+                ],
+                "tail_frames": [
+                  5334,
+                  5335,
+                  5336,
+                  5337,
+                  5338
+                ],
+                "tail_crop_xy_px": [
+                  [
+                    42.4367123809526,
+                    -20.14593228571391
+                  ],
+                  [
+                    43.491187714285786,
+                    19.672180095238332
+                  ],
+                  [
+                    44.807841047619206,
+                    47.203648142857446
+                  ],
+                  [
+                    46.84141466666688,
+                    57.7071881428576
+                  ],
+                  [
+                    48.76287800000023,
+                    72.13720700000022
+                  ]
+                ]
+              },
+              {
+                "role": "continuing",
+                "present": false
+              }
+            ],
+            "unmarked_pixels_unchanged": true,
+            "overlay_size_px": 256
+          }
+        }
+      ],
+      "interpretation": {
+        "title": "D4 · 第一候補：321 µm、最終候補からも除外",
+        "text": "赤ID 17945と青ID 18031が、同じ真値粒子7364を間欠的に追跡しています。−0.50 msと0 msでは両方がその1個に対応し、＋0.50 msでは赤が終了して青だけが残ります。",
+        "caveat": "掲載候補は−0.50・0・＋0.50 msです。−0.75・−0.25 msでは赤の位置が対象粒子から外れ、＋0.25 msでは青が欠測しています。これらは掲載候補から外し、下の診断欄に表示しています。候補時刻とスコアはframe 5337の保存値のままです。",
+        "history": "粒子7364はframe 5312の合体で生じた娘粒子です（候補の6.25 ms前）。青ID 18031はその後のframe 5319に始まるため、この赤青ペアが以前の2つの親粒子を表すわけではありません。"
+      },
+      "related_truth_events": [
+        {
+          "collision_event_id": 1733,
+          "frame": 5312,
+          "parent1_id": 7315,
+          "parent2_id": 7316,
+          "child_id": 7364
+        }
+      ]
+    },
+    {
+      "case_id": "D2",
+      "status": "reviewed_candidate_not_author_selected",
+      "candidate_key": [
+        18567,
+        18658,
+        5508
+      ],
+      "source_particle_id": 7645,
+      "truth_diameter_um": 318.547089,
+      "trajectory_score": 0.9372951808674976,
+      "image_feature_score": 0.48809774867819417,
+      "score_decrease": 0.44919743218930347,
+      "shared_component_count": 7,
+      "rendered_pre_frames": 9,
+      "final_retained": true,
+      "no_truth_event_in_common_gate": true,
+      "selected_frames": [
+        5507,
+        5508,
+        5509
+      ],
+      "selected_times_ms": [
+        -0.25,
+        0.0,
+        0.25
+      ],
+      "minimum_selected_crop_hologram_margin_px": 204,
+      "maximum_displayed_z_error_um": 66.36631948316062,
+      "observations": [
+        {
+          "frame": 5505,
+          "track_id": 18658,
+          "x": 712.0074722857147,
+          "y": 685.8039001904765,
+          "z_plane": 515.8238663551684,
+          "diameter_px": 24.46751251220703,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 703.222467,
+          "truth_y": 695.88982,
+          "truth_z_um": 51548.752955,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 13.375428825804898,
+          "z_error_um": -66.36631948316062,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5505,
+          "track_id": 18567,
+          "x": 692.8410382380955,
+          "y": 705.6378930000003,
+          "z_plane": 516.103045686012,
+          "diameter_px": 22.606114196777344,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 703.222467,
+          "truth_y": 695.88982,
+          "truth_z_um": 51548.752955,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 14.240751045918685,
+          "z_error_um": -38.4483863987989,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5506,
+          "track_id": 18658,
+          "x": 712.4147946666669,
+          "y": 705.5644938571431,
+          "z_plane": 515.8829934623918,
+          "diameter_px": 19.43910980224609,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 702.965681,
+          "truth_y": 712.666819,
+          "truth_z_um": 51549.117829,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 11.820692514419301,
+          "z_error_um": -60.81848276082019,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5506,
+          "track_id": 18567,
+          "x": 692.2198659047622,
+          "y": 719.4026313333337,
+          "z_plane": 516.0799676687574,
+          "diameter_px": 22.66983337402344,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 702.965681,
+          "truth_y": 712.666819,
+          "truth_z_um": 51549.117829,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 12.682417350447496,
+          "z_error_um": -41.12106212426443,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5507,
+          "track_id": 18658,
+          "x": 713.5392976190478,
+          "y": 721.8241895714289,
+          "z_plane": 515.9420817306616,
+          "diameter_px": 22.733743286132807,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 702.708894,
+          "truth_y": 729.443817,
+          "truth_z_um": 51549.482704,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 13.242219024835594,
+          "z_error_um": -55.27453093384247,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5507,
+          "track_id": 18567,
+          "x": 692.8000689523811,
+          "y": 731.9766030000004,
+          "z_plane": 516.0568766988822,
+          "diameter_px": 19.40546569824219,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 702.708894,
+          "truth_y": 729.443817,
+          "truth_z_um": 51549.482704,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 10.22740527925421,
+          "z_error_um": -43.795034111783025,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5508,
+          "track_id": 18658,
+          "x": 714.7329534761908,
+          "y": 739.4319136190479,
+          "z_plane": 516.0011311599773,
+          "diameter_px": 22.87696075439453,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 702.452108,
+          "truth_y": 746.220816,
+          "truth_z_um": 51549.847579,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 14.032403968963202,
+          "z_error_um": -49.73446300227806,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5508,
+          "track_id": 18567,
+          "x": 692.6354980000003,
+          "y": 740.5991820000004,
+          "z_plane": 516.0337727763865,
+          "diameter_px": 26.46958312988281,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 702.452108,
+          "truth_y": 746.220816,
+          "truth_z_um": 51549.847579,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 11.31232074872546,
+          "z_error_um": -46.47030136134708,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5509,
+          "track_id": 18658,
+          "x": 714.0025050952385,
+          "y": 756.3318363809526,
+          "z_plane": 516.0601417503393,
+          "diameter_px": 22.291110229492187,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 702.195322,
+          "truth_y": 762.997814,
+          "truth_z_um": 51550.212453,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 13.558939127458467,
+          "z_error_um": -44.19827796606842,
+          "mapping_agrees": true
+        },
+        {
+          "frame": 5510,
+          "track_id": 18658,
+          "x": 713.2363946666669,
+          "y": 773.0929944285718,
+          "z_plane": 516.1191135017475,
+          "diameter_px": 22.3810775756836,
+          "plausible_truth_ids": [
+            7645
+          ],
+          "nearest_xy_truth_id": 7645,
+          "one_to_one_source_id": null,
+          "truth_id": 7645,
+          "truth_x": 701.938535,
+          "truth_y": 779.774813,
+          "truth_z_um": 51550.577328,
+          "truth_diameter_um": 318.547089,
+          "xy_error_px": 13.125865017940002,
+          "z_error_um": -38.66597782525059,
+          "mapping_agrees": true
+        }
+      ],
+      "selected_panels": [
+        {
+          "label": "D2-3",
+          "filename": "D2-3-frame-5507.png",
+          "frame": 5507,
+          "delta": -1,
+          "x0": 650,
+          "y0": 658,
+          "center_x": 713.5392976190478,
+          "center_y": 721.8241895714289,
+          "center_z": 515.9420817306616,
+          "recorded_fraction": 1.0,
+          "hologram_margin_px": 238,
+          "truth_audit": {
+            "frame": 5507,
+            "delta": -1,
+            "x0": 650,
+            "y0": 658,
+            "hologram_margin_px": 238,
+            "whole_crop": true,
+            "truth_disk_margin_px": 36.781539549999984,
+            "red_present": true,
+            "red_same": true,
+            "blue_observation": {
+              "frame": 5507,
+              "track_id": 18658,
+              "x": 713.5392976190478,
+              "y": 721.8241895714289,
+              "z_plane": 515.9420817306616,
+              "diameter_px": 22.733743286132807,
+              "plausible_truth_ids": [
+                7645
+              ],
+              "nearest_xy_truth_id": 7645,
+              "one_to_one_source_id": null,
+              "truth_id": 7645,
+              "truth_x": 702.708894,
+              "truth_y": 729.443817,
+              "truth_z_um": 51549.482704,
+              "truth_diameter_um": 318.547089,
+              "xy_error_px": 13.242219024835594,
+              "z_error_um": -55.27453093384247,
+              "mapping_agrees": true
+            },
+            "red_observation": {
+              "frame": 5507,
+              "track_id": 18567,
+              "x": 692.8000689523811,
+              "y": 731.9766030000004,
+              "z_plane": 516.0568766988822,
+              "diameter_px": 19.40546569824219,
+              "plausible_truth_ids": [
+                7645
+              ],
+              "nearest_xy_truth_id": 7645,
+              "one_to_one_source_id": null,
+              "truth_id": 7645,
+              "truth_x": 702.708894,
+              "truth_y": 729.443817,
+              "truth_z_um": 51549.482704,
+              "truth_diameter_um": 318.547089,
+              "xy_error_px": 10.22740527925421,
+              "z_error_um": -43.795034111783025,
+              "mapping_agrees": true
+            }
+          },
+          "png_sha256": "7ced7f61a68b03a9747f23369790dc26c96e51d79ca444458fa8ba15288faf52"
+        },
+        {
+          "label": "D2-4",
+          "filename": "D2-4-frame-5508.png",
+          "frame": 5508,
+          "delta": 0,
+          "x0": 651,
+          "y0": 675,
+          "center_x": 714.7329534761908,
+          "center_y": 739.4319136190479,
+          "center_z": 516.0011311599773,
+          "recorded_fraction": 1.0,
+          "hologram_margin_px": 221,
+          "truth_audit": {
+            "frame": 5508,
+            "delta": 0,
+            "x0": 651,
+            "y0": 675,
+            "hologram_margin_px": 221,
+            "whole_crop": true,
+            "truth_disk_margin_px": 35.52475354999995,
+            "red_present": true,
+            "red_same": true,
+            "blue_observation": {
+              "frame": 5508,
+              "track_id": 18658,
+              "x": 714.7329534761908,
+              "y": 739.4319136190479,
+              "z_plane": 516.0011311599773,
+              "diameter_px": 22.87696075439453,
+              "plausible_truth_ids": [
+                7645
+              ],
+              "nearest_xy_truth_id": 7645,
+              "one_to_one_source_id": null,
+              "truth_id": 7645,
+              "truth_x": 702.452108,
+              "truth_y": 746.220816,
+              "truth_z_um": 51549.847579,
+              "truth_diameter_um": 318.547089,
+              "xy_error_px": 14.032403968963202,
+              "z_error_um": -49.73446300227806,
+              "mapping_agrees": true
+            },
+            "red_observation": {
+              "frame": 5508,
+              "track_id": 18567,
+              "x": 692.6354980000003,
+              "y": 740.5991820000004,
+              "z_plane": 516.0337727763865,
+              "diameter_px": 26.46958312988281,
+              "plausible_truth_ids": [
+                7645
+              ],
+              "nearest_xy_truth_id": 7645,
+              "one_to_one_source_id": null,
+              "truth_id": 7645,
+              "truth_x": 702.452108,
+              "truth_y": 746.220816,
+              "truth_z_um": 51549.847579,
+              "truth_diameter_um": 318.547089,
+              "xy_error_px": 11.31232074872546,
+              "z_error_um": -46.47030136134708,
+              "mapping_agrees": true
+            }
+          },
+          "png_sha256": "24bfb7709773f271fddf9a8f869dc934a05eb6f4e2b373e3010e4d108208bbae"
+        },
+        {
+          "label": "D2-5",
+          "filename": "D2-5-frame-5509.png",
+          "frame": 5509,
+          "delta": 1,
+          "x0": 650,
+          "y0": 692,
+          "center_x": 714.0025050952385,
+          "center_y": 756.3318363809526,
+          "center_z": 516.0601417503393,
+          "recorded_fraction": 1.0,
+          "hologram_margin_px": 204,
+          "truth_audit": {
+            "frame": 5509,
+            "delta": 1,
+            "x0": 650,
+            "y0": 692,
+            "hologram_margin_px": 204,
+            "whole_crop": true,
+            "truth_disk_margin_px": 36.26796755000003,
+            "red_present": false,
+            "red_same": false,
+            "blue_observation": {
+              "frame": 5509,
+              "track_id": 18658,
+              "x": 714.0025050952385,
+              "y": 756.3318363809526,
+              "z_plane": 516.0601417503393,
+              "diameter_px": 22.291110229492187,
+              "plausible_truth_ids": [
+                7645
+              ],
+              "nearest_xy_truth_id": 7645,
+              "one_to_one_source_id": null,
+              "truth_id": 7645,
+              "truth_x": 702.195322,
+              "truth_y": 762.997814,
+              "truth_z_um": 51550.212453,
+              "truth_diameter_um": 318.547089,
+              "xy_error_px": 13.558939127458467,
+              "z_error_um": -44.19827796606842,
+              "mapping_agrees": true
+            },
+            "red_observation": null
+          },
+          "png_sha256": "54a0a9b7bcb2a788b11bce9c34a0a4a775c3ed372e0b7cd626037b8f635923dc"
+        }
+      ],
+      "diagnostics": [
+        {
+          "case_id": "D2",
+          "label": "D2 diagnostic",
+          "filename": "D2-diagnostic-frame-5504.png",
+          "frame": 5504,
+          "delta": -4,
+          "x0": 649.0,
+          "y0": 601.0,
+          "center_x": 712.8299707142861,
+          "center_y": 664.544532761905,
+          "center_z": 515.7647004089911,
+          "recorded_fraction": 1.0,
+          "center_focus_interpolated": false,
+          "eligible_for_paper": false,
+          "png_sha256": "620d7ba17c1316b539c070f9fdb0ee52ef727999bc222f41d1054edaba4f3447",
+          "observations": [
+            {
+              "track_id": 18567,
+              "present": true,
+              "shared_truth_id": 7645,
+              "xy_error_to_shared_truth_px": 12.131208904350084,
+              "truth_radius_px": 15.927354450000001,
+              "z_error_to_shared_truth_um": -35.7770049353785,
+              "center_inside_truth_disk": true
+            },
+            {
+              "track_id": 18658,
+              "present": true,
+              "shared_truth_id": 7645,
+              "xy_error_to_shared_truth_px": 17.311006741250694,
+              "truth_radius_px": 15.927354450000001,
+              "z_error_to_shared_truth_um": -71.9180391008922,
+              "center_inside_truth_disk": false
+            }
+          ],
+          "overlay_audit": {
+            "label": "D2 diagnostic",
+            "frame": 5504,
+            "source_png_sha256": "620d7ba17c1316b539c070f9fdb0ee52ef727999bc222f41d1054edaba4f3447",
+            "overlay_png_sha256": "7cfcc8ba2098e8eeaca3371e433a4156254ca3c1dbe4d41ff117e021b28a155b",
+            "observations": [
+              {
+                "role": "terminating",
+                "present": true,
+                "track_id": 18567,
+                "marker": "o",
+                "color": "#D84A3A",
+                "crop_xy_px": [
+                  44.492239809523994,
+                  84.99945957142882
+                ],
+                "tail_frames": [
+                  5500,
+                  5501,
+                  5503,
+                  5504
+                ],
+                "tail_crop_xy_px": [
+                  [
+                    43.11229861904792,
+                    18.454406809524016
+                  ],
+                  [
+                    44.01016647619076,
+                    40.105175285714495
+                  ],
+                  [
+                    44.65444504761922,
+                    62.82873261904797
+                  ],
+                  [
+                    44.492239809523994,
+                    84.99945957142882
+                  ]
+                ]
+              },
+              {
+                "role": "continuing",
+                "present": true,
+                "track_id": 18658,
+                "marker": "s",
+                "color": "#2C6FB7",
+                "crop_xy_px": [
+                  63.829970714286105,
+                  63.544532761904975
+                ],
+                "tail_frames": [
+                  5500,
+                  5501,
+                  5502,
+                  5504
+                ],
+                "tail_crop_xy_px": [
+                  [
+                    66.55922166666699,
+                    -14.436625285713944
+                  ],
+                  [
+                    64.78361023809555,
+                    19.196172904762193
+                  ],
+                  [
+                    63.44516738095285,
+                    45.15146338095258
+                  ],
+                  [
+                    63.829970714286105,
+                    63.544532761904975
+                  ]
+                ]
+              }
+            ],
+            "unmarked_pixels_unchanged": true,
+            "overlay_size_px": 256
+          }
+        }
+      ],
+      "interpretation": {
+        "title": "D2 · 比較候補：319 µm、より大きいスコア低下",
+        "text": "赤ID 18567と青ID 18658が、同じ真値粒子7645を追跡しています。−0.25 msと0 msでは両方が1個の粒子上にあり、＋0.25 msでは赤が終了して青だけが残ります。",
+        "caveat": "スコアは0.937→0.488に低下しますが、最終候補一覧には残っています。採用する場合、元図の「rejected」は使えません。−1.00 msの青点は真値粒子の外周より約1.38 px外にあるため、掲載候補にはしていません。",
+        "history": "2本はframe 5500の真の合体以前には別々の親粒子を追い、その後は娘粒子7645を重複追跡しています。表示区間は合体後で、候補時刻は真の合体の2.00 ms後です。D4よりも解釈上の補足が必要です。"
+      },
+      "related_truth_events": [
+        {
+          "collision_event_id": 1806,
+          "frame": 5500,
+          "parent1_id": 7584,
+          "parent2_id": 7585,
+          "child_id": 7645
+        }
+      ]
+    }
+  ],
+  "phase_iterations": 3,
+  "crop_size_px": 128,
+  "pixel_pitch_um": 10,
+  "contrast": "Original per-frame recorded-pixel 1st/99th percentile normalization.",
+  "marker_policy": "Saved smoothed track observations and recent 1 ms tails; no truth-snapping or fabricated marker observations.",
+  "search": {
+    "full_scoring_union": 263185,
+    "counts": {
+      "high_trajectory_score_and_any_decrease": 13031,
+      "some_same_truth_support": 750,
+      "same_physical_particle_repeatedly": 20
+    },
+    "initial_screen": "trajectory score >=0.9 and any positive decrease after image features",
+    "independent_truth_screen": "A unique physical particle contains the observed center in its projected disk and lies within 250 um axially; >=2 observations per track and >=80% of pre/candidate-time observations share one truth ID; >=2 simultaneous shared observations.",
+    "limitations": "This is a documented geometrical screen, not a proof of absence of every duplicate-tracking pattern. Intermittent associations below the 80% support threshold remain outside this screen.",
+    "crop": "Fully recorded 128x128 pixels, centered on actual continuing-track positions. Display times considered independently, without changing candidate time or scores.",
+    "paper_definition": "CollisionPaper template.tex lines 164-169 and 914-925: multiple observed IDs assigned to a single physical particle."
+  },
+  "intermittent_search": {
+    "full_scoring_union": 263185,
+    "counts": {
+      "high_trajectory_score_and_any_decrease": 412,
+      "some_same_truth_support": 73,
+      "same_physical_particle_repeatedly": 14
+    },
+    "initial_screen": "trajectory score >=0.9 and decrease >0.2 after image features",
+    "independent_truth_screen": "A unique physical particle contains the observed center in its projected disk and lies within 250 um axially; >=2 observations per track and >=30% of pre/candidate-time observations share one truth ID; >=1 simultaneous shared observations.",
+    "limitations": "This is a documented geometrical screen, not a proof of absence of every duplicate-tracking pattern. Intermittent associations below the stated support threshold remain outside this screen.",
+    "crop": "Fully recorded 128x128 pixels, centered on actual continuing-track positions. Display times considered independently, without changing candidate time or scores.",
+    "paper_definition": "CollisionPaper template.tex lines 164-169 and 914-925: multiple observed IDs assigned to a single physical particle."
+  },
+  "scope": "Post-hoc illustrative review only. Saved models, candidate scores, 34 numerical outputs and confirmed (a) are unchanged."
+}
