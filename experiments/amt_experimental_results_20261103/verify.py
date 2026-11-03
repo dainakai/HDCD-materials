@@ -137,7 +137,21 @@ def main():
                 assert 0<=point.y-frame['y0']-radius and point.y-frame['y0']+radius<128
         assert [r['frame']-c['candidate_frame_raw'] for r in c['frames']]==[-8,-4,0,4,8]
     passed('Ten human-confirmed illustration cases preserve candidate/model/GIF identity; all observed parent extents fit their 50 reconstructed crops')
-    pages={name:Links() for name in ['index.html','fig10-candidates.html','fig13-exclusions.html']}
+    selected=read(DATA/'figure10_provenance.json')
+    assert selected['status']=='author_confirmed' and selected['selected_options']==['03','08']
+    assert [c['candidate_id'] for c in selected['cases']]==['15:6509:6639:6750','22:3758:4041:4087']
+    for c in selected['cases']:
+        original=next(o for o in gallery['cases'] if o['case']==c['option'])
+        assert c['frames']==original['frames'] and c['parent_diameters_um']==original['parent_diameters_um']
+        assert len(PdfReader(PACKAGE/f'fig10-selected/{c["case"]}.pdf').pages)==1
+        for k,f in enumerate(c['frames'],1):
+            with Image.open(PACKAGE/f'fig10-selected/{c["case"]}-frame{k}.png') as im:assert im.size==(768,768)
+            with Image.open(PACKAGE/f'gallery/{c["option"]}-frame{k}.png') as im:
+                np.testing.assert_array_equal(np.asarray(im),np.load(PRIVATE/'gallery_images'/f['cache'])['display'])
+    assert selected['display_geometry']['linear_display_gain_at_equal_figure_width']>1.65
+    reference=selected['reference_figure9'];assert sha(REPO/reference['file'])==reference['sha256']
+    passed('Author-confirmed 03/08 replace Fig.10; ten source crops are unchanged, frame views are 768px and paper panels are 1.655 times wider at equal figure width')
+    pages={name:Links() for name in ['index.html','fig10-candidates.html','fig10-selected.html','fig13-exclusions.html']}
     for name,parser in pages.items():parser.feed((PACKAGE/name).read_text())
     scheduled={'verification.json','experimental-replacements.zip'}
     for name,parser in pages.items():
@@ -151,7 +165,7 @@ def main():
             elif url.fragment:assert url.fragment in parser.ids,link
         content=(PACKAGE/name).read_text()
         assert 'style=' not in content and '<script' not in content
-    passed('All three report pages, gallery GIF/crop links, exclusion evidence, figure downloads and navigation anchors resolve without external assets')
+    passed('All four report pages, selected-frame views, gallery GIF/crop links, exclusion evidence, figure downloads and navigation anchors resolve without external assets')
     manuscript=WORK/'CollisionPaper/本番フォーマット/template.tex'
     assert sha(manuscript)==read(PACKAGE/'text/replacement_anchors.json')['manuscript_sha256_at_build']
     passed('Original manuscript remains unmodified')
@@ -159,7 +173,7 @@ def main():
     assert not any('sqlite' in p or 'review-access' in p or p.endswith(('.pt','.pth')) for p in snapshot_paths)
     passed('No review database, review access configuration or model weights in the public package')
     save(PACKAGE/'verification.json',{'status':'PASS','verified_at':stamp(),'checks':checks,
-        'visual_review':'Existing eight figures previously inspected. Updated Fig.12 and all ten new case PDFs rendered and inspected; observed-parent crop bounds also checked numerically.',
+        'visual_review':'Fig.10 author-confirmed 03/08 plate and enlarged frames rendered and inspected. Previously verified Fig.12 and the ten-case gallery retained; source crops and particle bounds checked numerically.',
         'limitations':['No claim of absolute experimental recall.','New and public cohorts differ; comparisons are not causal ablations.',
             'No terminal TeX compiler is installed; standalone TeX integration is supplied but the original manuscript is not compiled or edited.']})
     print('PASS:',len(checks),'independent accounting/artifact checks')

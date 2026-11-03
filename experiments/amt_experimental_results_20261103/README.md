@@ -56,15 +56,23 @@ Fig.5 retains the original display limits and now shares one logarithmic count
 normalization across all three panels. Clipped display counts remain recorded.
 Fig.3 is a procedure illustration and is outside this statistical update.
 
-The two Fig.10 images depict the physical examples in the previous Fig.10, but
-use new track hypotheses and measurements. Case (a): S0021 rank 5, raw candidate
-3612, display zero 3608; (b): S0017 rank 18, raw candidate 8565, display zero
-8563. Candidate IDs come from the new cohort, not the old PDF filenames.
-The display origins only select illustrative snapshots and do not change the
-analysis windows. Ten frames are reconstructed with the frozen engine on the
-local RTX 4060 Ti, with three iterations and 2048 padding; the engine manifest
-is fully checked before reconstruction. GPU numeric variability was previously
-authorized. See `data/figure10_provenance.json`.
+The author confirmed options 03 and 08 for Fig.10. Case (a) is S0015 rank 1,
+ID `15:6509:6639:6750`; case (b) is S0022 rank 2, ID `22:3758:4041:4087`.
+Both retain five views at −2, −1, 0, +1 and +2 ms relative to raw candidate
+time, with the existing 128×128 source crops. `figure10_selected.py` uses
+those cached images and changes only presentation: image panels occupy 29.0%
+of the full figure width instead of 17.5% (1.655 times as wide at equal overall
+width), arranged in three columns and two rows per case including trajectories.
+The large HTML view presents independent 768px overlaid PNGs, three per row
+on desktop and one per row on phones. It links to the original 128px crops,
+review GIFs, each selected case's PDF/PNG and the combined paper Fig.10.
+
+The earlier two-case Fig.10 was kept in `versions/before-selection-2310bfc`.
+It is now historical, as are the old `case_images.py` default cases. The ten-case
+option gallery remains accessible with a notice of the confirmed choice.
+`data/figure10_provenance.json` and `fig10-selected/selection.json` record the
+current author decision, fixed frames, source hashes and the Fig.9 visual
+reference. Original manuscript and parallel Fig.9 work remain untouched.
 
 ## Reproduction
 
@@ -151,3 +159,16 @@ OPENBLAS_NUM_THREADS=4 MPLCONFIGDIR=/tmp/amt-experimental-mpl .venv/bin/python e
 Rebuild the eight-figure combined PDF and render final new PDFs with system
 `pdftoppm`. Then rebuild the report, verify, and publish as above. The initial
 package was preserved at `versions/initial-e744ca9` before this follow-up.
+
+To refresh only the confirmed Fig.10 and its large view after the gallery exists:
+
+```bash
+OPENBLAS_NUM_THREADS=4 MPLCONFIGDIR=/tmp/amt-experimental-mpl .venv/bin/python experiments/amt_experimental_results_20261103/figure10_selected.py
+OPENBLAS_NUM_THREADS=4 .venv/bin/python experiments/amt_experimental_results_20261103/build_report.py
+OPENBLAS_NUM_THREADS=4 .venv/bin/python experiments/amt_experimental_results_20261103/verify.py
+.venv/bin/python experiments/amt_experimental_results_20261103/publish.py
+```
+
+The selected view is `experimental-results-20261103/fig10-selected.html` under
+the existing Quick Tunnel. `plot.py` also uses this confirmed selection for
+future full figure builds; it cannot silently revert to the old case pair.

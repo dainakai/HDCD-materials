@@ -14,7 +14,7 @@ TITLES={4:'再処理した粒子集団の統計',5:'再処理した粒径・速�
     12:'レビュー件数・カバー率・適合率',13:'体積保存・運動量保存との整合性',14:'系列別・全体の衝突率',15:'親粒径ペア別の衝突数'}
 NOTES={4:'追加の差し替え候補です。合成データを作った元の統計と、今回再処理した実験統計を本文で区別してください。',
 5:'72,047軌跡を集計しました。鉛直流の補正値0.26 m/sは変更していません。図の表示範囲外の軌跡は元の集計から削除していません。',
-10:'旧Fig.10と同じ物理的な衝突を、今回の軌跡・粒径・位相回復3回で再描画しました。新しい候補IDと表示時刻を記録し、表示上の時刻原点と解析の候補時刻を区別しました。',
+10:'候補03（S0015・1位）と08（S0022・2位）で確定しました。各コマを3列・2段に配置し、同じ図幅で画像枠を約1.66倍に拡大。専用ビューではスマートフォンで1コマずつ大きく表示します。',
 11:'曖昧12件を除いた1,108件。確認衝突186件、非衝突922件です。高スコアでも非衝突が残るという解釈は維持できます。',
 12:'Precision 50%の境界は各系列24件（51.49%）と25件（49.43%）の間で、Coverageはどちらも93.01%です。Coverageが初めて95%を超えるのは34件（95.16%、Precision 37.18%）。40件の縦線は削除しました。',
 13:'粒径は確認衝突184件・非衝突908件、速度は179件・822件。欠測による除外のみで、外れ値は残しています。速度RMSEの増加を本文でも明記します。',
@@ -26,7 +26,7 @@ def table(headers,rows):
 
 def figure_card(n):
     caption=html.escape(CAPTIONS[n])
-    extra={10:'<p><a href="fig10-candidates.html">衝突例の候補10件をGIF・軌跡・静止画で比較する</a>（各例のPDFとPNG付き）</p>',13:'<p><a href="fig13-exclusions.html">各サンプルの除外理由を読む</a>（全119件、元の観測フレーム付き）</p>'}.get(n,'')
+    extra={10:'<p><a href="fig10-selected.html">確定版03・08を大きな各コマで見る</a> · <a href="fig10-candidates.html">候補10例の一覧</a></p>',13:'<p><a href="fig13-exclusions.html">各サンプルの除外理由を読む</a>（全119件、元の観測フレーム付き）</p>'}.get(n,'')
     old=(f'<details><summary>旧論文の Fig.{n} と見比べる</summary><p class="muted">旧論文の掲載図。旧レビュー・旧計測値を変更せず表示しています。</p><img class="baseline" loading="lazy" src="baseline/fig{n:02d}.png" alt="旧版 Fig.{n}"></details>' if n>=10 else '')
     return f'''<article class="card" id="fig{n:02d}"><div class="figure-title"><span>FIGURE {n}</span><h3>{TITLES[n]}</h3></div>
 <p>{NOTES[n]}</p>{extra}<figure><a href="figures/fig{n:02d}.pdf"><img loading="lazy" class="{'case-image' if n==10 else ''}" src="preview/fig{n:02d}.png" alt="新版 Fig.{n}：{TITLES[n]}"></a></figure>
@@ -91,7 +91,7 @@ def main():
     download_rows=''.join(f'<li><a href="data/{p.name}">{p.name}</a></li>' for p in sorted(DATA.glob('*.csv')))
     report=f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>実験節の差し替え図表・結果 | AMT phase3</title><link rel="stylesheet" href="report.css"></head><body>
 <header><div class="eyebrow">AMT · EXPERIMENTAL RESULTS · 2026-11-03</div><h1>実験節の図表と結果を<br>新版のレビューから再作成</h1><p>14系列・各80件のレビューを固定し、同じ新版の予測・軌跡・粒子計測から集計しました。Fig.10–15、英文本文、キャプション、数値表を差し替え用に用意しています。</p>
-<div class="buttons"><a class="button" href="fig10-candidates.html">Fig.10候補10例</a><a class="button" href="fig13-exclusions.html">Fig.13全除外例の理由</a><a class="button primary" href="experimental-replacements.zip">差し替え一式 ZIP</a><a class="button" href="experimental_figures.pdf">図をまとめて読む PDF</a><a class="button" href="text/experimental_section.tex">実験節の英文 TeX</a></div>
+<div class="buttons"><a class="button" href="fig10-selected.html">Fig.10確定版・拡大ビュー</a><a class="button" href="fig13-exclusions.html">Fig.13全除外例の理由</a><a class="button primary" href="experimental-replacements.zip">差し替え一式 ZIP</a><a class="button" href="experimental_figures.pdf">図をまとめて読む PDF</a><a class="button" href="text/experimental_section.tex">実験節の英文 TeX</a></div>
 <div class="stats"><div class="stat"><strong>1,120 / 1,120</strong><span>保存済みレビュー</span></div><div class="stat"><strong>186</strong><span>確認衝突（旧版185）</span></div><div class="stat"><strong>94.1%</strong><span>上位30件の条件付きカバー率</span></div><div class="stat"><strong>83.6%</strong><span>確認衝突数 / 重力予測</span></div></div></header>
 <nav><div><a href="#findings">結果と変更点</a><a href="#figures">Fig.10–15</a><a href="#comparison">旧版比較</a><a href="#wording">本文差し替え</a><a href="#audit">検証・根拠</a><a href="#downloads">数値表</a></div></nav><main>
 <section id="findings"><h2>図と数値だけでなく、3か所の解釈も更新します</h2><div class="notice"><strong>「掲載図と性能値を置き換えるだけ」で済む状態ではありません。</strong><p>差し替え用の英文には、以下の解釈の変更を反映済みです。論文本体は編集していません。</p></div>
@@ -114,7 +114,7 @@ def main():
 <h3>Fig.4–5も再処理版を用意しました</h3><p>実験の粒子集団を紹介する図として、新しい測定値から再作成しています。ただし「この図の統計から今回の合成データを生成した」と書くと履歴と異なります。合成データの元の実験分布と鉛直速度摂動は固定したままです。差し替える場合は<a href="text/population_provenance_replacement.tex">データの由来を区別する英文</a>も併用してください。Fig.3は手順説明図なので今回の数値更新対象に含めていません。</p>
 <details><summary>補助のFig.4–5を見る</summary>{figure_card(4)}{figure_card(5)}</details></section>
 <section id="audit"><h2>今回の検証</h2><div class="notice good"><strong>レビューと計算の対応を固定</strong><p>全14系列の実行完了を確認し、SQLiteの整合したコピーに1,120判定と1,121履歴を保存しました。候補ID・順位・モデル・予測ファイル・GIFハッシュを全件突合しています。</p></div>
-<ul><li>各系列の粒子計測・平滑化軌跡のSHA-256を、処理完了時の記録と照合しました。</li><li>親・衝突後の粒径と窓境界を、今回の軌跡から再計算し、全候補の推論時特徴量と一致することを確認しました。</li><li>重力予測は既存の物理APIによる再計算、および対称な細分ビン行列の直接積分とも照合しました。</li><li>実験レビューをモデル学習には使っていません。既存Fig.10の表示用10フレームに加え、追加候補10例の50フレームを固定済みコード・位相回復3回・ローカルGPUで再構成しました。</li><li>粒径ペアは185件、全衝突数は186件。窓不足・欠測を数値表に残し、残差による外れ値除去をしていません。</li></ul>
+<ul><li>各系列の粒子計測・平滑化軌跡のSHA-256を、処理完了時の記録と照合しました。</li><li>親・衝突後の粒径と窓境界を、今回の軌跡から再計算し、全候補の推論時特徴量と一致することを確認しました。</li><li>重力予測は既存の物理APIによる再計算、および対称な細分ビン行列の直接積分とも照合しました。</li><li>実験レビューをモデル学習には使っていません。候補10例の50フレームは固定済みコード・位相回復3回で再構成しました。確定した03・08の10フレームは、その同じ128画素の画像を再利用して表示枠を拡大しています。</li><li>粒径ペアは185件、全衝突数は186件。窓不足・欠測を数値表に残し、残差による外れ値除去をしていません。</li></ul>
 <p><a href="verification.json">検証結果 JSON</a> / <a href="provenance.json">版・出典の記録</a> / <a href="data/results.json">全結果 JSON</a></p>
 <p class="muted">モデル SHA-256: <code>{MODEL_SHA}</code><br>最後の判定保存: {html.escape(frozen['last_review_at'])}<br>解析用スナップショット: {html.escape(frozen['created_at'])}</p></section>
 <section id="downloads"><h2>数値表・ダウンロード</h2><p>CSVは図の集計値・有効標本数・旧新版比較・補足確認を収録しています。レビューDB、アクセスキー、元ホログラム、モデル本体は公開パッケージに含めていません。</p><ul>{download_rows}</ul><div class="buttons"><a class="button primary" href="experimental-replacements.zip">一式をダウンロード</a><a class="button" href="experimental_figures.pdf">8図のPDF</a></div></section>
