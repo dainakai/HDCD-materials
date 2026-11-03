@@ -21,7 +21,7 @@
     "cloud microphysics"
   ],
   "license": "cc-by-4.0",
-  "version": "1.1.0.dev0",
+  "version": "1.1.0",
   "related_identifiers": [
     {
       "identifier": "https://github.com/dainakai/HDCD-materials",

@@ -20,8 +20,12 @@ def main():
     p.add_argument('--gpu-python', default=sys.executable)
     p.add_argument('--julia', default='julia')
     p.add_argument('--gpu', default='0', help='Visible GPU index; independent runs may select different GPUs')
+    p.add_argument('--cpu-jobs', type=int, default=1,
+                   help='Concurrent CPU feature jobs (default: 1); increase when RAM permits')
     p.add_argument('--smoke', action='store_true', help='128-frame generation-to-feature integration check')
     a = p.parse_args()
+    if a.cpu_jobs < 1:
+        p.error('cpu-jobs must be a positive integer')
     for name in ['gpu_python', 'julia']:
         value = getattr(a, name)
         resolved = shutil.which(value) or (str(Path(value).expanduser().resolve()) if Path(value).is_file() else None)
@@ -45,7 +49,12 @@ def main():
     def call(script, *args, gpu=False):
         cmd = [a.gpu_python if gpu else sys.executable, str(REPO / 'scripts' / script), *map(str, args)]
         print('Running:', ' '.join(cmd), flush=True)
-        subprocess.run(cmd, cwd=REPO, env=environment, check=True)
+        try:
+            subprocess.run(cmd, cwd=REPO, env=environment, check=True)
+        except subprocess.CalledProcessError as error:
+            (output / 'state.json').write_text(json.dumps({'status': 'FAIL', 'stage': stage,
+                'failed_command': cmd, 'returncode': error.returncode, 'smoke': a.smoke}) + '\n')
+            raise
 
     import fcntl
     with (output / '.pipeline.lock').open('a') as lock:
@@ -80,7 +89,7 @@ def main():
                 for step in ['pool', 'static', 'score', 'images']:
                     for method in ['ours', 'depth_free', 'minip2d']:
                         image_gpu = step == 'images' and method == 'ours'
-                        call('benchmark/run_stage.py', step, '--method', method, '--jobs', 1 if image_gpu else 3,
+                        call('benchmark/run_stage.py', step, '--method', method, '--jobs', 1 if image_gpu else a.cpu_jobs,
                              '--device', 'cuda:0' if image_gpu else 'cpu', gpu=image_gpu)
             elif stage == 'train':
                 for method in ['ours', 'depth_free', 'minip2d']:
@@ -88,6 +97,7 @@ def main():
             elif stage == 'evaluate':
                 for method in ['ours', 'depth_free', 'minip2d']:
                     call('benchmark/evaluate.py', '--method', method, *(['--stages'] if method == 'ours' else []))
+                call('verify_benchmark_results.py', '--run-root', output)
         (output / 'state.json').write_text(json.dumps({'status': 'PASS', 'through_stage': 'integration_smoke' if a.smoke and stage not in ['labels', 'render', 'initialize'] else stage, 'smoke': a.smoke}) + '\n')
 
 

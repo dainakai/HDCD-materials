@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+  "driver": "595.84",
+  "sampling": "Process GPU memory from nvidia-smi and Linux process RSS, sampled approximately every 0.2 seconds. GPU values include allocator caches and CUDA context memory.",
+  "integration": {
+    "seed": 260740,
+    "frames": 128,
+    "candidate_feature_vectors_per_method": 32,
+    "yolo_batch_size": 8,
+    "depth_batch_size": 256,
+    "diameter_batch_size": 512,
+    "unrestricted_peak_process_tree_rss_mib": 4147.3671875,
+    "limited_peak_process_tree_rss_mib": 4161.8125,
+    "both_runs_completed": true
+  },
+  "phases": [
+    {
+      "phase": "hologram_rendering",
+      "peak_gpu_mib": 380.0,
+      "peak_process_rss_mib": 3898.4609375
+    },
+    {
+      "phase": "minip",
+      "peak_gpu_mib": 524.0,
+      "peak_process_rss_mib": 1025.8828125
+    },
+    {
+      "phase": "particle_detection",
+      "peak_gpu_mib": 14138.0,
+      "peak_process_rss_mib": 1950.82421875
+    },
+    {
+      "phase": "depth_and_diameter",
+      "peak_gpu_mib": 1664.0,
+      "peak_process_rss_mib": 3347.79296875
+    },
+    {
+      "phase": "collision_image_features",
+      "peak_gpu_mib": 534.0,
+      "peak_process_rss_mib": 1749.4765625
+    },
+    {
+      "phase": "particle_detection_with_8gib_free",
+      "peak_gpu_mib": 3338.0,
+      "peak_process_rss_mib": 1934.62109375
+    },
+    {
+      "phase": "cpu_test_evaluation",
+      "peak_gpu_mib": 0,
+      "peak_process_rss_mib": 2427.50390625
+    }
+  ],
+  "gpu_memory_budget_check": {
+    "method": "An independent process held a temporary allocation, leaving about 8 GiB free for the unchanged measurement and feature pipeline.",
+    "free_gpu_bytes_before_job": 8547598336,
+    "peak_job_gpu_mib": 3338.0,
+    "raw_detections_unrestricted": 26288,
+    "raw_detections_limited": 26287,
+    "bitwise_particle_equivalence": false,
+    "scope": "Execution check on the same physical GPU; not a complete benchmark or a qualification of all 8 GB cards."
+  },
+  "cpu_evaluation": {
+    "frames": 6000,
+    "methods": [
+      "ours",
+      "depth_free",
+      "minip2d"
+    ],
+    "reference_comparison": "PASS",
+    "peak_process_tree_rss_mib": 2427.50390625
+  },
+  "complete_run_storage_gib": {
+    "holograms_and_generation_labels": 44.662,
+    "particle_measurements": 21.613,
+    "minip_images": 15.102,
+    "tracks_3d": 2.007,
+    "tracks_2d": 0.415,
+    "feature_and_truth_tables": 16.158,
+    "fitted_models": 0.343
+  },
+  "scope": "Observed resource use, not minimum hardware requirements. Full fitting and all 36000 frames were not profiled under the GPU memory limit."
+}

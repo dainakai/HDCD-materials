@@ -21,6 +21,10 @@ The candidate key is `(vanished_track_id, survivor_track_id, candidate_frame)`. 
 
 Model trees use skops, attention weights use safetensors, and normalization arrays use NumPy NPZ. The particle-measurement checkpoints retain their original PyTorch format and are checked against the bundled hashes before loading.
 
+## Acquisition files
+
+Each numerical sequence has an `acquisition.yaml` with `schema_version: 1`, a `units` mapping, an `optics` mapping and a `frames` CSV path. The CSV contains zero-based `frame` IDs and `primary` and `secondary` image paths, resolved relative to the YAML file. The files under `data/acquisition/` specify all numerical-benchmark optical settings explicitly: 21,450 µm camera separation, a 74,900 µm reconstruction front, three phase-retrieval iterations and 2,048-pixel padding for collision image features. `scripts/generate_holograms.py` writes the corresponding local image manifest and a separate `holod3-acquisition.yaml` with 1,536-pixel padding for particle measurement.
+
 ## Experimental reviews and measurements
 
 `data/experimental/reviews.csv` contains exactly 1,120 rows: the top 80 candidates in each of 14 recordings. `scene_num` is the acquisition-system sequence number; the paper numbers these recordings consecutively from 1 to 14. The mapping is in `scripts/figure_support/scene_index.py`.

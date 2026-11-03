@@ -4,16 +4,18 @@ Evaluation code, trained models and data for **Semi-automated detection of dropl
 
 ## Set up the environment
 
-Use Linux and Python **3.12.12**. Run the following commands from the repository root:
+The reference environment uses Linux x86-64 and Python **3.12.12**. Start with Git and curl installed. The commands below install uv 0.10.6 and the exact Python version in user-managed directories, then create the CPU environment:
 
 ```bash
-git clone --branch revision/amt-102p3mm-phase3 https://github.com/dainakai/HDCD-materials.git
+git clone https://github.com/dainakai/HDCD-materials.git
 cd HDCD-materials
-python3.12 -m venv .venv
-.venv/bin/python -m pip install uv==0.10.6
-.venv/bin/python -m uv pip install --python .venv/bin/python \
+curl -LsSf https://astral.sh/uv/0.10.6/install.sh | sh
+export PATH="$HOME/.local/bin:$PATH"
+uv python install 3.12.12
+uv venv --python 3.12.12 .venv
+uv pip install --python .venv/bin/python \
   --index-url https://download.pytorch.org/whl/cpu torch==2.12.0
-.venv/bin/python -m uv pip install --python .venv/bin/python \
+uv pip install --python .venv/bin/python \
   -r requirements-core-reference.txt -e .
 source .venv/bin/activate
 python scripts/check_environment.py
@@ -21,7 +23,7 @@ python scripts/prepare_data.py --profile test
 python scripts/verify_release.py
 ```
 
-This environment runs the supplied collision models and the numerical analyses on a CPU. Reserve 6 GB for the environment and unpacked inputs. Hologram generation and particle measurement additionally require an NVIDIA GPU, the [GPU environment and Julia setup](docs/environment.md#hologram-generation-and-particle-measurement), and about 150 GB of working space. Generated holograms stay in the run directory.
+The supplied collision models, numerical evaluation, tables and figures run on a CPU; no GPU is needed for these tasks. About 6 GB of disk space covers the checkout, CPU environment and unpacked inputs. All subsequent commands run from the repository root. Full reproduction from holograms uses the [GPU environment and Julia setup](docs/environment.md#hologram-generation-and-particle-measurement). See [resource usage](docs/environment.md#resource-usage) for measured memory use and full-run disk space. Generated holograms stay in the run directory.
 
 ## Evaluate the trained models
 
@@ -51,6 +53,8 @@ python scripts/reproduce_benchmark.py --output runs/benchmark --julia julia
 ```
 
 This generates all six particle sequences and paired holograms, reconstructs and measures particles, links and smooths trajectories, selects candidates, calculates features, fits all three collision models, and evaluates the test sequence. It uses the bundled particle-measurement weights and fits the collision models from the five training sequences.
+
+The final comparison is written to `runs/benchmark/reference-comparison.json`. The command exits with an error if the recalculated predictions or metrics differ beyond the recorded tolerances. GPU workspace selection and floating-point arithmetic can affect thresholded detections; inspect this comparison as well as the input hashes when reproducing the published values.
 
 The generation volume spans 0–102.3 mm. Reconstruction uses 1,024 planes from 74.9 to 177.2 mm relative to the primary camera, with three phase-retrieval iterations throughout. MinIP includes the terminal plane. The generator uses explicit PCG64 streams and fixed distribution tables; every generated particle table and camera image is checked against a recorded SHA-256 before downstream processing. [Generation, resumption and reproducibility checks](docs/simulation.md).
 
