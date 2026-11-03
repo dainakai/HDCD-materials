@@ -4,6 +4,63 @@ This author-requested revision changes illustrative examples and display only.
 Model fits, saved candidate scores and 34 frozen numerical outputs remain
 unchanged. The manuscript is not edited.
 
+## Latest candidates: complete crops inside the hologram, 2026-11-03
+
+The author requested (a) candidates without clipping near the hologram boundary.
+`interior_true.py` now requires all six complete 128×128 crops to remain inside
+the 1024×1024 hologram, with at least 8 pixels between the crop edge and the
+hologram edge. Crops remain centered on actual continuing-track measurements;
+no inward shift, clamp, fill or change of scale is used. Both truth disks and
+measured disks have at least 3 pixels of clearance within each crop.
+
+The search found 232 cases with six complete interior crops, 223 with verified
+identities and visible disks, and 79 after initial particle separation and
+common-focus checks. Of these, 31 have both parents >=100 µm and all ten XY
+errors <=3 pixels (also <=40% of the truth radius, with axial error <=250 µm).
+The larger N1 option has a maximum XY error of 4.31 pixels, disclosed explicitly.
+
+| Candidate | Frame / terminating, continuing tracks | True diameters (µm) | Mean / max XY error (px) | Minimum crop-to-hologram edge distance (px) |
+| --- | --- | --- | --- | ---: |
+| N1 | 3958 / 12754, 12764 | 154 + 242 → 261 | 1.45 / 4.31 | 12 |
+| N2 | 5894 / 19387, 19524 | 146 + 154 → 190 | 1.20 / 2.61 | 43 |
+| N3 | 163 / 65, 325 | 145 + 163 → 195 | 1.12 / 2.00 | 51 |
+| N4 | 1897 / 4252, 4359 | 146 + 151 → 187 | 1.42 / 2.84 | 63 |
+| N5 | 4178 / 12913, 13140 | 130 + 142 → 172 | 1.11 / 2.36 | 208 |
+| N6 | 5472 / 17670, 17995 | 116 + 123 → 151 | 0.67 / 1.86 | 307 |
+
+All 36 panels were visually inspected. N5 has relatively unobstructed target
+images farther inside the hologram; N1 preserves larger particles; N2/N3
+balance size and localization. The errors summarize ten displayed observations
+per case and are not whole-test metrics. All cases are strict identity-consistent
+at candidate time and retained by the final policy; candidate time equals the
+true event time. N1's blue point at −0.75 ms has no existing one-to-one mapping,
+but independently matches the nearest expected truth parent with 1.99px XY and
+14.3µm axial error. N1's maximum error is a different point, at +0.25 ms. N2–N6
+have one-to-one mappings for all ten displayed points.
+
+Private outputs: `../audit/revision-figure9-interior-20261103/`.
+The public `fig09-interior-a.html` page contains six time frames per candidate,
+original red/blue markers and recent tails, optional plain PNGs, exact scores,
+boundary distances and a ZIP with 72 individual PNGs and six contact sheets.
+Previous candidate galleries link to this page. The current paper PDF still
+uses the rejected C04 and is unchanged pending the author's selection.
+
+```bash
+PY=/media/dai-server/M2Disk2TB/repos/260712/.venv/bin/python
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/interior_true.py select
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/interior_true.py render
+MPLCONFIGDIR=/tmp/amt-figure9-mpl OPENBLAS_NUM_THREADS=1 "$PY" experiments/amt_figure9_refinement_20261102/publish_interior_true.py
+```
+
+Rendering uses the same three-iteration phase recovery on CPU with four
+threads. Exact candidate keys are pinned in `PREVIEW_CASES`; raw crops can be
+reused only after checking the saved center coordinates. Every reconstruction
+asserts that all pixels were recorded. Publication protects the current paper
+PDF, selection record and replacement ZIP with before/after SHA-256 checks.
+The existing tunnel is reused, with HTTPS checks and process details recorded
+in the private `publication.json` receipt. Scientific results and experimental
+processing remain unchanged.
+
 ## Current status: the old (a) is rejected
 
 The author correctly identified poor particle localization in C04. It is no
