@@ -1,30 +1,16 @@
 {
   "status": "PASS",
-  "selected": [
-    "C04",
-    "H01"
+  "author_confirmed": [
+    "N1",
+    "D4"
   ],
-  "selection": "Post-hoc illustrative choice at the author request, not an estimate of an average image-feature effect.",
-  "inspected_centered_candidates": [
-    "C01",
-    "C02",
-    "C03",
-    "C04",
-    "H01",
-    "H02"
+  "source_review_sha256": "97157b80d1d4340e3ece30ab42161a92992cce926f84399d6435015e5ee420b2",
+  "source_a_selection_sha256": "370a0674f2f2336b5f686b33d5b08e1d3298fb02ec0bc2eeb9b10468d96c11e5",
+  "selection": "Post-hoc illustrative visual selection confirmed by the author; not an estimate of the mean image-feature effect.",
+  "rejected_distinct_particle_examples": [
+    "B01",
+    "B02"
   ],
-  "artifact_rule": "Trajectory score >=0.9, saved image-ensemble score decreases by >=0.3, outside the common truth gate, absent from final policy; shared-particle interpretation audited from actual observations and independent truth geometry.",
-  "true_rule": "Final-policy retained, both scores >=0.9, exact event time, two actual pre-event track observations on the two truth parents, and actual daughter observations at/after the event.",
-  "crop": "128 pixels centered on continuing-track observations; original black padding and recorded-pixel 1st–99th percentile normalization.",
-  "time_frames": [
-    -4,
-    0,
-    1
-  ],
-  "focus": "Actual continuing-track smoothed depth; no truth-based refocusing.",
-  "historical_searches": [
-    "search.py: smaller centered examples",
-    "larger.py: superseded off-center examples"
-  ],
-  "strict_training_label_note": "C04 has identity_unknown in the strict training-label audit because the terminating ID lacks a one-to-one truth match. Its displayed observations are checked independently against the correct parents and daughter. Do not claim strict identity_consistent."
+  "candidate_review": "fig09-artifact-options.html",
+  "diagnosis": "D4 frames -0.75/-0.25ms have red positions outside the truth disk; +0.25ms has no blue observation. They remain visible as diagnostics in the candidate review, not in the paper figure."
 }

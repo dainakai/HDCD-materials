@@ -127,19 +127,37 @@
       "child_diameter_um": 292.3523690850424
     },
     "inspected_current_case": "C01 / 12486_12575_3859",
-    "decision": "Inspected the regenerated realization of the original planned slot. Selected C04 instead: larger parents and daughter, a visible two-to-one transition, and no continuing duplicate red observation in the post-frame."
+    "decision": "The original planned slot was inspected; the author ultimately confirmed N1, true event 1204, and D4, same-particle artifact."
   },
   "dataset_relation": "Same training/test seed allocation, byte-identical empirical diameter and velocity distributions, and common HoloD3 measurement models; all five training sequences and the test sequence were regenerated. Generation depth changed from 102.4 to 102.3 mm and the particle realizations differ. Same seed or shared HoloD3 does not imply identical input samples or track IDs.",
   "correction": "The previous larger-particle version added an incorrect crop-center clamp to avoid padding. This shifted targets to crop edges. Restore target-centered 128-pixel crops and black unrecorded padding; normalize only recorded pixels as in the original.",
-  "selected_cases": [
+  "scope": "Only illustrative selection and display change; current model fits, scores and evaluation metrics remain frozen.",
+  "historical_selected_cases": [
     "C04",
     "H01"
   ],
-  "display_frames_relative": [
+  "selected_cases": [
+    "N1",
+    "D4"
+  ],
+  "scope_note": "Original regeneration comparison remains valid. Other notes about C04/H01 are historical; current selection and times are in selection.json.",
+  "historical_display_frames_relative": [
     -4,
     0,
     1
   ],
-  "display_time_note": "The +0.25 ms frame retains actual observations and whole target disks before they leave the recording area. No post-exit positions are imputed. The original figure used +1.00 ms.",
-  "scope": "Only illustrative selection and display change; current model fits, scores and evaluation metrics remain frozen."
+  "display_frames_relative": {
+    "N1": [
+      -1,
+      0,
+      1
+    ],
+    "D4": [
+      -2,
+      0,
+      2
+    ]
+  },
+  "historical_display_time_note": "The +0.25 ms frame retains actual observations and whole target disks before they leave the recording area. No post-exit positions are imputed. The original figure used +1.00 ms.",
+  "display_time_note": "Author-confirmed N1: -0.25/0/+0.25ms; D4: -0.50/0/+0.50ms. All six centered crops are fully recorded."
 }

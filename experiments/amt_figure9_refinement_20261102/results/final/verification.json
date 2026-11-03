@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "visual_review": "PASS",
+  "final_pdf_sha256": "26bc0be64d32f426d128ea4f47c7d1e465d7ce9a6c8f9ef174648e9fd7d3558f",
+  "selection_sha256": "dca88470eebb1a48862af3533bfabd7a30b8a1b0dbdc43586aabfcebaa4ae749",
+  "identity_audit_sha256": "9182a10002daa699859327b1466ba0500e996f591a46c2e138ad44e6dabaf292",
+  "original_comparison_sha256": "a2032a3bab215d5a6c46adf46f382c15ac5d6c9488c2cc597d4ced659f0bd7b1",
+  "frozen_evaluation_files_unchanged": 34,
+  "original_image_panel_geometry_identical": true,
+  "used_fonts_embedded_and_no_clipped_text": true,
+  "used_fonts": [
+    "AAAAAA+LiberationSans",
+    "FRZNSF+LiberationSans"
+  ],
+  "six_pdf_images_match_reviewed_crops_through_original_colormap": true,
+  "native_pdf_image_size_px": 128,
+  "actual_observations_checked": 9,
+  "fully_recorded_panels": 6,
+  "manuscript_unchanged": true,
+  "confirmed_a_pixels_unchanged": true,
+  "visual_review_details": "Rendered final PDF inspected: all six selected images, original panel borders/typography/legend/scale bar, all four score labels, source-image orientation and red/blue markers. No clipping or overlap."
+}

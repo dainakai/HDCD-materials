@@ -1,0 +1,163 @@
+{
+  "status": "PASS",
+  "original_provenance_sha256": "a1091fadc21ddca57d41eb6fd3de453be1a727cb511674a002436666ecafc7e2",
+  "generation_depth_um": {
+    "original": 102400.0,
+    "current": 102300.0
+  },
+  "identical_empirical_input_csv_sha256": {
+    "diameter_density_csv": "7b6286da85ca8c5b4783e30908440f34fe92725637186cd04b36f8918e4f2beb",
+    "velocity_quantiles_csv": "1be7499fdc685d1a40b57301f2f23869ca2d77d35520fd6d9865a27cf33ade16"
+  },
+  "regenerated_sequences": [
+    {
+      "seed": 260740,
+      "role": "training",
+      "old_events_sha256": "7cf612e653e1254b88a731e796c873610dd8f2fee1668e71fbd12b699f36acb6",
+      "regenerated_events_sha256": "22e0cb8547f646319c6c787d6f6d88d7a2afd0c3aa4e6c9247f2c9b87c16bf92"
+    },
+    {
+      "seed": 260741,
+      "role": "training",
+      "old_events_sha256": "771eff2e039669336be5ad4c6ede11a7f087bab58337788a205a6710307e9b06",
+      "regenerated_events_sha256": "5e0743c02778460b2b1e87a61c8d821d1f26386d61a4ebcc0414acddd32d8130"
+    },
+    {
+      "seed": 260742,
+      "role": "training",
+      "old_events_sha256": "fa5f5f2edea14e85af475899081a4f8f20100caa0b573e082ac8ed28ab8f9737",
+      "regenerated_events_sha256": "48d9404ed200a715be6c93fc112a502dcf1897b8717aa9c49092994e1d0e2aa5"
+    },
+    {
+      "seed": 260743,
+      "role": "training",
+      "old_events_sha256": "e58857f6dae0bb6d0bdb2c27eeb3468a5630772b94ad603a867b024298c400d7",
+      "regenerated_events_sha256": "063661ec0daa1924effffefafb6ac70ec90ba6443d4a06c8ab2ede66e3389b5e"
+    },
+    {
+      "seed": 260744,
+      "role": "training",
+      "old_events_sha256": "75167e5f2521739ad39797a1b759a5c2434f7908a4bb302cca16d40b92b277df",
+      "regenerated_events_sha256": "cf81ecc5d0009769c0430b00ab63129bf0ae87397dc41e3dda207ee17ff74062"
+    },
+    {
+      "seed": 260745,
+      "role": "test",
+      "old_events_sha256": "aeaf13271a6502cb05553027dd84905f2eb7593aecf5687069d3c5c84f1c332f",
+      "regenerated_events_sha256": "44feccac7ca3c451c5bf5870c5ec32d38fea2dde56050298765fe7dfd0730164"
+    }
+  ],
+  "original_cases": [
+    {
+      "case": "true_collision",
+      "candidate_key": "12515_12410_3859",
+      "truth_collision_event_id": 1165,
+      "candidate_frame": 3859,
+      "time_reference_frame": 3859,
+      "display_frames": "3855;3859;3863",
+      "vanished_track_id": 12515,
+      "survivor_track_id": 12410,
+      "shared_source_particle_id": null,
+      "truth_parent1_diameter_um": 211.52060245627885,
+      "truth_parent2_diameter_um": 250.15516888178723,
+      "truth_child_diameter_um": 292.86011857105285,
+      "trajectory_score_p_traj": 0.9769993691086968,
+      "base_score_b_with_image": 0.9641979492184912,
+      "score_change": -0.012801419890205556,
+      "pre_same_interp_count": 0,
+      "pre_same_observed_count": 0,
+      "pre_alternating_same_count": 0,
+      "display_center_sources": "frozen_image_feature_table;continuing_track;continuing_track",
+      "recorded_fractions": "1.000000;1.000000;0.906250",
+      "display_crop_policy": "128 px crop centered on the target; unrecorded pixels are black"
+    },
+    {
+      "case": "shared_particle_artifact",
+      "candidate_key": "17742_17721_5331",
+      "truth_collision_event_id": null,
+      "candidate_frame": 5331,
+      "time_reference_frame": 5331,
+      "display_frames": "5327;5331;5335",
+      "vanished_track_id": 17742,
+      "survivor_track_id": 17721,
+      "shared_source_particle_id": 7332,
+      "truth_parent1_diameter_um": null,
+      "truth_parent2_diameter_um": null,
+      "truth_child_diameter_um": null,
+      "trajectory_score_p_traj": 0.8896492645874858,
+      "base_score_b_with_image": 0.3357927002433158,
+      "score_change": -0.55385656434417,
+      "pre_same_interp_count": 9,
+      "pre_same_observed_count": 7,
+      "pre_alternating_same_count": 2,
+      "display_center_sources": "frozen_image_feature_table;continuing_track;continuing_track",
+      "recorded_fractions": "1.000000;1.000000;0.656250",
+      "display_crop_policy": "128 px crop centered on the target; unrecorded pixels are black"
+    }
+  ],
+  "original_crop_policy": "128 px square centered on the stored feature center when available; regions outside the recorded image are displayed as black padding",
+  "original_normalization": "per-panel 1st-to-99th percentile over recorded pixels only; unrecorded padding remains black",
+  "original_event_csv_sha256": "aeaf13271a6502cb05553027dd84905f2eb7593aecf5687069d3c5c84f1c332f",
+  "current_event_parquet_sha256": "60354b5d39d3678ff88313f0e748cdcffc70fa710da630e8f119f165024e3ebe",
+  "same_planned_slot_1165": {
+    "original": {
+      "planned_event_id": 1165,
+      "frame": 3859,
+      "parent1_id": 5136,
+      "parent2_id": 5137,
+      "child_id": 5213,
+      "x_um": 1034.7597643033787,
+      "y_um": 9090.6087691362,
+      "z_um": 46773.68032018562,
+      "parent1_diameter_um": 211.52060245627885,
+      "parent2_diameter_um": 250.15516888178723,
+      "child_diameter_um": 292.86011857105285
+    },
+    "current": {
+      "planned_event_id": 1165,
+      "frame": 3859,
+      "parent1_id": 5167,
+      "parent2_id": 5168,
+      "child_id": 5233,
+      "x_um": 231.1659064073742,
+      "y_um": 7535.733170397785,
+      "z_um": 15823.585332779876,
+      "parent1_diameter_um": 206.237014837826,
+      "parent2_diameter_um": 253.1094600969418,
+      "child_diameter_um": 292.3523690850424
+    },
+    "inspected_current_case": "C01 / 12486_12575_3859",
+    "decision": "The original planned slot was inspected; the author ultimately confirmed N1, true event 1204, and D4, same-particle artifact."
+  },
+  "dataset_relation": "Same training/test seed allocation, byte-identical empirical diameter and velocity distributions, and common HoloD3 measurement models; all five training sequences and the test sequence were regenerated. Generation depth changed from 102.4 to 102.3 mm and the particle realizations differ. Same seed or shared HoloD3 does not imply identical input samples or track IDs.",
+  "correction": "The previous larger-particle version added an incorrect crop-center clamp to avoid padding. This shifted targets to crop edges. Restore target-centered 128-pixel crops and black unrecorded padding; normalize only recorded pixels as in the original.",
+  "scope": "Only illustrative selection and display change; current model fits, scores and evaluation metrics remain frozen.",
+  "historical_selected_cases": [
+    "C04",
+    "H01"
+  ],
+  "selected_cases": [
+    "N1",
+    "D4"
+  ],
+  "scope_note": "Original regeneration comparison remains valid. Other notes about C04/H01 are historical; current selection and times are in selection.json.",
+  "historical_display_frames_relative": [
+    -4,
+    0,
+    1
+  ],
+  "display_frames_relative": {
+    "N1": [
+      -1,
+      0,
+      1
+    ],
+    "D4": [
+      -2,
+      0,
+      2
+    ]
+  },
+  "historical_display_time_note": "The +0.25 ms frame retains actual observations and whole target disks before they leave the recording area. No post-exit positions are imputed. The original figure used +1.00 ms.",
+  "display_time_note": "Author-confirmed N1: -0.25/0/+0.25ms; D4: -0.50/0/+0.50ms. All six centered crops are fully recorded."
+}

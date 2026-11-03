@@ -21,11 +21,11 @@ REPO = HERE.parents[1]
 WORK = REPO.parent
 SOURCE = REPO / 'experiments/amt_full_20261101/results'
 FULL = WORK / 'audit/revision-full-20261101'
-OUT = WORK / 'audit/revision-paper-replacements-20261102'
+OUT = WORK / 'audit/revision-paper-final-20261103'
 PACKAGE = OUT / 'package'
 PUBLIC = WORK / 'audit/revision-review-20261101/public'
 PAPER = WORK / 'CollisionPaper/本番フォーマット/template.tex'
-REFINED = WORK / 'audit/revision-figure9-refinement-20261102'
+REFINED = WORK / 'audit/revision-figure9-final-20261103'
 BUNDLE = Path('/home/dai-server/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages')
 sys.path.append(str(BUNDLE))
 os.environ.setdefault('MPLCONFIGDIR', str(OUT / 'cache/matplotlib'))
@@ -98,22 +98,21 @@ def render_fig9(n):
     selection = load(REFINED/'selection.json')
     verification = load(REFINED/'verification.json')
     assert selection['status'] == verification['status'] == 'PASS'
+    assert selection['author_confirmed'] and verification['visual_review']=='PASS'
     assert sha(REFINED/'fig09.pdf') == selection['final_pdf_sha256'] == verification['final_pdf_sha256']
     assert sha(REFINED/'selection.json') == verification['selection_sha256']
     assert n['figure9_cases'] == selection['cases']
-    for name in ['fig09.pdf', 'fig09.png', 'crop-contrast-comparison.png']:
+    for name in ['fig09.pdf', 'fig09.png']:
         cp(REFINED/name, 'figures/'+name)
     subprocess.run(['/usr/bin/pdftoppm','-singlefile','-scale-to','2400','-png',
                     str(PAPER.parent/'figures/fig09.pdf'),str(OUT/'original-fig09')],check=True,
                    stdout=subprocess.DEVNULL)
     cp(OUT/'original-fig09.png', 'figures/fig09-original-reference.png')
-    cp(REFINED/'previous-smaller-cases/fig09.png','figures/fig09-previous-smaller.png')
     cp(REFINED/'selection.json', 'provenance/fig09-layout.json')
     cp(REFINED/'verification.json', 'provenance/fig09-verification.json')
     cp(REFINED/'search-protocol.json', 'provenance/fig09-search-protocol.json')
     cp(REFINED/'identity-audit.json', 'provenance/fig09-identity-audit.json')
     cp(REFINED/'original-comparison.json', 'provenance/fig09-original-comparison.json')
-    cp(Path(selection['candidate_search_directory'])/'C01.png', 'figures/fig09-original-slot-current.png')
 
 
 def source_span(source, start, end):
@@ -181,7 +180,7 @@ def table_html(headers, rows):
 
 def readme(mapping, n):
     lines = ['# 合成ホログラム評価：論文差し替え用セット', '',
-             '対象：2026-11-02確定の102.3 mm・全位相回復3回の評価。ブランチ revision/amt-102p3mm-phase3。',
+             '対象：102.3 mm・全位相回復3回の確定評価。Fig.9は2026-11-03に著者が採用したN1/D4へ更新。ブランチ revision/amt-102p3mm-phase3。',
              '原稿は変更していません。以下は著者が差し替えるためのファイルです。', '',
              '## 差し替え方', '',
              '1. figures/fig07.pdf、fig08.pdf、fig09.pdfを原稿の同名ファイルへコピーします。PNGは閲覧用です。',
@@ -202,9 +201,9 @@ def readme(mapping, n):
               '- 画像特徴段階でAPは0.892678から0.897689に改善し、FP90は1,186から1,004に減りますが、FP80は177から183に増えます。「全段階で全指標が改善」は使えません。',
               '- Table 5は候補集合と位置補正に渡せる特徴も変わります。スコアだけの要因実験とは解釈しません。最終行で追加されるのは座標による重複抑制です。',
               '- Fig.9は著者の依頼により事例を選び直しました。128×128画素、各クロップの1–99パーセンタイルによる線形コントラスト調整、元の作図スクリプトと投稿用ラベル処理を使用しています。画像は固定済みの新系列から位相回復3回で再構成しました。学習・推論スコア・全量性能評価は変更していません。',
-              '- Fig.9は286＋285→360 µmの真の衝突と、真値径276 µmの共有粒子アーティファクトです。スコアはそれぞれ0.958486→0.957430と0.908647→0.491434です。前版のクロップ位置の誤りを修正し、対象中心の128画素を切り出し、撮影範囲外だけを元図と同じ黒表示にしました。表示時刻は−1.00、0、＋0.25 msです。赤丸・青四角は実観測に限り、焦点は継続軌跡の推定Zです。事例は結果を見た後の例示選択であり、平均効果の評価ではありません。',
+              '- Fig.9(a)はN1：154＋242→261 µmの真の衝突、−0.25・0・＋0.25 ms、0.998955→0.997927です。(b)はD4：同じ真値粒子7364（321 µm）を赤ID 17945と青ID 18031が追う例、−0.50・0・＋0.50 ms、0.943667→0.624751です。6枚の128画素クロップ全体が撮影範囲内にあります。真の衝突は最終候補に残り、D4は除外されています。表示スコアはrelation-attention前、retained/rejectedは最終選択結果です。',
               '- 元図のイベント1165・frame 3859も追跡しました。同じseed構成ですが、生成奥行き変更に伴う再生成後は位置と粒子IDが異なります。元図と同じ画像に新スコアを付けた図ではありません。元の候補ID、同じ計画枠の新旧真値、表示事例の照合結果はprovenance/fig09-original-comparison.jsonとfig09-identity-audit.jsonにあります。',
-              '- アーティファクトは二つの軌跡IDが同一粒子を捉えた候補です。その粒子は2フレーム後に別の粒子と衝突しますが、候補位置から約481 µm離れており共通評価ゲート350 µmの外です。「周辺に物理的な衝突が一切ない例」とは説明しません。',
+              '- D4は表示した前時刻と候補時刻の両方で2本が同じ真値粒子の投影円内にあり、表示点のZ誤差は最大78.606 µmです。画像特徴は9フレーム中8フレームで共有成分を示します。粒子は候補の6.25 ms前に生成された娘粒子で、青IDはその生成後に始まっています。−0.75・−0.25 msの赤の位置ずれと＋0.25 msの青の欠測は診断記録に残し、図には使用していません。事例選択は結果確認後の例示で、平均効果の評価ではありません。',
               '- Fig.7(a)はconfidenceを動かしたPR曲線、(b–f)は衝突用の計測／追跡系統の集計です。低confidenceの追加検出まで同一ファイルとは説明しません。',
               '- 生成座標0–102.3 mmと、カメラからの距離74.9–177.2 mmを区別します。',
               '- APはprecision包絡線の積分です。scikit-learnの非補間APと同じ定義とは書きません。',
@@ -226,31 +225,18 @@ def readme(mapping, n):
 def figure9_notes(n):
     true, artifact = n['figure9_cases']
     event = true['truth_event']
-    original = load(REFINED/'original-comparison.json')
-    slot = original['same_planned_slot_1165']
-    a, b = slot['original'], slot['current']
-    slot_table = table_html(['イベント1165 / frame 3859','元論文の系列','今回の再生成系列'], [
-        ['親ID → 娘ID',f"{int(a['parent1_id'])}, {int(a['parent2_id'])} → {int(a['child_id'])}",f"{int(b['parent1_id'])}, {int(b['parent2_id'])} → {int(b['child_id'])}"],
-        ['位置 x, y, z (mm)',', '.join(f"{a[k]/1000:.3f}" for k in ['x_um','y_um','z_um']),', '.join(f"{b[k]/1000:.3f}" for k in ['x_um','y_um','z_um'])],
-        ['真値径 (µm)',f"{a['parent1_diameter_um']:.0f} + {a['parent2_diameter_um']:.0f} → {a['child_diameter_um']:.0f}",f"{b['parent1_diameter_um']:.0f} + {b['parent2_diameter_um']:.0f} → {b['child_diameter_um']:.0f}"],
-    ])
-    return f'''<p><strong>対象中心のクロップへ修正しました。</strong>真の衝突は {event['parent1_diameter_um']:.0f}＋{event['parent2_diameter_um']:.0f}→{event['child_diameter_um']:.0f} µm。アーティファクトの真値径は {artifact['shared_truth_diameter_um']:.0f} µmで、trajectory scoreは{artifact['trajectory_score']:.6f}、画像特徴追加後は{artifact['image_feature_score']:.6f}です。0.9以上から{artifact['trajectory_score']-artifact['image_feature_score']:.3f}低下します。</p>
-<p>元図と同じ128×128画素（1.28 mm四方）、赤丸・青四角と短い軌跡、右側の横棒、フォント・パネル配置を使っています。前版で加えた「枠を撮影範囲内へずらす処理」が粒子を端へ寄せていたため、削除しました。元図と同じく対象中心で切り出し、撮影範囲外は黒表示にします。記録された画素だけで1–99パーセンタイルの線形コントラスト調整を行っています。</p>
-<p>6枚の画像と完成PDFを目視確認し、実観測9点を正解粒子と照合しました。時刻は<strong>−1.00、0、＋0.25 ms</strong>です。粒子が撮影範囲から出る前の実観測を使うため、元図の＋1.00 msから変更しました。粒子画像の倍率・画素・推論結果は変更していません。</p>
-<details><summary>元論文と異なるサンプルになった理由と、元の事例の追跡結果</summary>
-<p>粒径・速度分布の元CSVは新旧でバイト単位で同じで、学習・テストに使うseedの構成も維持しています。ただし、生成体積を0–102.3 mmへ変更し、学習5系列とテスト1系列の真値・ホログラムを再生成して、粒子計測と追跡も再実行しています。学習用の個々の画像まで同じではありません。HoloD3を共通にしても入力画像と軌跡IDは一致しません。元図の真イベントは候補12515_12410_3859（計画イベント1165）、アーティファクトは17742_17721_5331でした。元のアーティファクトは0.890→0.336で、今回指定のtrajectory score 0.9以上には達していません。</p>
-{slot_table}
-<p>同じ計画イベント1165の今回の実現（候補12486_12575_3859）も再構成して比較しました。粒子径は近いものの、位置と軌跡は異なり、合体後にも赤の観測が残ります。今回は二粒子から一粒子への変化が見やすく、さらに大きいイベント1815を採用しました。「同じseedの同じ計画枠」と「同じ画像・同じ粒子の実現」を区別しています。</p>
-<figure><img src="paper/figures/fig09-original-slot-current.png" alt="元図と同じ計画イベント1165を今回の再生成データで再構成した比較候補。採用図ではありません" loading="lazy"><figcaption>比較用：今回のイベント1165。差し替えには上の採用PDFを使ってください。</figcaption></figure>
-<figure><a href="paper/figures/fig09-original-reference.png"><img src="paper/figures/fig09-original-reference.png" alt="CollisionPaperにある元論文のFig.9" loading="lazy"></a><figcaption>元論文のFig.9。元作図スクリプトと投稿用ラベル処理を今回も使用しています。</figcaption></figure>
-<p>CollisionPaperのmainと一致するコミット2a5d3f4を確認。旧作業コピーから回収した作図スクリプトは保存済みスナップショットとバイト単位で一致しています。</p>
-<a href="paper/provenance/fig09-original-comparison.json" download>新旧事例の対応記録</a></details>
-<details><summary>アーティファクトの正解対応と、選択上の注意</summary>
-<p>終了軌跡8518と継続軌跡8507は、表示した−1.00 msと0 msの両方で、同じ真値粒子3605の投影円内にあります。Z誤差は最大約66 µmです。一対一の対応表は継続軌跡にしか真値を割り当てないため、両IDがその対応表で確認できたとは記述していません。画像特徴は衝突前9フレームすべてで共有成分を示します。</p>
-<p>この粒子は2フレーム後に別の粒子と衝突します。ただし、そのイベントは候補位置から約481 µm離れ、共通評価の350 µmゲート外です。ここで示すアーティファクトは「同一粒子に付いた二つのIDを組にした候補」であり、周囲に衝突が一切ないという意味ではありません。真イベント1815は最終候補に残り、アーティファクトは除外されています。表示スコアはrelation-attention前です。</p>
-<p>真イベント1815の厳密な学習ラベルはidentity_unknownです。終了軌跡に一対一対応がないためで、今回の図では表示点を独立に正解の親7607・7608、娘7683と照合しました。学習ラベルや評価規則は変更していません。選択は結果を見た後の例示であり、画像特徴の平均効果を示すものではありません。</p>
-<a href="paper/provenance/fig09-identity-audit.json" download>表示点と正解粒子の照合記録</a> · <a href="paper/provenance/fig09-layout.json" download>事例・描画条件・出典</a></details>
-<details><summary>128画素クロップとコントラスト調整の比較</summary><figure><a href="paper/figures/crop-contrast-comparison.png"><img src="paper/figures/crop-contrast-comparison.png" alt="同じ採用事例を256画素、128画素固定0–1、128画素1–99パーセンタイルで比較" loading="lazy"></a><figcaption>左：256画素・1–99％。中央：128画素・固定0–1。右：採用した128画素・1–99％。表示処理を特徴抽出や推論へ戻していません。</figcaption></figure></details>'''
+    return f'''<p id="fig9-current-selection"><strong>著者による採用確定：</strong>(a) N1、(b) D4。元の作図スクリプトと投稿用ラベル処理で、確定した6枚とスコアを組み合わせました。</p>
+<p>(a)は真イベント1204、真値粒径{event['parent1_diameter_um']:.0f}＋{event['parent2_diameter_um']:.0f}→{event['child_diameter_um']:.0f} µm、時刻は<strong>−0.25・0・＋0.25 ms</strong>です。スコアは{true['trajectory_score']:.6f}→{true['image_feature_score']:.6f}で高い値を保ちます。</p>
+<p>(b)は<strong>同じ真値粒子7364（321 µm）を赤ID 17945と青ID 18031が重複追跡する例</strong>です。時刻は<strong>−0.50・0・＋0.50 ms</strong>。前時刻と候補時刻で2本が1個の粒子に対応し、後時刻は青だけになります。スコアは{artifact['trajectory_score']:.6f}→{artifact['image_feature_score']:.6f}、低下量は{artifact['trajectory_score']-artifact['image_feature_score']:.6f}です。</p>
+<p>6枚すべて、対象中心の128×128画素クロップ全体が撮影範囲内にあります。位相回復3回、継続軌跡の推定Zで再構成し、各画像の1–99パーセンタイルで線形にコントラストを調整しています。赤丸・青四角と線は保存された観測軌跡から描き、真値へ移動させていません。原図の画像パネル寸法、配色、線、凡例、フォントを維持しています。</p>
+<details><summary>真値との照合と、使用しなかったフレーム</summary>
+<p>図中の実観測9点を真値と独立に照合しました。(a)は正しい親粒子5288・5289と娘粒子5377に対応します。(b)の5点は全て粒子7364の投影円内にあり、Z誤差の最大値は78.606 µmです。D4の画像特徴は候補前9フレーム中8フレームで共有成分を示します。</p>
+<p>D4の−0.75・−0.25 msでは赤の位置が対象粒子から外れ、＋0.25 msでは青が欠測しています。これらは最終図には使わず、<a href="fig09-artifact-options.html#D4">候補レビューの診断欄</a>に残しています。真値粒子7364は候補の6.25 ms前の合体で生じた娘粒子です。青IDはその生成後に始まり、この赤青ペアが以前の2つの親粒子を表すわけではありません。</p>
+<p>retained/rejectedは最終候補選択の結果です。棒グラフのスコアはrelation-attention前であり、画像特徴だけが最終除外を決めたとは説明しません。この2例は結果確認後に選んだ例示で、全体での平均的な効果を示すものではありません。</p>
+<a href="paper/provenance/fig09-identity-audit.json" download>表示点と真値の照合記録</a> · <a href="paper/provenance/fig09-layout.json" download>採用事例・時刻・作図条件</a></details>
+<details><summary>元論文との関係</summary><p>元論文の事例は12515_12410_3859と17742_17721_5331です。粒径・速度分布の元CSVとseed構成は新旧で共通ですが、生成奥行きの変更に伴い学習5系列とテスト1系列の画像・真値を再生成しています。今回はその新系列から採用したN1/D4であり、旧画像へ新しいスコアを付けた図ではありません。</p>
+<figure><a href="paper/figures/fig09-original-reference.png"><img src="paper/figures/fig09-original-reference.png" alt="元論文のFig.9。比較用" loading="lazy"></a><figcaption>比較用：元論文のFig.9。差し替えには上の確定PDFを使ってください。</figcaption></figure>
+<a href="paper/provenance/fig09-original-comparison.json" download>新旧系列と元事例の照合記録</a></details>'''
 
 
 def html_page(n, mapping):
@@ -296,7 +282,7 @@ def html_page(n, mapping):
     bytes_=sum(p.stat().st_size for p in PACKAGE.rglob('*') if p.is_file())
     return f'''<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>合成ホログラム評価 · 論文差し替え用セット</title><link rel="stylesheet" href="paper-assets/paper.css"><script src="paper-assets/paper.js" defer></script></head>
 <body><a href="#main" class="skip">本文へ</a><header><a href="index.html">HDCD · 研究報告</a><a href="paper-replacements.zip" download>一括ダウンロード ↓</a></header>
-<main id="main"><div class="hero"><p class="eyebrow">SYNTHETIC VALIDATION / 2026.11.02</p><h1>合成ホログラム評価<br>論文の差し替え用セット</h1><p class="lead">Fig.7–9、Table 4・5、元数値、英語キャプションと本文案をまとめました。<br>確定した全量評価を使用し、原稿への差し替えは行っていません。</p>
+<main id="main"><div class="hero"><p class="eyebrow">SYNTHETIC VALIDATION / 2026.11.03 · FIG.9 CONFIRMED</p><h1>合成ホログラム評価<br>論文の差し替え用セット</h1><p class="lead">Fig.7–9、Table 4・5、元数値、英語キャプションと本文案をまとめました。<br>確定した全量評価を使用し、原稿への差し替えは行っていません。</p>
 <div class="summary"><div><span>提案法のAP</span><strong>0.9222</strong></div><div><span>誤検出 · 再現率80%</span><strong>51<small>件</small></strong></div><div><span>誤検出 · 再現率90%</span><strong>486<small>件</small></strong></div></div>
 <div class="downloads"><a class="primary" href="paper-replacements.zip" download>差し替えセットを保存 (.zip)</a><a href="paper/README.md" download>差し替え手順 (.md)</a><button id="print" type="button">印刷</button></div>
 <p class="micro">生成奥行き102.3 mm · 全位相回復3回 · 評価seed 260745 · 6,000フレーム / 真値2,000イベント</p></div>
@@ -360,7 +346,7 @@ def main():
           'particle_reconstruction_planes':1024,'phase_retrieval_iterations':3,
           'prior_test_seed_use':'Implementation and sensitivity checks on earlier generated data; excluded from model fitting.'})
     files = {str(p.relative_to(PACKAGE)):sha(p) for p in sorted(PACKAGE.rglob('*')) if p.is_file() and p.name not in {'manifest.json','SHA256SUMS'}}
-    write('manifest.json', {'schema_version':1,'status':'PASS','edition':'2026-11-02 synthetic paper replacement package, centered large particles and high-score artifact',
+    write('manifest.json', {'schema_version':1,'status':'PASS','edition':'2026-11-03 synthetic paper replacement package, author-confirmed N1/D4',
           'source_branch':'revision/amt-102p3mm-phase3','source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
           'manuscript_sha256':original_paper,'files':files,'file_count_excluding_manifests':len(files),
           'manuscript_modified':False,'full_manuscript_compilation':'Not performed: manuscript replacement is reserved for the author.'})

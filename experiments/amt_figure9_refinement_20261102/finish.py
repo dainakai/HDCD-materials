@@ -17,6 +17,9 @@ CANDIDATES=REPO.parent/'audit/revision-figure9-centered-20261102'
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def main():
+    current=REPO.parent/'audit/revision-figure9-final-20261103/selection.json'
+    if current.exists() and json.loads(current.read_text()).get('author_confirmed'):
+        raise RuntimeError('Historical C04/H01 assembly is superseded. Use finalize.py for the author-confirmed N1/D4 figure.')
     assert mpl.__version__=='3.10.9',mpl.__version__
     shortlist=json.loads((CANDIDATES/'shortlist.json').read_text())
     rows=[next(r for r in shortlist if r['review_id']==key) for key in CHOSEN]

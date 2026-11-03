@@ -4,7 +4,38 @@ This author-requested revision changes illustrative examples and display only.
 Model fits, saved candidate scores and 34 frozen numerical outputs remain
 unchanged. The manuscript is not edited.
 
-## Current author decision: (a) confirmed, (b) alternatives, 2026-11-03
+## Final author selection: N1 / D4, 2026-11-03
+
+The author accepted the recommended D4 example and requested the final results
+summary. N1 remains fixed at −0.25/0/+0.25 ms; D4 uses −0.50/0/+0.50 ms.
+`finalize.py` combines the six reviewed caches using the original plot and
+submission relabeler. No model fitting or performance recomputation occurs.
+The current figure and evidence are in `results/final/` and mirrored to the
+conventional `results/fig09.pdf`, `results/fig09.png` and companion JSONs.
+
+- N1: frame 3958, observed IDs 12754/12764, true event 1204, diameters
+  153.79 + 241.59 → 260.79 µm; scores 0.9989552783 → 0.9979272758.
+- D4: frame 5337, observed IDs 17945/18031 on true particle 7364,
+  diameter 321.39 µm; scores 0.9436670450 → 0.6247505742. It is absent
+  from final predictions. Eight of nine image-feature frames share a component.
+- All six crops are fully recorded. Nine actual observations are independently
+  checked against physical truth. The PDF preserves native 128×128 raster pixels
+  instead of the original savefig default's 106px downsampling; all 24 visible
+  image-panel border segments remain at their original coordinates. Original
+  colormap, fonts, labels, scale bar, lines and markers are preserved.
+- Retained/rejected are final-policy outcomes; the displayed scores precede
+  relation-attention. The figure does not attribute final removal to image
+  features alone. Selection is post-hoc illustration, not a performance estimate.
+
+The completed figure was rendered and visually inspected. The combined
+Fig.7–9/Table 4–5/LaTeX package is now in
+`../audit/revision-paper-final-20261103/`; the original manuscript remains
+unedited. The earlier package is preserved in its original dated directory.
+`publish_final.py` updates review-page decisions and the scoped public manifest.
+Do not run the superseded `finish.py` or candidate publisher to restore an old
+choice: those entry points now reject overwriting the confirmed selection.
+
+## Earlier decision: (a) confirmed, (b) alternatives, 2026-11-03
 
 The author confirmed N1 with −0.25, 0 and +0.25 ms: frames 3957, 3958 and
 3959, tracks 12754/12764, true event 1204. `confirm_true.py` exports these

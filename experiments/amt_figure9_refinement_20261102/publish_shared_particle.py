@@ -48,6 +48,9 @@ def triptych(cid, panels, score):
 
 
 def main():
+    final=REPO.parent/'audit/revision-figure9-final-20261103/selection.json'
+    if final.exists() and json.loads(final.read_text()).get('author_confirmed'):
+        raise RuntimeError('N1/D4 are now author-confirmed. Use finalize.py and publish_final.py; do not restore the pre-selection candidate page.')
     a=json.loads((CONFIRMED/'selection.json').read_text())
     assert a['status']=='author_confirmed' and a['display_frames']==[3957,3958,3959]
     protected=a['old_complete_figure_and_zip_unchanged']

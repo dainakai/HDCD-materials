@@ -29,11 +29,13 @@ The evaluation uses maximum-cardinality one-to-one matching within \(\pm5\) fram
 def figure9_caption(n):
     true, artifact = n['figure9_cases']
     pre, zero, post = true['display_time_ms']
-    assert artifact['display_time_ms'] == [pre, zero, post]
+    b_pre, b_zero, b_post = artifact['display_time_ms']
+    assert zero==b_zero==0
     return rf'''Illustrative examples of the effect of image features on candidate scores on the synthetic test sequence.
-Reconstructed images are shown at \({pre:.2f}\), \(0\), and \({post:+.2f}\,\unit{{ms}}\) relative to the candidate time for (a) a true collision--coalescence event and (b) a shared-particle artifact, in which two reconstructed track IDs represent the same physical particle.
+Reconstructed images are shown at \({pre:.2f}\), \(0\), and \({post:+.2f}\,\unit{{ms}}\) relative to the true collision time in (a), and at \({b_pre:.2f}\), \(0\), and \({b_post:+.2f}\,\unit{{ms}}\) relative to the candidate time in (b).
+Panel (b) shows a shared-particle artifact, in which two reconstructed track IDs represent the same physical particle.
 Red circles and blue squares mark actual observations of the terminating and continuing tracks, respectively; lines show their recent trajectories.
-Each \(128\times128\)-pixel crop (\(1.28\times1.28\,\unit{{mm}}\)) is centered on the continuing track and reconstructed at its estimated depth; unrecorded regions are black.
+Each \(128\times128\)-pixel crop (\(1.28\times1.28\,\unit{{mm}}\)) is centered on the continuing track and reconstructed at its estimated depth; all six crops lie entirely within the recorded field of view.
 For display, recorded pixels in each crop are linearly normalized between their first and 99th intensity percentiles; the scale bar is \ensuremath{{500\,\unit{{\mu m}}}}.
 The diameters below (a) are ground-truth parent and daughter diameters.
 (c) Candidate scores from the trajectory classifier and the image-feature ensemble, before relation-attention adjustment.

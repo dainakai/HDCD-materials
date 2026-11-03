@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "author_confirmed_cases": [
+    "N1",
+    "D4"
+  ],
+  "report_url": "https://messenger-recognition-forgotten-valium.trycloudflare.com/synthetic.html",
+  "zip_url": "https://messenger-recognition-forgotten-valium.trycloudflare.com/paper-replacements.zip",
+  "zip_sha256": "5de49b9bbf98b1237b5e5b6f215358e8cc6ede4b1aaf9236bb9ff7c6a9711abd",
+  "package_files": 54,
+  "https_files_verified": 66,
+  "verified_at": "2026-11-03T18:29:00.171935+09:00",
+  "figure9_pdf_sha256": "26bc0be64d32f426d128ea4f47c7d1e465d7ce9a6c8f9ef174648e9fd7d3558f",
+  "figure9_png_sha256": "91d2b39ef430b4f6b1a3f917fa38ab8df7996f090c69f0c2245964850695d297",
+  "all_performance_values_unchanged": true,
+  "manuscript_unchanged": true,
+  "full_manuscript_compilation": false,
+  "browser_rendering": "Not verified: local browser use is disabled in Work settings.",
+  "source_branch": "revision/amt-102p3mm-phase3"
+}

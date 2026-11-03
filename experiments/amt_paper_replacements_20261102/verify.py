@@ -50,6 +50,8 @@ def main():
     selection=load(REFINED/'selection.json')
     figure9_check=load(REFINED/'verification.json')
     assert figure9_check['status']=='PASS'
+    assert figure9_check['visual_review']=='PASS' and selection['author_confirmed']
+    assert [c['review_id'] for c in selection['cases']]==['N1','D4']
     assert sha(REFINED/'selection.json')==figure9_check['selection_sha256']
     assert sha(PACKAGE/'figures/fig09.pdf')==selection['final_pdf_sha256']==figure9_check['final_pdf_sha256']
     assert sha(PACKAGE/'figures/fig09.png')==selection['final_png_sha256']
@@ -101,8 +103,10 @@ def main():
         assert old not in results, old
     caption=(PACKAGE/'latex/fig09.tex').read_text()
     assert '128\\times128' in caption and 'Red circles and blue squares' in caption
-    assert '-1.00' in caption and '+0.25' in caption and 'width=1.0\\linewidth' in caption
-    assert 'unrecorded regions are black' in caption and 'recorded pixels' in caption
+    assert all(t in caption for t in ['-0.25','+0.25','-0.50','+0.50']) and 'width=1.0\\linewidth' in caption
+    assert 'all six crops lie entirely within the recorded field of view' in caption and 'recorded pixels' in caption
+    assert selection['cases'][0]['display_frames']==[3957,3958,3959]
+    assert selection['cases'][1]['display_frames']==[5335,5337,5339]
     assert selection['cases'][1]['trajectory_score'] >= .9
     assert sha(PACKAGE/'provenance/fig09-identity-audit.json') == figure9_check['identity_audit_sha256']
     assert sha(PACKAGE/'provenance/fig09-original-comparison.json') == figure9_check['original_comparison_sha256']
