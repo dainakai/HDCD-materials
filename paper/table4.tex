@@ -1,45 +1,21 @@
-\begin{table}[H]
+\begin{table}[tbp]
   \centering
-  \small
-  \caption{
-    Cumulative stage ablation on the synthetic test sequence containing 2,000 ground-truth events. Image features, relation-attention, and duplicate suppression are added successively to the trajectory-feature model. At each target recall, precision and false-positive counts are evaluated at the same highest score threshold attaining that recall, including tied scores jointly. AP denotes average precision, P precision, R recall, and FP the number of false positives. Arrows indicate the favorable direction.
-  }
-  \label{tab:projected_xy_stage_ablation}
-  \resizebox{\linewidth}{!}{%
-    \begin{tabular}{lrrrrr}
-      \toprule
-      Variant
-        & AP $\uparrow$
-        & $P$ at $R\geq0.8$ $\uparrow$
-        & FP at $R\geq0.8$ $\downarrow$
-        & $P$ at $R\geq0.9$ $\uparrow$
-        & FP at $R\geq0.9$ $\downarrow$ \\
-      \midrule
-      Trajectory features only
-        & 0.879
-        & 0.857
-        & 266
-        & 0.532
-        & 1,583 \\
-      + image features
-        & 0.888
-        & 0.881
-        & 216
-        & 0.603
-        & 1,186 \\
-      + relation-attention
-        & 0.896
-        & 0.917
-        & 144
-        & 0.668
-        & 896 \\
-      + duplicate suppression
-        & 0.917
-        & 0.960
-        & 67
-        & 0.766
-        & 550 \\
-      \bottomrule
-    \end{tabular}%
-  }
+  \caption{Event-level performance on the synthetic test sequence containing 2,000 ground-truth events.
+Events are matched one-to-one within the common in-plane and temporal gate defined in Sec.~\ref{sec:synthetic_hologram_generation}.
+AP is the integral of the monotonically enveloped precision--recall curve, with tied scores included together, and the maximum \(F_1\) score is obtained by varying the score threshold.
+Precision at each target recall is evaluated at the highest score threshold attaining or exceeding that recall.
+Candidate-pool recall is evaluated for the generated pool \(\mathcal{H}\), before candidate-wise scoring and duplicate suppression.
+Values in parentheses denote the difference from Ours (method minus Ours), calculated before rounding.}
+  \label{tab:projected_xy_metric_summary}
+  \begin{tabular}{lrrr}
+    \tophline
+    Metric & Ours & Depth-free variant & MinIP-based 2D \\
+    \middlehline
+    Average precision & 0.922 & 0.913 (${-0.009}$) & 0.877 (${-0.045}$) \\
+    Maximum $F_1$ & 0.888 & 0.869 (${-0.019}$) & 0.831 (${-0.058}$) \\
+    Precision at recall $\geq0.8$ & 0.969 & 0.945 (${-0.024}$) & 0.847 (${-0.122}$) \\
+    Precision at recall $\geq0.9$ & 0.787 & 0.695 (${-0.092}$) & 0.496 (${-0.292}$) \\
+    Candidate-pool recall & 0.977 & 0.986 (${+0.009}$) & 0.990 (${+0.013}$) \\
+    \bottomhline
+  \end{tabular}
 \end{table}

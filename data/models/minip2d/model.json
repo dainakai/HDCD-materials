@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "method": "minip_2d",
   "sklearn_version": "1.7.1",
   "stage1_features": [
     "time_offset_frame",
@@ -177,12 +178,12 @@
     "survivor_set_fraction"
   ],
   "files": {
-    "trees.skops": "1f990c8bad21c686b4d014517f94df3606bae888b5b3b8e153a1b4932f74855c",
-    "relation.safetensors": "1b9098c70a3afe883e1b1bd0edac6029647f565aede9cc718e1ec54ea9a62ead",
-    "normalization.npz": "491bce5e986493a213069159cf09870feb0070cfa44c3acd7389a1b2267fd548"
+    "trees.skops": "ed56310ca9193b87f1e94d327f47fb9ea0bfc20579e246647a0d370712166c89",
+    "relation.safetensors": "6283855496264eb47944aa6a21ee3335743f0dff2199dbe81117cf2f8b33246b",
+    "normalization.npz": "9a1f648cd50b63a0513e445cb0a897ca43e9f534853870aac3e8e3d6f7363c46"
   },
-  "method": "minip_2d",
   "audit": {
+    "method": "minip_2d",
     "training_seeds": [
       260740,
       260741,
@@ -190,49 +191,126 @@
       260743,
       260744
     ],
-    "test_seed_used_in_fit": false,
     "inputs": {
-      "data/minip2d/train/seed260740/gate.parquet": "fb6a3b71d666ffbe11753bc2889860b0435cf65505c1e1e42497a1adfe99cf9b",
-      "data/minip2d/train/seed260740/static.parquet": "eb4b165242f5372a99829afe1995d5eb711fec8f324b10da2b37a32528ae210b",
-      "data/minip2d/train/seed260740/full.parquet": "282328a7aefe5dc6e7d5a270b0728499b92d579515b9dfd2a20f976230b2415a",
-      "data/labels/train/seed260740/collision_events.parquet": "3f2e8ea4c34c267e738d0d7381e119d8c443534caf88b51b4a9d05befbe4517a",
-      "data/minip2d/train/seed260741/gate.parquet": "7ba1cdbb23c90cc3b87dbc4754aae476e73059acbc3bfb0196a2053cccd6dc1c",
-      "data/minip2d/train/seed260741/static.parquet": "874753f42b4a9be056a72ed37d861d60b01c59984f8d34a76ad0097289dde13c",
-      "data/minip2d/train/seed260741/full.parquet": "0f4b045780818e402669d752df3dc4f9b581bccb91e04ff34215b5e3093f0927",
-      "data/labels/train/seed260741/collision_events.parquet": "19805bad3d85589208ec8705a43ea2f7d8b43b763de593c041ad3466d08781b5",
-      "data/minip2d/train/seed260742/gate.parquet": "0a70f7c0029ecdd56470864dcdc30575a2c536f22b9e27e7c988cc33d050d13d",
-      "data/minip2d/train/seed260742/static.parquet": "ba214e745d10c5223c236b87f6bc173d878828036625609b17c89c007b91e308",
-      "data/minip2d/train/seed260742/full.parquet": "3b8ff8d4bd4d6d7f4bf0cc368b87903940b40fae216a5a2210f4d1a9a5b82def",
-      "data/labels/train/seed260742/collision_events.parquet": "a2d53e5e1e9a1c8c249268919fb714974651c763536d075679347e5aee91744d",
-      "data/minip2d/train/seed260743/gate.parquet": "324766f468ae1fe98dbf0a98a8b0078ccaa8d4b3aa3d5c2c0adcf57303efa279",
-      "data/minip2d/train/seed260743/static.parquet": "1418f38d036ed28fbdb21e687235fd82d34bbd644f03a9ed04907dd6a5c591e5",
-      "data/minip2d/train/seed260743/full.parquet": "d4c2671b693cdd164067dadb184f045efa81d271e4e8ccaa9c39f5227efc2e3a",
-      "data/labels/train/seed260743/collision_events.parquet": "87bf15637be89eb385badaf463f5694bf22a940337bf844956c0054cd4298d6e",
-      "data/minip2d/train/seed260744/gate.parquet": "f5a55c11c22a887cc1475d46b3b1aea162b1eaab5c54b4ed41b5371a9fa9ed6a",
-      "data/minip2d/train/seed260744/static.parquet": "a73a0fe62373199681b88a10f85593a8510bd20e75af57413525a5116532fa44",
-      "data/minip2d/train/seed260744/full.parquet": "91583ae399817cd85c57321f3396405273c832dd8e959820f654f115b8e10344",
-      "data/labels/train/seed260744/collision_events.parquet": "fd4ad8cef5153c7ba0c17f6a011599cf4ed03753de37c1318907e29c17ed0848"
+      "minip2d/train/seed260740/full64.parquet": "68037787dd3f3cad01c6d79b26ce7f42ada240144393401594da26cc0fdd175a",
+      "labels/train/seed260740/collision_events.parquet": "87463462664bbf4163b64aac9fdeb184eb53c31cf1a206f6dc33c147f9652409",
+      "minip2d/train/seed260740/gate.parquet": "aae9bd47e0d778366199f2d1650577b0c7273f6401b1ce0181bd57cc48f01d1f",
+      "minip2d/train/seed260740/static.parquet": "28840aa960c89c1f315f85c875b9272d889b4a97ab449410b8a2c8a831ed6449",
+      "minip2d/train/seed260741/full64.parquet": "f8bc7bb3402edbaa2c38d420679663ff69bd07cda1ea3900ae03e838dc4fa7c0",
+      "labels/train/seed260741/collision_events.parquet": "d1938562b8d657a8f8b81abc6b6383a81ea7cd08f53543f7f6c8fd9e768f5b20",
+      "minip2d/train/seed260741/gate.parquet": "8a0ea48e9e6fe40933f8a9b7ecdf4516d876679489afcc6934c8d14184651ef5",
+      "minip2d/train/seed260741/static.parquet": "c47cbd9f2f39ad2bc53c2327701efa9b01251be6e0e81ad2cea713b4f7756c50",
+      "minip2d/train/seed260742/full64.parquet": "c197658a5c61c495512f638496f80fc0f88050fc40b391c98f42eea4e74508c4",
+      "labels/train/seed260742/collision_events.parquet": "a0eb05fe6fb7f1d4eb6cd32c2f8ee4443a7c0a1f10f06e4299093122963f71fe",
+      "minip2d/train/seed260742/gate.parquet": "3627f478dd65c287a7ef5b89f487157bc6f9690c7fb4f16e491f773fc8073f42",
+      "minip2d/train/seed260742/static.parquet": "5ee7c5c41a17ac75f03a2b097cd37a59c52280b3bc149e152c4dabb45409d7c2",
+      "minip2d/train/seed260743/full64.parquet": "c9a015644a04aaae851ee2fe76f1b5f8478f2ca12bae1520adfa3eddf1bb6252",
+      "labels/train/seed260743/collision_events.parquet": "ea57c8d9221553fe139a6343d53b19cb56153fc2af264062709c95d756c6af76",
+      "minip2d/train/seed260743/gate.parquet": "cb3c643398c8ff3427c0625104d9f69ea465f9591442f712de327eab65c17124",
+      "minip2d/train/seed260743/static.parquet": "eb3573c1e8e623c4309209490a7b09a40bb8db3a857028f9c406ea646442f870",
+      "minip2d/train/seed260744/full64.parquet": "a8dbe2c067d13ec13905fd44efad3b20161ba1250aeff9e3bd0d9ee53dcee797",
+      "labels/train/seed260744/collision_events.parquet": "a03f30057fd0cf3037e9d2a8ac4cbb49fd0824b8b01e8b3e565d46901fceb3a4",
+      "minip2d/train/seed260744/gate.parquet": "a231cba07269f228ef7f30310e51ef4187c0ed5f750a7f67240c2310b65f2ea6",
+      "minip2d/train/seed260744/static.parquet": "91bbe22607a4a845957012bc1f4c6e54347b95f5a5a1690859b90d4b4c43229f"
     },
-    "device": "cpu",
-    "base_oof_recomputed": true,
-    "base_random_states": [
-      269723,
-      269724,
-      269725
+    "full_features": [
+      "time_offset_frame",
+      "xy_dist_um",
+      "radius_sum_um",
+      "vanished_diameter_um",
+      "survivor_diameter_um",
+      "post_survival_frames",
+      "pre_overlap_frames",
+      "survivor_delta_diameter_px",
+      "vertical_y_gap_um",
+      "vertical_closing_um_frame",
+      "vertical_time_to_catch_frame",
+      "vertical_penalty",
+      "xy_gate_ratio_400",
+      "pre_diameter_vanished_um",
+      "pre_diameter_survivor_um",
+      "pre_diameter_large_um",
+      "pre_diameter_small_um",
+      "post_diameter_um",
+      "pre_diameter_vanished_n",
+      "pre_diameter_survivor_n",
+      "post_diameter_n",
+      "post_over_large",
+      "post_over_expected",
+      "post_minus_large",
+      "post_minus_expected",
+      "volume_resid_frac",
+      "signed_volume_resid_frac",
+      "small_large_ratio",
+      "expected_growth_um",
+      "growth_fraction_of_expected",
+      "pre_n_min",
+      "pre_kin_both_count",
+      "pre_kin_span_frames",
+      "pre_xy_first_um",
+      "pre_xy_last_um",
+      "pre_xy_min_um",
+      "pre_xy_max_um",
+      "pre_xy_last_minus_first_um",
+      "pre_xy_slope_um_frame",
+      "pre_xy_tail_slope_um_frame",
+      "pre_xy_increase_fraction",
+      "pre_xy_tail_increase_fraction",
+      "pre_xy_event_minus_last_um",
+      "pre_xy_event_minus_min_um",
+      "pre_closing_xy_last_um_frame",
+      "pre_closing_xy_median_um_frame",
+      "diameter_under_0p725",
+      "diameter_under_0p90",
+      "moving_apart_xy_rule",
+      "rendered_pre_frames",
+      "skipped_pre_frames",
+      "pre_same_interp_count",
+      "pre_same_interp_fraction",
+      "pre_same_observed_count",
+      "pre_alternating_same_count",
+      "same_component_area_median_px",
+      "same_component_score",
+      "fragment_pre_full_v1",
+      "fragment_pre8_v1",
+      "fragment_pre7_v1",
+      "same_ge7",
+      "same_ge8",
+      "same_ge9",
+      "same7_and_diameter_under_0p90"
     ],
-    "attention_random_state": 270901,
+    "device": "cuda:0",
+    "base_oof_recomputed": true,
+    "smoke": false,
+    "test_seed_used_in_fit": false,
     "attention_epochs": 12,
+    "stage1": {
+      "rows": 1866339,
+      "positive_rows": 469304,
+      "features": 13,
+      "random_state": 269723,
+      "iterations": 350,
+      "seconds": 13.252445059013553
+    },
+    "static": {
+      "rows": 2373902,
+      "positive_rows": 297697,
+      "features": 49,
+      "random_state": 269723,
+      "iterations": 350,
+      "seconds": 42.7279434959637
+    },
     "relation_fit": {
-      "sets": 60760,
-      "positive_groups": 20071,
-      "positive_groups_with_top20_positive": 19799,
-      "positive_top20_coverage": 0.9864481092122963,
-      "device": "cpu",
+      "sets": 62956,
+      "positive_groups": 20465,
+      "positive_groups_with_top20_positive": 20338,
+      "positive_top20_coverage": 0.9937942829220621,
+      "device": "cuda:0",
       "feature_count": 41,
-      "initial_loss": 0.38377312091578775,
-      "final_loss": 0.3337825179778989,
-      "elapsed_seconds": 18.998735329834744,
-      "peak_gpu_memory_gb": 0.0
+      "initial_loss": 0.3405845384349811,
+      "final_loss": 0.295178907444012,
+      "elapsed_seconds": 13.853444440988824,
+      "peak_gpu_memory_gb": 0.03713083267211914
     },
     "residuals": {
       "train_seeds": [
@@ -242,23 +320,34 @@
         260743,
         260744
       ],
-      "training_rows": 180052,
+      "training_rows": 170218,
       "target_audits": {
         "frame_delta": {
-          "training_rmse": 1.410759139217882,
-          "elapsed_seconds": 1.769072453957051
+          "training_rmse": 1.544714689947399,
+          "elapsed_seconds": 1.3591614890028723
         },
         "x_delta": {
-          "training_rmse": 47.573064615475715,
-          "elapsed_seconds": 1.196275811176747
+          "training_rmse": 69.45237883379579,
+          "elapsed_seconds": 1.2292274109786376
         },
         "y_delta": {
-          "training_rmse": 86.40902271697048,
-          "elapsed_seconds": 1.6564591629430652
+          "training_rmse": 92.81880757805877,
+          "elapsed_seconds": 1.3554354810039513
         }
       },
-      "elapsed_seconds": 4.621873626019806
-    },
-    "preparation": "Scene-wise prepared candidate tables; each training-scene base score excludes that scene."
+      "elapsed_seconds": 3.9438886269927025
+    }
+  },
+  "provenance": {
+    "training_seeds": [
+      260740,
+      260741,
+      260742,
+      260743,
+      260744
+    ],
+    "test_seed": 260745,
+    "training_protocol": "reference/benchmark.json",
+    "source_model_sha256": "c878a993b6cc8e855fae774c53293242d138d48721131de26b5ea598889fb682"
   }
 }

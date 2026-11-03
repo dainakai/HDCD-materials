@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from importlib.resources import files
 import json
 from pathlib import Path
 import shutil
@@ -15,26 +14,18 @@ import zstandard
 from .io import contained_path, sha256, write_json
 
 
-DEFAULT_REPOSITORY = "dnakaikit/RA3D"
-
-
-def published_revision():
-    resource = files("ra3d").joinpath("config/release.json")
-    if not resource.is_file():
-        raise ValueError("This checkout has no published data revision; supply --revision explicitly")
-    return json.loads(resource.read_text())["revision"]
-
-
-def load_manifest(*, repo_id=DEFAULT_REPOSITORY, revision=None, local=None):
+def load_manifest(*, repo_id=None, revision=None, local=None):
     if local:
         source = Path(local)
     else:
+        if not repo_id or not revision:
+            raise ValueError("A repository and immutable revision are required for remote inputs")
         source = Path(
             hf_hub_download(
                 repo_id,
                 filename="manifest.json",
                 repo_type="dataset",
-                revision=revision or published_revision(),
+                revision=revision,
                 token=False,
             )
         )
@@ -122,13 +113,14 @@ def download(
     tiers,
     scenes=None,
     split=None,
-    repo_id=DEFAULT_REPOSITORY,
+    repo_id=None,
     revision=None,
     extract=False,
     dry_run=False,
     progress=None,
 ):
-    revision = revision or published_revision()
+    if not repo_id or not revision:
+        raise ValueError("A repository and immutable revision are required for remote inputs")
     manifest = load_manifest(repo_id=repo_id, revision=revision)
     selected = select_files(manifest, tiers=tiers, scenes=scenes, split=split)
     report = {

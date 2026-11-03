@@ -201,6 +201,7 @@ def fit_staged(
     parameters=None,
     source_manifest=None,
     verify_paper=False,
+    relation_context_transform=None,
 ):
     """Fit a complete deployable model from precomputed, scene-wise candidate tables.
 
@@ -294,6 +295,8 @@ def fit_staged(
             np.save(output / f"oof_{held_out}.npy", score)
             write_json(audit, output / "training_audit.json")
         contexts = [context_frame(full[s], oof[s]) for s in seeds]
+        if relation_context_transform is not None:
+            contexts = relation_context_transform(contexts)
         relation_marker = checkpoint.directory / "relation.json"
         if relation_marker.exists():
             relation = RelationAttentionRanker(46, recipe["hidden_size"], recipe["attention_heads"])

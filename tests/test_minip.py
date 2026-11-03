@@ -12,9 +12,9 @@ from ra3d import minip
 ROOT = Path(__file__).resolve().parents[1]
 
 
-@pytest.mark.parametrize('directory', ['baseline2d', 'minip2d'])
+@pytest.mark.parametrize('directory', ['depth_free', 'minip2d'])
 def test_minip_prediction_is_independent_of_truth_labels(directory):
-    frame = pd.read_parquet(ROOT / 'data' / directory / 'validation/seed260745/full.parquet').head(256)
+    frame = pd.read_parquet(ROOT / 'data/test' / (directory + '.parquet')).head(256)
     bundle = minip.load(ROOT / 'data/models' / directory)
     unlabelled = frame.drop(columns=minip.LABEL_COLUMNS, errors='ignore')
     changed = unlabelled.copy()

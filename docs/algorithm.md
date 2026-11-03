@@ -1,55 +1,33 @@
-# Algorithm and frozen parameters
+# Collision detection and evaluation
 
-This page describes the saved implementation used by the reproduction commands. The ordered model columns live in `ra3d.config`; attention and event-policy parameters are shipped in `src/ra3d/config/paper.json`. Numerical kernels include symbol-level source provenance. See [terminology](glossary.md) and [analysis conventions](paper-notes.md) when comparing the code with the paper.
+## Measurement and trajectories
 
-## Measurement and smoothing
+The particle detector operates on the minimum-intensity projection. Fixed depth and diameter networks measure detected particles from phase-retrieved holograms. A two-stage assignment links detections; axial Gaussian-mixture smoothing and in-plane Savitzky–Golay smoothing provide trajectories. Raw observations generate candidates, and smoothed observations provide kinematic and reconstructed-image features.
 
-HoloD3 performs angular-spectrum reconstruction, minimum-intensity projection, YOLO particle detection, learned depth estimation and diameter estimation. HoloD3-Linker links the measured particles. This release provides a NumPy implementation of the historical polynomial axial smoother with a Gaussian mixture noise model (Z-GMM), and Savitzky–Golay smoothing/velocity estimation. The distributed evaluation starts from recorded numerical measurements; upstream image-processing weights are not included.
+Raw trajectory files retain one-based axial slice coordinates. Physical coordinates use `(slice - 1) * 100` µm, with the observation volume spanning 0–102,300 µm. In-plane coordinates are pixels; the pixel pitch is 10 µm. Frame IDs are zero-based and the frame rate is 4,000/s.
 
-Automatic Z-GMM selection evaluates polynomial degree 1/2, regularization from 1e-8 through 1, and alpha 0/0.0001/0.01 on up to 512 length-stratified tracks with at least eight observations. The original predicted-residual-sum-of-squares (PRESS) and convergence rule selects the simplest degree within 1% of the minimum score. The expectation–maximization (EM) fit uses a fixed mean prior and a broad outlier Gaussian. The Savitzky–Golay boundary extension uses odd reflection, matching the original Julia implementation. Per-run selection and convergence are recorded in the smoothing audit.
+## Candidate labels and training
 
-## Candidates and computational budgets
+At candidate time t, identity supervision requires both parent observations at t−1 and the daughter observation at t+1. Missing observations are not interpolated. Identity-consistent candidates take precedence. For an event with an identity-consistent candidate, other nearby candidates are neutral and receive zero loss weight. If no identity-consistent candidate exists, spatial correspondence supplies the fallback positive set. Ours uses ±15,000 µm in depth for training correspondence; the two comparison methods omit depth.
 
-For each vanishing trajectory, candidate generation searches nearby surviving trajectories. Both tracks need at least two observations. The wide pool uses an endpoint-relative window of ±12 frames, at least one survivor post-frame, an XY/Z ellipse with 1,500/30,000 µm radii, effective-distance slack of 2,000 µm, and Z weight 0.15. Boundary and vertical-catching diagnostics are features rather than ground-truth labels.
+Labels are recomputed within the candidate set actually used at each learning stage. This includes the top 20 candidates supplied to relation attention. Positive weights balance events across the training sequences; class balancing is applied separately. The test labels and experimental review labels are excluded from fitting.
 
-The selected gate uses ±12 frames, at least one post-frame, an ellipse with 1,200/25,000 µm radii, and finite effective margin at most 1,200 µm. The 24-feature stage is fitted on labeled selected-gate candidates. It scores the entire wide pool; all gate members plus the top 40% outside the gate proceed to trajectory features. Counts use ceiling, with deterministic frame/track tie rules.
+Stage-one and static classifiers use scene-wise cross-fitting to prepare downstream training inputs. The final full-feature ensemble combines three gradient-boosting classifiers. Relation attention operates over each terminating track's retained candidate set. Localization regressors correct event time and position after selection. Random states and feature order are included in the code and model metadata.
 
-The 77-feature classifier scores this shortlist. Its probability and the screening probability are blended in logit space, with weights 0.75 and 0.25, to define the structural rank. Image features are acquired for the top 25% of the static shortlist globally. The final 92-feature scoring set is the union of that image-acquired set and the structural top 20 candidates per vanishing track.
+Ours uses 77 trajectory features and 15 image features. Depth-free uses 49 trajectory features and 15 MinIP image features from the same measured tracks with depth removed. MinIP-based 2D uses an independent in-plane linking of projection detections and the same 64-feature family. See [the feature catalog](features.md).
 
-## Image features and missing values
+## Ranking and duplicate suppression
 
-At each candidate time f, image aggregation uses f−10 through f−2 inclusive. Two-plane phase retrieval uses 12 iterations; the retrieved field is mean-padded to 2,048 pixels and reconstructed at the candidate depth. A 128 × 128 crop is normalized by its 1st/99th percentiles and rounded to uint8. Dark pixels at or below 30 undergo 3 × 3 closing and 2 × 2 opening. Four-connected components smaller than six pixels are removed; particle/component association uses an 11 × 11 neighborhood.
+Temporal modes are formed for each track pair, with at most five modes per terminating track. The lineage rank is fixed **before coordinate suppression**, and the lineage-dependent log-odds penalty uses that rank. Coordinate non-maximum suppression then removes nearby alternatives. The fixed rule is common to all three methods.
 
-Eleven raw aggregates and four indicator features encode common components and fragmentation patterns. Some columns intentionally overlap in meaning because the frozen trained schema preserves the historical features. Non-acquired candidates have 11 raw NaNs and four derived zeros. Histogram gradient boosting (HGB), the tree classifier used here, handles those NaNs directly. The `image_complete92` extension computes the same image features for every row of the final scoring union and preserves `paper_image_enriched`; it does not alter the paper's `paper92` tables.
+Table 5 is a scoring-stage comparison. Temporal-mode selection, the five-mode limit, the pre-suppression lineage penalty and trained localization regressors are common downstream operations. The trajectory row uses the static shortlist, while later rows use the scoring union. Missing image features remain missing in the trajectory row. The final row adds coordinate suppression. These rows therefore include candidate-selection and available-feature effects; they are not isolated interventions on classifier scores alone.
 
-## Labels and classifier fitting
+Adding image features increases AP from 0.892678 to 0.897689, while false positives at recall 0.8 increase from 177 to 183. Improvements are not uniform across every metric and stage.
 
-Candidate training compatibility requires ±5 frames, XY distance at most 350 µm, and Z distance at most 15,000 µm. Maximum matching supplies event anchors. True particle IDs are used to prefer role-consistent vanishing/surviving pairs. If an event has no identity-consistent candidate, its spatially compatible candidates provide fallback positives. Other spatial candidates for an event that does have consistent identities are excluded from classifier fitting rather than relabeled negative. Candidates with no spatial match are negative.
+## Event metrics
 
-Positive weights equalize event contribution; positive and negative total weights are balanced and the final weights have mean one. The historical float32 event factors are retained before float64 fitting.
+For each score threshold, predictions and truth events form a bipartite graph. Edges require a time difference of at most five frames and in-plane distance of at most 350 µm. The maximum one-to-one matching determines the number of true positives. No depth gate is used for the common evaluation.
 
-| HGB classifier setting | Value |
-| --- | --- |
-| Loss | Binary log loss |
-| Learning rate / iterations | 0.045 / 350 |
-| Maximum leaves / minimum samples per leaf | 31 / 20 |
-| L2 regularization | 0.02 |
-| Early stopping | scikit-learn 1.7.1 `auto`, internal 10% row split |
-| Screening and static random state | 269723 |
-| Full-feature ensemble random states | 269723, 269724, 269725 |
+Average precision is the integral of the all-points interpolated precision envelope, weighted by recall increments. A separate non-interpolated recall-weighted precision value is recorded by the full benchmark evaluator. Maximum F1 is taken over the score-threshold curve. The operating point at target recall is the first threshold attaining that recall; reported false positives are predictions minus matched events.
 
-The three full-model probabilities are averaged arithmetically. The internal early-stopping split is row based and is not the independent scene-wise performance evaluation.
-
-## Relation attention, event selection and correction
-
-Relation attention groups the top 20 candidates per vanishing trajectory. Its 46 inputs contain 36 candidate/context values and 10 relative values. Features are standardized using training statistics. Empty padded entries are excluded from attention, set averaging and loss. The hidden width is 48 with four attention heads and no dropout. AdamW uses learning rate 0.0008, weight decay 0.0001, 12 epochs, batch size 192 sets and seed 270901. Inference batches contain 512 sets.
-
-The 3D relation target is spatial compatibility, distinct from the identity-selected classifier target. Per-scene positive/negative weights are balanced with equal positive event contribution. The final score blends base/relation logits at 0.85/0.15 and converts to within-scene percentiles.
-
-Candidate pairs are aggregated into temporal modes separated by a 10-frame gap, retaining at most five modes per vanishing track. Representatives receive a zero-based score rank within that vanishing track before coordinate suppression. Coordinate suppression uses ±2 frames, XY 250 µm and Z 7,500 µm. The saved rank is subtracted from the percentile score's log odds; ranks are not renumbered after suppression. Four independent HGB regressors then correct time/x/y/z without changing selection or scores. They use 150 iterations, learning rate 0.05, 31 leaves, minimum leaf size 30, L2 0.1 and disabled early stopping. Their training positives use identity selection and event-balanced weights. Corrections are clipped to ±5 frames, ±350 µm for x/y and ±15,000 µm for z; time uses nearest-even integer rounding.
-
-## Independent evaluation
-
-Development scenes are seeds 260740–260744; terminal validation is 260745. The latter is absent from every fit and normalization. Relation development evaluation trains base classifiers excluding both the outer evaluation scene and the context-scoring scene. The upstream scene-wise candidate tables remain fixed: this is not nesting the entire image/candidate preparation pipeline. The released experimental review labels are excluded from fitting. The [depth-free guide](baseline2d.md#prepared-feature-table-inputs) describes the separate reviewed examples used in that comparison's reference-feature preparation.
-
-The paper's performance evaluator uses maximum one-to-one matching within ±5 frames and XY 350 µm, with no Z or identity gate. Precision/recall are pooled over independent scenes, score ties are processed together, and AP integrates the interpolated precision envelope. [Reproduction](reproduction.md) gives the expected values and validation evidence.
+Particle detection in Fig.7 uses confidence-ranked nearest-unmatched correspondence within 8 pixels. Particle position errors use raw in-plane Hungarian assignment within the same gate, followed by errors calculated from the smoothed tracks used for collision features. These particle metrics and the collision metrics use the same 6,000-frame test sequence.

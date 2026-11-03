@@ -166,7 +166,7 @@ def build_frame_indices(table: pd.DataFrame, args: argparse.Namespace) -> dict[i
             (
                 rows["x"].to_numpy(dtype=np.float64) * args.dx_um / args.xy_gate_um,
                 rows["y"].to_numpy(dtype=np.float64) * args.dx_um / args.xy_gate_um,
-                rows["z"].to_numpy(dtype=np.float64) * args.dz_um / args.z_gate_um,
+                (rows["z"].to_numpy(dtype=np.float64) - 1.0) * args.dz_um / args.z_gate_um,
             )
         )
         indices[int(frame)] = FrameIndex(frame=int(frame), rows=rows, tree=cKDTree(coords))
@@ -174,7 +174,8 @@ def build_frame_indices(table: pd.DataFrame, args: argparse.Namespace) -> dict[i
 
 
 def vector_um(x: float, y: float, z: float, args: argparse.Namespace) -> np.ndarray:
-    return np.asarray([x * args.dx_um, y * args.dx_um, z * args.dz_um], dtype=np.float64)
+    # Reconstruction plane 1 is the nominal volume front (physical Z = 0).
+    return np.asarray([x * args.dx_um, y * args.dx_um, (z - 1.0) * args.dz_um], dtype=np.float64)
 
 
 def velocity_um_frame(vx: float, vy: float, vz: float, args: argparse.Namespace) -> np.ndarray:
@@ -190,7 +191,7 @@ def boundary_penalty(track: Track, max_frame: int, args: argparse.Namespace) -> 
     y = float(track.y[-1])
     z = float(track.z[-1])
     edge_xy = min(x, y, args.datlen - x, args.datlen - y)
-    edge_z = min(z, args.datlen - z)
+    edge_z = min(z - 1.0, args.datlen - z)
     margin = max(args.boundary_margin_px, 1.0)
     penalty = 0.0
     if edge_xy < margin:

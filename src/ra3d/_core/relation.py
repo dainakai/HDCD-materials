@@ -132,7 +132,7 @@ def build_set_arrays(
     retained_positive_groups = 0
     for context_id, context in enumerate(contexts):
         base_features = finite_context_features(context)
-        labels = context["spatial_positive"].to_numpy(bool)
+        labels = context.get("identity_training_selected", pd.Series(False, index=context.index)).to_numpy(bool)
         score = context["score"].to_numpy(float)
         for indices in context.groupby("vanished_track_id", sort=False).indices.values():
             total_groups += 1
@@ -348,3 +348,6 @@ def relation_scores(
         }
     )
     return campaign.percentile_score(blended), set_audit
+
+# Equal event weights and neutral-label masking under the aligned protocol.
+from ..strict_labels import relation_weights as event_balanced_weights

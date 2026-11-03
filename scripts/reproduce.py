@@ -20,8 +20,9 @@ from ra3d.evaluation import event_curve
 from ra3d.io import read_table, write_json, write_table
 from ra3d.models import load_model
 
-EXPECTED_AP = {"3d_terminal": 0.9171254959438848,
-               "2d_terminal": 0.9011106311866217, "minip2d_terminal": 0.858187450125321}
+EXPECTED_AP = {name: json.loads((ROOT / f"reference/evaluation/{method}/metrics.json").read_text())["event_ap"]
+               for name, method in [("3d_terminal", "ours"), ("2d_terminal", "depth_free"), ("minip2d_terminal", "minip2d")]}
+
 
 
 def compare(actual, reference, score_column):
@@ -42,9 +43,7 @@ def compare(actual, reference, score_column):
             differences[name] = float(np.max(np.abs(left[name].to_numpy(float) - right[name].to_numpy(float))))
     differences["score"] = float(np.max(np.abs(left.score.to_numpy(float) - right[score_column].to_numpy(float))))
     result["max_absolute_differences"] = differences
-    # The released 3D model is a verified refit; single percentile-rank steps can
-    # differ between the historical GPU reduction and CPU replay. Event identity,
-    # integer time and corrected coordinates are checked separately.
+    # Compare event identity and localization separately from score reductions.
     result["score_atol"] = 1e-5
     result["coordinate_atol_um"] = 1e-7
     result["status"] = "PASS" if all(differences[k] <= (1e-5 if k == "score" else 1e-7) for k in differences) else "MISMATCH"
@@ -52,23 +51,26 @@ def compare(actual, reference, score_column):
 
 
 def terminal(output, device):
+    from prepare_data import prepare
+    prepare("test")
     result = {}
-    truth = read_table(ROOT / "data/labels/validation/seed260745/collision_events.parquet")
+    truth = read_table(ROOT / "data/test/collision_events.parquet")
     for method in ["3d", "2d", "minip2d"]:
         if method == "3d":
-            model = load_model(ROOT / "data/models/paper", device=device)
-            full = read_table(ROOT / "data/features/validation/seed260745/paper92.parquet")
+            model = load_model(ROOT / "data/models/ours", device=device)
+            full = read_table(ROOT / "data/test/ours.parquet")
             pred, audit = predict_full(full, model, scene_id=260745)
         else:
-            directory = "baseline2d" if method == "2d" else "minip2d"
+            directory = "depth_free" if method == "2d" else "minip2d"
             model = minip.load(ROOT / f"data/models/{directory}", device=device)
-            full = read_table(ROOT / f"data/{directory}/validation/seed260745/full.parquet")
+            full = read_table(ROOT / f"data/test/{directory}.parquet")
             pred = minip.predict(full, model, scene_id=260745)
             audit = {"trajectory_features": 49, "image_features": 15, "full_features": 64}
-        reference = read_table(ROOT / f"data/predictions/{method}/validation/seed260745.parquet")
+        reference_name = {"3d": "ours", "2d": "depth_free", "minip2d": "minip2d"}[method]
+        reference = read_table(ROOT / f"reference/evaluation/{reference_name}/predictions.parquet")
         curve, metric = event_curve({260745: pred}, {260745: truth})
         np.testing.assert_allclose(metric["event_ap"], EXPECTED_AP[f"{method}_terminal"], rtol=0, atol=1e-12)
-        comparison = compare(pred, reference, "relation_attention_3d" if method == "3d" else "relation_attention_2d")
+        comparison = compare(pred, reference, "score")
         write_table(pred, output / f"terminal_{method}.parquet")
         write_table(curve, output / f"terminal_{method}_pr.parquet")
         result[method] = {"comparison": comparison, "metrics": metric, "audit": audit}

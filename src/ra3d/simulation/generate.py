@@ -126,7 +126,7 @@ def prepare_velocity_samples(
         value_arr = np.asarray(values, dtype=np.float64)
         if q_arr.size < 2 or q_arr[0] != 0.0 or q_arr[-1] != 1.0 or np.any(np.diff(q_arr) <= 0.0):
             raise RuntimeError(f"{quantiles_csv} must contain strictly increasing quantiles from 0 to 1")
-        sample_rng = np.random.default_rng(params.seed + 113)
+        sample_rng = np.random.Generator(np.random.PCG64(params.seed + 113))
         samples = np.interp(sample_rng.random(SOURCE_SAMPLE_SIZE), q_arr, value_arr)
         source_note: str | list[str] = str(quantiles_csv)
     elif source_glob:
@@ -222,7 +222,7 @@ def prepare_diameter_samples(
                 [float(row["scene_mean_number_density_bin_cm3"]) for row in density_rows], dtype=np.float64
             )
         weights /= float(weights.sum())
-        sample_rng = np.random.default_rng(seed + 197)
+        sample_rng = np.random.Generator(np.random.PCG64(seed + 197))
         choices = sample_rng.choice(len(density_rows), size=SOURCE_SAMPLE_SIZE, p=weights)
         lows = np.asarray(
             [float(density_rows[int(index)]["diameter_bin_low_um"]) for index in choices], dtype=np.float64
@@ -2296,7 +2296,7 @@ def generate_dataset(
     velocity_source_glob: str | None,
     velocity_quantiles_csv: Path | None,
 ) -> None:
-    rng = np.random.default_rng(params.seed)
+    rng = np.random.Generator(np.random.PCG64(params.seed))
     out_dir.mkdir(parents=True, exist_ok=True)
     labels_dir = out_dir / "labels"
     metadata_dir = out_dir / "metadata"

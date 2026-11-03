@@ -32,13 +32,13 @@ def test_partial_render_manifest_preserves_nonzero_frames_and_rejects_unpaired_i
     assert acquisition.frames.index.tolist() == [100, 101]
     assert acquisition.validate()["frames"] == 2
     # Both workflows share the recorded physical front, but not the optical
-    # iteration/padding recipe. Confusing these silently changes measurements.
+    # padding recipe. Confusing these silently changes measurements.
     upstream = yaml.safe_load((tmp_path / "holod3-acquisition.yaml").read_text())
     collision = yaml.safe_load((tmp_path / "acquisition.yaml").read_text())
-    assert upstream["optics"]["reconstruction_start_um"] == collision["optics"]["reconstruction_start_um"] == 64900
+    assert upstream["optics"]["reconstruction_start_um"] == collision["optics"]["reconstruction_start_um"] == 74900
     assert upstream["reconstruction"]["phase_retrieval_iterations"] == 3
     assert upstream["reconstruction"]["fft_padding_side"] == 1536
-    assert collision["optics"]["phase_iterations"] == 12
+    assert collision["optics"]["phase_iterations"] == 3
     assert collision["optics"]["padding_px"] == 2048
     (tmp_path / "01_bkgrem/C001H001S0011/000102.png").unlink()
     with pytest.raises(ValueError, match="Incomplete rendered camera pair at frame 101"):
@@ -70,3 +70,16 @@ def test_generation_contract_requires_explicit_environment_override(tmp_path, mo
         contract.validate_contract()
     _, evidence = contract.validate_contract(allow_unverified_environment=True)
     assert not evidence["environment_matches_reference"]
+
+
+def test_source_contracts_reference_only_distributed_files():
+    distributed = {entry['path'] for entry in json.loads((ROOT / 'manifest.json').read_text())['files']}
+    for filename, field, prefix in [
+        ('reference/engine-manifest.json', 'files', ''),
+        ('reference/generation/contract.json', 'source_sha256', ''),
+        ('reference/measurement/manifest.json', 'files', 'reference/measurement/'),
+    ]:
+        for name, expected in json.loads((ROOT / filename).read_text())[field].items():
+            relative = prefix + name
+            assert relative in distributed, f'Undistributed source in {filename}: {relative}'
+            assert hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() == expected

@@ -7,8 +7,7 @@ authors:
     given-names: Dai
     affiliation: "Kyoto Institute of Technology"
     orcid: "https://orcid.org/0000-0002-6819-2825"
-version: "1.0.1"
-date-released: "2026-10-19"
+version: "1.1.0.dev0"
 repository-code: "https://github.com/dainakai/HDCD-materials"
-url: "https://github.com/dainakai/HDCD-materials/releases/tag/v1.0.1"
-abstract: "Complete held-out test evaluation for three pretrained collision-detection methods, Tables 3–4, nine numerical figures and 1,120 top-80 experimental review labels. Includes 3D test trajectories and code that calculates trajectory features and regenerates test particle states. Training sequences, supplementary evaluations, full experimental replay data and images are outside this reduced distribution."
+url: "https://github.com/dainakai/HDCD-materials/tree/revision/amt-102p3mm-phase3"
+abstract: "Evaluation of three droplet collision-detection methods, including deterministic numerical hologram generation, particle measurement, five-sequence model fitting, test evaluation, Tables 4–5, Figures 4–5 and 7–15, and 1,120 reviewed experimental candidates with collision examples."

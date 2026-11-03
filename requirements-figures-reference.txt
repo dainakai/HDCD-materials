@@ -10,3 +10,4 @@ packaging==26.3
 pyparsing==3.3.3
 python-dateutil==2.9.0.post0
 six==1.17.0
+reportlab==4.4.9

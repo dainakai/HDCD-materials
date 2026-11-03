@@ -1,5 +1,0 @@
-arm,candidate_rows,spatial_positive_rows,identity_training_positive_rows,neutral_spatial_rows,identity_consistent_events,identity_fallback_events
-strict_phase3_z15,1250810,223740,106715,117025.0,5506,4114
-strict_phase3_z30,1250810,238753,116938,121815.0,5506,4187
-strict_phase3_z5,1250810,196709,92244,104465.0,5488,4056
-strict_phase3_znone,1250810,257442,129931,127511.0,5508,4269

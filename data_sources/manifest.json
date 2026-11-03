@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "objects": [
+    {
+      "destination": "reference/measurement/models/depth/depth_compare_best.pt",
+      "profile": "measurement",
+      "sha256": "cfb3632c4c9e96a3e0da4d25f6ff23183f1e49869400ff6d39542fa1bdca3ea3",
+      "bytes": 152373,
+      "compression": "zstd",
+      "parts": [
+        {
+          "path": "data_sources/reference__measurement__models__depth__depth_compare_best.pt.zst.000",
+          "sha256": "c9d59d767a7a4506629e65577b67ad7642671e460095fbeb2882fd8399b5657f",
+          "bytes": 119464
+        }
+      ]
+    },
+    {
+      "destination": "reference/measurement/models/depth/depth_compare_robust_v1.pt",
+      "profile": "measurement",
+      "sha256": "c69ea9c713f5d588ab5b1c43ef52702a449496b0c3d591b87f0349fa8f9e0d21",
+      "bytes": 157685,
+      "compression": "zstd",
+      "parts": [
+        {
+          "path": "data_sources/reference__measurement__models__depth__depth_compare_robust_v1.pt.zst.000",
+          "sha256": "10e576ea2576a1b88a6a987117caca5a1657e8ffcc556753c0f13c30ebf3c07e",
+          "bytes": 122222
+        }
+      ]
+    },
+    {
+      "destination": "reference/measurement/models/slice_diam/slice_diammodel_best.pt",
+      "profile": "measurement",
+      "sha256": "50faaf673cd4e7fb2034d76c5e249c8a8b7eb7fcc98d8670039fc53c9f9a1f26",
+      "bytes": 6750991,
+      "compression": "zstd",
+      "parts": [
+        {
+          "path": "data_sources/reference__measurement__models__slice_diam__slice_diammodel_best.pt.zst.000",
+          "sha256": "928abd5b7eaab4dded3ea47bca1abd114c718ed4992e431b9bc0eb4f779da3ec",
+          "bytes": 6221865
+        }
+      ]
+    },
+    {
+      "destination": "reference/measurement/models/yolo/best.pt",
+      "profile": "measurement",
+      "sha256": "4072d26f7e0f71e6a46183db643126db216b4bff9c2e88c4e602571eb3df044f",
+      "bytes": 210751682,
+      "compression": "zstd",
+      "parts": [
+        {
+          "path": "data_sources/reference__measurement__models__yolo__best.pt.zst.000",
+          "sha256": "7b722abd7a497346cdae7a6303bf658eb4a39fd7e1c39a08a3716682d883f253",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/reference__measurement__models__yolo__best.pt.zst.001",
+          "sha256": "f01b1a7b1165944cb0bf3f9c02496eca13af56cc0ced2de95543f13b9d029300",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/reference__measurement__models__yolo__best.pt.zst.002",
+          "sha256": "1fa57d15df2c9bef52ea88fda4150a5a44f8d6dccbb6a043b0b7c1b565877080",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/reference__measurement__models__yolo__best.pt.zst.003",
+          "sha256": "0abfa32ee376ba8beb2f7ea175be884ab7cb49f2d71f91db13428ddd51372b69",
+          "bytes": 21819700
+        }
+      ]
+    },
+    {
+      "destination": "data/test/ours.parquet",
+      "profile": "test",
+      "sha256": "f3153e709892973b1d1e10f4288da3d00b7ff442ce4e7cffa6a25b0a5f11c588",
+      "bytes": 119809684,
+      "compression": "zstd",
+      "parts": [
+        {
+          "path": "data_sources/data__test__ours.parquet.zst.000",
+          "sha256": "709b2b8eda0868dcf5a16fb19945be43314a35734b16c1946e745425940a5631",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/data__test__ours.parquet.zst.001",
+          "sha256": "29af9dfdc01211b7d83afd0ddecb6d419790525e823ac50181d7e69df7bbaad4",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/data__test__ours.parquet.zst.002",
+          "sha256": "81adb14a4cb0515d2b8816dfc3b95c4d7c2eab63622f13104d058f3aa47b4648",
+          "bytes": 10973932
+        }
+      ]
+    },
+    {
+      "destination": "data/test/depth_free.parquet",
+      "profile": "test",
+      "sha256": "6575685a38769afea72ed381f8b0e1715eb6d037b2a5aa698b0b20b4ad442faf",
+      "bytes": 97653627,
+      "compression": "zstd",
+      "parts": [
+        {
+          "path": "data_sources/data__test__depth_free.parquet.zst.000",
+          "sha256": "fbc4d0187b8633817486a96a1ec81150677f3f37cfc5360aa536a9ecda5b38a3",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/data__test__depth_free.parquet.zst.001",
+          "sha256": "61317682f88fcb65b0f06cd2f229ca78929fbe3d80961ab2bef67262c34cb09c",
+          "bytes": 40053962
+        }
+      ]
+    },
+    {
+      "destination": "data/test/minip2d.parquet",
+      "profile": "test",
+      "sha256": "914602eb22dd6b435e9206f840d55844172fd4fcc0f62d9eee59b8568d6a4627",
+      "bytes": 101259379,
+      "compression": "zstd",
+      "parts": [
+        {
+          "path": "data_sources/data__test__minip2d.parquet.zst.000",
+          "sha256": "73cbc4e5b34c0c87fe8d86c2cda357cc8515ae9afe77b789f72d7343e545275d",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/data__test__minip2d.parquet.zst.001",
+          "sha256": "6474db1834b3a4d89513a2b6eecfd8927179f02edf53aa9a61e09719f5bed3c2",
+          "bytes": 42894900
+        }
+      ]
+    },
+    {
+      "destination": "data/test/trajectory.parquet",
+      "profile": "test",
+      "sha256": "0e1d5b3cb85ff8df2270ee1ba564dc5c3e9233e8d8f36ac0a3eacb38ca5fdf8a",
+      "bytes": 217319193,
+      "compression": "zstd",
+      "parts": [
+        {
+          "path": "data_sources/data__test__trajectory.parquet.zst.000",
+          "sha256": "406ecf13417accd1da601c2b611194ecb097ef046789eb9b53c279c138edb469",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/data__test__trajectory.parquet.zst.001",
+          "sha256": "9684266ec37fc61df824553862ce342a05344fe40e1569b739581f25aaa5c7f0",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/data__test__trajectory.parquet.zst.002",
+          "sha256": "fb07970fa893ecd3f891180e04df3c82d9fabdc1f961c15a8a8e19a741c8eb7e",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/data__test__trajectory.parquet.zst.003",
+          "sha256": "dcfdd0f2d7bd4c2c25bf9ac7dc038bbf73902fb4a154ce63cfd83d83b640cb8a",
+          "bytes": 50331648
+        },
+        {
+          "path": "data_sources/data__test__trajectory.parquet.zst.004",
+          "sha256": "d77e98b26b11f5c9ef9042b92447be91d7aaafbf4359d00809be449e92afcffc",
+          "bytes": 12850684
+        }
+      ]
+    }
+  ]
+}

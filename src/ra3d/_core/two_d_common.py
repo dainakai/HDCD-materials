@@ -473,3 +473,9 @@ def identity_adjacency(
         if consistent:
             adjacency[int(candidate_index)] = consistent
     return (adjacency, sourced)
+
+# Shared manuscript training rule for all comparison methods.
+def attach_training_labels(candidates, truth, mapping):
+    from ..strict_labels import attach_identity_labels
+    frame, audit, _ = attach_identity_labels(candidates, truth, mapping)
+    return frame, audit

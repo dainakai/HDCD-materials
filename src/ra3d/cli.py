@@ -36,35 +36,8 @@ def parser():
         )
         p.add_argument("--acquisition", help="Collision image/geometry acquisition.yaml")
 
-    p = command("download", "Selectively download verified data and model artifacts")
-    p.add_argument(
-        "--tier",
-        action="append",
-        required=True,
-        help="Repeat for additional tiers; no holograms are downloaded implicitly",
-    )
-    p.add_argument("--scene", action="append")
-    p.add_argument("--split", choices=["train", "validation"])
-    p.add_argument("--output", default="data")
-    p.add_argument("--repo", default="dnakaikit/RA3D")
-    p.add_argument("--revision")
-    p.add_argument("--extract", action="store_true")
-    p.add_argument("--plan", action="store_true")
-    p = command("list-data", "List dataset tiers and their download sizes")
-    p.add_argument("--repo", default="dnakaikit/RA3D")
-    p.add_argument("--revision")
-    p.add_argument("--manifest")
     p = command("validate-acquisition", "Validate image synchronization and optical geometry")
     p.add_argument("acquisition")
-    p = command("detect", "Run the public HoloD3 Python detector/depth/diameter pipeline")
-    p.add_argument("--holod3-root", required=True)
-    p.add_argument("--acquisition", required=True, help="HoloD3 acquisition YAML")
-    p.add_argument("--output", required=True)
-    p.add_argument("--limit", type=int, default=0)
-    p.add_argument("--plan", action="store_true")
-    for role in ["yolo", "depth-primary", "depth-fallback", "diameter"]:
-        p.add_argument("--" + role + "-weights")
-    runtime(p)
     p = command("link", "Link detected particles into trajectories with HoloD3-Linker")
     p.add_argument("--particles", required=True)
     p.add_argument("--output", required=True)
@@ -110,9 +83,7 @@ def parser():
     p.add_argument("--output", required=True)
     runtime(p)
     p = command("train", "Fit a complete collision model, resuming completed stages")
-    source = p.add_mutually_exclusive_group(required=True)
-    source.add_argument("--paper-root")
-    source.add_argument("--prepared")
+    p.add_argument("--prepared", required=True)
     p.add_argument("--output", required=True)
     p.add_argument("--reuse-oof", help="Explicit directory of audited out-of-fold scores; default recomputes")
     runtime(p)
@@ -122,14 +93,6 @@ def parser():
     p.add_argument("--output", required=True)
     p.add_argument("--score-column", default="score")
     p.add_argument("--protocol", choices=["projected-xy", "3d"], default="projected-xy")
-    p = command("reproduce", "Evaluate released results or refit the paper models")
-    p.add_argument("--data", required=True)
-    p.add_argument("--output", required=True)
-    p.add_argument("--refit", action="store_true")
-    p.add_argument(
-        "--reuse-scores", action="store_true", help="Explicitly reuse released out-of-fold scores in refitting"
-    )
-    runtime(p)
     p = command("review", "Start the offline visual review application at 127.0.0.1")
     p.add_argument("--run", help="Inference output directory; supplies predictions, tracks, and acquisition")
     p.add_argument("--predictions")
@@ -148,51 +111,10 @@ def run(args):
     if hasattr(args, "cpu_threads") and args.cpu_threads < 1:
         raise ValueError("cpu_threads must be positive")
     name = args.command
-    if name == "download":
-        from .datasets import download
-
-        return download(
-            args.output,
-            tiers=args.tier,
-            scenes=args.scene,
-            split=args.split,
-            repo_id=args.repo,
-            revision=args.revision,
-            extract=args.extract,
-            dry_run=args.plan,
-            progress=emit,
-        )
-    if name == "list-data":
-        from .datasets import load_manifest
-
-        manifest = load_manifest(repo_id=args.repo, revision=args.revision, local=args.manifest)
-        tiers = {}
-        for item in manifest["files"]:
-            group = tiers.setdefault(item["tier"], {"files": 0, "bytes": 0})
-            group["files"] += 1
-            group["bytes"] += item["bytes"]
-        return tiers
     if name == "validate-acquisition":
         from .acquisition import Acquisition
 
         return Acquisition.load(args.acquisition).validate()
-    if name == "detect":
-        from .upstream import detect
-
-        weights = {
-            role: getattr(args, role.replace("-", "_") + "_weights")
-            for role in ["yolo", "depth-primary", "depth-fallback", "diameter"]
-        }
-        detect(
-            args.acquisition,
-            args.output,
-            holod3_root=args.holod3_root,
-            device=args.device,
-            weights={k: v for k, v in weights.items() if v},
-            limit=args.limit,
-            dry_run=args.plan,
-        )
-        return {"output": args.output}
     if name == "link":
         from .upstream import link
 
@@ -288,12 +210,10 @@ def run(args):
             args.project, args.output, device=args.device, cpu_threads=args.cpu_threads, progress=emit
         )
     if name == "train":
-        from .training import load_paper_training, fit_staged
+        from .training import fit_staged
         from .workflow import load_prepared
 
-        stages, manifest = (
-            load_paper_training(args.paper_root) if args.paper_root else load_prepared(args.prepared)
-        )
+        stages, manifest = load_prepared(args.prepared)
         _, audit = fit_staged(
             stages,
             args.output,
@@ -302,7 +222,7 @@ def run(args):
             progress=emit,
             reuse_oof=args.reuse_oof,
             source_manifest=manifest,
-            verify_paper=bool(args.paper_root),
+            verify_paper=False,
         )
         return audit
     if name == "evaluate":
@@ -318,23 +238,6 @@ def run(args):
         write_table(curve, output / "pr.parquet")
         write_json(metrics, output / "metrics.json")
         return metrics
-    if name == "reproduce":
-        from .reproduction import refit_paper, evaluate_published
-
-        if args.reuse_scores and not args.refit:
-            raise ValueError("--reuse-scores requires --refit")
-        return (
-            refit_paper(
-                args.data,
-                args.output,
-                device=args.device,
-                cpu_threads=args.cpu_threads,
-                reuse_scores=args.reuse_scores,
-                progress=emit,
-            )
-            if args.refit
-            else evaluate_published(args.data, args.output)
-        )
     if name == "review":
         from .review import create_app
 

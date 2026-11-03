@@ -100,6 +100,7 @@ def context_frame(
         "structural_score",
         "image_enriched",
         "spatial_positive",
+        "identity_training_selected",
         "matched_truth_event_id",
     ]
     frame = compact[[column for column in columns if column in compact]].copy()

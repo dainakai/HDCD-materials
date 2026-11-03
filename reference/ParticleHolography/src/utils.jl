@@ -246,7 +246,7 @@ function _cu_kernel_vote!(votevol, nimg, H, W)
 
     if i <= H && j <= W
         @inbounds val = Int(nimg[i, j]) + 1  # 1..256
-        @inbounds votevol[val, i, j] += Int32(1)  # atomic不要
+        @inbounds votevol[val, i, j] += Int32(1)  # No atomic operation is needed.
     end
     return
 end

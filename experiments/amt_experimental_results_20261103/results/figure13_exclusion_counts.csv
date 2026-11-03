@@ -1,7 +1,0 @@
-status,panel,total,included,excluded
-collision,a,186,184,2
-collision,b,186,179,7
-non_collision,a,922,908,14
-non_collision,b,922,822,100
-ambiguous,a,12,0,12
-ambiguous,b,12,0,12

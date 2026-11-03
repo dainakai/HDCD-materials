@@ -1,0 +1,13 @@
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.98\linewidth,height=0.78\textheight,keepaspectratio]{figures/fig08.pdf}
+  \caption{Event-detection performance and review burden of the proposed method, the depth-free variant, and MinIP-based 2D on the same synthetic test sequence as Fig.~\ref{fig:synthetic_hologram_distribution}, containing 2,000 ground-truth events.
+The depth-free variant retains the measured trajectories and diameters used by the proposed method but excludes depth information during collision detection, whereas MinIP-based 2D independently estimates diameters and constructs two-dimensional trajectories from MinIP images before depth-free collision detection (Table~\ref{tab:method_comparison}).
+(a) Event-level precision--recall curves; AP is the integral of the monotonically enveloped precision--recall curve.
+(b) Precision (solid lines) and recall (dashed lines) among ranked candidates; tied scores are included together.
+The vertical line marks the number of ground-truth events, \(N=2{,}000\).
+(c) Number of false-positive candidates at each target recall, using the highest score threshold that attains or exceeds that recall.
+(d) False-positive composition at a target recall of 0.8, separated into duplicate or competing detections and candidates with no ground-truth event within the matching gate.
+The evaluation uses maximum-cardinality one-to-one matching within \(\pm5\) frames and an in-plane distance of \ensuremath{350\,\unit{\mu m}}, without an axial gate.}
+  \label{fig:synthetic_hologram_validation_results}
+\end{figure}

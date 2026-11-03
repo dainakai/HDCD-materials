@@ -38,9 +38,6 @@ def temporal_mode_predictions(
     score_column = str(config.get("score_column", "base_percentile"))
     mode_gap = int(config["pair_mode_gap_frames"])
     top_k = int(config["maximum_modes_per_vanished_track"])
-    rank_order = config.get("lineage_rank_order", "before")
-    if rank_order not in {"before", "after"}:
-        raise ValueError("lineage_rank_order must be 'before' or 'after'")
     columns = campaign.KEY_COLUMNS + campaign.GEOMETRY_COLUMNS
     work = frame[columns].copy()
     work["_source_index"] = np.arange(len(work), dtype=np.int64)
@@ -99,9 +96,8 @@ def temporal_mode_predictions(
         )
     else:
         selected = capped
-    selected = selected.copy()
     selected["_lineage_rank_before_suppression"] = selected["_lineage_rank"].to_numpy()
-    if rank_order == "after":
+    if config.get("lineage_rank_order", "before") == "after":
         selected["_lineage_rank"] = selected.groupby("vanished_track_id", sort=False).cumcount()
     selected[method] = adjusted_score(
         selected["_policy_score"].to_numpy(float),
@@ -118,6 +114,5 @@ def temporal_mode_predictions(
         "post_coordinate_suppression": int(len(selected)),
         "pair_mode_gap_frames": mode_gap,
         "maximum_modes_per_vanished_track": top_k,
-        "lineage_rank_order": rank_order,
     }
     return selected, audit

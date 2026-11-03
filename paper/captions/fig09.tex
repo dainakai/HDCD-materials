@@ -1,0 +1,16 @@
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=1.0\linewidth,height=0.78\textheight,keepaspectratio]{figures/fig09.pdf}
+  \caption{Illustrative examples of the effect of image features on candidate scores on the synthetic test sequence.
+Reconstructed images are shown at \(-0.25\), \(0\), and \(+0.25\,\unit{ms}\) relative to the true collision time in (a), and at \(-0.50\), \(0\), and \(+0.50\,\unit{ms}\) relative to the candidate time in (b).
+Panel (b) shows a shared-particle artifact, in which two reconstructed track IDs represent the same physical particle.
+Red circles and blue squares mark actual observations of the terminating and continuing tracks, respectively; lines show their recent trajectories.
+Each \(128\times128\)-pixel crop (\(1.28\times1.28\,\unit{mm}\)) is centered on the continuing track and reconstructed at its estimated depth; all six crops lie entirely within the recorded field of view.
+For display, recorded pixels in each crop are linearly normalized between their first and 99th intensity percentiles; the scale bar is \ensuremath{500\,\unit{\mu m}}.
+The diameters below (a) are ground-truth parent and daughter diameters.
+(c) Candidate scores from the trajectory classifier and the image-feature ensemble, before relation-attention adjustment.
+The true-event score changes from 0.999 to 0.998, whereas the artifact score decreases from 0.944 to 0.625.
+The retained/rejected labels refer to the final candidate-selection policy.
+These examples were selected for visibility after examining the results and illustrate individual candidates rather than an average effect over the test sequence.}
+  \label{fig:image_feature_case_study}
+\end{figure}
