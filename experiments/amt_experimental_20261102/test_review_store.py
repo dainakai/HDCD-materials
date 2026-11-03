@@ -55,6 +55,9 @@ class ReviewStoreTest(unittest.TestCase):
             document['prediction_sha256']='different-predictions';save(path,document)
             with self.assertRaisesRegex(RuntimeError,'Frozen cohort changed'):
                 other.get(PREFIX+'/api/scenes/12',base_url=base)
+            self.assertEqual(other.post(PREFIX+'/api/logout',json={},base_url=base).status_code,403)
+            self.assertEqual(other.post(PREFIX+'/api/logout',json={},headers={'X-CSRF-Token':token2},base_url=base).status_code,200)
+            self.assertEqual(other.get(PREFIX+'/api/status',base_url=base).status_code,403)
 
 
 if __name__=='__main__':unittest.main()

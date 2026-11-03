@@ -88,8 +88,12 @@ def create_app(root=ROOT, access=None):
     def index():return render_template('review.html',csrf=session['csrf'])
     @app.get(PREFIX+'/assets/<name>')
     def assets(name):
-        if name not in {'review.css','review.js'}:abort(404)
+        if name not in {'review.css','review.js','collisiongifserver.css','icons.svg','gifuct.js','gif-player.js'}:abort(404)
         return send_file(SCRIPT/'static'/name)
+    @app.post(PREFIX+'/api/logout')
+    def logout():
+        session.clear()
+        return jsonify({'logged_out':True})
     @app.get(PREFIX+'/api/status')
     def status():
         rows=[]

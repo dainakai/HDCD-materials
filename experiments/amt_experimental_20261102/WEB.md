@@ -1,6 +1,6 @@
 # Local monitoring and experimental review
 
-The scheduled 2026-11-02 task adds a dedicated monitoring page and extends the existing local review app. The reference `collisiongifserver` repository was inspected: it uses Workers/R2/D1 and includes old-data upload/deletion behavior. This implementation reuses the campaign's local Flask/SQLite review service, with the same three review choices, candidate browsing and revert-to-unreviewed interaction. No external review database or legacy labels are imported.
+The scheduled 2026-11-02 task adds a dedicated monitoring page. On 2026-11-03, the review frontend was replaced with the requested `collisiongifserver` design: its CSS is copied verbatim to `static/collisiongifserver.css`, and its header/tabs, sidebar/mobile drawer, GIF stage, playback controls, colored judgment buttons and metadata cards are ported to the existing local Flask/SQLite API. The reference source hashes are recorded in `collisiongifserver-design-source.json`. No external review database or legacy labels are imported.
 
 ## Running pages
 
@@ -48,9 +48,9 @@ The monitor's cached state and log are in `audit/revision-experimental-20261102/
 
 Every full scene retains exactly its original ranked top 80 candidates. Filtering and gallery browsing change only the display, never the cohort or rank. Scene selection is preserved in the URL; loading a scene starts at its first unreviewed candidate. Completed scenes appear automatically.
 
-The app supports collision, non-collision and ambiguous judgments; saved notes; three trajectory projections; enlarged GIF viewing; candidate and label filters; a lazy-loaded gallery; and returning a judgment to unreviewed. Reverting removes the current annotation row while retaining its prior history and adding an `unreviewed` history event. Images and candidate manifests remain intact.
+The app supports collision, non-collision and ambiguous judgments; saved notes; three trajectory projections; enlarged GIF viewing; candidate and label filters; a lazy-loaded Browse gallery; a Dashboard of review counts; and returning a judgment to unreviewed. The GIF player uses the same gifuct-js 2.1.2 decoder and disposal composition as collisiongifserver, with play/pause, stop, speed and frame stepping. Vendor licenses are retained in `static/THIRD_PARTY_LICENSES.txt`. The status filter initially selects unreviewed candidates, as in the original design. Reverting removes the current annotation row while retaining its prior history and adding an `unreviewed` history event. Images and candidate manifests remain intact.
 
-Unsaved notes are retained in the current browser tab, including across candidate navigation. During saving, controls and notes are locked to prevent mismatched requests. A failed save preserves the draft. With automatic advance enabled, the next candidate's image is brought into view. Keyboard shortcuts do not classify while editing an input. The app uses the existing SQLite database and fixed cohort fingerprints; CSRF and access checks remain enabled.
+Unsaved notes are retained in the current browser tab, including across candidate navigation. During saving, controls and notes are locked to prevent mismatched requests. A failed save preserves the draft. With automatic advance enabled, the next candidate's image is brought into view. On mobile, the three classification buttons sit directly under the GIF: green collision and red non-collision in one row, brown ambiguous below. The additional notes and trajectory plot follow the original metadata card layout. Keyboard shortcuts do not classify while editing an input. The app uses the existing SQLite database and fixed cohort fingerprints; CSRF and access checks remain enabled.
 
 Before restarting the review service, SQLite's backup API created `web/reviews-before-web-update.sqlite3`, including any WAL-backed data. No production judgment was entered during verification. Only test fixtures received successful save/revert requests.
 
@@ -63,3 +63,9 @@ Before restarting the review service, SQLite's backup API created `web/reviews-b
 - HTTPS verification checks the page assets, live state, authenticated scene APIs, representative first/last GIF hashes for both ready scenes, CSV export, blocked private paths and rejected invalid labels. Real review/history row counts remain unchanged.
 
 Evidence is recorded in `web/https-verification.json` and `web/browser-verification.json`. The four scientific campaign files, execution adapters and fixed numerical model are not modified by this Web task.
+
+## Design copy verification (2026-11-03)
+
+The upstream working tree was read only. Its CSS and React source fingerprints are recorded separately because it contains uncommitted user changes. Original SVG icons are generated from its installed lucide-react package; the GIF decoder is bundled locally from its installed gifuct-js package. No package was downloaded and the old R2/D1 deletion behavior is not used. Only the allowlisted frontend assets and a CSRF-protected logout endpoint were added to the local backend.
+
+A SQLite backup was made before restarting the review process. Updated PIDs are in the existing preview process receipt. Deployment and verification evidence for this change are in `audit/revision-experimental-20261102/web/design-copy-20261103/`. Source CSS remains an exact copy; local additions adapt the dataset fields and prevent clipping on 320-pixel screens.
