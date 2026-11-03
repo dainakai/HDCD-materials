@@ -54,7 +54,7 @@ def main():
         # Only the review count and precision annotate each of the two guides.
         ax.annotate(f'N = {rank}\nPrecision {precision:.1f}%',xy=(rank,precision),
                     xytext=(-8,-12) if rank==24 else (8,9),textcoords='offset points',
-                    ha='right' if rank==24 else 'left',va='top' if rank==24 else 'bottom',fontsize=11,color=original.BLUE)
+                    ha='right' if rank==24 else 'left',va='top' if rank==24 else 'bottom',fontsize=11,color='black')
     ax.set(xlim=(0,80),ylim=(0,104),xlabel='Candidates reviewed per scene',ylabel='Coverage and precision [%]')
     ax.set_xticks(np.arange(0,81,10));ax.yaxis.set_major_locator(mticker.MultipleLocator(20.))
     ax.yaxis.set_major_formatter(mticker.PercentFormatter(xmax=100.));original.style_axis(ax)
@@ -65,7 +65,7 @@ def main():
     fig.legend(handles,legends,frameon=False,loc='upper center',bbox_to_anchor=(.54,.965),ncols=2)
     save(DATA/'figure12_display.json',dict(original_style_source='scripts/figure_support/review_budget.py',
         figure_size_inches=[9.2,5.4],axes_position=[.105,.15,.870,.65],
-        vertical_guides=[24,34],annotations=['N = 24 / Precision 51.5%','N = 34 / Precision 37.2%'],
+        vertical_guides=[24,34],annotations=['N = 24 / Precision 51.5%','N = 34 / Precision 37.2%'],annotation_color='#000000',
         unchanged_curve_data_sha256=sha(DATA/'review_budget.csv'),horizontal_guides=0,shaded_bands=0))
     for suffix in ['pdf','png']:fig.savefig(FIGURES/f'fig12.{suffix}',dpi=300,facecolor='white')
     plt.close(fig)

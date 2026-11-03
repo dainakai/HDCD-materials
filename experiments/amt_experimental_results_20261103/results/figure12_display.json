@@ -18,6 +18,7 @@
     "N = 24 / Precision 51.5%",
     "N = 34 / Precision 37.2%"
   ],
+  "annotation_color": "#000000",
   "unchanged_curve_data_sha256": "55ad50637b2158b20b74b60cba9eaae200d76c7c43e358f25b0e4152164c2356",
   "horizontal_guides": 0,
   "shaded_bands": 0
