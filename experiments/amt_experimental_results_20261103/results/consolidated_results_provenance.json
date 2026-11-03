@@ -1,0 +1,45 @@
+{
+  "created_at": "2026-11-03T19:29:20.893296+09:00",
+  "synthetic_package": "audit/revision-paper-final-20261103/package",
+  "synthetic_copied_files": {
+    "fig07.pdf": "7375dad2860d5d5746ef2c5c69676f151bc931f8e3b6de3a053612b841c95107",
+    "fig07.png": "026fc73d1c60b109994c47aa36803e3cfe56376692ef2d34f46a20f1bd851755",
+    "fig08.pdf": "a69af6c64f6d1808f62f183bc16f34998a4ea452e5765b2cb07004d9ace5434a",
+    "fig08.png": "5ffee7a82b4539f48ec4bcedf2420dbc61c9048645c74e79ee9b7290d9e19303",
+    "fig09.pdf": "26bc0be64d32f426d128ea4f47c7d1e465d7ce9a6c8f9ef174648e9fd7d3558f",
+    "fig09.png": "91d2b39ef430b4f6b1a3f917fa38ab8df7996f090c69f0c2245964850695d297",
+    "table04-metrics.csv": "191358aba01e4d7e13c456cac53aa75620669e26efb2b1336e8b6eab70e40ec4",
+    "table05-stages.csv": "033347ae1fe93a5bd61715c69b4d98f981d16a88b70a577c6afd6714cde98fcf",
+    "version-comparison.csv": "d185f6b2e23a647717b27ebf5596d4c1877175d001baeccf9e18d38454abac4a",
+    "figure07-summary.json": "1aeb7f43764417f8afbaab21419e792e1f17c7fe22bea86d18766145ae01257e",
+    "figure09-cases.json": "5133b9a279e5bce83b2eb144598f3f32b85354893c99f462e15c9c3c3ae21086"
+  },
+  "synthetic_performance_unchanged": true,
+  "experimental_results_sha256": "562f7bb12dca21cec8b34f3d93201cf2d286f04a28732ffcca2406612b31a05e",
+  "figure10_selected_options": [
+    "03",
+    "08"
+  ],
+  "figure9_selected_options": [
+    "N1",
+    "D4"
+  ],
+  "figures": [
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "tables": [
+    4,
+    5
+  ],
+  "manuscript_edited": false
+}

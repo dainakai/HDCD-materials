@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "verified_at": "2026-11-03T19:29:30.063664+09:00",
+  "checks": [
+    "Frozen SQLite snapshot and live review labels agree; 1120 model/prediction/asset-bound judgments retained",
+    "All 80 review-budget points independently recounted from the frozen labels, including ambiguous denominators",
+    "Requested Fig.12 discrete boundaries independently verified: N=24/25, first 95% coverage at N=34; no fractional budget invented",
+    "185 parent pairs independently assigned from two valid parent diameters; the missing-parent event is retained only in total counts",
+    "Full-recording nominal-volume exposure, scene/pair totals and square-root Poisson pooling agree",
+    "Physical diagnostic sample counts and all published RMSE values independently checked from exported figure data",
+    "All 1120 eligibility decisions reconcile with Fig.13; every one of 119 exclusions has frame-level source evidence; true one-point windows distinguished from API zero",
+    "Histogram bins contain every binary-labeled candidate without clipping",
+    "Eight single-page figure PDFs, high-resolution PNGs and the eight-page combined PDF parse successfully",
+    "Ten human-confirmed illustration cases preserve candidate/model/GIF identity; all observed parent extents fit their 50 reconstructed crops",
+    "Fig.10 original panel layout/dimensions restored for 03/08; source crops unchanged; 96px/120px fixed within-case views independently retain every observed particle disk",
+    "Unchanged Fig.4/5/11/13/14/15 and final synthetic package retain their prior hashes; consolidated PDF contains all 11 current figures",
+    "All five report pages, figure/GIF downloads, source evidence, same-site synthetic package links and navigation anchors resolve",
+    "Original manuscript remains unmodified",
+    "No review database, review access configuration or model weights in the public package"
+  ],
+  "visual_review": "Fig.10 restored layout with in-panel view scaling, and Fig.12 original design with only two short guide annotations, rendered and inspected. All other figure bytes retained.",
+  "limitations": [
+    "No claim of absolute experimental recall.",
+    "New and public cohorts differ; comparisons are not causal ablations.",
+    "No terminal TeX compiler is installed; standalone TeX integration is supplied but the original manuscript is not compiled or edited."
+  ]
+}

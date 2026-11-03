@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-11-03T18:00:30.815779+09:00",
+  "created_at": "2026-11-03T19:29:05.286136+09:00",
   "status": "author_confirmed",
   "selected_options": [
     "03",
@@ -179,84 +179,268 @@
     "22": "0cda908a2beddf90f9c22c0f0c223cd82f36888baa551918e8d82151a7ba7bc5"
   },
   "display_geometry": {
-    "panel_width_relative": 0.2896551724137931,
-    "previous_gallery_panel_width_relative": 0.175,
-    "linear_display_gain_at_equal_figure_width": 1.6551724137931036,
-    "crop_pixels": 128,
+    "figure_size_inches": [
+      12.8,
+      12.1
+    ],
+    "panel_width_relative": 0.175,
+    "layout_reference_commit": "2310bfc",
+    "layout_restored": true,
+    "source_crop_pixels": 128,
     "pixel_pitch_um": 10,
-    "web_frame_columns_desktop": 3,
-    "web_frame_columns_phone": 1
+    "view_pixels": {
+      "03": 96,
+      "08": 120
+    },
+    "in_panel_magnification": {
+      "03": 1.3333333333333333,
+      "08": 1.0666666666666667
+    },
+    "fixed_scale_within_each_case": true,
+    "observed_disk_margins": [
+      {
+        "case": "a",
+        "frame": 6742,
+        "track_id": 6509,
+        "minimum_disk_margin_pixels": 10.075105532307635
+      },
+      {
+        "case": "a",
+        "frame": 6742,
+        "track_id": 6639,
+        "minimum_disk_margin_pixels": 10.447069782935976
+      },
+      {
+        "case": "a",
+        "frame": 6746,
+        "track_id": 6509,
+        "minimum_disk_margin_pixels": 22.505643024669574
+      },
+      {
+        "case": "a",
+        "frame": 6746,
+        "track_id": 6639,
+        "minimum_disk_margin_pixels": 23.879642540667163
+      },
+      {
+        "case": "a",
+        "frame": 6750,
+        "track_id": 6639,
+        "minimum_disk_margin_pixels": 37.418759107595996
+      },
+      {
+        "case": "a",
+        "frame": 6754,
+        "track_id": 6639,
+        "minimum_disk_margin_pixels": 37.455710368233554
+      },
+      {
+        "case": "a",
+        "frame": 6758,
+        "track_id": 6639,
+        "minimum_disk_margin_pixels": 37.40040642185136
+      },
+      {
+        "case": "b",
+        "frame": 4079,
+        "track_id": 3758,
+        "minimum_disk_margin_pixels": 0.6477799048953896
+      },
+      {
+        "case": "b",
+        "frame": 4079,
+        "track_id": 4041,
+        "minimum_disk_margin_pixels": 1.3849538005489084
+      },
+      {
+        "case": "b",
+        "frame": 4083,
+        "track_id": 3758,
+        "minimum_disk_margin_pixels": 25.624951976678517
+      },
+      {
+        "case": "b",
+        "frame": 4083,
+        "track_id": 4041,
+        "minimum_disk_margin_pixels": 27.205601025867555
+      },
+      {
+        "case": "b",
+        "frame": 4087,
+        "track_id": 3758,
+        "minimum_disk_margin_pixels": 44.191367604980655
+      },
+      {
+        "case": "b",
+        "frame": 4087,
+        "track_id": 4041,
+        "minimum_disk_margin_pixels": 43.96408932676455
+      },
+      {
+        "case": "b",
+        "frame": 4091,
+        "track_id": 4041,
+        "minimum_disk_margin_pixels": 48.929805705147615
+      },
+      {
+        "case": "b",
+        "frame": 4095,
+        "track_id": 4041,
+        "minimum_disk_margin_pixels": 48.068830129138505
+      }
+    ],
+    "limitation": "Option 08 at -2 ms spans 117.97 pixels across both observed disks; a 96px view would clip a parent. Its fixed 120px view preserves both."
   },
   "paper_panels": [
     {
       "case": "a",
       "frame": 6742,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.425,
+        0.7689999999999999,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        15.5,
+        111.5
+      ]
     },
     {
       "case": "a",
       "frame": 6746,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.615,
+        0.7689999999999999,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        15.5,
+        111.5
+      ]
     },
     {
       "case": "a",
       "frame": 6750,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.805,
+        0.7689999999999999,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        15.5,
+        111.5
+      ]
     },
     {
       "case": "a",
       "frame": 6754,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.52,
+        0.5619999999999999,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        15.5,
+        111.5
+      ]
     },
     {
       "case": "a",
       "frame": 6758,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.71,
+        0.5619999999999999,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        15.5,
+        111.5
+      ]
     },
     {
       "case": "b",
       "frame": 4079,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.425,
+        0.27899999999999997,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        3.5,
+        123.5
+      ]
     },
     {
       "case": "b",
       "frame": 4083,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.615,
+        0.27899999999999997,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        3.5,
+        123.5
+      ]
     },
     {
       "case": "b",
       "frame": 4087,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.805,
+        0.27899999999999997,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        3.5,
+        123.5
+      ]
     },
     {
       "case": "b",
       "frame": 4091,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.52,
+        0.07199999999999995,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        3.5,
+        123.5
+      ]
     },
     {
       "case": "b",
       "frame": 4095,
-      "width_inches": 2.1,
-      "height_inches": 2.1,
-      "relative_width": 0.2896551724137931
+      "axes_bounds": [
+        0.71,
+        0.07199999999999995,
+        0.175,
+        0.185
+      ],
+      "relative_width": 0.175,
+      "view_bounds_pixels": [
+        3.5,
+        123.5
+      ]
     }
   ],
   "unchanged_source_crops": true,
@@ -265,5 +449,5 @@
     "file": "experiments/amt_figure9_refinement_20261102/results/confirmed-a/fig09-a-confirmed.pdf",
     "sha256": "4ddd15001db2a64bad6af50bae958a4a6b2a2f11cdf4338de369d7fdc4dbd45a"
   },
-  "selection_note": "User confirmed options 03 and 08. Five displayed times are retained; 128px crops are enlarged in the layout, without recropping or reconstruction."
+  "selection_note": "User confirmed options 03 and 08 and requested larger particles within existing panels. Original layout and five times retained; only view limits narrowed to 96px/120px using unchanged 128px cached reconstructions."
 }

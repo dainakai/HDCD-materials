@@ -1,0 +1,24 @@
+{
+  "original_style_source": "scripts/figure_support/review_budget.py",
+  "figure_size_inches": [
+    9.2,
+    5.4
+  ],
+  "axes_position": [
+    0.105,
+    0.15,
+    0.87,
+    0.65
+  ],
+  "vertical_guides": [
+    24,
+    34
+  ],
+  "annotations": [
+    "N = 24 / Precision 51.5%",
+    "N = 34 / Precision 37.2%"
+  ],
+  "unchanged_curve_data_sha256": "55ad50637b2158b20b74b60cba9eaae200d76c7c43e358f25b0e4152164c2356",
+  "horizontal_guides": 0,
+  "shaded_bands": 0
+}

@@ -60,12 +60,20 @@ The author confirmed options 03 and 08 for Fig.10. Case (a) is S0015 rank 1,
 ID `15:6509:6639:6750`; case (b) is S0022 rank 2, ID `22:3758:4041:4087`.
 Both retain five views at −2, −1, 0, +1 and +2 ms relative to raw candidate
 time, with the existing 128×128 source crops. `figure10_selected.py` uses
-those cached images and changes only presentation: image panels occupy 29.0%
-of the full figure width instead of 17.5% (1.655 times as wide at equal overall
-width), arranged in three columns and two rows per case including trajectories.
-The large HTML view presents independent 768px overlaid PNGs, three per row
-on desktop and one per row on phones. It links to the original 128px crops,
-review GIFs, each selected case's PDF/PNG and the combined paper Fig.10.
+those cached images and restores the original 12.8-by-12.1-inch layout: 3D
+trajectories on the left and five images at their original positions on the right.
+Only the image field is enlarged inside those fixed panels: 96 pixels / 0.96 mm
+for 03 (1.333x), and 120 pixels / 1.20 mm for 08 (1.067x). A 96px field for 08
+would clip a parent at -2 ms. Both cases retain a fixed scale across all five
+frames, and all observed particle disks remain inside their respective fields.
+Scale bars remain 500 micrometres with their actual 50-source-pixel length.
+The HTML view uses the same original composition rather than rearranging frames.
+
+Fig.12 restores the original dimensions, colors, axes, typography and legend.
+Only two vertical guides at N=24 and N=34 with short precision/count labels
+replace the former N=40 guide. The full threshold explanation stays in the
+caption and report; added shaded bands, horizontal guides and text blocks
+have been removed.
 
 The earlier two-case Fig.10 was kept in `versions/before-selection-2310bfc`.
 It is now historical, as are the old `case_images.py` default cases. The ten-case
@@ -136,7 +144,7 @@ route rejections are recorded in `https-verification.json` alongside the package
   This is a display operation and changes no tracks, labels or analysis values.
 - `gallery.py` produces `fig10-candidates.html`, ten single-case PDFs/PNGs/GIFs,
   fifty clean image crops, captions and `fig10-candidates.pdf` (ten pages).
-  Existing Fig.10 remains available; its two examples are options 04 and 07.
+  The pre-selection Fig.10 remains in the version archive; its examples were 04 and 07.
 - `figure12_thresholds.py` produces the requested precision/coverage boundaries
   using equal integer budgets per sequence, without interpolation.
 - `figure13_exclusions.py` audits all 1120 candidates and all 3360 windows
@@ -165,6 +173,7 @@ To refresh only the confirmed Fig.10 and its large view after the gallery exists
 ```bash
 OPENBLAS_NUM_THREADS=4 MPLCONFIGDIR=/tmp/amt-experimental-mpl .venv/bin/python experiments/amt_experimental_results_20261103/figure10_selected.py
 OPENBLAS_NUM_THREADS=4 .venv/bin/python experiments/amt_experimental_results_20261103/build_report.py
+OPENBLAS_NUM_THREADS=4 .venv/bin/python experiments/amt_experimental_results_20261103/results_summary.py
 OPENBLAS_NUM_THREADS=4 .venv/bin/python experiments/amt_experimental_results_20261103/verify.py
 .venv/bin/python experiments/amt_experimental_results_20261103/publish.py
 ```
@@ -172,3 +181,18 @@ OPENBLAS_NUM_THREADS=4 .venv/bin/python experiments/amt_experimental_results_202
 The selected view is `experimental-results-20261103/fig10-selected.html` under
 the existing Quick Tunnel. `plot.py` also uses this confirmed selection for
 future full figure builds; it cannot silently revert to the old case pair.
+
+## Consolidated results and layout correction
+
+`results_summary.py` builds `summary.html` with Figures 4–5 and 7–15, Tables
+4–5, the public-versus-revised comparison, review-budget thresholds, and links
+to the full exclusion audit. `all-figures.pdf` contains those eleven current
+figures. Figures 7–9 and their metric tables are exact copies from the final
+N1/D4 synthetic package, not recomputed outputs. The existing synthetic ZIP
+is linked separately. Figures 4, 5, 11, 13, 14 and 15 retain their prior bytes.
+
+The superseded Fig.10 layout and expanded Fig.12 design are archived in
+`versions/before-layout-correction-e3c91b0`. The selected candidate IDs, raw
+source crops, five displayed times, model, labels and all performance values
+remain fixed. Only image fields, the two requested Fig.12 guides and their
+short labels change within the restored original designs.

@@ -4,7 +4,11 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
+import sys
 from common import *
+sys.path.insert(0,str(REPO/'scripts'))
+from figure_support import review_budget as original
 
 
 def thresholds(curve):
@@ -36,36 +40,33 @@ def main():
         'cumulative_confirmed_collisions':'confirmed_tp','coverage_of_reviewed_confirmed':'confirmed_tp_coverage'})
     operating.to_csv(DATA/'review_operating_points.csv',index=False)
     plt.rcdefaults()
-    plt.rcParams.update({'font.family':'DejaVu Sans','font.size':11.5,'pdf.fonttype':42,'ps.fonttype':42})
-    blue,orange='#236899','#c66b22'
-    fig=plt.figure(figsize=(10.4,6.7))
-    ax=fig.add_axes([.085,.13,.88,.57])
-    n=curve.top_n_per_scene
-    ax.step(n,100*curve.coverage_of_reviewed_confirmed,where='post',color=orange,lw=2.1,label='Confirmed-event coverage')
-    ax.plot(n,100*curve.top_n_precision,color=blue,lw=2.1,label='Review precision')
-    ax.axvspan(24,25,color=blue,alpha=.13,lw=0)
-    ax.hlines(50,0,25,colors=blue,linestyles=':',lw=1.1)
-    ax.vlines(34,0,100*177/186,colors=orange,linestyles='--',lw=1.1)
-    ax.hlines(95,0,34,colors=orange,linestyles=':',lw=1.1)
-    ax.scatter([24,25],[100*173/336,100*173/350],s=45,c=blue,edgecolors='white',linewidths=.8,zorder=5)
-    ax.scatter([34],[100*177/186],s=65,c=orange,edgecolors='white',linewidths=.8,zorder=5)
-    ax.annotate('24–25',(24.5,50),xytext=(28,61),color=blue,fontsize=10.5,
-                arrowprops={'arrowstyle':'-','color':blue,'lw':.8})
-    ax.annotate('34',(34,95.1613),xytext=(38,85),color=orange,fontsize=11,
-                arrowprops={'arrowstyle':'-','color':orange,'lw':.8})
-    ax.set(xlim=(0,80),ylim=(0,105),xlabel='Candidates reviewed per sequence, N',ylabel='Coverage or precision [%]')
-    ax.set_xticks(range(0,81,10));ax.set_yticks(range(0,101,20))
-    ax.grid(axis='y',color='#dce2e6',lw=.6);ax.set_axisbelow(True)
-    ax.spines[['top','right']].set_visible(False)
-    ax.legend(loc='lower left',bbox_to_anchor=(.02,.035),frameon=True,facecolor='white',edgecolor='#dce2e6')
+    original.configure_plotting()
+    plt.rcParams.update({'pdf.fonttype':42,'ps.fonttype':42})
+    fig=plt.figure(figsize=(9.2,5.4));ax=fig.add_subplot(1,1,1)
+    fig.subplots_adjust(left=.105,right=.975,top=.80,bottom=.15)
+    n=curve.top_n_per_scene.to_numpy(int)
+    ax.step(np.r_[0,n],np.r_[0,100*curve.coverage_of_reviewed_confirmed],where='post',
+            color=original.ORANGE,lw=2.2,label='Coverage of 186 confirmed collisions')
+    ax.plot(n,100*curve.top_n_precision,color=original.BLUE,lw=2.2,label='Top-N precision')
+    for key in ['last_precision_at_least_50','first_coverage_at_least_95']:
+        point=result[key];rank=point['per_sequence'];precision=point['precision']*100
+        ax.axvline(rank,color=original.GRAY,lw=1.5,linestyle='-',zorder=0)
+        # Only the review count and precision annotate each of the two guides.
+        ax.annotate(f'N = {rank}\nPrecision {precision:.1f}%',xy=(rank,precision),
+                    xytext=(-8,-12) if rank==24 else (8,9),textcoords='offset points',
+                    ha='right' if rank==24 else 'left',va='top' if rank==24 else 'bottom',fontsize=11,color=original.BLUE)
+    ax.set(xlim=(0,80),ylim=(0,104),xlabel='Candidates reviewed per scene',ylabel='Coverage and precision [%]')
+    ax.set_xticks(np.arange(0,81,10));ax.yaxis.set_major_locator(mticker.MultipleLocator(20.))
+    ax.yaxis.set_major_formatter(mticker.PercentFormatter(xmax=100.));original.style_axis(ax)
     upper=ax.secondary_xaxis('top',functions=(lambda v:v*14,lambda v:v/14))
-    upper.set_xlabel('Total reviews across 14 sequences',labelpad=9)
-    upper.set_xticks(np.arange(0,1121,140))
-    fig.text(.085,.955,'Precision = 50%: boundary between N = 24 and 25',color=blue,weight='bold',fontsize=11.4,va='top')
-    fig.text(.085,.918,'N = 24: 336 reviews, precision 51.49%\nN = 25: 350 reviews, precision 49.43%\nBoth: 173 / 186 events, coverage 93.01%',fontsize=10.6,linespacing=1.5,va='top')
-    fig.text(.565,.955,'Coverage ≥ 95%: first attained at N = 34',color=orange,weight='bold',fontsize=11.4,va='top')
-    fig.text(.565,.918,'476 reviews, 177 / 186 confirmed events\nCoverage 95.16%; precision 37.18%\nN = 33 remains below 95% coverage (94.62%).',fontsize=10.6,linespacing=1.5,va='top')
-    fig.text(.085,.035,'Coverage is conditional on the 186 confirmed events in the reviewed top-80 cohort.',fontsize=9.8,color='#465561')
+    upper.set_xlabel('Total candidates reviewed across 14 scenes')
+    upper.set_xticks(np.arange(0,81,20)*14);upper.tick_params(direction='out',width=.8)
+    handles,legends=ax.get_legend_handles_labels()
+    fig.legend(handles,legends,frameon=False,loc='upper center',bbox_to_anchor=(.54,.965),ncols=2)
+    save(DATA/'figure12_display.json',dict(original_style_source='scripts/figure_support/review_budget.py',
+        figure_size_inches=[9.2,5.4],axes_position=[.105,.15,.870,.65],
+        vertical_guides=[24,34],annotations=['N = 24 / Precision 51.5%','N = 34 / Precision 37.2%'],
+        unchanged_curve_data_sha256=sha(DATA/'review_budget.csv'),horizontal_guides=0,shaded_bands=0))
     for suffix in ['pdf','png']:fig.savefig(FIGURES/f'fig12.{suffix}',dpi=300,facecolor='white')
     plt.close(fig)
     print(result)

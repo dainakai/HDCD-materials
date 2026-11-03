@@ -49,7 +49,11 @@ def main():
         np.testing.assert_allclose(point['precision'],selected.label.eq('collision').mean())
         np.testing.assert_allclose(point['coverage'],selected.label.eq('collision').sum()/186)
     pdf12=PdfReader(FIGURES/'fig12.pdf').pages[0].extract_text()
-    assert all(value in pdf12 for value in ['51.49','49.43','93.01','95.16','37.18'])
+    assert all(value in pdf12 for value in ['51.5','37.2','N = 24','N = 34'])
+    assert all(value not in pdf12 for value in ['51.49','49.43','93.01','95.16','N = 40'])
+    display12=read(DATA/'figure12_display.json')
+    assert display12['vertical_guides']==[24,34] and display12['shaded_bands']==display12['horizontal_guides']==0
+    np.testing.assert_allclose([float(x) for x in PdfReader(FIGURES/'fig12.pdf').pages[0].mediabox[2:]],[9.2*72,5.4*72])
     assert 'rounded' not in (PACKAGE/'text/caption_fig12.tex').read_text()
     passed('Requested Fig.12 discrete boundaries independently verified: N=24/25, first 95% coverage at N=34; no fractional budget invented')
     counts=pd.read_csv(DATA/'review_counts_by_scene.csv')
@@ -148,16 +152,45 @@ def main():
             with Image.open(PACKAGE/f'fig10-selected/{c["case"]}-frame{k}.png') as im:assert im.size==(768,768)
             with Image.open(PACKAGE/f'gallery/{c["option"]}-frame{k}.png') as im:
                 np.testing.assert_array_equal(np.asarray(im),np.load(PRIVATE/'gallery_images'/f['cache'])['display'])
-    assert selected['display_geometry']['linear_display_gain_at_equal_figure_width']>1.65
+    geometry=selected['display_geometry']
+    assert geometry['layout_restored'] and geometry['panel_width_relative']==.175
+    assert geometry['view_pixels']=={'03':96,'08':120} and geometry['fixed_scale_within_each_case']
+    np.testing.assert_allclose([float(x) for x in PdfReader(FIGURES/'fig10.pdf').pages[0].mediabox[2:]],[12.8*72,12.1*72])
+    for row,c in enumerate(selected['cases']):
+        top=.96-row*.49
+        expected=[(.425,top-.191),(.615,top-.191),(.805,top-.191),(.520,top-.398),(.710,top-.398)]
+        actual=[p for p in selected['paper_panels'] if p['case']==c['case']]
+        for panel,(x,y) in zip(actual,expected):np.testing.assert_allclose(panel['axes_bounds'],[x,y,.175,.185])
+        width=geometry['view_pixels'][c['option']];low=63.5-width/2;high=63.5+width/2
+        tracks=pd.read_parquet(CAMPAIGN/f'scenes/scene{c["scene_num"]:04d}/tracking/smoothed.parquet')
+        event=label_map.loc[c['candidate_id']]
+        for rec in c['frames']:
+            points=tracks.loc[tracks.frame.eq(rec['frame'])&tracks.track_id.isin([event.vanished_track_id,event.survivor_track_id])]
+            radius=np.maximum(2,points.diameter_px.to_numpy()/2)
+            for coordinate,origin in [('x',rec['x0']),('y',rec['y0'])]:
+                values=points[coordinate].to_numpy()-origin
+                assert np.all(values-radius>low) and np.all(values+radius<high)
     reference=selected['reference_figure9'];assert sha(REPO/reference['file'])==reference['sha256']
-    passed('Author-confirmed 03/08 replace Fig.10; ten source crops are unchanged, frame views are 768px and paper panels are 1.655 times wider at equal figure width')
-    pages={name:Links() for name in ['index.html','fig10-candidates.html','fig10-selected.html','fig13-exclusions.html']}
+    passed('Fig.10 original panel layout/dimensions restored for 03/08; source crops unchanged; 96px/120px fixed within-case views independently retain every observed particle disk')
+    protected=read(ROOT/'layout-correction-protected.json')
+    for name,digest in protected.items():assert sha(WORK/name)==digest,name
+    combined=read(DATA/'consolidated_results_provenance.json')
+    for name,digest in combined['synthetic_copied_files'].items():assert sha(PACKAGE/'synthetic-reference'/name)==digest
+    assert len(PdfReader(PACKAGE/'all-figures.pdf').pages)==11
+    passed('Unchanged Fig.4/5/11/13/14/15 and final synthetic package retain their prior hashes; consolidated PDF contains all 11 current figures')
+    pages={name:Links() for name in ['index.html','summary.html','fig10-candidates.html','fig10-selected.html','fig13-exclusions.html']}
     for name,parser in pages.items():parser.feed((PACKAGE/name).read_text())
     scheduled={'verification.json','experimental-replacements.zip'}
     for name,parser in pages.items():
         for link in parser.links:
             url=urlsplit(link)
-            assert not url.scheme and not url.netloc,'External resource in report'
+            if url.scheme or url.netloc:
+                base=urlsplit(read(WORK/'audit/revision-paper-final-20261103/publication.json')['report_url'])
+                assert url.scheme=='https' and url.netloc==base.netloc,'External resource in report'
+                preview=WORK/'audit/revision-review-20261101'
+                allowed=read(preview/'public-manifest.json')['files'];public_name=url.path.lstrip('/')
+                assert public_name in allowed and sha(preview/'public'/public_name)==allowed[public_name],link
+                continue
             if url.path:
                 assert '..' not in Path(unquote(url.path)).parts
                 assert (PACKAGE/unquote(url.path)).is_file() or url.path in scheduled,link
@@ -165,7 +198,7 @@ def main():
             elif url.fragment:assert url.fragment in parser.ids,link
         content=(PACKAGE/name).read_text()
         assert 'style=' not in content and '<script' not in content
-    passed('All four report pages, selected-frame views, gallery GIF/crop links, exclusion evidence, figure downloads and navigation anchors resolve without external assets')
+    passed('All five report pages, figure/GIF downloads, source evidence, same-site synthetic package links and navigation anchors resolve')
     manuscript=WORK/'CollisionPaper/本番フォーマット/template.tex'
     assert sha(manuscript)==read(PACKAGE/'text/replacement_anchors.json')['manuscript_sha256_at_build']
     passed('Original manuscript remains unmodified')
@@ -173,7 +206,7 @@ def main():
     assert not any('sqlite' in p or 'review-access' in p or p.endswith(('.pt','.pth')) for p in snapshot_paths)
     passed('No review database, review access configuration or model weights in the public package')
     save(PACKAGE/'verification.json',{'status':'PASS','verified_at':stamp(),'checks':checks,
-        'visual_review':'Fig.10 author-confirmed 03/08 plate and enlarged frames rendered and inspected. Previously verified Fig.12 and the ten-case gallery retained; source crops and particle bounds checked numerically.',
+        'visual_review':'Fig.10 restored layout with in-panel view scaling, and Fig.12 original design with only two short guide annotations, rendered and inspected. All other figure bytes retained.',
         'limitations':['No claim of absolute experimental recall.','New and public cohorts differ; comparisons are not causal ablations.',
             'No terminal TeX compiler is installed; standalone TeX integration is supplied but the original manuscript is not compiled or edited.']})
     print('PASS:',len(checks),'independent accounting/artifact checks')
