@@ -1,4 +1,4 @@
-"""Top-80 score plot; source hash and paper reference in provenance/paper_figures.json."""
+"""Score distributions for the top-80 review cohort."""
 from pathlib import Path
 import numpy as np
 import pandas as pd

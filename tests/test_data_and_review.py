@@ -70,7 +70,7 @@ def test_upstream_bundle_download_installs_in_declared_root_and_resumes(tmp_path
 
     monkeypatch.setattr("ra3d.datasets.hf_hub_download", fetch)
     output = tmp_path / "download"
-    options = {"tiers": ["holod3-training"], "revision": "fixture", "extract": True}
+    options = {"repo_id": "test/fixture", "tiers": ["holod3-training"], "revision": "fixture", "extract": True}
     download(output, **options)
     target = output / item["extract_root"] / "depth-primary/manifest.csv"
     assert target.read_bytes() == content

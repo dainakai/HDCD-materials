@@ -28,10 +28,10 @@ class Acquisition:
     frames: pd.DataFrame
     units: Units
     wavelength_um: float = 0.6328
-    phase_distance_um: float = 56300.0
-    reconstruction_start_um: float = 61650.0
+    phase_distance_um: float = 21450.0
+    reconstruction_start_um: float = 74900.0
     padding_px: int = 2048
-    phase_iterations: int = 12
+    phase_iterations: int = 3
     coefficients: np.ndarray | None = None
     mode: str = "dual_phase_retrieval"
 
@@ -40,7 +40,7 @@ class Acquisition:
         path = Path(path).resolve()
         config = yaml.safe_load(path.read_text())
         if config.get("schema_version") != 1:
-            raise ValueError("Acquisition schema_version must be 1; see docs/custom-data.md")
+            raise ValueError("Acquisition schema_version must be 1; see docs/data.md#acquisition-files")
         units = Units(**config["units"])
         frame_path = path.parent / config["frames"]
         frames = read_table(frame_path)

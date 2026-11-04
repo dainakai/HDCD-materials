@@ -1,4 +1,4 @@
-# Core numerical versions used for the original-compatible verification. Python 3.12.
+# Core numerical reference environment. Python 3.12.12.
 # Install a platform-appropriate PyTorch build if CUDA is needed.
 numpy==2.4.6
 pandas==3.0.3
@@ -15,3 +15,4 @@ zstandard==0.25.0
 skops==0.14.0
 safetensors==0.8.0
 matplotlib==3.10.9
+polars==1.41.2

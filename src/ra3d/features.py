@@ -17,7 +17,7 @@ from .tracks import trajectory_objects
 from ._core.candidates import build_frame_indices, generate_candidate_pool
 from ._core.features import add_derived_features
 from ._core.feature_primitives import summarize_diameter, make_dark_mask
-from ._core.kinematics import analyze_row
+from ._core.kinematics import analyze_row, Track as KinematicTrack, finite_difference as kinematic_difference
 from ._core.track_images import TrackPoint, finite_float, crop_with_mean_padding, normalize_crop
 from ._core.components import point_hit, component_area
 from .acquisition import Reconstructor
@@ -52,6 +52,15 @@ def static_features(
     validate_candidates(candidates)
     track_frames = {int(k): v.reset_index(drop=True) for k, v in tracks.groupby("track_id", sort=False)}
     kinematic_cache = {}
+    if track_dir is None:
+        # Independent XY features without creating tens of thousands of CSVs.
+        track_dir = Path('__in_memory_tracks__')
+        for tid, values in track_frames.items():
+            frames = values.frame.to_numpy(np.int32)
+            coordinates = [values[c].to_numpy(float) for c in 'xyz']
+            velocities = [values['v'+c].to_numpy(float) if 'v'+c in values else kinematic_difference(frames, values[c].to_numpy(float)) for c in 'xyz']
+            good = np.all(np.isfinite(np.column_stack(coordinates+velocities)), axis=1)
+            kinematic_cache[(str(track_dir), tid)] = KinematicTrack(frames[good], *[a[good] for a in coordinates+velocities])
     rows = []
     for idx, row in candidates.reset_index(drop=True).iterrows():
         vanished, survivor = int(row.vanished_track_id), int(row.survivor_track_id)

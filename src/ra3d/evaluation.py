@@ -22,7 +22,8 @@ def event_curve(
     """Pool scores across scenes, never matching events across acquisition boundaries.
 
     The paper's projected-XY protocol uses corrected frame/x/y and no z gate.
-    Labels for training use a different, three-dimensional association rule.
+    Aligned training labels additionally prioritize the three particle IDs;
+    both training eligibility and evaluation use time and XY without a Z gate.
     """
     if set(predictions) != set(truths):
         raise ValueError("Prediction and truth scene sets must match")

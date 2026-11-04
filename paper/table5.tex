@@ -1,0 +1,24 @@
+\begin{table}[tbp]
+  \centering
+  \small
+  \caption{Comparison of scoring stages of the proposed method on the synthetic test sequence containing 2,000 ground-truth events.
+All rows include temporal-mode aggregation, a cap of five modes per terminating trajectory, rank adjustment using ranks fixed before suppression, and the same trained localization regressors.
+The trajectory-only row uses the static shortlist without image features, whereas the subsequent rows use the scoring union and the image features available at those stages.
+Coordinate-based duplicate suppression is added only in the final row.
+The comparison therefore includes changes in candidate selection and localization-feature availability, as well as scoring.
+At each target recall, precision and false-positive counts are evaluated at the highest score threshold attaining or exceeding that recall, including tied scores jointly.
+AP denotes average precision, P precision, R recall, and FP the number of false positives.}
+  \label{tab:projected_xy_stage_ablation}
+  \resizebox{\linewidth}{!}{
+    \begin{tabular}{lrrrrr}
+      \tophline
+      Stage & AP $\uparrow$ & $P$ at $R\geq0.8$ $\uparrow$ & FP at $R\geq0.8$ $\downarrow$ & $P$ at $R\geq0.9$ $\uparrow$ & FP at $R\geq0.9$ $\downarrow$ \\
+      \middlehline
+      Trajectory features only & 0.893 & 0.900 & 177 & 0.603 & 1,186 \\
+      + image features & 0.898 & 0.897 & 183 & 0.642 & 1,004 \\
+      + relation-attention & 0.905 & 0.931 & 118 & 0.693 & 797 \\
+      + coordinate suppression & \textbf{0.922} & \textbf{0.969} & \textbf{51} & \textbf{0.787} & \textbf{486} \\
+      \bottomhline
+    \end{tabular}
+  }
+\end{table}

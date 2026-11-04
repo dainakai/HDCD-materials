@@ -1,0 +1,13 @@
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=0.98\linewidth,height=0.78\textheight,keepaspectratio]{figures/fig07.pdf}
+  \caption{Performance of holographic droplet detection and tracking using HoloD3 \citep{HoloD3} on the same synthetic test sequence used for the collision-detection evaluation in Fig.~\ref{fig:synthetic_hologram_validation_results} (seed 260745; 6,000 frames).
+The particle measurements and trajectories are from the same reconstruction and tracking pipeline used as inputs to that evaluation.
+(a) Particle-level precision--recall curve obtained by varying the particle-detection confidence threshold.
+Histograms show (b) the in-plane position error, \(\sqrt{\Delta x^2+\Delta y^2}\), (c) the absolute axial-position error, \(|\Delta z|\), and (d) the signed relative diameter error, \(100(D_{\mathrm{meas}}-D_{\mathrm{true}})/D_{\mathrm{true}}\), for matched observations at the tracking-input confidence threshold of 0.1.
+The errors in (b--d) use the smoothed trajectories supplied to collision detection; associations are determined in the image plane.
+Annotations in (b,c) report the 50th, 90th, and 95th percentiles; those in (d) report the median and central 90\% and 95\% intervals.
+(e) Ground-truth and measured number-density distributions.
+(f) Cumulative numbers of trajectories with length greater than or equal to \(L\), for the ground-truth and reconstructed trajectories.}
+  \label{fig:synthetic_hologram_distribution}
+\end{figure}

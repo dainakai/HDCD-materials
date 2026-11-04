@@ -52,7 +52,7 @@ end
     modified_Cholesky_decomposition(A)
 
 This function decomposes the target matrix A to A = LDL^T. The diagonal components of the return matrix are the inverse of D, and the lower left components correspond to L.
-対象行列Aを A = LDL^T に変換します。戻り値行列の対角成分は D の逆数、左下成分は L に一致します。
+Factor A as LDL^T. Store the inverse diagonal of D on the diagonal and L in the lower triangle.
 
 # Arguments
 - `A::Array{<:AbstractFloat,2}`: The target matrix.
@@ -81,7 +81,7 @@ function modified_Cholesky_decomposition(A::Array{<:AbstractFloat,2})
         end
         matA[j, j] = 1.0 / t
     end
-    # matA の対角成分は matD の逆数。matA_ji (i<j) は matL_ji。
+    # The diagonal of matA contains the inverse diagonal of matD; matA_ji (i<j) contains matL_ji.
     return matA
 end
 

@@ -1,4 +1,4 @@
-"""Paper plotting/scientific functions; source hashes in provenance/paper_figures.json."""
+"""Scientific plotting and summary calculations for the associated paper."""
 from __future__ import annotations
 
 import math

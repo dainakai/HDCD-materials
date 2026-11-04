@@ -1,0 +1,86 @@
+[
+  {
+    "case": "N1",
+    "candidate_frame": 3958,
+    "vanished_track_id": 12754,
+    "survivor_track_id": 12764,
+    "display_frames": [
+      3957,
+      3958,
+      3959
+    ],
+    "trajectory_score": 0.9989552782751296,
+    "image_feature_score": 0.9979272757552868,
+    "truth_event": {
+      "collision_event_id": 1204,
+      "planned_event_id": 1204,
+      "frame": 3958,
+      "file": "003959.png",
+      "event_type": "planned",
+      "parent1_id": 5288,
+      "parent2_id": 5289,
+      "child_id": 5377,
+      "x_um": 958.3519468901178,
+      "y_um": 9305.20584271574,
+      "z_um": 84880.2924163132,
+      "distance_um": 196.69948905951384,
+      "radius_sum_um": 197.68792870303068,
+      "overlap_um": 0.9884396435168412,
+      "parent1_diameter_um": 153.79068586981978,
+      "parent2_diameter_um": 241.5851715362416,
+      "child_diameter_um": 260.79207550515963,
+      "parent1_bin_10um": 12,
+      "parent2_bin_10um": 21,
+      "bin_pair_low_10um": 12,
+      "bin_pair_high_10um": 21,
+      "parent1_vx_um_s": 55908.41894232003,
+      "parent1_vy_um_s": 223077.84507867516,
+      "parent1_vz_um_s": 9631.53440000224,
+      "parent2_vx_um_s": 1890.193999484214,
+      "parent2_vy_um_s": 620447.9718712575,
+      "parent2_vz_um_s": 11026.259344842376,
+      "child_vx_um_s": 12967.833769295328,
+      "child_vy_um_s": 538958.3797095254,
+      "child_vz_um_s": 10740.239940590222,
+      "parent1_birth_frame": 2458,
+      "parent2_birth_frame": 2458,
+      "sampling_component": "coverage_uniform",
+      "pair_low_25um": 5,
+      "pair_high_25um": 8,
+      "pair_label_25um": "150-175 x 225-250",
+      "relative_speed_um_s": 401027.3451409512,
+      "conditional_speed_percentile": 0.8914166666666666,
+      "relative_speed_tier": 5,
+      "normalized_impact_parameter": 0.8023736458047181,
+      "impact_parameter_tier": 3,
+      "approach_dot_um2_s": -46647800.97190563,
+      "coverage_extra_assignment": 0
+    },
+    "shared_truth_particle_id": null,
+    "images": [
+      "N1-3957.npz",
+      "N1-3958.npz",
+      "N1-3959.npz"
+    ]
+  },
+  {
+    "case": "D4",
+    "candidate_frame": 5337,
+    "vanished_track_id": 17945,
+    "survivor_track_id": 18031,
+    "display_frames": [
+      5335,
+      5337,
+      5339
+    ],
+    "trajectory_score": 0.9436670449838276,
+    "image_feature_score": 0.6247505741646191,
+    "truth_event": null,
+    "shared_truth_particle_id": 7364,
+    "images": [
+      "D4-5335.npz",
+      "D4-5337.npz",
+      "D4-5339.npz"
+    ]
+  }
+]

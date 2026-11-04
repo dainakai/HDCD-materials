@@ -1,0 +1,13 @@
+{
+  "method": "depth_free",
+  "event_ap": 0.9133483150935661,
+  "maximum_f1": 0.8693548387096773,
+  "maximum_recall": 0.9715,
+  "prediction_rows": 20034,
+  "precision_at_recall_0p8": 0.9450679267572357,
+  "false_positives_at_recall_0p8": 93,
+  "precision_at_recall_0p9": 0.694980694980695,
+  "false_positives_at_recall_0p9": 790,
+  "candidate_pool_rows": 554389,
+  "candidate_pool_recall": 0.9855
+}

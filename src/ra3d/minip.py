@@ -39,10 +39,10 @@ def score(models, frame):
     return np.mean([model.predict_proba(matrix)[:, 1] for model in models], axis=0)
 
 
-def predict(frame, bundle, scene_id=0):
+def predict(frame, bundle, scene_id=0, *, lineage_rank_order="before"):
     """Rank and localize events without consulting ground-truth label columns."""
     frame = frame.drop(columns=LABEL_COLUMNS, errors='ignore').copy()
-    return baseline2d.predict(frame, bundle, scene_id, base_scores=score(bundle['full_models'], frame))
+    return baseline2d.predict(frame, bundle, scene_id, base_scores=score(bundle['full_models'], frame), lineage_rank_order=lineage_rank_order)
 
 
 def load(directory, device='cpu'):
@@ -86,7 +86,7 @@ class MinIPReader:
             raise ValueError('Duplicate MinIP frame numbers')
         self.dtype = np.float32 if method == 'depth-free' else np.float64
         self.acquisition = SimpleNamespace(frames=frames, units=Units(), wavelength_um=0.6328,
-            phase_distance_um=21450., reconstruction_start_um=74900. if method == 'depth-free' else 64900.,
+            phase_distance_um=21450., reconstruction_start_um=74900.,
             padding_px=1536, phase_iterations=3, coefficients=None, mode='minip_' + method)
 
     def intensity(self, frame, z):
@@ -178,7 +178,7 @@ def sample_training(frame, seed):
     return frame.loc[chosen].reset_index(drop=True)
 
 
-def train(root, output, method, *, device='cpu', cpu_threads=4, smoke=False, progress=print):
+def train(root, output, method, *, device='cpu', cpu_threads=4, smoke=False, progress=print, relation_context_transform=None):
     root, output = Path(root), Path(output)
     if (output / 'model.json').exists():
         raise FileExistsError('Completed model exists; choose a new output directory')
@@ -186,7 +186,7 @@ def train(root, output, method, *, device='cpu', cpu_threads=4, smoke=False, pro
     output.mkdir(parents=True, exist_ok=True)
     frames, truth, manifest = {}, {}, {}
     for seed in DEVELOPMENT_SEEDS:
-        path = root / directory / 'train' / f'seed{seed}' / 'full.parquet'
+        path = root / directory / 'train' / f'seed{seed}' / 'full64.parquet'
         full = read_table(path)
         if not full.synth_seed.eq(seed).all():
             raise ValueError(f'Wrong training scene in {path}')
@@ -229,6 +229,8 @@ def train(root, output, method, *, device='cpu', cpu_threads=4, smoke=False, pro
             contexts.append(relation.context_frame(frames[held], base))
             del models
             gc.collect()
+        if relation_context_transform is not None:
+            contexts = relation_context_transform(contexts)
         attention, mean, std, audit['relation_fit'] = relation.fit_attention(contexts, device)
         bundle.update(relation=attention, mean=mean, std=std)
         del contexts
@@ -287,7 +289,7 @@ def main():
                              progress=lambda value: print(json.dumps(value), flush=True))
             if args.smoke:
                 directory = METHODS[args.method][0]
-                test = read_table(args.data / directory / 'validation/seed260745/full.parquet').head(2048)
+                test = read_table(args.data / directory / 'validation/seed260745/full64.parquet').head(2048)
                 prediction = predict(test, load(args.output, args.device), 260745)
                 if prediction.empty or not np.isfinite(prediction[['score', 'x_um', 'y_um']]).all().all():
                     raise AssertionError('Reloaded model did not produce finite events')

@@ -1,90 +1,94 @@
 # HDCD-materials
 
-HDCD stands for Holographic droplet collision detection. This repository provides evaluation data, trained models and code accompanying “Semi-automated detection of droplet collision-coalescence using digital in-line holography” by Dai Nakai.
+Evaluation code, trained models and data for **Semi-automated detection of droplet collision-coalescence using digital in-line holography**. HDCD stands for *Holographic droplet collision detection*.
 
-Evaluate the three pretrained collision models on the complete held-out test sequence, reproduce Tables 3–4 and Figures 4, 5, 7, 8 and 11–15, and examine the experimental review labels. These workflows use numerical data and run on a CPU. Hologram images are not required.
+## Set up the environment
 
-The download is approximately 503 MB. It includes test seed 260745, with 6,000 frames and 2,000 true collision events, plus numerical measurements for the nine figures. The five training sequences, supplementary benchmark, full experimental trajectory/feature sequence, and HoloD3 measurement weights are outside this distribution. Full model retraining and image-to-track reproduction therefore require inputs beyond this repository.
-
-## Choose a task
-
-| Task | Starting point | Result |
-| --- | --- | --- |
-| Evaluate pretrained models | [Quick start](#quick-start) | New event predictions and precision–recall metrics for all three methods |
-| Check reproducibility | [Tables and figures](docs/paper-validation.md) | Tables 3–4 and nine figures, with reference comparisons |
-| Recalculate 3D trajectory features | [Feature preparation](docs/data-preparation.md#what-is-calculated) | All 566,261 fixed test candidates; 77 trajectory features |
-| Reanalyze experimental judgments | [Review CSV dictionary](docs/figures.md#5-visual-review-labels) | 1,120 labels and measured values for the physical comparisons |
-
-The [use-case guide](docs/use-cases.md) describes the input boundary of each workflow.
-
-## Quick start
-
-Download and extract the [v1.0.1 ZIP](https://github.com/dainakai/HDCD-materials/archive/refs/tags/v1.0.1.zip), or clone the release:
+The reference environment uses Linux x86-64 and Python **3.12.12**. Start with Git and curl installed. The commands below install uv 0.10.6 and the exact Python version in user-managed directories, then create the CPU environment:
 
 ```bash
-git clone --branch v1.0.1 --depth 1 https://github.com/dainakai/HDCD-materials.git
+git clone https://github.com/dainakai/HDCD-materials.git
 cd HDCD-materials
-```
-
-Use Linux and Python 3.12. Run all commands from this directory. Installation needs the package registry; numerical inputs and collision weights are included. [Environment setup](docs/environment.md).
-
-```bash
-python3.12 -m venv .venv
-.venv/bin/python -m pip install uv==0.10.6
-.venv/bin/python -m uv pip install --python .venv/bin/python \
+curl -LsSf https://astral.sh/uv/0.10.6/install.sh | sh
+export PATH="$HOME/.local/bin:$PATH"
+uv python install 3.12.12
+uv venv --python 3.12.12 .venv
+uv pip install --python .venv/bin/python \
+  --index-url https://download.pytorch.org/whl/cpu torch==2.12.0
+uv pip install --python .venv/bin/python \
   -r requirements-core-reference.txt -e .
 source .venv/bin/activate
-python scripts/check_environment.py --profile core
-python scripts/prepare_data.py --profile all --output runs/data-preparation.json
-python scripts/verify_release.py --tables
-python scripts/reproduce.py --suite terminal --output runs/pretrained-test
+python scripts/check_environment.py
+python scripts/prepare_data.py --profile test
+python scripts/verify_release.py
 ```
 
-Preparation calculates the 3D trajectory features and test particle states locally, and assembles the selected input tables. Every completed table is checked against its recorded SHA-256. It reuses verified files after interruption and preserves existing files whose contents differ. Allow 6 GB of additional disk space for prepared files and temporary calculations, separately from the Python environments. Runtime on the verification host was 14.4 minutes. [Preparation details and selective profiles](docs/data-preparation.md).
+The supplied collision models, numerical evaluation, tables and figures run on a CPU; no GPU is needed for these tasks. About 6 GB of disk space covers the checkout, CPU environment and unpacked inputs. All subsequent commands run from the repository root. Full reproduction from holograms uses the [GPU environment and Julia setup](docs/environment.md#hologram-generation-and-particle-measurement). See [resource usage](docs/environment.md#resource-usage) for measured memory use and full-run disk space. Generated holograms stay in the run directory.
 
-The evaluation command loads the supplied models and scores the entire test sequence. The directory name `validation/` refers to this independent test sequence; it was excluded from fitting.
-
-| Test metric | Ours | Depth-free variant | MinIP-based 2D |
-| --- | ---: | ---: | ---: |
-| Average precision (AP) | 0.917 | 0.901 | 0.858 |
-| Maximum F1 | 0.878 | 0.846 | 0.811 |
-| Precision at recall ≥ 0.8 | 0.960 | 0.895 | 0.813 |
-| False positives at that recall | 67 | 188 | 368 |
-| Precision at recall ≥ 0.9 | 0.766 | 0.637 | 0.424 |
-| False positives at that recall | 550 | 1,024 | 2,447 |
-
-MinIP means minimum-intensity projection of a reconstructed volume. [Method comparison](docs/baseline2d.md#method-comparison).
-
-Read `runs/pretrained-test/verification.json`. The `terminal/` subdirectory contains event predictions and precision–recall curves. AP integrates the interpolated precision envelope. Events match one-to-one within ±5 frames and 350 µm in the image plane. Scores rank candidates; they are not calibrated probabilities. [Evaluation definitions](docs/paper-validation.md#evaluation-definitions).
-
-## Reproduce the tables and figures
+## Evaluate the trained models
 
 ```bash
-python scripts/reproduce_tables.py --output runs/paper-tables
+python scripts/reproduce.py --output runs/test-evaluation
 ```
 
-This recalculates Tables 3–4 and writes CSVs, LaTeX tables and a verification report. Table 3 uses reference predictions and candidate geometry; Table 4 reruns the full-feature and relation models from the prepared test tables.
+The command runs all three models on the complete test sequence (seed 260745, 6,000 frames, 2,000 true collision events), calculates event precision-recall curves, and compares predictions and metrics with the reference evaluation. The five training seeds are 260740–260744.
 
-Install the [figure environments](docs/figures.md#1-set-up-the-two-plotting-environments), then run:
+| Test metric | Ours | Depth-free | MinIP-based 2D |
+|---|---:|---:|---:|
+| Average precision | 0.922169 | 0.913348 | 0.877041 |
+| Maximum F1 | 0.888366 | 0.869355 | 0.830834 |
+| Precision at recall ≥ 0.8 | 0.969110 | 0.945068 | 0.847009 |
+| False positives at recall ≥ 0.8 | 51 | 93 | 289 |
+| Precision at recall ≥ 0.9 | 0.787402 | 0.694981 | 0.495595 |
+| False positives at recall ≥ 0.9 | 486 | 790 | 1,832 |
+
+Read `runs/test-evaluation/verification.json` for the comparison. Scores order candidates; they are not calibrated collision probabilities. AP integrates the all-points interpolated precision envelope. Event matching uses maximum one-to-one association within ±5 frames and 350 µm in the image plane, without a depth gate. [Evaluation and training definitions](docs/algorithm.md).
+
+## Reproduce the numerical experiment from holograms
+
+After completing the GPU and Julia setup:
 
 ```bash
-python scripts/reproduce_figures.py --output runs/paper-figures --verify-rendered
+python scripts/reproduce_benchmark.py --output runs/benchmark --julia julia
 ```
 
-The command produces nine figures with 18 PDF panels, numerical outputs, English captions and the paper's layout. Exact pixel checks use the specified plotting environments and Poppler 22.02.0. With another Poppler version, omit `--verify-rendered` to retain numerical checks and report rendering differences.
+This generates all six particle sequences and paired holograms, reconstructs and measures particles, links and smooths trajectories, selects candidates, calculates features, fits all three collision models, and evaluates the test sequence. It uses the bundled particle-measurement weights and fits the collision models from the five training sequences.
 
-A ready-to-view [figure and table preview](paper/preview.pdf) is included. [Figure guide](docs/figures.md) · [Calculation settings](docs/physical-conventions.md).
+The final comparison is written to `runs/benchmark/reference-comparison.json`. The command exits with an error if the recalculated predictions or metrics differ beyond the recorded tolerances. GPU workspace selection and floating-point arithmetic can affect thresholded detections; inspect this comparison as well as the input hashes when reproducing the published values.
 
-## What is calculated and what is supplied
+The generation volume spans 0–102.3 mm. Reconstruction uses 1,024 planes from 74.9 to 177.2 mm relative to the primary camera, with three phase-retrieval iterations throughout. MinIP includes the terminal plane. The generator uses explicit PCG64 streams and fixed distribution tables; every generated particle table and camera image is checked against a recorded SHA-256 before downstream processing. [Generation, resumption and reproducibility checks](docs/simulation.md).
 
-- The original particle simulator regenerates the complete test particle-state table from the fixed seed and sampling distributions.
-- The original trajectory routines calculate 53 additional features from supplied 3D test trajectories and 24 fixed candidate-generation features. Small recorded bitwise differences recover the exact original table representation.
-- Model scores, relation attention, duplicate suppression, event time/position corrections and evaluation are calculated from the prepared tables and trained weights.
-- Image-derived measurements and the two comparison methods' final feature tables are supplied. They are not inferred from the random seed.
-- Numerical figure measurements cover all 14 experimental sequences. The [review CSV](data/paper_figures/review/visual_review_labels.csv) contains the top 80 candidates per sequence: 185 collisions, 896 non-collisions and 39 ambiguous cases. These judgments are excluded from training.
+A shorter integration check generates a complete particle sequence and processes its first 128 image pairs:
 
-[Data dictionary](docs/data.md) · [Model definitions](docs/models.md) · [Feature catalog](docs/features.md) · [Verification scope](docs/reproduction.md).
+```bash
+python scripts/reproduce_benchmark.py --smoke --output runs/smoke --julia julia
+```
+
+## Reproduce tables and figures
+
+```bash
+python scripts/reproduce_tables.py --output runs/tables
+python scripts/reproduce_experimental.py --output runs/experimental
+```
+
+The first command recalculates **Tables 4 and 5**, including the four scoring stages and their common downstream operations. The second recalculates review budgets, diameter and velocity diagnostics, and gravitational collision predictions from the experimental measurements and labels.
+
+Install the [plotting dependencies](docs/environment.md#figures), then run:
+
+```bash
+python scripts/reproduce_figures.py --output runs/figures
+```
+
+[Figures 4–5 and 7–15](paper/figures.pdf), individual PDFs/PNGs and English captions are also supplied in [paper/](paper/README.md). Fig.7 uses the particle measurements and tracks from the same synthetic test sequence as the collision evaluation. Fig.9 shows a true collision and two tracks of the same physical particle. Fig.10 shows two confirmed experimental collisions. [Figure inputs and commands](docs/figures.md).
+
+## Experimental data
+
+The review contains 80 candidates from each of 14 recordings: **186 collisions, 922 non-collisions and 12 ambiguous cases**. At 24 reviews per recording, precision is 51.49% and coverage is 93.01%; at 34 reviews, precision is 37.18% and coverage is 95.16%. Coverage is relative to the 186 confirmed events in the reviewed top-80 cohort.
+
+Ten confirmed collision examples include reconstructed image sequences. Event trajectories, review labels, per-window physical measurements and compact population summaries support the analyses. Full experimental recordings and their raw holograms are not included. There are 185 events with both parent diameters, 184 eligible diameter diagnostics and 179 eligible velocity diagnostics. The total count remains 186; missing measurements affect only the corresponding analyses. [Data dictionary and example files](docs/data.md).
+
+The gravitational model predicts **222.4103 ± 14.9134** collisions across the 14 recordings; the uncertainty is the conditional Poisson standard deviation. The observed count is a lower bound from the reviewed candidates. [Physical conventions](docs/physics.md).
 
 ## Citation and licenses
 
-Please cite the associated paper and the dataset version used. [CITATION.cff](CITATION.cff) contains the citation metadata; the [Zenodo archive](https://doi.org/10.5281/zenodo.23409588) provides a DOI for each release. Numerical research data use [CC BY 4.0](LICENSE-DATA.md); software and included collision-model weights use MIT, with third-party components retaining their own licenses. [Third-party notices](THIRD_PARTY_NOTICES.md).
+Please cite the associated paper and the commit or dataset version used. [CITATION.cff](CITATION.cff) contains citation metadata. Numerical research data use [CC BY 4.0](LICENSE-DATA.md); project software and collision-model weights use [MIT](LICENSE). Dependencies and bundled components retain their own licenses; see [Third-party notices](THIRD_PARTY_NOTICES.md).

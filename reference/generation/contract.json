@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "name": "paper-six-scenes-6000f-halfmix25-v1",
+  "name": "hdcd-six-scenes-102p3mm-phase3",
   "seeds": [
     260740,
     260741,
@@ -22,7 +22,7 @@
   },
   "label_arguments": [
     "--theme",
-    "collision_benchmark_260715_halfmix25_v1",
+    "hdcd_102p3mm_phase3",
     "--frames",
     "6000",
     "--target-particles",
@@ -48,17 +48,45 @@
     "-0.26",
     "--disable-natural-collisions",
     "--small-particle-y-jitter",
-    "--refresh-source"
+    "--refresh-source",
+    "--volume-depth-um",
+    "102300"
   ],
   "source_sha256": {
-    "reference/generation/generate_collision_benchmark.py": "9bea91038c92afdebee66878c1b65de374855b79b761ecb66f216ab26978ef7f",
-    "reference/generation/generate_clean.py": "30da4ce17759ccb21fe2ac78469a98758429383e9377c6b9f7d587ac1978a810",
-    "reference/generation/half_mixture.py": "ddafe3f0c26adc69d6ba1aecd5c84a46b32956721d0e64841d39238bb635f6fc",
+    "src/ra3d/simulation/generate.py": "2cea331d38491251e72a4e504e2520e5e4441d266bf89ce20932c6f1f5b506a2",
+    "src/ra3d/simulation/physical.py": "851f17835a8b99d11b6d1854215730d9b4fa978be3288b330865ed26185b5023",
+    "src/ra3d/simulation/half_mixture.py": "cea741192948be6551b1305ae03e305af2657228f22d4b2b5901ad261af36bb5",
+    "src/ra3d/config/simulation/diameter_distribution_260715.csv": "7b6286da85ca8c5b4783e30908440f34fe92725637186cd04b36f8918e4f2beb",
+    "src/ra3d/config/simulation/velocity_quantiles_260715.csv": "1be7499fdc685d1a40b57301f2f23869ca2d77d35520fd6d9865a27cf33ade16",
     "reference/generation/render_holograms.jl": "d12c4be9e0b4ebf6867059e785f2b1dd46771720dd3114c54011dd1d201cd4aa",
     "reference/generation/Project.toml": "d866f9576be59b17ad45100e3b58d86d939615a0e40d7ef1f5d81dea198eff03",
-    "reference/generation/Manifest.toml": "a5e74d3fcb39e4dc47b18d0f8f8d306e17ccc9238a92ea58c660cd43003bddf6",
-    "src/ra3d/config/simulation/diameter_distribution_260715.csv": "7b6286da85ca8c5b4783e30908440f34fe92725637186cd04b36f8918e4f2beb",
-    "src/ra3d/config/simulation/velocity_quantiles_260715.csv": "1be7499fdc685d1a40b57301f2f23869ca2d77d35520fd6d9865a27cf33ade16"
+    "reference/generation/Manifest.toml": "a5e74d3fcb39e4dc47b18d0f8f8d306e17ccc9238a92ea58c660cd43003bddf6"
   },
-  "rendering": "No stochastic optical noise; image values depend on the particle table and the pinned deterministic optical calculation. Cross-GPU/FFT/encoder byte equality must be checked."
+  "rendering": "No stochastic optical noise; image values depend on the particle table and the pinned deterministic optical calculation. Cross-GPU/FFT/encoder byte equality must be checked.",
+  "labels_sha256": {
+    "260740": {
+      "particles": "a0a21e9a7e4ef4a3bc17aa5a0763c3030844994aebf2418e3d1c8ac2f8e6f2a7",
+      "collision_events": "22e0cb8547f646319c6c787d6f6d88d7a2afd0c3aa4e6c9247f2c9b87c16bf92"
+    },
+    "260741": {
+      "particles": "a5c833defbecda3857d5d268a4aced6bdf6e24d6a417e428ce5db10891dbc169",
+      "collision_events": "5e0743c02778460b2b1e87a61c8d821d1f26386d61a4ebcc0414acddd32d8130"
+    },
+    "260742": {
+      "particles": "855e253392b48a96dca115d870d836cf884b8c1afc0f3d3c3369bd0f055ffa10",
+      "collision_events": "48d9404ed200a715be6c93fc112a502dcf1897b8717aa9c49092994e1d0e2aa5"
+    },
+    "260743": {
+      "particles": "447db8055c632415acc2d2c8a318e669fd6dd385b01eb5118098d5c2a7c21819",
+      "collision_events": "063661ec0daa1924effffefafb6ac70ec90ba6443d4a06c8ab2ede66e3389b5e"
+    },
+    "260744": {
+      "particles": "e7c48e65f4f443179c7a8daefd1565799add30fab9f8c61d5c02ec66118f63ad",
+      "collision_events": "cf81ecc5d0009769c0430b00ab63129bf0ae87397dc41e3dda207ee17ff74062"
+    },
+    "260745": {
+      "particles": "0a058257df0bde0aeb68124027efa0211ab6ebec2145f6c09ebaabcc29c1e42b",
+      "collision_events": "44feccac7ca3c451c5bf5870c5ec32d38fea2dde56050298765fe7dfd0730164"
+    }
+  }
 }

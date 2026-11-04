@@ -1,0 +1,52 @@
+[
+  {
+    "output": "fig07.pdf",
+    "label": "fig:synthetic_hologram_distribution",
+    "sources": [
+      "01_particle_detection_pr_curve_seed260745.pdf",
+      "02_xy_center_error_smoothed_hist_seed260745.pdf",
+      "03_axial_error_smoothed_hist_seed260745.pdf",
+      "04_diameter_relative_error_hist_seed260745.pdf",
+      "paper_number_density_distribution_25_300um_seed260745.pdf",
+      "paper_trajectory_length_counts_25_300um_seed260745.pdf"
+    ],
+    "columns": 3
+  },
+  {
+    "output": "fig08.pdf",
+    "label": "fig:synthetic_hologram_validation_results",
+    "sources": [
+      "01_validation_precision_recall.pdf",
+      "02_validation_topn_precision_recall.pdf",
+      "03_validation_false_positive_burden.pdf",
+      "04_validation_false_positive_composition.pdf"
+    ],
+    "columns": 2
+  },
+  {
+    "output": "fig09.pdf",
+    "label": "fig:image_feature_case_study",
+    "sources": [
+      "image_feature_case_study_arial_compatible.pdf"
+    ],
+    "panel_centres": [
+      [
+        152.17,
+        151.363529
+      ],
+      [
+        152.17,
+        16.565026
+      ],
+      [
+        408.55,
+        3.45625
+      ]
+    ],
+    "subtitles": [
+      "Ground-truth collision: 154 + 242 \u2192 261 \u00b5m",
+      "Shared-particle artifact: two track IDs share one true particle",
+      "Scores with and without image features"
+    ]
+  }
+]

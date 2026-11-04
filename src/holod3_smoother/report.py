@@ -1,0 +1,98 @@
+"""Self-contained, offline HTML trajectory inspection; no external assets or uploads."""
+
+from __future__ import annotations
+
+import html
+import json
+from pathlib import Path
+
+import numpy as np
+
+
+def write_report(batch, destination: str | Path, *, max_tracks: int = 100, max_points: int = 1000) -> None:
+    groups = sorted(batch.tracks.groupby("track_id"), key=lambda pair: (-len(pair[1]), pair[0]))[:max_tracks]
+    columns = ["frame", "segment", "x_raw", "y_raw", "z_raw", "x", "y", "z", "vx", "vy", "vz", "postOutProb"]
+    tracks = []
+    for track_id, frame in groups:
+        if len(frame) > max_points:
+            frame = frame.iloc[np.unique(np.rint(np.linspace(0, len(frame) - 1, max_points)).astype(int))]
+        tracks.append({"id": int(track_id), "rows": frame[columns].to_dict(orient="records")})
+    payload = json.dumps(tracks, allow_nan=False).replace("<", "\\u003c")
+    candidate_rows = []
+    for candidate in batch.tuning.get("candidates", []):
+        candidate_rows.append(
+            "<tr>"
+            + "".join(
+                f"<td>{html.escape(str(candidate.get(key, '—')))}</td>"
+                for key in ("degree", "alpha", "lambda_other", "objective", "em_converged")
+            )
+            + "</tr>"
+        )
+    page = _PAGE.replace("__DATA__", payload).replace("__CANDIDATES__", "".join(candidate_rows))
+    velocity_label = (
+        "Velocity / observation (XY), / frame (Z)" if batch.config.xy_mode == "legacy" else "Velocity / frame"
+    )
+    page = page.replace("__VELOCITY_LABEL__", velocity_label)
+    page = page.replace(
+        "__SUMMARY__",
+        html.escape(
+            f"{batch.tracks.track_id.nunique()} tracks · {len(batch.tracks)} points · degree {batch.config.degree} · "
+            f"α {batch.config.alpha:g} · λ {batch.config.lambda_other:g} · "
+            f"EM {'converged' if batch.state.converged else 'NOT CONVERGED'} ({batch.state.iterations} iterations)"
+        ),
+    )
+    Path(destination).write_text(page, encoding="utf-8")
+
+
+_PAGE = """<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HoloD3 Smoother · trajectory report</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#20304a;background:#f4f7fc}*{box-sizing:border-box}
+body{max-width:1120px;margin:0 auto;padding:40px 24px}h1{font-size:32px;letter-spacing:-1px;margin:8px 0}
+.eyebrow{font-size:12px;letter-spacing:2px;color:#416fbe;font-weight:700}p{line-height:1.6;color:#53617a}
+.card{background:white;border:1px solid #dce4f0;border-radius:16px;padding:24px;margin:20px 0}
+.controls{display:flex;gap:24px;flex-wrap:wrap}label{font-weight:600}select{margin-left:8px;padding:9px;border:1px solid #bccce0;border-radius:8px;background:white}
+canvas{width:100%;height:340px;display:block}#prob{height:150px}.legend{font-size:13px}.raw{color:#70839e}.fit{color:#1565ce}.out{color:#d45336}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:8px 12px;text-align:right;border-bottom:1px solid #e2e8f0}
+.scroll{overflow:auto;max-height:420px}summary{cursor:pointer;font-weight:600}footer{font-size:13px;color:#65738b}
+</style>
+<div class="eyebrow">HOLOD3 / TRAJECTORY ANALYSIS</div><h1>Robust smoothing, point by point</h1>
+<p>__SUMMARY__</p>
+<div class="card"><div class="controls">
+<label>Track <select id="track" aria-label="Track"></select></label>
+<label>Axis <select id="axis"><option value="z">Z · slice</option><option value="x">X · pixel</option><option value="y">Y · pixel</option></select></label>
+<label>View <select id="view"><option value="position">Position</option><option value="velocity">__VELOCITY_LABEL__</option></select></label></div>
+<p class="legend"><span class="raw">● Raw position</span> &nbsp; <span class="fit">━ Smoothed</span> &nbsp; <span class="out">● Outlier probability &gt; 0.5</span></p>
+<canvas id="plot" role="img" aria-label="Selected trajectory; numeric values available in the table below"></canvas>
+<p class="legend">Z-model posterior outlier probability (0–1)</p>
+<canvas id="prob" role="img" aria-label="Outlier probability over frame"></canvas>
+</div>
+<p>Preview: up to 100 longest tracks and 1,000 evenly sampled points per track. Full-resolution results are in CSV.
+Frames with gaps stay at their observed times. Lines break at explicitly fitted segments. Velocities on very short tracks are unresolved.</p>
+<div class="card"><details><summary>Selected track values</summary><div class="scroll"><table id="values"></table></div></details></div>
+<div class="card"><h2>Parameter search</h2><p>Lower PRESS score is better. This is an approximate leave-one-out surrogate with the fitted mixture and prior held fixed; it is not ground-truth accuracy. Only converged candidates can be selected.</p>
+<div class="scroll"><table><thead><tr><th>Degree</th><th>Alpha</th><th>Lambda other</th><th>PRESS score</th><th>Converged</th></tr></thead><tbody>__CANDIDATES__</tbody></table></div></div>
+<footer>Generated by HoloD3-Smoother. All data are embedded in this file. No network connection is used.</footer>
+<script type="application/json" id="data">__DATA__</script>
+<script>
+const data=JSON.parse(document.getElementById('data').textContent),track=document.getElementById('track'),axis=document.getElementById('axis'),view=document.getElementById('view');
+data.forEach((t,i)=>{const o=document.createElement('option');o.value=i;o.textContent=t.id;track.appendChild(o)});
+function draw(id,rows,lines,range){
+ const canvas=document.getElementById(id),dpr=window.devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;
+ canvas.width=w*dpr;canvas.height=h*dpr;const c=canvas.getContext('2d');c.scale(dpr,dpr);const pad=54;
+ const xs=rows.map(r=>r.frame),ys=rows.flatMap(r=>lines.map(l=>r[l.key]));let lo=range?range[0]:Math.min(...ys),hi=range?range[1]:Math.max(...ys);
+ if(hi===lo){lo-=1;hi+=1}const xmin=Math.min(...xs),xmax=Math.max(...xs),X=x=>pad+(x-xmin)/Math.max(1,xmax-xmin)*(w-pad-15),Y=y=>h-30-(y-lo)/(hi-lo)*(h-50);
+ c.font='11px system-ui';c.fillStyle='#63718a';
+ for(let j=0;j<5;j++){let y=lo+(hi-lo)*j/4;c.beginPath();c.strokeStyle='#e3eaf3';c.moveTo(pad,Y(y));c.lineTo(w-15,Y(y));c.stroke();c.fillText(y.toFixed(2),0,Y(y)+4)}
+ c.fillText('frame '+xmin,pad,h-8);c.fillText(xmax,w-52,h-8);
+ for(const line of lines){c.strokeStyle=line.color;c.lineWidth=2;c.beginPath();rows.forEach((r,i)=>{const x=X(r.frame),y=Y(r[line.key]);if(line.dots){c.fillStyle=r.postOutProb>0.5?'#d45336':line.color;c.beginPath();c.arc(x,y,3,0,2*Math.PI);c.fill()}else{if(i===0||rows[i-1].segment!==r.segment)c.moveTo(x,y);else c.lineTo(x,y)}});if(!line.dots)c.stroke()}
+}
+function render(){const rows=data[Number(track.value)].rows,a=axis.value,v=view.value==='velocity';
+ draw('plot',rows,v?[{key:'v'+a,color:'#1565ce'}]:[{key:a,color:'#1565ce'},{key:a+'_raw',color:'#8799b2',dots:true}]);
+ draw('prob',rows,[{key:'postOutProb',color:'#d45336'}],[0,1]);const table=document.getElementById('values');table.replaceChildren();
+ const keys=['frame',a+'_raw',a,'v'+a,'postOutProb'];const head=document.createElement('tr');keys.forEach(k=>{let th=document.createElement('th');th.textContent=k;head.appendChild(th)});table.appendChild(head);
+ rows.forEach(r=>{const tr=document.createElement('tr');keys.forEach(k=>{const td=document.createElement('td');td.textContent=Number(r[k]).toFixed(k==='frame'?0:5);tr.appendChild(td)});table.appendChild(tr)});
+}
+[track,axis,view].forEach(e=>e.addEventListener('change',render));window.addEventListener('resize',render);render();
+</script></html>"""

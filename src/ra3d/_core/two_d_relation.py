@@ -100,6 +100,8 @@ def context_frame(frame: pd.DataFrame, scores: np.ndarray) -> pd.DataFrame:
         "z_um",
         "structural_score",
         "relation_positive",
+        "spatial_positive",
+        "identity_training_selected",
         "matched_truth_event_id",
     ]
     output = frame[[column for column in columns if column in frame]].copy()
@@ -377,7 +379,7 @@ def coordinate_nms_2d(frame: pd.DataFrame) -> pd.DataFrame:
 
 
 def policy_predictions(
-    frame: pd.DataFrame, score: np.ndarray, seed: int
+    frame: pd.DataFrame, score: np.ndarray, seed: int, *, lineage_rank_order: str = "before"
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     columns = [*common.KEY_COLUMNS, "vanished_end_frame", "time_offset_frame", "x_um", "y_um", "z_um"]
     work = frame[columns].copy()
@@ -413,6 +415,11 @@ def policy_predictions(
     representatives["_lineage_rank"] = representatives.groupby("vanished_track_id", sort=False).cumcount()
     capped = representatives[representatives["_lineage_rank"] < 5].copy()
     selected = coordinate_nms_2d(capped)
+    selected["_lineage_rank_before_suppression"] = selected["_lineage_rank"].to_numpy()
+    if lineage_rank_order not in {"before", "after"}:
+        raise ValueError("lineage_rank_order must be before or after")
+    if lineage_rank_order == "after":
+        selected["_lineage_rank"] = selected.groupby("vanished_track_id", sort=False).cumcount()
     probability = np.clip(selected["_policy_score"].to_numpy(float), 1e-12, 1.0 - 1e-12)
     logit = np.log(probability / (1.0 - probability))
     selected["relation_attention_2d_uncorrected"] = 1.0 / (
@@ -506,3 +513,8 @@ def correct_predictions(
     output["relation_attention_2d"] = output["relation_attention_2d_uncorrected"].to_numpy(float)
     output["method"] = "relation_attention_2d"
     return output
+
+# Match the shared identity-selected loss in the 3D method.
+def relation_weights(contexts, labels, mask, sources):
+    from ..strict_labels import relation_weights as shared
+    return shared(contexts, labels, mask, sources)[0]

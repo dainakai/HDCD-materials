@@ -225,3 +225,6 @@ def attach_identity_labels(
         "identity_state_rows": {str(key): int(value) for key, value in state_counts.items()},
     }
     return output, audit, component_table
+
+# Experimental protocol: user-confirmed three-role adjacent-frame identity.
+from ..strict_labels import attach_identity_labels

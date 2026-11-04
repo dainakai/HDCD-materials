@@ -22,7 +22,7 @@ For diameter summaries, the expected merged diameter is `(Dv**3 + Ds**3)**(1/3)`
 | 14 | `boundary_exit_score` | Screening + static + full | Clipped proximity to XY/Z boundaries or recording end. |
 | 15 | `survivor_change_score` | Screening + static + full | Capped combination of pre/post diameter and velocity change. |
 | 16 | `survivor_delta_diameter_px` | Screening + static + full | Post minus pre survivor diameter in the short change window. |
-| 17 | `survivor_delta_speed_px_frame` | Screening + static + full | Norm of the componentwise pre/post velocity change in legacy coordinate units. |
+| 17 | `survivor_delta_speed_px_frame` | Screening + static + full | sqrt(Δvx² + Δvy² + Δvz²), using the stored XY velocities in pixels/frame and Z velocity in slices/frame; this mixed-coordinate feature is not a physical speed. |
 | 18 | `vertical_y_gap_um` | Screening + static + full | Signed vertical separation used by the catching diagnostic. |
 | 19 | `vertical_closing_um_frame` | Screening + static + full | Relative vertical velocity toward catching. |
 | 20 | `vertical_time_to_catch_frame` | Screening + static + full | Estimated vertical catching time. |

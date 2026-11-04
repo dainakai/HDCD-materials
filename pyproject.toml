@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ra3d"
-version = "1.0.1"
+version = "1.1.0"
 description = "Reproducible relation-attention detection and review of 3D particle collisions"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -34,13 +34,12 @@ ra3d = "ra3d.cli:main"
 Repository = "https://github.com/dainakai/HDCD-materials"
 Documentation = "https://github.com/dainakai/HDCD-materials#readme"
 Issues = "https://github.com/dainakai/HDCD-materials/issues"
-Archive = "https://doi.org/10.5281/zenodo.23409588"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-ra3d = ["config/*.json", "config/simulation/*.csv", "config/physics/*", "simulation/provenance.json", "_core/*provenance.json", "templates/*.html", "static/*.css", "static/*.js"]
+ra3d = ["config/*.json", "config/simulation/*.csv", "config/physics/*", "_core/physics_provenance.json", "templates/*.html", "static/*.css", "static/*.js"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

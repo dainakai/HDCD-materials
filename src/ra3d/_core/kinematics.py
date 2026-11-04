@@ -102,7 +102,7 @@ def point_exact(track: Track, frame: int, *, dx_um: float = DX_UM, dz_um: float 
     return Point(
         x_um=float(track.x[idx] * dx_um),
         y_um=float(track.y[idx] * dx_um),
-        z_um=float(track.z[idx] * dz_um),
+        z_um=float((track.z[idx] - 1) * dz_um),
         vx_um_frame=float(track.vx[idx] * dx_um),
         vy_um_frame=float(track.vy[idx] * dx_um),
         vz_um_frame=float(track.vz[idx] * dz_um),

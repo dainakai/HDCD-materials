@@ -53,7 +53,7 @@ def select_union(static, static_model):
     return result
 
 
-def predict(full, bundle, scene_id=0, base_scores=None):
+def predict(full, bundle, scene_id=0, base_scores=None, *, lineage_rank_order="before"):
     data = full.reset_index(drop=True).copy()
     data["relation_positive"] = False
     data["matched_truth_event_id"] = -1
@@ -61,7 +61,7 @@ def predict(full, bundle, scene_id=0, base_scores=None):
     base = score(bundle["full_models"], data) if base_scores is None else base_scores
     context = relation.context_frame(data, base)
     values, _ = relation.attention_scores(context, bundle["relation"], bundle["mean"], bundle["std"])
-    selected, _ = relation.policy_predictions(data, values, scene_id)
+    selected, _ = relation.policy_predictions(data, values, scene_id, lineage_rank_order=lineage_rank_order)
     result = relation.correct_predictions(selected, data, bundle["residuals"])
     result["candidate_frame_raw"] = data.iloc[result._source_index.to_numpy(int)].candidate_frame.to_numpy(
         int

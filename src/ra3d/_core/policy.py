@@ -96,6 +96,9 @@ def temporal_mode_predictions(
         )
     else:
         selected = capped
+    selected["_lineage_rank_before_suppression"] = selected["_lineage_rank"].to_numpy()
+    if config.get("lineage_rank_order", "before") == "after":
+        selected["_lineage_rank"] = selected.groupby("vanished_track_id", sort=False).cumcount()
     selected[method] = adjusted_score(
         selected["_policy_score"].to_numpy(float),
         selected["_lineage_rank"].to_numpy(float),

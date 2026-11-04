@@ -20,7 +20,8 @@
     "coordinate_frame_tolerance": 2,
     "coordinate_xy_tolerance_um": 250.0,
     "coordinate_z_tolerance_um": 7500.0,
-    "lineage_log_odds_penalty": 1.0
+    "lineage_log_odds_penalty": 1.0,
+    "lineage_rank_order": "before"
   },
   "residual_model": {
     "max_iter": 150,

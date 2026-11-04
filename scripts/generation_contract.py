@@ -37,7 +37,7 @@ def label_command(seed, output, executable):
     contract = json.loads(CONTRACT.read_text())
     if seed not in contract["seeds"]:
         raise ValueError("The canonical recipe only covers the six published seeds")
-    return [executable, str(ROOT / "reference/generation/generate_collision_benchmark.py"),
+    return [executable, "-m", "ra3d.simulation.generate",
             "--project-root", str(ROOT), "--out-dir", str(output), "--seed", str(seed),
             *[arg.format(root=ROOT) for arg in contract["label_arguments"]]]
 

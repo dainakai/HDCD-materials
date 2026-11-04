@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "test_seed": 260745,
+  "frames": 6000,
+  "truth_points": 1200000,
+  "source_is_collision_test_tracks": true,
+  "particle_ap": 0.9752611871208939,
+  "tracking_input_operating_point": {
+    "confidence": 0.1,
+    "predictions": 1223546,
+    "true_positives": 1159515,
+    "precision": 0.9476676806593295,
+    "recall": 0.9662625
+  },
+  "measured_points": 1223546,
+  "matched_points": 1159665,
+  "xy_p50_p90_p95_um": [
+    2.7833181672249236,
+    17.461320109951373,
+    26.21558240676126
+  ],
+  "absolute_z_p50_p90_p95_um": [
+    28.47954212654713,
+    116.3878085012311,
+    948.5886946185846
+  ],
+  "diameter_p2p5_p5_p50_p95_p97p5_percent": [
+    -8.651956155284502,
+    -3.828079179633232,
+    0.12258098369815668,
+    3.804123312304079,
+    10.335524438020233
+  ],
+  "number_density_volume_cm3": 10.72693248,
+  "physical_z": "(one-based slice - 1)*100 um",
+  "particle_pr_rule": "Confidence-ranked nearest-unmatched truth in an 8 px radial gate; same historical rule.",
+  "position_error_rule": "Raw XY squared-distance Hungarian association in an 8 px gate; errors from the exact collision-feature smoothed tracks."
+}
