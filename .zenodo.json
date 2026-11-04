@@ -24,9 +24,22 @@
   "version": "1.1.0",
   "related_identifiers": [
     {
-      "identifier": "https://github.com/dainakai/HDCD-materials",
-      "relation": "isSupplementTo",
+      "identifier": "https://github.com/dainakai/HDCD-materials/tree/v1.1.0",
+      "relation": "isIdenticalTo",
       "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/dainakai/HDCD-materials/blob/v1.1.0/README.md",
+      "relation": "isDocumentedBy",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.23409589",
+      "relation": "isNewVersionOf",
+      "scheme": "doi"
     }
-  ]
+  ],
+  "publication_date": "2026-11-04",
+  "access_right": "open",
+  "language": "eng"
 }

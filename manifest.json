@@ -10,13 +10,13 @@
     },
     {
       "path": ".zenodo.json",
-      "bytes": 1385,
-      "sha256": "56f9bbfbe31d73e0af1bb16cc73c4393fdcfd56c4ca74154a3a95dce3bff2f0b"
+      "bytes": 1756,
+      "sha256": "bc3a3f3eb7d3f2ac7627f9f48f1f9a26a4fa3414f84d4fe922dac6a8c3f3ca35"
     },
     {
       "path": "CITATION.cff",
-      "bytes": 780,
-      "sha256": "2517034fba316956ba6564afc0783911290f69e46c8af38a1b6acb1a0e4138f6"
+      "bytes": 808,
+      "sha256": "2c8dc29088a11eb17bf8d48d13975355627b3446f2601eb225c2caccb5ca6109"
     },
     {
       "path": "DATASET_INDEX.csv",
