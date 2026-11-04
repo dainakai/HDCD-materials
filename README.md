@@ -91,4 +91,6 @@ The gravitational model predicts **222.4103 ± 14.9134** collisions across the 1
 
 ## Citation and licenses
 
-Please cite the associated paper and the commit or dataset version used. [CITATION.cff](CITATION.cff) contains citation metadata. Numerical research data use [CC BY 4.0](LICENSE-DATA.md); project software and collision-model weights use [MIT](LICENSE). Dependencies and bundled components retain their own licenses; see [Third-party notices](THIRD_PARTY_NOTICES.md).
+Please cite the associated paper and the dataset version used. Version **1.1.0** is archived at [doi:10.5281/zenodo.23940869](https://doi.org/10.5281/zenodo.23940869). [CITATION.cff](CITATION.cff) contains citation metadata. The [all-versions DOI](https://doi.org/10.5281/zenodo.23409588) resolves to the latest archived version.
+
+Numerical research data use [CC BY 4.0](LICENSE-DATA.md); project software and collision-model weights use [MIT](LICENSE). Dependencies and bundled components retain their own licenses; see [Third-party notices](THIRD_PARTY_NOTICES.md).
